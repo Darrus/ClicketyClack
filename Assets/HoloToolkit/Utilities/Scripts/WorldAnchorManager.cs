@@ -1,13 +1,20 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using HoloToolkit.Unity.SpatialMapping;
 
 #if UNITY_EDITOR || UNITY_WSA
 using UnityEngine.VR.WSA.Persistence;
+using UnityEngine.VR.WSA.Sharing;
 using UnityEngine.VR.WSA;
+#endif
+
+#if !UNITY_EDITOR && UNITY_WSA
+using Windows.Storage;
 #endif
 
 namespace HoloToolkit.Unity
@@ -49,6 +56,46 @@ namespace HoloToolkit.Unity
         /// </summary>
         public WorldAnchorStore AnchorStore { get; private set; }
 
+        public string anchorFileName;
+        string folderPath;
+        string fileExtension = ".bytes";
+
+        int retries = 0;
+        const int maxRetry = 3;
+
+        WorldAnchorTransferBatch TransferBatch;
+        List<byte> storedData;
+        bool exporting;
+
+        [HideInInspector]
+        public bool importing = false;
+#endif
+
+        /// <summary>
+        /// When the app starts grab the anchor store immediately.
+        /// </summary>
+        void Start()
+        {
+#if UNITY_EDITOR
+            Debug.LogWarning("World Anchor Manager does not work in the editor. Anchor Store will never be ready.");
+#endif
+
+#if UNITY_EDITOR || UNITY_WSA
+            AnchorStore = null;
+            WorldAnchorStore.GetAsync(AnchorStoreReady);
+
+#if !UNITY_EDITOR && UNITY_WSA
+            folderPath = ApplicationData.Current.RoamingFolder.Path;
+#else
+            folderPath = Application.streamingAssetsPath;
+#endif
+            TransferBatch = new WorldAnchorTransferBatch();
+            storedData = new List<byte>();
+            exporting = false;
+#endif
+        }
+
+#if UNITY_EDITOR || UNITY_WSA
         /// <summary>
         /// Callback function that contains the WorldAnchorStore object.
         /// </summary>
@@ -57,25 +104,7 @@ namespace HoloToolkit.Unity
         {
             AnchorStore = anchorStore;
         }
-#endif
 
-        /// <summary>
-        /// When the app starts grab the anchor store immediately.
-        /// </summary>
-        protected override void Awake()
-        {
-            base.Awake();
-
-#if UNITY_EDITOR
-            Debug.LogWarning("World Anchor Manager does not work in the editor. Anchor Store will never be ready.");
-#endif
-#if UNITY_EDITOR || UNITY_WSA
-            AnchorStore = null;
-            WorldAnchorStore.GetAsync(AnchorStoreReady);
-#endif
-        }
-
-#if UNITY_EDITOR || UNITY_WSA
         /// <summary>
         /// Each frame see if there is work to do and if we can do a unit, do it.
         /// </summary>
@@ -86,7 +115,6 @@ namespace HoloToolkit.Unity
                 DoAnchorOperation(anchorOperations.Dequeue());
             }
         }
-#endif
 
         /// <summary>
         /// Attaches an anchor to the game object.  If the anchor store has
@@ -132,14 +160,12 @@ namespace HoloToolkit.Unity
                 return;
             }
 
-#if UNITY_EDITOR || UNITY_WSA
             // This case is unexpected, but just in case.
             if (AnchorStore == null)
             {
                 Debug.LogError("remove anchor called before anchor store is ready.");
                 return;
             }
-#endif
 
             anchorOperations.Enqueue(
                 new AnchorAttachmentInfo
@@ -150,12 +176,41 @@ namespace HoloToolkit.Unity
                 });
         }
 
+        public void RemoveAnchorFromStore(string anchorName)
+        {
+            // This case is unexpected, but just in case.
+            if (AnchorStore == null)
+            {
+                Debug.LogError("Remove anchor called before anchor store is ready.");
+                return;
+            }
+
+            AnchorStore.Delete(anchorName);
+        }
+
+        public bool CheckAnchorExist(string anchorName)
+        {
+            // This case is unexpected, but just in case.
+            if (AnchorStore == null)
+            {
+                Debug.LogError("Check anchor exist called before anchor store is ready.");
+                return false;
+            }
+
+            string[] allID = AnchorStore.GetAllIds();
+            for (int i = 0; i < allID.Length; ++i)
+            {
+                if (allID[i] == anchorName)
+                    return true;
+            }
+            return false;
+        }
+
         /// <summary>
         /// Removes all anchors from the scene and deletes them from the anchor store.
         /// </summary>
         public void RemoveAllAnchors()
         {
-#if UNITY_EDITOR || UNITY_WSA
             SpatialMappingManager spatialMappingManager = SpatialMappingManager.Instance;
 
             // This case is unexpected, but just in case.
@@ -183,7 +238,6 @@ namespace HoloToolkit.Unity
                     }
                 }
             }
-#endif
         }
 
         /// <summary>
@@ -192,7 +246,6 @@ namespace HoloToolkit.Unity
         /// <param name="anchorAttachmentInfo">Parameters for attaching the anchor.</param>
         private void DoAnchorOperation(AnchorAttachmentInfo anchorAttachmentInfo)
         {
-#if UNITY_EDITOR || UNITY_WSA
             switch (anchorAttachmentInfo.Operation)
             {
                 case AnchorOperation.Create:
@@ -205,8 +258,15 @@ namespace HoloToolkit.Unity
                         break;
                     }
 
+                    WorldAnchor existingAnchor = gameObjectToAnchor.GetComponent<WorldAnchor>();
+                    if (existingAnchor != null)
+                    {
+                        DestroyImmediate(existingAnchor);
+                    }
+
                     // Try to load a previously saved world anchor.
                     WorldAnchor savedAnchor = AnchorStore.Load(anchorName, gameObjectToAnchor);
+     
                     if (savedAnchor == null)
                     {
                         // Either world anchor was not saved / does not exist or has a different name.
@@ -220,7 +280,6 @@ namespace HoloToolkit.Unity
                         savedAnchor.name = anchorName;
                         Debug.Log(gameObjectToAnchor.name + " : World anchor loaded from anchor store and updated for this game object.");
                     }
-
                     break;
                 case AnchorOperation.Delete:
                     if (AnchorStore == null)
@@ -241,10 +300,8 @@ namespace HoloToolkit.Unity
                     {
                         Debug.LogError("Cannot get anchor while deleting");
                     }
-
                     break;
             }
-#endif
         }
 
         /// <summary>
@@ -254,7 +311,6 @@ namespace HoloToolkit.Unity
         /// <param name="anchorName">The name to give to the anchor.</param>
         private void CreateAnchor(GameObject gameObjectToAnchor, string anchorName)
         {
-#if UNITY_EDITOR || UNITY_WSA
             var anchor = gameObjectToAnchor.AddComponent<WorldAnchor>();
             anchor.name = anchorName;
 
@@ -268,10 +324,8 @@ namespace HoloToolkit.Unity
                 // Other times we must wait for the tracking system to locate the world.
                 anchor.OnTrackingChanged += Anchor_OnTrackingChanged;
             }
-#endif
         }
 
-#if UNITY_EDITOR || UNITY_WSA
         /// <summary>
         /// When an anchor isn't located immediately we subscribe to this event so
         /// we can save the anchor when it is finally located.
@@ -311,6 +365,120 @@ namespace HoloToolkit.Unity
                 Debug.LogError(gameObject.name + " : World anchor save failed.");
             }
         }
+
+        #region Export
+        public void ExportToFile(GameObject gameObjectToExport)
+        {
+            if (exporting)
+            {
+                Debug.LogWarning("Manager is currently exporting, please try again later.");
+                return;
+            }
+
+            if (gameObjectToExport == null)
+            {
+                Debug.LogError("Invalid GameObject");
+                return;
+            }
+
+            var exportAnchor = gameObjectToExport.GetComponent<WorldAnchor>();
+            if (exportAnchor != null)
+            {
+                if (TransferBatch.anchorCount > 0)
+                {
+                    TransferBatch.Dispose();
+                }
+
+                TransferBatch.AddWorldAnchor(exportAnchor.name, exportAnchor);
+                WorldAnchorTransferBatch.ExportAsync(TransferBatch, ExportData, ExportComplete);
+                exporting = true;
+            }
+            else
+            {
+                Debug.LogError("Cannot get anchor while exporting");
+            }
+        }
+
+        void ExportData(byte[] data)
+        {
+            Debug.Log("Exporting data size : " + data.Length.ToString());
+            storedData.AddRange(data);
+        }
+
+        void ExportComplete(SerializationCompletionReason completionReason)
+        {
+#if !UNITY_EDITOR && UNITY_WSA
+            exporting = false;
+            if (completionReason != SerializationCompletionReason.Succeeded)
+            {
+                Debug.LogError("Export Failed due to : " + completionReason.ToString());
+                return;
+            }
+
+            folderPath = ApplicationData.Current.RoamingFolder.Path;
+            string filePath = Path.Combine(folderPath, anchorFileName + fileExtension);
+
+#if UNITY_WINRT
+            UnityEngine.Windows.File.WriteAllBytes(filePath, storedData.ToArray());
+#else
+            System.IO.File.WriteAllBytes(fullPath, storedData.ToArray());
 #endif
-    }
+            Debug.Log("Succesfully exported data to path : " + filePath);
+#endif
+            }
+#endregion
+
+            #region Import
+        public void ImportFromFile()
+        {
+            if (importing)
+            {
+                Debug.LogWarning("Manager is currently importing, please try again later.");
+                return;
+            }
+
+            importing = true;
+            string filePath = Path.Combine(Application.streamingAssetsPath, anchorFileName + fileExtension);
+            Debug.Log(String.Format("Importing from {0}", filePath));
+
+#if UNITY_WINRT
+            byte[] data = UnityEngine.Windows.File.ReadAllBytes(filePath);
+#else
+            byte[] data = System.IO.File.ReadAllBytes(filePath);
+#endif
+
+            WorldAnchorTransferBatch.ImportAsync(data, ImportComplete);
+        }
+
+        private void ImportComplete(SerializationCompletionReason completionReason, WorldAnchorTransferBatch deserializedTransferBatch)
+        {
+            importing = false;
+            if (completionReason != SerializationCompletionReason.Succeeded)
+            {
+                if (retries == maxRetry)
+                {
+                    Debug.LogError("Failed to import due to " + completionReason.ToString() + ". After " + retries.ToString() + " retries.");
+                    retries = 0;
+                    return;
+                }
+
+                Debug.LogError("Failed to import due to " + completionReason.ToString() + ". Retries : " + retries.ToString());
+                retries++;
+
+                ImportFromFile();
+                return;
+            }
+            Debug.Log("Succesfully imported files.");
+            retries = 0;
+
+            string[] ids = deserializedTransferBatch.GetAllIds();
+            for (int i = 0; i < ids.Length; ++i)
+            {
+                AnchorStore.Save(ids[i], deserializedTransferBatch.LockObject(ids[i], this.gameObject));
+                Destroy(GetComponent<WorldAnchor>());
+            }
+        }
+            #endregion
+#endif
+        }
 }

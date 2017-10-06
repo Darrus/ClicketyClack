@@ -21,7 +21,7 @@ namespace HoloToolkit.Unity.SpatialMapping
         /// <summary>
         /// The extension given to mesh files.
         /// </summary>
-        private static string fileExtension = ".room";
+        private static string fileExtension = ".bytes";
 
         /// <summary>
         /// Read-only property which returns the folder path where mesh files are stored.
@@ -30,11 +30,12 @@ namespace HoloToolkit.Unity.SpatialMapping
         {
             get
             {
-#if !UNITY_EDITOR && UNITY_METRO
-                return ApplicationData.Current.RoamingFolder.Path;
-#else
-                return Application.persistentDataPath;
-#endif
+                return Application.streamingAssetsPath;
+//#if !UNITY_EDITOR && UNITY_UWP
+//                return ApplicationData.Current.RoamingFolder.Path;
+//#else
+//                return Application.persistentDataPath;
+//#endif
             }
         }
 
@@ -47,6 +48,7 @@ namespace HoloToolkit.Unity.SpatialMapping
         /// <remarks>Determines the save path to use and automatically applies the file extension.</remarks>
         public static string Save(string fileName, IEnumerable<MeshFilter> meshFilters)
         {
+#if !UNITY_EDITOR && UNITY_UWP
             if (string.IsNullOrEmpty(fileName))
             {
                 throw new ArgumentException("Must specify a valid fileName.");
@@ -58,7 +60,7 @@ namespace HoloToolkit.Unity.SpatialMapping
             }
 
             // Create the mesh file.
-            String folderName = MeshFolderName;
+            String folderName = ApplicationData.Current.RoamingFolder.Path;
             Debug.Log(String.Format("Saving mesh file: {0}", Path.Combine(folderName, fileName + fileExtension)));
 
             using (Stream stream = OpenFileForWrite(folderName, fileName + fileExtension))
@@ -72,6 +74,9 @@ namespace HoloToolkit.Unity.SpatialMapping
             Debug.Log("Mesh file saved.");
 
             return Path.Combine(folderName, fileName + fileExtension);
+#else
+            return null;
+#endif
         }
 
         /// <summary>
@@ -83,6 +88,7 @@ namespace HoloToolkit.Unity.SpatialMapping
         /// <remarks>Determines the save path to use and automatically applies the file extension.</remarks>
         public static string Save(string fileName, IEnumerable<Mesh> meshes)
         {
+#if !UNITY_EDITOR && UNITY_UWP
             if (string.IsNullOrEmpty(fileName))
             {
                 throw new ArgumentException("Must specify a valid fileName.");
@@ -94,7 +100,7 @@ namespace HoloToolkit.Unity.SpatialMapping
             }
 
             // Create the mesh file.
-            String folderName = MeshFolderName;
+            String folderName = ApplicationData.Current.RoamingFolder.Path;
             Debug.Log(String.Format("Saving mesh file: {0}", Path.Combine(folderName, fileName + fileExtension)));
 
             using (Stream stream = OpenFileForWrite(folderName, fileName + fileExtension))
@@ -108,6 +114,9 @@ namespace HoloToolkit.Unity.SpatialMapping
             Debug.Log("Mesh file saved.");
 
             return Path.Combine(folderName, fileName + fileExtension);
+#else
+            return null;
+#endif
         }
 
         /// <summary>
@@ -124,22 +133,46 @@ namespace HoloToolkit.Unity.SpatialMapping
             }
 
             List<Mesh> meshes = new List<Mesh>();
-
+            
             // Open the mesh file.
             String folderName = MeshFolderName;
-            Debug.Log(String.Format("Loading mesh file: {0}", Path.Combine(folderName, fileName + fileExtension)));
+            string filePath = Path.Combine(folderName, fileName + fileExtension);
+            Debug.Log(String.Format("Loading mesh file: {0}", filePath));
 
-            using (Stream stream = OpenFileForRead(folderName, fileName + fileExtension))
-            {
-                // Read the file and deserialize the meshes.
-                byte[] data = new byte[stream.Length];
-                stream.Read(data, 0, data.Length);
+            byte[] bytes = UnityEngine.Windows.File.ReadAllBytes(filePath);
+            meshes.AddRange(SimpleMeshSerializer.Deserialize(bytes));
 
-                meshes.AddRange(SimpleMeshSerializer.Deserialize(data));
-            }
+            //using (Stream stream = OpenFileForRead(folderName, fileName + fileExtension))
+            //{
+            //    // Read the file and deserialize the meshes.
+            //    byte[] data = new byte[stream.Length];
+            //    stream.Read(data, 0, data.Length);
+
+            //    meshes.AddRange(SimpleMeshSerializer.Deserialize(data));
+            //}
 
             Debug.Log("Mesh file loaded.");
 
+            return meshes;
+        }
+
+        public static IList<Mesh> LoadFromResources(string fileName)
+        {
+            if (string.IsNullOrEmpty(fileName))
+            {
+                throw new ArgumentException("Must specify a valid fileName.");
+            }
+
+            List<Mesh> meshes = new List<Mesh>();
+            Debug.Log("Loading mesh file from Resources/RoomData");
+
+            TextAsset dataAsset = Resources.Load<TextAsset>("RoomData/" + fileName);
+            Debug.Log(dataAsset);
+            Debug.Log("RoomData/" + fileName);
+            byte[] data = dataAsset.bytes;
+            meshes.AddRange(SimpleMeshSerializer.Deserialize(data));
+
+            Debug.Log("Mesh file loaded.");
             return meshes;
         }
 

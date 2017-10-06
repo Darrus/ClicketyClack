@@ -1,0 +1,4 @@
+C:\Users\wilsonchia\Documents\ClicketyClack\WindowsStoreApp\ClicketyClack\ClicketyClack.csproj;x86
+C:\Users\wilsonchia\Documents\ClicketyClack\WindowsStoreApp\GeneratedProjects\UWP\Assembly-CSharp\Assembly-CSharp.csproj;x86
+C:\Users\wilsonchia\Documents\ClicketyClack\WindowsStoreApp\GeneratedProjects\UWP\Assembly-CSharp-firstpass\Assembly-CSharp-firstpass.csproj;x86
+C:\Users\wilsonchia\Documents\ClicketyClack\WindowsStoreApp\GeneratedProjects\UWP\Assembly-CSharp-firstpass\Assembly-CSharp-firstpass.csproj;x86

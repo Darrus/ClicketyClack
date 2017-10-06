@@ -1,0 +1,239 @@
+fileFormatVersion: 2
+guid: 024c8c5f5dac74142a56dd6d2f01c0fd
+timeCreated: 1506926723
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: grp_station_obj_lamp
+    100002: grp_station_obj_lamp1
+    100004: grp_station_obj_lamp2
+    100006: grp_station_obj_lamp3
+    100008: grp_station_obj_neon_light_long1
+    100010: grp_station_obj_neon_light_long10
+    100012: grp_station_obj_neon_light_long11
+    100014: grp_station_obj_neon_light_long12
+    100016: grp_station_obj_neon_light_long13
+    100018: grp_station_obj_neon_light_long14
+    100020: grp_station_obj_neon_light_long15
+    100022: grp_station_obj_neon_light_long16
+    100024: grp_station_obj_neon_light_long17
+    100026: grp_station_obj_neon_light_long18
+    100028: grp_station_obj_neon_light_long2
+    100030: grp_station_obj_neon_light_long3
+    100032: grp_station_obj_neon_light_long4
+    100034: grp_station_obj_neon_light_long5
+    100036: grp_station_obj_neon_light_long6
+    100038: grp_station_obj_neon_light_long7
+    100040: grp_station_obj_neon_light_long8
+    100042: grp_station_obj_neon_light_long9
+    100044: grp_station_obj_neon_light_short1
+    100046: grp_station_obj_neon_light_short2
+    100048: grp_station_obj_neon_light_short3
+    100050: grp_station_obj_neon_light_short4
+    100052: grp_station_obj_neon_light_short5
+    100054: grp_station_obj_station_bench
+    100056: grp_station_obj_station_bench1
+    100058: grp_station_obj_station_clock
+    100060: grp_station_obj_train_station
+    100062: obj_humancaref_grp_station
+    100064: //RootNode
+    400000: grp_station_obj_lamp
+    400002: grp_station_obj_lamp1
+    400004: grp_station_obj_lamp2
+    400006: grp_station_obj_lamp3
+    400008: grp_station_obj_neon_light_long1
+    400010: grp_station_obj_neon_light_long10
+    400012: grp_station_obj_neon_light_long11
+    400014: grp_station_obj_neon_light_long12
+    400016: grp_station_obj_neon_light_long13
+    400018: grp_station_obj_neon_light_long14
+    400020: grp_station_obj_neon_light_long15
+    400022: grp_station_obj_neon_light_long16
+    400024: grp_station_obj_neon_light_long17
+    400026: grp_station_obj_neon_light_long18
+    400028: grp_station_obj_neon_light_long2
+    400030: grp_station_obj_neon_light_long3
+    400032: grp_station_obj_neon_light_long4
+    400034: grp_station_obj_neon_light_long5
+    400036: grp_station_obj_neon_light_long6
+    400038: grp_station_obj_neon_light_long7
+    400040: grp_station_obj_neon_light_long8
+    400042: grp_station_obj_neon_light_long9
+    400044: grp_station_obj_neon_light_short1
+    400046: grp_station_obj_neon_light_short2
+    400048: grp_station_obj_neon_light_short3
+    400050: grp_station_obj_neon_light_short4
+    400052: grp_station_obj_neon_light_short5
+    400054: grp_station_obj_station_bench
+    400056: grp_station_obj_station_bench1
+    400058: grp_station_obj_station_clock
+    400060: grp_station_obj_train_station
+    400062: obj_humancaref_grp_station
+    400064: //RootNode
+    2300000: grp_station_obj_lamp
+    2300002: grp_station_obj_lamp1
+    2300004: grp_station_obj_lamp2
+    2300006: grp_station_obj_lamp3
+    2300008: grp_station_obj_neon_light_long1
+    2300010: grp_station_obj_neon_light_long10
+    2300012: grp_station_obj_neon_light_long11
+    2300014: grp_station_obj_neon_light_long12
+    2300016: grp_station_obj_neon_light_long13
+    2300018: grp_station_obj_neon_light_long14
+    2300020: grp_station_obj_neon_light_long15
+    2300022: grp_station_obj_neon_light_long16
+    2300024: grp_station_obj_neon_light_long17
+    2300026: grp_station_obj_neon_light_long18
+    2300028: grp_station_obj_neon_light_long2
+    2300030: grp_station_obj_neon_light_long3
+    2300032: grp_station_obj_neon_light_long4
+    2300034: grp_station_obj_neon_light_long5
+    2300036: grp_station_obj_neon_light_long6
+    2300038: grp_station_obj_neon_light_long7
+    2300040: grp_station_obj_neon_light_long8
+    2300042: grp_station_obj_neon_light_long9
+    2300044: grp_station_obj_neon_light_short1
+    2300046: grp_station_obj_neon_light_short2
+    2300048: grp_station_obj_neon_light_short3
+    2300050: grp_station_obj_neon_light_short4
+    2300052: grp_station_obj_neon_light_short5
+    2300054: grp_station_obj_station_bench
+    2300056: grp_station_obj_station_bench1
+    2300058: grp_station_obj_station_clock
+    2300060: grp_station_obj_train_station
+    2300062: obj_humancaref_grp_station
+    3300000: grp_station_obj_lamp
+    3300002: grp_station_obj_lamp1
+    3300004: grp_station_obj_lamp2
+    3300006: grp_station_obj_lamp3
+    3300008: grp_station_obj_neon_light_long1
+    3300010: grp_station_obj_neon_light_long10
+    3300012: grp_station_obj_neon_light_long11
+    3300014: grp_station_obj_neon_light_long12
+    3300016: grp_station_obj_neon_light_long13
+    3300018: grp_station_obj_neon_light_long14
+    3300020: grp_station_obj_neon_light_long15
+    3300022: grp_station_obj_neon_light_long16
+    3300024: grp_station_obj_neon_light_long17
+    3300026: grp_station_obj_neon_light_long18
+    3300028: grp_station_obj_neon_light_long2
+    3300030: grp_station_obj_neon_light_long3
+    3300032: grp_station_obj_neon_light_long4
+    3300034: grp_station_obj_neon_light_long5
+    3300036: grp_station_obj_neon_light_long6
+    3300038: grp_station_obj_neon_light_long7
+    3300040: grp_station_obj_neon_light_long8
+    3300042: grp_station_obj_neon_light_long9
+    3300044: grp_station_obj_neon_light_short1
+    3300046: grp_station_obj_neon_light_short2
+    3300048: grp_station_obj_neon_light_short3
+    3300050: grp_station_obj_neon_light_short4
+    3300052: grp_station_obj_neon_light_short5
+    3300054: grp_station_obj_station_bench
+    3300056: grp_station_obj_station_bench1
+    3300058: grp_station_obj_station_clock
+    3300060: grp_station_obj_train_station
+    3300062: obj_humancaref_grp_station
+    4300000: grp_station_obj_lamp
+    4300002: grp_station_obj_lamp1
+    4300004: grp_station_obj_lamp2
+    4300006: grp_station_obj_lamp3
+    4300008: grp_station_obj_neon_light_long1
+    4300010: grp_station_obj_neon_light_long10
+    4300012: grp_station_obj_neon_light_long11
+    4300014: grp_station_obj_neon_light_long12
+    4300016: grp_station_obj_neon_light_long13
+    4300018: grp_station_obj_neon_light_long14
+    4300020: grp_station_obj_neon_light_long15
+    4300022: grp_station_obj_neon_light_long16
+    4300024: grp_station_obj_neon_light_long17
+    4300026: grp_station_obj_neon_light_long18
+    4300028: grp_station_obj_neon_light_long2
+    4300030: grp_station_obj_neon_light_long3
+    4300032: grp_station_obj_neon_light_long4
+    4300034: grp_station_obj_neon_light_long5
+    4300036: grp_station_obj_neon_light_long6
+    4300038: grp_station_obj_neon_light_long7
+    4300040: grp_station_obj_neon_light_long8
+    4300042: grp_station_obj_neon_light_long9
+    4300044: grp_station_obj_neon_light_short1
+    4300046: grp_station_obj_neon_light_short2
+    4300048: grp_station_obj_neon_light_short3
+    4300050: grp_station_obj_neon_light_short4
+    4300052: grp_station_obj_neon_light_short5
+    4300054: grp_station_obj_station_bench
+    4300056: grp_station_obj_station_bench1
+    4300058: grp_station_obj_station_clock
+    4300060: grp_station_obj_train_station
+    4300062: obj_humancaref_grp_station
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
