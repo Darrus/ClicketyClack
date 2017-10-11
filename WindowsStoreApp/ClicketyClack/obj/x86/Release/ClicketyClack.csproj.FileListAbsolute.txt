@@ -207,3 +207,5 @@ C:\Users\wilsonchia\Documents\ClicketyClack\WindowsStoreApp\ClicketyClack\obj\x8
 C:\Users\wilsonchia\Documents\ClicketyClack\WindowsStoreApp\ClicketyClack\obj\x86\Release\qualifiers.txt.intermediate
 C:\Users\wilsonchia\Documents\ClicketyClack\WindowsStoreApp\ClicketyClack\obj\x86\Release\MultipleQualifiersPerDimensionFound.txt
 C:\Users\wilsonchia\Documents\ClicketyClack\WindowsStoreApp\ClicketyClack\obj\x86\Release\ProjectArchitectures.txt
+C:\Users\wilsonchia\Documents\ClicketyClack\WindowsStoreApp\ClicketyClack\bin\x86\Release\Assembly-CSharp.dll
+C:\Users\wilsonchia\Documents\ClicketyClack\WindowsStoreApp\ClicketyClack\bin\x86\Release\Assembly-CSharp.pdb

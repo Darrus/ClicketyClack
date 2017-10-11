@@ -123,7 +123,6 @@ namespace HoloToolkit.Unity.SpatialMapping
             {
                 throw new ArgumentException("Must specify a valid fileName.");
             }
-
             List<Mesh> meshes = new List<Mesh>();
             
             // Open the mesh file.
@@ -131,9 +130,13 @@ namespace HoloToolkit.Unity.SpatialMapping
             string filePath = Path.Combine(folderName, fileName + fileExtension);
             Debug.Log(String.Format("Loading mesh file: {0}", filePath));
 
+#if UNITY_WINRT
             byte[] bytes = UnityEngine.Windows.File.ReadAllBytes(filePath);
-            meshes.AddRange(SimpleMeshSerializer.Deserialize(bytes));
+#else
+            byte[] bytes = System.IO.File.ReadAllBytes(fileName);
+#endif
 
+            meshes.AddRange(SimpleMeshSerializer.Deserialize(bytes));
             Debug.Log("Mesh file loaded.");
             return meshes;
         }

@@ -5,9 +5,9 @@
 # Write a line equal to 'overwrite-all' (without quotes) to overwrite everything (preserved accross builds)
 # Write a line equal to 'keep-all' (without quotes) to keep files regardless their modification (preserved accross builds)
 # Default behavior is to never overwrite files
-ClicketyClack.sln: modified
-ClicketyClack\App.cs: C6D9639222B27C64C5FD75C5FEBECB86
-ClicketyClack\ClicketyClack.csproj: 92341D9BCC42F8968902D511D3D44A27
+ClicketyClack.sln: DA6CE0CE7B8303E3959FE7B124E44B74
+ClicketyClack\App.cs: modified
+ClicketyClack\ClicketyClack.csproj: FD8608A8C0D0FA6E9366623B70EC13D9
 ClicketyClack\ClicketyClack.csproj.user: modified
 ClicketyClack\Package.appxmanifest: D6994109DC7CD3E73EDEF3FF7E392A9D
 ClicketyClack\project.json: 1D02BC64BAC0D041019673A1C4C51737
@@ -19,7 +19,7 @@ ClicketyClack\Assets\StoreLogo.png: 90BD194CA4A7CFFF3E8B8222229857FB
 ClicketyClack\Assets\Wide310x150Logo.scale-200.png: C96846A80DF667F87355569CD816192D
 ClicketyClack\obj\x86\Debug\ClicketyClack.csproj.CopyComplete: D41D8CD98F00B204E9800998ECF8427E
 ClicketyClack\obj\x86\Release\ClicketyClack.csproj.CopyComplete: D41D8CD98F00B204E9800998ECF8427E
-ClicketyClack\Properties\AssemblyInfo.cs: B920CFCCF6CD896FB9FFA65C617AFE7D
+ClicketyClack\Properties\AssemblyInfo.cs: modified
 ClicketyClack\Properties\Default.rd.xml: 72EB282657164E79A1C42F6240984826
 GeneratedProjects\UWP\Assembly-CSharp\project.json: 4FCF72A4D5EDB37E24C206A7BCFE7AF1
 GeneratedProjects\UWP\Assembly-CSharp-firstpass\project.json: 4FCF72A4D5EDB37E24C206A7BCFE7AF1

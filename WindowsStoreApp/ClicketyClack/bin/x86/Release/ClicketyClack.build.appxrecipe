@@ -14,7 +14,7 @@
     <RemoteDeploymentType></RemoteDeploymentType>
     <PackageRegistrationPath></PackageRegistrationPath>
     <RemoveNonLayoutFiles>true</RemoveNonLayoutFiles>
-    <DeployOptionalPackages>true</DeployOptionalPackages>
+    <DeployOptionalPackages>false</DeployOptionalPackages>
     <WindowsSdkPath>C:\Program Files %28x86%29\Windows Kits\10\</WindowsSdkPath>
     <LayoutDir>C:\Users\wilsonchia\Documents\ClicketyClack\WindowsStoreApp\ClicketyClack\bin\x86\Release\AppX</LayoutDir>
   </PropertyGroup>
@@ -461,6 +461,9 @@
       <PackagePath>resources.pri</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\wilsonchia\Documents\ClicketyClack\WindowsStoreApp\ClicketyClack\Assembly-CSharp.dll">
+      <PackagePath>Assembly-CSharp.dll</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\wilsonchia\Documents\ClicketyClack\WindowsStoreApp\ClicketyClack\UnityEngine.dll">
       <PackagePath>UnityEngine.dll</PackagePath>
     </AppxPackagedFile>
@@ -478,12 +481,6 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\wilsonchia\Documents\ClicketyClack\WindowsStoreApp\ClicketyClack\UnityEngine.VR.dll">
       <PackagePath>UnityEngine.VR.dll</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\wilsonchia\Documents\ClicketyClack\WindowsStoreApp\ClicketyClack\Assembly-CSharp.dll">
-      <PackagePath>Assembly-CSharp.dll</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\wilsonchia\Documents\ClicketyClack\WindowsStoreApp\ClicketyClack\Assembly-CSharp-firstpass.dll">
-      <PackagePath>Assembly-CSharp-firstpass.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\wilsonchia\Documents\ClicketyClack\WindowsStoreApp\ClicketyClack\bin\x86\Release\Core\ClicketyClack.exe">
       <PackagePath>ClicketyClack.exe</PackagePath>
