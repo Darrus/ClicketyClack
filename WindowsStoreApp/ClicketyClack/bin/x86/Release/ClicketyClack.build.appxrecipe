@@ -451,6 +451,9 @@
     <AppxPackagedFile Include="C:\Users\wilsonchia\Documents\ClicketyClack\WindowsStoreApp\ClicketyClack\Data\StreamingAssets\spatial.bytes">
       <PackagePath>Data\StreamingAssets\spatial.bytes</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\wilsonchia\Documents\ClicketyClack\WindowsStoreApp\ClicketyClack\Data\StreamingAssets\spatial.room">
+      <PackagePath>Data\StreamingAssets\spatial.room</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.15063.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
     </AppxPackagedFile>

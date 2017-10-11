@@ -9,7 +9,7 @@ public class Room : MonoBehaviour {
 
 	void Start () {
         anchor = GetComponent<Anchor>();
-#if !UNITY_EDITOR && UNITY_WSA 
+#if !UNITY_EDITOR && UNITY_WSA
         WorldAnchorManager.Instance.ImportFromFile();
 #endif
     }
@@ -20,6 +20,10 @@ public class Room : MonoBehaviour {
         if (!WorldAnchorManager.Instance.importing)
         {
             anchor.LoadAnchor();
+            foreach(Transform child in transform)
+            {
+                child.gameObject.SetActive(true);
+            }
             Destroy(this);
         }
 #endif

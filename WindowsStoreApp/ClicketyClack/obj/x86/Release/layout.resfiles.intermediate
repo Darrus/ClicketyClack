@@ -17,6 +17,7 @@ Data\sharedassets0.assets
 Data\sharedassets0.assets.resS
 Data\StreamingAssets\AnchorPositions.bytes
 Data\StreamingAssets\spatial.bytes
+Data\StreamingAssets\spatial.room
 MicStreamSelector.dll
 PlaneFinding.dll
 Properties\Default.rd.xml

@@ -65,9 +65,7 @@ namespace HoloToolkit.Unity
 
         WorldAnchorTransferBatch TransferBatch;
         List<byte> storedData;
-        bool exporting;
-
-        [HideInInspector]
+        bool exporting = false;
         public bool importing = false;
 #endif
 
@@ -91,7 +89,6 @@ namespace HoloToolkit.Unity
 #endif
             TransferBatch = new WorldAnchorTransferBatch();
             storedData = new List<byte>();
-            exporting = false;
 #endif
         }
 
@@ -407,7 +404,6 @@ namespace HoloToolkit.Unity
 
         void ExportComplete(SerializationCompletionReason completionReason)
         {
-#if !UNITY_EDITOR && UNITY_WSA
             exporting = false;
             if (completionReason != SerializationCompletionReason.Succeeded)
             {
@@ -415,20 +411,18 @@ namespace HoloToolkit.Unity
                 return;
             }
 
-            folderPath = ApplicationData.Current.RoamingFolder.Path;
-            string filePath = Path.Combine(folderPath, anchorFileName + fileExtension);
+            string fullPath = folderPath + "\\" + anchorFileName + fileExtension;
 
 #if UNITY_WINRT
-            UnityEngine.Windows.File.WriteAllBytes(filePath, storedData.ToArray());
+            UnityEngine.Windows.File.WriteAllBytes(fullPath, storedData.ToArray());
 #else
             System.IO.File.WriteAllBytes(fullPath, storedData.ToArray());
 #endif
-            Debug.Log("Succesfully exported data to path : " + filePath);
-#endif
-            }
-#endregion
+            Debug.Log("Succesfully exported data to path : " + fullPath);
+        }
+        #endregion
 
-            #region Import
+        #region Import
         public void ImportFromFile()
         {
             if (importing)
@@ -464,11 +458,11 @@ namespace HoloToolkit.Unity
 
                 Debug.LogError("Failed to import due to " + completionReason.ToString() + ". Retries : " + retries.ToString());
                 retries++;
-
                 ImportFromFile();
                 return;
             }
             Debug.Log("Succesfully imported files.");
+
             retries = 0;
 
             string[] ids = deserializedTransferBatch.GetAllIds();
@@ -478,7 +472,7 @@ namespace HoloToolkit.Unity
                 Destroy(GetComponent<WorldAnchor>());
             }
         }
-            #endregion
+#endregion
 #endif
         }
 }

@@ -1,0 +1,146 @@
+fileFormatVersion: 2
+guid: 3123c3343b9a0094289c57e2a61fd1d3
+timeCreated: 1507263186
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: grp_ladder
+    100002: grp_tower
+    100004: obj_ladder1
+    100006: obj_ladder12
+    100008: obj_ladder2
+    100010: obj_ladder3
+    100012: obj_ladder4
+    100014: obj_ladder5
+    100016: obj_ladder6
+    100018: obj_ladder7
+    100020: obj_ladder8
+    100022: //RootNode
+    100024: obj_tower_gear_big
+    100026: obj_tower_stand
+    100028: obj_water_tank
+    400000: grp_ladder
+    400002: grp_tower
+    400004: obj_ladder1
+    400006: obj_ladder12
+    400008: obj_ladder2
+    400010: obj_ladder3
+    400012: obj_ladder4
+    400014: obj_ladder5
+    400016: obj_ladder6
+    400018: obj_ladder7
+    400020: obj_ladder8
+    400022: //RootNode
+    400024: obj_tower_gear_big
+    400026: obj_tower_stand
+    400028: obj_water_tank
+    2300000: obj_ladder1
+    2300002: obj_ladder12
+    2300004: obj_ladder2
+    2300006: obj_ladder3
+    2300008: obj_ladder4
+    2300010: obj_ladder5
+    2300012: obj_ladder6
+    2300014: obj_ladder7
+    2300016: obj_ladder8
+    2300018: obj_tower_gear_big
+    2300020: obj_tower_stand
+    2300022: obj_water_tank
+    3300000: obj_ladder1
+    3300002: obj_ladder12
+    3300004: obj_ladder2
+    3300006: obj_ladder3
+    3300008: obj_ladder4
+    3300010: obj_ladder5
+    3300012: obj_ladder6
+    3300014: obj_ladder7
+    3300016: obj_ladder8
+    3300018: obj_tower_gear_big
+    3300020: obj_tower_stand
+    3300022: obj_water_tank
+    4300000: obj_tower_stand
+    4300002: obj_water_tank
+    4300004: obj_tower_gear_big
+    4300006: obj_ladder1
+    4300008: obj_ladder2
+    4300010: obj_ladder3
+    4300012: obj_ladder4
+    4300014: obj_ladder5
+    4300016: obj_ladder6
+    4300018: obj_ladder7
+    4300020: obj_ladder8
+    4300022: obj_ladder12
+    7400000: Take 001
+    9500000: //RootNode
+    11100000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

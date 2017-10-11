@@ -7,7 +7,7 @@
 # Default behavior is to never overwrite files
 ClicketyClack.sln: modified
 ClicketyClack\App.cs: C6D9639222B27C64C5FD75C5FEBECB86
-ClicketyClack\ClicketyClack.csproj: FA43C7E5089B4502D4A1EF7FE999FDCE
+ClicketyClack\ClicketyClack.csproj: 92341D9BCC42F8968902D511D3D44A27
 ClicketyClack\ClicketyClack.csproj.user: modified
 ClicketyClack\Package.appxmanifest: D6994109DC7CD3E73EDEF3FF7E392A9D
 ClicketyClack\project.json: 1D02BC64BAC0D041019673A1C4C51737
