@@ -396,6 +396,26 @@ public static class BezierCurve2 {
     // DEFAULT //
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    public static void ClearAllData()
+    {
+
+        for (int n = 0; n < points.Length; n++)
+        {
+            points[0] = new Vector3();
+        }
+        Array.Resize(ref points, 0);
+
+
+        for (int i = 0; i < GO_Points.Length; i++)
+        {
+            GO_Points[i] = null;
+        }
+
+        Array.Resize(ref GO_Points, 0);
+
+    }
+
+
     public static void IncreaseSize(Vector3[] newPoints, int i)
     {
         Array.Resize(ref points, points.Length + i);

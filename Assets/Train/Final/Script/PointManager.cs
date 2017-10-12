@@ -22,6 +22,7 @@ public class PointManager : MonoBehaviour {
         BezierCurve2.CruveSteps = curveSteps;
         if (once)
         {
+            BezierCurve2.ClearAllData();
             BezierCurve2.IncreaseSize(startSize);
             BezierCurve2.updateCurvePoints();
 
