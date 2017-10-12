@@ -7,8 +7,7 @@ public class TrainMovement : MonoBehaviour {
     public float speed;
 
     private float distacneTravel;
-    private int Point_ID;
-
+    public int Point_ID;
 
 	// Use this for initialization
 	void Start () {
@@ -19,15 +18,10 @@ public class TrainMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (BezierCurve2.Go)
+        if(LevelManager.MoveOut && !LevelManager.ReachStation && BezierCurve2.Go)
         {
             distacneTravel += Time.deltaTime * speed;
             CheckPosition();
-        }
-        else
-        {
-            distacneTravel = 0f;
-            Point_ID = 0;
         }
     }
 
@@ -43,6 +37,8 @@ public class TrainMovement : MonoBehaviour {
             {
                 Temp_Id = 0;
                 distacneTravel = 0;
+
+                LevelManager.ReachStation = true;
             }
 
             if (distacneTravel >= BezierCurve2.Track_List[Temp_Id].distance)

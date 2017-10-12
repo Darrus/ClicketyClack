@@ -71,7 +71,7 @@ public class MainPoints : MonoBehaviour {
 
         if (type == (int)pointType.EventPoint)
         {
-            CreatePoints(EventPoint);
+            //CreatePoints(EventPoint);
             gameObject.name = ID.ToString() + "_Event";
         }
 
