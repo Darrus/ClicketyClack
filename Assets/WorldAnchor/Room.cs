@@ -4,12 +4,14 @@ using UnityEngine;
 using HoloToolkit.Unity;
 using HoloToolkit.Unity.SpatialMapping;
 
-public class Room : MonoBehaviour {
+public class Room : Singleton<Room> {
+    public bool done = false;
     public GameObject[] objectsToActivate;
     Anchor anchor;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         DontDestroyOnLoad(this.gameObject);
 #if !UNITY_EDITOR && UNITY_WSA
     foreach(GameObject go in objectsToActivate)
@@ -36,7 +38,7 @@ public class Room : MonoBehaviour {
             {
                 go.SetActive(true);
             }
-            Destroy(this);
+            done = true;
         }
 #endif
     }

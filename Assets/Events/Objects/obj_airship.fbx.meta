@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: aac7db5143dc99b4880dc457a6c88795
-timeCreated: 1507272658
+guid: 16cf12579c49a254d896585b51c44038
+timeCreated: 1507784831
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -8,45 +8,50 @@ ModelImporter:
     100000: //RootNode
     100002: obj_airship
     100004: obj_airship_fan_left
-    100006: obj_airship_fan_right
+    100006: obj_airship_fan_left1
     100008: obj_airship_frontwheel_left
     100010: obj_airship_frontwheel_right
-    100012: obj_airship_wheel_left
-    100014: obj_airship_wheel_right
-    100016: obj_cannon
+    100012: obj_airship_interior
+    100014: obj_airship_wheel_left
+    100016: obj_airship_wheel_right
+    100018: obj_cannon
     400000: obj_airship
     400002: //RootNode
     400004: obj_airship_fan_left
-    400006: obj_airship_fan_right
+    400006: obj_airship_fan_left1
     400008: obj_airship_frontwheel_left
     400010: obj_airship_frontwheel_right
-    400012: obj_airship_wheel_left
-    400014: obj_airship_wheel_right
-    400016: obj_cannon
+    400012: obj_airship_interior
+    400014: obj_airship_wheel_left
+    400016: obj_airship_wheel_right
+    400018: obj_cannon
     2300000: obj_airship
     2300002: obj_airship_fan_left
-    2300004: obj_airship_fan_right
+    2300004: obj_airship_fan_left1
     2300006: obj_airship_frontwheel_left
     2300008: obj_airship_frontwheel_right
-    2300010: obj_airship_wheel_left
-    2300012: obj_airship_wheel_right
-    2300014: obj_cannon
+    2300010: obj_airship_interior
+    2300012: obj_airship_wheel_left
+    2300014: obj_airship_wheel_right
+    2300016: obj_cannon
     3300000: obj_airship
     3300002: obj_airship_fan_left
-    3300004: obj_airship_fan_right
+    3300004: obj_airship_fan_left1
     3300006: obj_airship_frontwheel_left
     3300008: obj_airship_frontwheel_right
-    3300010: obj_airship_wheel_left
-    3300012: obj_airship_wheel_right
-    3300014: obj_cannon
+    3300010: obj_airship_interior
+    3300012: obj_airship_wheel_left
+    3300014: obj_airship_wheel_right
+    3300016: obj_cannon
     4300000: obj_cannon
     4300002: obj_airship_wheel_right
     4300004: obj_airship_wheel_left
     4300006: obj_airship_frontwheel_right
     4300008: obj_airship_frontwheel_left
     4300010: obj_airship_fan_left
-    4300012: obj_airship_fan_right
+    4300012: obj_airship_interior
     4300014: obj_airship
+    4300016: obj_airship_fan_left1
     7400000: Take 001
     9500000: //RootNode
     11100000: //RootNode
@@ -77,7 +82,7 @@ ModelImporter:
       name: Take 001
       takeName: Take 001
       firstFrame: 1
-      lastFrame: 56
+      lastFrame: 60
       wrapMode: 2
       orientationOffsetY: 0
       level: 0
@@ -104,11 +109,13 @@ ModelImporter:
         weight: 1
       - path: obj_airship_fan_left
         weight: 1
-      - path: obj_airship_fan_right
+      - path: obj_airship_fan_left1
         weight: 1
       - path: obj_airship_frontwheel_left
         weight: 1
       - path: obj_airship_frontwheel_right
+        weight: 1
+      - path: obj_airship_interior
         weight: 1
       - path: obj_airship_wheel_left
         weight: 1

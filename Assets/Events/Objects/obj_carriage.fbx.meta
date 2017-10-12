@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 876784eb2ecbc87458244ecc77b251a0
-timeCreated: 1507259950
+guid: c463b93ba0b6d784b8925070844ce501
+timeCreated: 1507797829
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -67,14 +67,14 @@ ModelImporter:
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
-    animationWrapMode: 0
+    animationWrapMode: 2
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
       name: Take 001
       takeName: Take 001
       firstFrame: 1
-      lastFrame: 28
+      lastFrame: 600
       wrapMode: 2
       orientationOffsetY: 0
       level: 0

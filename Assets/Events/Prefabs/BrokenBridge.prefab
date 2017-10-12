@@ -19,7 +19,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4556901954157804}
-  - component: {fileID: 114560198645448218}
+  - component: {fileID: 114490931093607608}
+  - component: {fileID: 65397916882197834}
   m_Layer: 0
   m_Name: BrokenBridge
   m_TagString: Untagged
@@ -608,6 +609,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1539299442547872}
   m_Mesh: {fileID: 4300000, guid: 54d29b1ff777a9a40bb2e29522211744, type: 3}
+--- !u!65 &65397916882197834
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1013981456876430}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.6, y: 0.5, z: 0.35}
+  m_Center: {x: -0.3, y: 0, z: 0}
 --- !u!65 &65704671233973474
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -632,7 +645,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.6, y: 0.38, z: 0.3}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114560198645448218
+--- !u!114 &114490931093607608
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -640,9 +653,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1013981456876430}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3ab2cf133e77a648a75791cdd5fed09, type: 3}
+  m_Script: {fileID: 11500000, guid: 68aa698daca25f04494a3f0e4d95aeca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTag: Player
 --- !u!135 &135937024566926874
 SphereCollider:
   m_ObjectHideFlags: 1
