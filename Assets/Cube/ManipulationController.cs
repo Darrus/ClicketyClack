@@ -3,11 +3,15 @@ using HoloToolkit.Unity.InputModule;
 
 public class ManipulationController : MonoBehaviour, IManipulationHandler
 {
-    Vector3 prevPos;
+    [SerializeField]
+    private float speed = 1.0f;
+    private float step;
+
 
     public void OnManipulationCanceled(ManipulationEventData eventData)
     {
         GetComponent<Rigidbody>().useGravity = true;
+
         InputManager.Instance.PopModalInputHandler();
     }
 
@@ -21,26 +25,28 @@ public class ManipulationController : MonoBehaviour, IManipulationHandler
     {
         GetComponent<Rigidbody>().useGravity = false;
 
-        // ???
-        prevPos = eventData.CumulativeDelta;
+        // Back to Default Angle
+        step = speed * Time.deltaTime;
 
         // need(KORE GA NAITO OBUJEKUTO NI FORCAS DEKINAI)
-        InputManager.Instance.PushModalInputHandler(gameObject);
+        InputManager.Instance.PushModalInputHandler(this.gameObject);
+
+        Debug.Log(gameObject);
     }
 
     public void OnManipulationUpdated(ManipulationEventData eventData)
     {
-        
-        Vector3 moveVec = Vector3.zero;
-        moveVec = eventData.CumulativeDelta - prevPos;
+        GetComponent<Rigidbody>().useGravity = true;
 
-        prevPos = eventData.CumulativeDelta;
-        
+        // Default Angle
+        this.transform.rotation =
+            Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, 0), step);
 
-        var handDistance = 0.4f;
-        var objectDistance = 
-            Vector3.Distance(Camera.main.transform.position, gameObject.transform.position);
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
 
-        gameObject.transform.position += (moveVec * (objectDistance / handDistance));
+        gameObject.transform.position = Camera.main.transform.position + Camera.main.transform.forward * 2;
+
     }
 }
+
+
