@@ -9,6 +9,7 @@ TagManager:
   - DragPoint
   - test
   - Ground
+  - Bound
   layers:
   - Default
   - TransparentFX

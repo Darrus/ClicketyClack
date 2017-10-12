@@ -13,18 +13,24 @@ public class PickAndSnap : MonoBehaviour, IManipulationHandler
     public string snapTriggerName;
 
     private Collider objCollider;
+    private Rigidbody rigid;
 
     [HideInInspector]
     public bool snapped = false;
+    bool picked = false;
     EventBase trainEvent;
+
 
     private void Start()
     {
         objCollider = GetComponent<Collider>();
+        rigid = GetComponent<Rigidbody>();
     }
 
     public void OnManipulationCanceled(ManipulationEventData eventData)
     {
+        InputManager.Instance.ClearModalInputStack();
+        picked = false;
         if (snapped)
         {
             for(int i = 0; i < meshRenderers.Length; ++i)
@@ -33,10 +39,17 @@ public class PickAndSnap : MonoBehaviour, IManipulationHandler
             }
             trainEvent = null;
         }
+        else if (rigid)
+        {
+            rigid.useGravity = true;
+            rigid.isKinematic = false;
+        }
     }
 
     public void OnManipulationCompleted(ManipulationEventData eventData)
     {
+        InputManager.Instance.ClearModalInputStack();
+        picked = false;
         if(snapped)
         {
             for (int i = 0; i < meshRenderers.Length; ++i)
@@ -45,10 +58,23 @@ public class PickAndSnap : MonoBehaviour, IManipulationHandler
             }
             trainEvent = null;
         }
+        else if (rigid)
+        {
+            rigid.useGravity = true;
+            rigid.isKinematic = false;
+        }
     }
 
     public void OnManipulationStarted(ManipulationEventData eventData)
     {
+        InputManager.Instance.ClearModalInputStack();
+        InputManager.Instance.PushModalInputHandler(gameObject);
+        picked = true;
+        if (rigid)
+        {
+            rigid.useGravity = false;
+            rigid.isKinematic = true;
+        }
     }
 
     public void OnManipulationUpdated(ManipulationEventData eventData)
@@ -67,7 +93,6 @@ public class PickAndSnap : MonoBehaviour, IManipulationHandler
             {
                 meshRenderers[i].material = placeableMaterial;
             }
-
             if (sqrMagnitude >= breakOffPoint * breakOffPoint)
             {
                 snapped = false;
@@ -87,6 +112,9 @@ public class PickAndSnap : MonoBehaviour, IManipulationHandler
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!picked)
+            return;
+
         if(other.name == snapTriggerName)
         {
             Transform otherTransform = other.transform;

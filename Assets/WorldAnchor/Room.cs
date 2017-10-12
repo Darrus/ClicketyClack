@@ -10,6 +10,7 @@ public class Room : MonoBehaviour {
 
     private void Awake()
     {
+        DontDestroyOnLoad(this.gameObject);
 #if !UNITY_EDITOR && UNITY_WSA
     foreach(GameObject go in objectsToActivate)
     {

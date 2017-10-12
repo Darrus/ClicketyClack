@@ -60,12 +60,11 @@ namespace HoloToolkit.Unity
         string folderPath;
         string fileExtension = ".bytes";
 
-        int retries = 0;
-        const int maxRetry = 3;
-
         WorldAnchorTransferBatch TransferBatch;
         List<byte> storedData;
         bool exporting = false;
+
+        [HideInInspector]
         public bool importing = false;
 #endif
 
@@ -446,24 +445,16 @@ namespace HoloToolkit.Unity
 
         private void ImportComplete(SerializationCompletionReason completionReason, WorldAnchorTransferBatch deserializedTransferBatch)
         {
-            importing = false;
             if (completionReason != SerializationCompletionReason.Succeeded)
             {
-                if (retries == maxRetry)
-                {
-                    Debug.LogError("Failed to import due to " + completionReason.ToString() + ". After " + retries.ToString() + " retries.");
-                    retries = 0;
-                    return;
-                }
-
-                Debug.LogError("Failed to import due to " + completionReason.ToString() + ". Retries : " + retries.ToString());
-                retries++;
+                Debug.LogError("Failed to import due to " + completionReason.ToString());
                 ImportFromFile();
                 return;
             }
+
+            importing = false;
             Debug.Log("Succesfully imported files.");
 
-            retries = 0;
 
             string[] ids = deserializedTransferBatch.GetAllIds();
             for (int i = 0; i < ids.Length; ++i)
