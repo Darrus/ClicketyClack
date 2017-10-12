@@ -8,7 +8,7 @@
 ClicketyClack.sln: DA6CE0CE7B8303E3959FE7B124E44B74
 ClicketyClack\App.cs: modified
 ClicketyClack\ClicketyClack.csproj: FD8608A8C0D0FA6E9366623B70EC13D9
-ClicketyClack\ClicketyClack.csproj.user: BEFB8AC4886C4CFDD3C68445D6F19B04
+ClicketyClack\ClicketyClack.csproj.user: modified
 ClicketyClack\Package.appxmanifest: D6994109DC7CD3E73EDEF3FF7E392A9D
 ClicketyClack\project.json: 1D02BC64BAC0D041019673A1C4C51737
 ClicketyClack\Assets\SplashScreen.scale-200.png: 60618416282ED104FD1473935716045D
