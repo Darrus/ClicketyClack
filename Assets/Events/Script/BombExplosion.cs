@@ -34,6 +34,8 @@ public class BombExplosion : MonoBehaviour {
                 {
                     Debug.Log(col.name);
                     Rigidbody objRigidbody = col.GetComponent<Rigidbody>();
+                    objRigidbody.useGravity = true;
+                    objRigidbody.isKinematic = false;
                     objRigidbody.AddExplosionForce(explosionForce, transform.position, sphereCollider.radius);
                 }
             }
