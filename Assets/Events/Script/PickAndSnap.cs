@@ -2,7 +2,7 @@
 using HoloToolkit.Unity.InputModule;
 
 [RequireComponent(typeof(Collider))]
-public class PickUpAndSnap : MonoBehaviour, IManipulationHandler
+public class PickAndSnap : MonoBehaviour, IManipulationHandler
 {
     [Range(1.0f, 8.0f)]
     public float snapDistance = 5.0f;
@@ -10,12 +10,13 @@ public class PickUpAndSnap : MonoBehaviour, IManipulationHandler
     public Material placeableMaterial;
     public Material defaultMaterial;
     public MeshRenderer[] meshRenderers;
+    public string snapTriggerName;
 
-    private const string mountTagName = "MountPoint";
     private Collider objCollider;
 
     [HideInInspector]
     public bool snapped = false;
+    EventBase trainEvent;
 
     private void Start()
     {
@@ -30,6 +31,7 @@ public class PickUpAndSnap : MonoBehaviour, IManipulationHandler
             {
                 meshRenderers[i].material = defaultMaterial;
             }
+            trainEvent = null;
         }
     }
 
@@ -41,6 +43,7 @@ public class PickUpAndSnap : MonoBehaviour, IManipulationHandler
             {
                 meshRenderers[i].material = defaultMaterial;
             }
+            trainEvent = null;
         }
     }
 
@@ -64,9 +67,13 @@ public class PickUpAndSnap : MonoBehaviour, IManipulationHandler
             {
                 meshRenderers[i].material = placeableMaterial;
             }
+
             if (sqrMagnitude >= breakOffPoint * breakOffPoint)
             {
                 snapped = false;
+                if(trainEvent != null)
+                    trainEvent.Solved = false;
+                trainEvent = null;
                 transform.SetParent(null);
                 transform.rotation = new Quaternion();
                 transform.position = newPosition;
@@ -80,43 +87,25 @@ public class PickUpAndSnap : MonoBehaviour, IManipulationHandler
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(mountTagName))
+        if(other.name == snapTriggerName)
         {
-            Vector3 newPosition;
-            switch (other.name)
+            Transform otherTransform = other.transform;
+            trainEvent = otherTransform.parent.GetComponent<EventBase>();
+            if (trainEvent == null || trainEvent.Solved)
             {
-                case "leftPoint":
-                    snapped = true;
-                    newPosition = new Vector3(other.transform.localPosition.x - objCollider.bounds.size.x * 0.5f, other.transform.localPosition.y, other.transform.localPosition.z);
-                    transform.SetParent(other.transform.parent);
-                    transform.localRotation = new Quaternion();
-                    transform.localPosition = newPosition;
-                    break;
-                case "rightPoint":
-                    snapped = true;
-                    newPosition = new Vector3(other.transform.localPosition.x + objCollider.bounds.size.x * 0.5f, other.transform.localPosition.y, other.transform.localPosition.z);
-                    transform.SetParent(other.transform.parent);
-                    transform.localRotation = new Quaternion();
-                    transform.localPosition = newPosition;
-                    break;
-                case "frontPoint":
-                    snapped = true;
-                    newPosition = new Vector3(other.transform.localPosition.x + objCollider.bounds.size.z * 0.5f, other.transform.localPosition.y, other.transform.localPosition.z);
-                    transform.SetParent(other.transform.parent);
-                    transform.localRotation = new Quaternion();
-                    transform.localPosition = newPosition;
-                    break;
-                case "backPoint":
-                    snapped = true;
-                    newPosition = new Vector3(other.transform.localPosition.x - objCollider.bounds.size.z * 0.5f, other.transform.localPosition.y, other.transform.localPosition.z);
-                    transform.SetParent(other.transform.parent);
-                    transform.localRotation = new Quaternion();
-                    transform.localPosition = newPosition;
-                    break;
-                default:
-                    Debug.Log("Error mount point in " + other.transform.parent.name + ", name is incorrect.");
-                    break;
+                Debug.Log(trainEvent.Solved);
+                return;
             }
+
+            for (int i = 0; i < meshRenderers.Length; ++i)
+            {
+                meshRenderers[i].material = placeableMaterial;
+            }
+
+            transform.SetParent(otherTransform.parent);
+            transform.localPosition = new Vector3();
+            transform.localRotation = new Quaternion();
+            snapped = true;
         }
     }
 }
