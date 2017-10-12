@@ -11,13 +11,14 @@ public class MainPoints : MonoBehaviour {
         None = 0,
         FixedPoint = 1,
         EventPoint = 2,
-        NormalPoint = 3
+        NormalPoint = 3,
+        TrafficLight = 4
     };
 
     public GameObject NormalPoint;
     //public GameObject FixedPoint;
     public GameObject EventPoint;
-
+    public GameObject TrafficLight;
 
     [HideInInspector]
     public Vector3 ChildPoint_position;
@@ -75,6 +76,14 @@ public class MainPoints : MonoBehaviour {
             gameObject.name = ID.ToString() + "_Event";
         }
 
+        if (type == (int)pointType.TrafficLight)
+        {
+            
+            CreatePoints(TrafficLight);
+            //CreatePoints(EventPoint);
+            gameObject.name = ID.ToString() + "_TrafficLight";
+        }
+
     }
 	
 	// Update is called once per frame
@@ -89,7 +98,7 @@ public class MainPoints : MonoBehaviour {
             for (int i = 0; i <= BezierCurve2.CruveSteps; ++i)
             {
 
-                if (type == (int)pointType.NormalPoint || type == (int)pointType.FixedPoint)
+                if (type == (int)pointType.NormalPoint || type == (int)pointType.FixedPoint || type == (int)pointType.TrafficLight)
                 {
                     Vector3 point = (BezierCurve2.GetPoint(transform.position * BezierCurve2.Distance_scaleFacter, ChildPoint_position * BezierCurve2.Distance_scaleFacter, Friend_ChildPoint_position * BezierCurve2.Distance_scaleFacter, FriendPoint_position * BezierCurve2.Distance_scaleFacter, i / (float)BezierCurve2.CruveSteps)) - transform.position * BezierCurve2.Distance_scaleFacter;
                     curveNodes[i] = point;
@@ -115,6 +124,12 @@ public class MainPoints : MonoBehaviour {
                 GetComponent<Renderer>().enabled = false;
                 UnrenderMesh = false;
             }
+
+            if (type == (int)pointType.TrafficLight)
+            {
+                UpdateTrafficLightPoints();
+            }
+
         }
 
         if(BezierCurve2.EnableTrackCollision)
@@ -128,6 +143,18 @@ public class MainPoints : MonoBehaviour {
     {
         GameObject myPoint = Instantiate(temp, transform.position, Quaternion.identity);
         myPoint.transform.parent = transform;
+    }
+
+    public void UpdateTrafficLightPoints()
+    {
+        GameObject Temp = gameObject.transform.GetChild(0).gameObject;
+
+        Vector3 normal = Vector3.Cross(BezierCurve2.Track_List[ID * 500].tangent, Vector3.up).normalized;
+
+        Temp.transform.position = Temp.transform.position + new Vector3(normal.x * 0.4f, 0, normal.z * 0.4f);
+
+        Temp.transform.LookAt(transform.position);
+
     }
 
     public void BuildRoadMesh()

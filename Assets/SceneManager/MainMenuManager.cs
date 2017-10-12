@@ -20,6 +20,8 @@ public class MainMenuManager : MonoBehaviour
     public GameObject LevelPage;
     public GameObject CustomizePage;
 
+    public GameObject Room_Items;
+
     public GameObject AppPrefab;
 
     public static MainMenuManager Singleton = null;

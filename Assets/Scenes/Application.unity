@@ -529,7 +529,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -1851,6 +1851,21 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 20634706718640648, guid: a1977506eaab58e4c900a3a0dcd09ee4,
+        type: 2}
+      propertyPath: m_BackGroundColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 20634706718640648, guid: a1977506eaab58e4c900a3a0dcd09ee4,
+        type: 2}
+      propertyPath: m_BackGroundColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 20634706718640648, guid: a1977506eaab58e4c900a3a0dcd09ee4,
+        type: 2}
+      propertyPath: m_BackGroundColor.b
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a1977506eaab58e4c900a3a0dcd09ee4, type: 2}
   m_IsPrefabParent: 0
@@ -2626,6 +2641,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc78b01cd61808f47879fa50cbe5be83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  done: 0
   objectsToActivate: []
 --- !u!114 &1375522559
 MonoBehaviour:
