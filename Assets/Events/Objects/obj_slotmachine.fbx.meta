@@ -1,22 +1,32 @@
 fileFormatVersion: 2
 guid: 18ca971dc696057439febadf17bb976b
-timeCreated: 1507271891
+timeCreated: 1507532636
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: obj_slot_machine
-    100002: //RootNode
-    100004: obj_slotmachine_handle
-    400000: obj_slot_machine
-    400002: //RootNode
-    400004: obj_slotmachine_handle
-    2300000: obj_slot_machine
-    2300002: obj_slotmachine_handle
-    3300000: obj_slot_machine
-    3300002: obj_slotmachine_handle
-    4300000: obj_slotmachine_handle
-    4300002: obj_slot_machine
+    100000: obj_arrow
+    100002: obj_light_bulbs
+    100004: //RootNode
+    100006: obj_slotmachine_body
+    100008: obj_slotmachine_handle
+    400000: obj_arrow
+    400002: obj_light_bulbs
+    400004: //RootNode
+    400006: obj_slotmachine_body
+    400008: obj_slotmachine_handle
+    2300000: obj_arrow
+    2300002: obj_light_bulbs
+    2300004: obj_slotmachine_body
+    2300006: obj_slotmachine_handle
+    3300000: obj_arrow
+    3300002: obj_light_bulbs
+    3300004: obj_slotmachine_body
+    3300006: obj_slotmachine_handle
+    4300000: obj_arrow
+    4300002: obj_slotmachine_body
+    4300004: obj_slotmachine_handle
+    4300006: obj_light_bulbs
   materials:
     importMaterials: 1
     materialName: 0
