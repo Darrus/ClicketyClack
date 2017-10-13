@@ -56,7 +56,7 @@ public class PickAndSnap : MonoBehaviour, IManipulationHandler
             {
                 meshRenderers[i].material = defaultMaterial;
             }
-            trainEvent = null;
+            trainEvent.Solved = true;
         }
         else if (rigid)
         {

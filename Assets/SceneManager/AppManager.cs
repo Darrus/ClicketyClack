@@ -11,17 +11,24 @@ public class AppManager : MonoBehaviour {
     public String MainMenu;
     public String Level_1;
     public String Level_2;
+    public String Level_3;
+    public String Level_4;
 
     public enum GameScene
     {
         mainmenu = 0,
         level_1 = 1,
-        level_2 = 2
+        level_2 = 2,
+        level_3 = 3,
+        level_4 = 4
+
     };
 
     public static int curScene;
 
     public static AppManager Singleton = null;
+
+    public GameObject TheRoom;
 
     public static AppManager Instance
     {
@@ -56,10 +63,12 @@ public class AppManager : MonoBehaviour {
    
     void Update()
     {
+#if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Quit();
         }
+#endif
     }
 
     public static void Quit()
@@ -90,7 +99,18 @@ public class AppManager : MonoBehaviour {
                     SceneManager.LoadScene(Temp.Level_2);
                     break;
                 }
+            case (int)GameScene.level_3:
+                {
+                    SceneManager.LoadScene(Temp.Level_3);
+                    break;
+                }
+            case (int)GameScene.level_4:
+                {
+                    SceneManager.LoadScene(Temp.Level_4);
+                    break;
+                }
         }
+        Detach_RoomChild(Temp);
     }
 
     public static void NextLevel(AppManager Temp)
@@ -105,11 +125,29 @@ public class AppManager : MonoBehaviour {
                 }
             case (int)GameScene.level_2:
                 {
-                    curScene = (int)GameScene.level_1;
-                    SceneManager.LoadScene(Temp.Level_1);
+                    curScene = (int)GameScene.level_3;
+                    SceneManager.LoadScene(Temp.Level_3);
+                    break;
+                }
+            case (int)GameScene.level_3:
+                {
+                    curScene = (int)GameScene.level_4;
+                    SceneManager.LoadScene(Temp.Level_4);
+                    break;
+                }
+            case (int)GameScene.level_4:
+                {
+                    curScene = (int)GameScene.mainmenu;
+                    SceneManager.LoadScene(Temp.MainMenu);
                     break;
                 }
         }
+        Detach_RoomChild(Temp);
+    }
+
+    public static void Detach_RoomChild(AppManager Temp)
+    {
+        Temp.TheRoom.transform.DetachChildren();
     }
 
 }

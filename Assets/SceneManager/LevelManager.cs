@@ -13,7 +13,10 @@ public class LevelManager : MonoBehaviour {
     public static bool ReachStation;
     public static bool MoveOut;
 
+    public GameObject Room_Items;
+
     public GameObject AppPrefab;
+
 
     public static LevelManager Singleton = null;
 
@@ -40,6 +43,10 @@ public class LevelManager : MonoBehaviour {
 
             Debug.Log("Creating temporary App");
         }
+
+        GameObject Room = GameObject.Find("Room");
+        Room_Items.transform.SetParent(Room.transform);
+
     }
 
     void Start()
@@ -52,11 +59,14 @@ public class LevelManager : MonoBehaviour {
 
     void Update()
     {
+
+#if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             MoveOut = true;
             ReachStation = false;
         }
+#endif
 
         Check_Win_Lose_Condition();
     }
@@ -78,6 +88,7 @@ public class LevelManager : MonoBehaviour {
     void ResetLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        AppManager.Detach_RoomChild(AppManager.Singleton);
     }
 
 }

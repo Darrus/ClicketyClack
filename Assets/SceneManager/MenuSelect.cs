@@ -10,6 +10,7 @@ public class MenuSelect : MonoBehaviour ,IInputClickHandler{
     enum UIList
     {
         Start = 1,
+        Temp = 99,
         Quit = 0,
 
         Level_1 = 2,
@@ -35,6 +36,12 @@ public class MenuSelect : MonoBehaviour ,IInputClickHandler{
                     MainMenuManager.UpdateMainMenu(MainMenuManager.Singleton);
                     break;
                 }
+            case (int)UIList.Temp:
+                {
+                    MainMenuManager.curPage = (int)MainMenuManager.MenuPages.Customization;
+                    MainMenuManager.UpdateMainMenu(MainMenuManager.Singleton);
+                    break;
+                }
             case (int)UIList.Quit:
                 {
                     AppManager.Quit();
@@ -48,14 +55,20 @@ public class MenuSelect : MonoBehaviour ,IInputClickHandler{
                 }
             case (int)UIList.Level_2:
                 {
+                    AppManager.curScene = (int)AppManager.GameScene.level_2;
+                    AppManager.LoadScene(AppManager.Singleton);
                     break;
                 }
             case (int)UIList.Level_3:
                 {
+                    AppManager.curScene = (int)AppManager.GameScene.level_3;
+                    AppManager.LoadScene(AppManager.Singleton);
                     break;
                 }
             case (int)UIList.Level_4:
                 {
+                    AppManager.curScene = (int)AppManager.GameScene.level_4;
+                    AppManager.LoadScene(AppManager.Singleton);
                     break;
                 }
             case (int)UIList.New:

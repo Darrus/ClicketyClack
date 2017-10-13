@@ -18,7 +18,7 @@ public class TrainMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if(LevelManager.MoveOut && !LevelManager.ReachStation && BezierCurve2.Go)
+        if(LevelManager.TrianConnected && LevelManager.MoveOut && !LevelManager.ReachStation && BezierCurve2.Go)
         {
             distacneTravel += Time.deltaTime * speed;
             CheckPosition();

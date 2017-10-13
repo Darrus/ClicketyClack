@@ -10,6 +10,8 @@ TagManager:
   - test
   - Ground
   - Bound
+  - FallPoint
+  - Bullet
   layers:
   - Default
   - TransparentFX

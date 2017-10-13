@@ -61,7 +61,9 @@ public class MainPoints : MonoBehaviour {
 
         if (type == (int)pointType.NormalPoint)
         {
+#if UNITY_EDITOR
             CreatePoints(NormalPoint);
+#endif
             gameObject.name = ID.ToString() + "_Normal"; 
         }
 
@@ -72,16 +74,20 @@ public class MainPoints : MonoBehaviour {
 
         if (type == (int)pointType.EventPoint)
         {
-            //CreatePoints(EventPoint);
+#if UNITY_EDITOR
+            CreatePoints(EventPoint);
+#endif
             gameObject.name = ID.ToString() + "_Event";
         }
 
         if (type == (int)pointType.TrafficLight)
         {
-            
             CreatePoints(TrafficLight);
-            //CreatePoints(EventPoint);
             gameObject.name = ID.ToString() + "_TrafficLight";
+#if UNITY_EDITOR
+            CreatePoints(EventPoint);
+#endif
+            
         }
 
     }
@@ -89,7 +95,7 @@ public class MainPoints : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (UpdateMesh)
+        if (UpdateMesh && BezierCurve2.Go)
         {
             curveNodes = new Vector3[BezierCurve2.CruveSteps + 1];
             tangents = new Vector3[BezierCurve2.CruveSteps + 1];
@@ -148,8 +154,8 @@ public class MainPoints : MonoBehaviour {
     public void UpdateTrafficLightPoints()
     {
         GameObject Temp = gameObject.transform.GetChild(0).gameObject;
-
-        Vector3 normal = Vector3.Cross(BezierCurve2.Track_List[ID * 500].tangent, Vector3.up).normalized;
+      
+        Vector3 normal = Vector3.Cross(BezierCurve2.Track_List[(ID * 500) + 1].tangent, Vector3.up).normalized;
 
         Temp.transform.position = Temp.transform.position + new Vector3(normal.x * 0.4f, 0, normal.z * 0.4f);
 

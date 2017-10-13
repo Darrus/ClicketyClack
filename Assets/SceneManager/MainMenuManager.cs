@@ -49,6 +49,10 @@ public class MainMenuManager : MonoBehaviour
 
             Debug.Log("Creating temporary App");
         }
+
+        GameObject Room = GameObject.Find("Room");
+        Room_Items.transform.SetParent(Room.transform);
+
     }
 
     void Start()

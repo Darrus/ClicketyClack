@@ -9,11 +9,19 @@ public class TriggerTrainDeath : MonoBehaviour {
     {
         if(collision.gameObject.CompareTag(triggerTag))
         {
-            Debug.Log("DEATH");
+            GameObject[] Temp;
+            Temp = GameObject.FindGameObjectsWithTag("Player");
+
             LevelManager.TrianConnected = false;
-            Rigidbody rigid = collision.transform.GetComponent<Rigidbody>();
-            rigid.useGravity = true;
-            rigid.isKinematic = false;
+            Debug.Log("DEATH");
+            
+
+            foreach (GameObject temp in Temp)
+            {
+                Rigidbody rigid = temp.transform.GetComponent<Rigidbody>();
+                rigid.useGravity = true;
+                rigid.isKinematic = false;
+            }
         }
     }
 }

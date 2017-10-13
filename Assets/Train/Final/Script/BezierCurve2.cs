@@ -87,7 +87,6 @@ public static class BezierCurve2 {
 
         for (float f = step; f < 1.0000000001f; f += step) // this is so dumb
         {
-
             if (currPoint.type == (int)MainPoints.pointType.NormalPoint || currPoint.type == (int)MainPoints.pointType.FixedPoint || currPoint.type == (int)MainPoints.pointType.TrafficLight)
             {
                 pt = GetPoint(currPoint.transform.position, currPoint.ChildPoint_position, currPoint.Friend_ChildPoint_position, currPoint.FriendPoint_position, f);
@@ -412,6 +411,8 @@ public static class BezierCurve2 {
         }
 
         Array.Resize(ref GO_Points, 0);
+
+        Array.Resize(ref Track_List, 0);
 
     }
 

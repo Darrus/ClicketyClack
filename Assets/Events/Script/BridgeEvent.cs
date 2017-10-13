@@ -7,6 +7,9 @@ public class BridgeEvent : EventBase {
 
     private void OnTriggerEnter(Collider other)
     {
+        if (Solved)
+            return;
+
         if(other.CompareTag(playerTag))
         {
             Rigidbody rigid = other.transform.GetComponent<Rigidbody>();

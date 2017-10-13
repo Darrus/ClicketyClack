@@ -55,3 +55,6 @@ MonoBehaviour:
   MainMenu: MainMenu
   Level_1: Game_Level_1
   Level_2: Game_Level_2
+  Level_3: Game_Level_3
+  Level_4: Game_Level_4
+  TheRoom: {fileID: 0}
