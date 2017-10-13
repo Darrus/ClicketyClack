@@ -31,7 +31,7 @@ public class Room : Singleton<Room> {
     private void Update()
     {
 #if !UNITY_EDITOR && UNITY_WSA
-        if (!WorldAnchorManager.Instance.importing)
+        if (!WorldAnchorManager.Instance.importing && !done)
         {
             anchor.LoadAnchor();
             foreach(GameObject go in objectsToActivate)

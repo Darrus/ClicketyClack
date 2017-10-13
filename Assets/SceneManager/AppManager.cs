@@ -27,6 +27,8 @@ public class AppManager : MonoBehaviour {
 
     };
 
+    private static bool once;
+
     public static int curScene;
 
     public static AppManager Singleton = null;
@@ -58,8 +60,13 @@ public class AppManager : MonoBehaviour {
         {
             // Make sure this object persists between scene loads.
             DontDestroyOnLoad(gameObject);
+            once = true;
+
+#if UNITY_EDITOR
             curScene = (int)GameScene.mainmenu;
             LoadScene(this);
+#endif
+
         }
     }
 
@@ -72,14 +79,24 @@ public class AppManager : MonoBehaviour {
             Quit();
         }
 #endif
+
+#if UNITY_WSA
+        if (once && Room.Instance.done)
+        {
+            curScene = (int)GameScene.mainmenu;
+            LoadScene(this);
+            once = false;
+        }
+#endif
     }
 
     public static void Quit()
     {
         Debug.Log("App: Terminating.");
 
-
+#if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
+#endif
         Application.Quit();
     }
 

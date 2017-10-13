@@ -35,8 +35,6 @@ public class MainMenuManager : MonoBehaviour
 
     void Awake()
     {
-       
-
         Debug.Log("MainMenu: Starting.");
 
         if (Singleton != null)
@@ -53,10 +51,8 @@ public class MainMenuManager : MonoBehaviour
 
             Debug.Log("Creating temporary App");
         }
-
-        GameObject Room = GameObject.Find("Room");
+        GameObject Room = GameObject.Find("TheRoom");
         Room_Items.transform.SetParent(Room.transform);
-
     }
 
     void Start()
@@ -66,6 +62,7 @@ public class MainMenuManager : MonoBehaviour
             curPage = (int)MenuPages.Base_Menu;
             MenuPage.SetActive(true);
         }
+        
     }
 
     void Update()

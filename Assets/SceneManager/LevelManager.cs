@@ -45,10 +45,8 @@ public class LevelManager : MonoBehaviour {
 
             Debug.Log("Creating temporary App");
         }
-
-        GameObject Room = GameObject.Find("Room");
+        GameObject Room = GameObject.Find("TheRoom");
         Room_Items.transform.SetParent(Room.transform);
-
     }
 
     void Start()
@@ -70,12 +68,15 @@ public class LevelManager : MonoBehaviour {
             ReachStation = false;
         }
 #endif
-        if (!MoveOut && TimeToRollOut >= 0)
-            TimeToRollOut -= Time.deltaTime;
-        else
+        if (!MoveOut)
         {
-            MoveOut = true;
-            ReachStation = false;
+            if (TimeToRollOut >= 0)
+                TimeToRollOut -= Time.deltaTime;
+            else
+            {
+                MoveOut = true;
+                ReachStation = false;
+            }
         }
 
         Check_Win_Lose_Condition();

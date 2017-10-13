@@ -445,6 +445,7 @@ namespace HoloToolkit.Unity
 
         private void ImportComplete(SerializationCompletionReason completionReason, WorldAnchorTransferBatch deserializedTransferBatch)
         {
+            importing = false;
             if (completionReason != SerializationCompletionReason.Succeeded)
             {
                 Debug.LogError("Failed to import due to " + completionReason.ToString());
@@ -452,7 +453,6 @@ namespace HoloToolkit.Unity
                 return;
             }
 
-            importing = false;
             Debug.Log("Succesfully imported files.");
 
 
