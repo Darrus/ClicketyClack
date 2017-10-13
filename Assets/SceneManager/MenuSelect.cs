@@ -73,10 +73,13 @@ public class MenuSelect : MonoBehaviour ,IInputClickHandler{
                 }
             case (int)UIList.New:
                 {
+
                     break;
                 }
             case (int)UIList.Load:
                 {
+                    AppManager.curScene = (int)AppManager.GameScene.ArtScene;
+                    AppManager.LoadScene(AppManager.Singleton);
                     break;
                 }
             case (int)UIList.back:

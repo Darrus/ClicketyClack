@@ -13,6 +13,7 @@ public class AppManager : MonoBehaviour {
     public String Level_2;
     public String Level_3;
     public String Level_4;
+    public String ArtScene;
 
     public enum GameScene
     {
@@ -20,7 +21,9 @@ public class AppManager : MonoBehaviour {
         level_1 = 1,
         level_2 = 2,
         level_3 = 3,
-        level_4 = 4
+        level_4 = 4,
+        ArtScene = 5,
+        TestLevelCreation = 6
 
     };
 
@@ -107,6 +110,15 @@ public class AppManager : MonoBehaviour {
             case (int)GameScene.level_4:
                 {
                     SceneManager.LoadScene(Temp.Level_4);
+                    break;
+                }
+            case (int)GameScene.ArtScene:
+                {
+                    SceneManager.LoadScene(Temp.ArtScene);
+                    break;
+                }
+            case (int)GameScene.TestLevelCreation:
+                {
                     break;
                 }
         }

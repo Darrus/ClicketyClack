@@ -24,6 +24,8 @@ public class MainMenuManager : MonoBehaviour
 
     public GameObject AppPrefab;
 
+    public bool TestScene;
+
     public static MainMenuManager Singleton = null;
 
     public static MainMenuManager Instance
@@ -33,6 +35,8 @@ public class MainMenuManager : MonoBehaviour
 
     void Awake()
     {
+       
+
         Debug.Log("MainMenu: Starting.");
 
         if (Singleton != null)
@@ -57,14 +61,15 @@ public class MainMenuManager : MonoBehaviour
 
     void Start()
     {
-
-        curPage = (int)MenuPages.Base_Menu;
-        MenuPage.SetActive(true);
+        if (!TestScene)
+        {
+            curPage = (int)MenuPages.Base_Menu;
+            MenuPage.SetActive(true);
+        }
     }
 
     void Update()
     {
-      
     }
 
     public static void UpdateMainMenu(MainMenuManager Temp)

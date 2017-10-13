@@ -25,6 +25,8 @@ public class LevelManager : MonoBehaviour {
         get { return Singleton; }
     }
 
+    private float TimeToRollOut;
+
     void Awake()
     {
         Debug.Log("Level: Starting.");
@@ -55,6 +57,7 @@ public class LevelManager : MonoBehaviour {
         TrianOnGround = false;
         ReachStation = false;
         MoveOut = false;
+        TimeToRollOut = 5f;
     }
 
     void Update()
@@ -67,6 +70,13 @@ public class LevelManager : MonoBehaviour {
             ReachStation = false;
         }
 #endif
+        if (!MoveOut && TimeToRollOut >= 0)
+            TimeToRollOut -= Time.deltaTime;
+        else
+        {
+            MoveOut = true;
+            ReachStation = false;
+        }
 
         Check_Win_Lose_Condition();
     }
