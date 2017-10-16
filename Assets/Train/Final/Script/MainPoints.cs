@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-
+#if UNITY_EDITOR
+[ExecuteInEditMode()]
+#endif
 public class MainPoints : MonoBehaviour {
 
     public enum pointType
@@ -55,95 +57,107 @@ public class MainPoints : MonoBehaviour {
     public bool UnrenderMesh;
 
     // Use this for initialization
-    void Start () {
-        UpdateMesh = false;
-        UnrenderMesh = true;
-
-        if (type == (int)pointType.NormalPoint)
+    void Start()
+    {
+        if (Application.isPlaying)
         {
-#if UNITY_EDITOR
-            CreatePoints(NormalPoint);
-#endif
-            gameObject.name = ID.ToString() + "_Normal"; 
-        }
+            UpdateMesh = false;
+            UnrenderMesh = true;
 
-        if (type == (int)pointType.FixedPoint)
-        {
-            gameObject.name = ID.ToString() + "_Fixed";
-        }
-
-        if (type == (int)pointType.EventPoint)
-        {
-#if UNITY_EDITOR
-            CreatePoints(EventPoint);
-#endif
-            gameObject.name = ID.ToString() + "_Event";
-        }
-
-        if (type == (int)pointType.TrafficLight)
-        {
-            CreatePoints(TrafficLight);
-            gameObject.name = ID.ToString() + "_TrafficLight";
-#if UNITY_EDITOR
-            CreatePoints(EventPoint);
-#endif
-            
-        }
-
-    }
-	
-	// Update is called once per frame
-	void Update () {
-
-        if (UpdateMesh && BezierCurve2.Go)
-        {
-            curveNodes = new Vector3[BezierCurve2.CruveSteps + 1];
-            tangents = new Vector3[BezierCurve2.CruveSteps + 1];
-            vertices = new Vector3[(BezierCurve2.CruveSteps + 1) * 2];
-
-            for (int i = 0; i <= BezierCurve2.CruveSteps; ++i)
+            if (type == (int)pointType.NormalPoint)
             {
-
-                if (type == (int)pointType.NormalPoint || type == (int)pointType.FixedPoint || type == (int)pointType.TrafficLight)
-                {
-                    Vector3 point = (BezierCurve2.GetPoint(transform.position * BezierCurve2.Distance_scaleFacter, ChildPoint_position * BezierCurve2.Distance_scaleFacter, Friend_ChildPoint_position * BezierCurve2.Distance_scaleFacter, FriendPoint_position * BezierCurve2.Distance_scaleFacter, i / (float)BezierCurve2.CruveSteps)) - transform.position * BezierCurve2.Distance_scaleFacter;
-                    curveNodes[i] = point;
-
-                    tangents[i] = BezierCurve2.GetFirstDerivative(transform.position * BezierCurve2.Distance_scaleFacter, ChildPoint_position * BezierCurve2.Distance_scaleFacter, Friend_ChildPoint_position * BezierCurve2.Distance_scaleFacter, FriendPoint_position * BezierCurve2.Distance_scaleFacter, i / (float)BezierCurve2.CruveSteps);
-                }
-
-                if (type == (int)pointType.EventPoint)
-                {
-                    Vector3 point = (BezierCurve2.GetPoint(transform.position * BezierCurve2.Distance_scaleFacter, transform.position * BezierCurve2.Distance_scaleFacter, FriendPoint_position * BezierCurve2.Distance_scaleFacter, FriendPoint_position * BezierCurve2.Distance_scaleFacter, i / (float)BezierCurve2.CruveSteps)) - transform.position * BezierCurve2.Distance_scaleFacter;
-                    curveNodes[i] = point;
-
-                    tangents[i] = BezierCurve2.GetFirstDerivative(transform.position * BezierCurve2.Distance_scaleFacter, transform.position * BezierCurve2.Distance_scaleFacter, FriendPoint_position * BezierCurve2.Distance_scaleFacter, FriendPoint_position * BezierCurve2.Distance_scaleFacter, i / (float)BezierCurve2.CruveSteps);
-                }
+                //CreatePoints(NormalPoint);
+                gameObject.name = ID.ToString() + "_Normal";
             }
 
-            BuildRoadMesh();
-
-            UpdateMesh = false;
-
-            if(UnrenderMesh)
+            if (type == (int)pointType.FixedPoint)
             {
-                GetComponent<Renderer>().enabled = false;
-                UnrenderMesh = false;
+                gameObject.name = ID.ToString() + "_Fixed";
+            }
+
+            if (type == (int)pointType.EventPoint)
+            {
+                gameObject.name = ID.ToString() + "_Event";
             }
 
             if (type == (int)pointType.TrafficLight)
             {
-                UpdateTrafficLightPoints();
+                CreatePoints(TrafficLight);
+                gameObject.name = ID.ToString() + "_TrafficLight";
+            }
+        }
+    }
+	
+	// Update is called once per frame
+	void Update () {
+        if (Application.isPlaying)
+        {
+            if (UpdateMesh && BezierCurve2.Go)
+            {
+                curveNodes = new Vector3[BezierCurve2.CruveSteps + 1];
+                tangents = new Vector3[BezierCurve2.CruveSteps + 1];
+                vertices = new Vector3[(BezierCurve2.CruveSteps + 1) * 2];
+
+                for (int i = 0; i <= BezierCurve2.CruveSteps; ++i)
+                {
+
+                    if (type == (int)pointType.NormalPoint || type == (int)pointType.FixedPoint || type == (int)pointType.TrafficLight)
+                    {
+                        Vector3 point = (BezierCurve2.GetPoint(transform.position * BezierCurve2.Distance_scaleFacter, ChildPoint_position * BezierCurve2.Distance_scaleFacter, Friend_ChildPoint_position * BezierCurve2.Distance_scaleFacter, FriendPoint_position * BezierCurve2.Distance_scaleFacter, i / (float)BezierCurve2.CruveSteps)) - transform.position * BezierCurve2.Distance_scaleFacter;
+                        curveNodes[i] = point;
+
+                        tangents[i] = BezierCurve2.GetFirstDerivative(transform.position * BezierCurve2.Distance_scaleFacter, ChildPoint_position * BezierCurve2.Distance_scaleFacter, Friend_ChildPoint_position * BezierCurve2.Distance_scaleFacter, FriendPoint_position * BezierCurve2.Distance_scaleFacter, i / (float)BezierCurve2.CruveSteps);
+                    }
+
+                    if (type == (int)pointType.EventPoint)
+                    {
+                        Vector3 point = (BezierCurve2.GetPoint(transform.position * BezierCurve2.Distance_scaleFacter, transform.position * BezierCurve2.Distance_scaleFacter, FriendPoint_position * BezierCurve2.Distance_scaleFacter, FriendPoint_position * BezierCurve2.Distance_scaleFacter, i / (float)BezierCurve2.CruveSteps)) - transform.position * BezierCurve2.Distance_scaleFacter;
+                        curveNodes[i] = point;
+
+                        tangents[i] = BezierCurve2.GetFirstDerivative(transform.position * BezierCurve2.Distance_scaleFacter, transform.position * BezierCurve2.Distance_scaleFacter, FriendPoint_position * BezierCurve2.Distance_scaleFacter, FriendPoint_position * BezierCurve2.Distance_scaleFacter, i / (float)BezierCurve2.CruveSteps);
+                    }
+                }
+
+                BuildRoadMesh();
+
+                UpdateMesh = false;
+
+                if (UnrenderMesh)
+                {
+                    GetComponent<Renderer>().enabled = false;
+                    UnrenderMesh = false;
+                }
+
+                if (type == (int)pointType.TrafficLight)
+                {
+                    UpdateTrafficLightPoints();
+                }
+
             }
 
+            if (BezierCurve2.EnableTrackCollision)
+                GetComponent<MeshCollider>().enabled = true;
+            else
+                GetComponent<MeshCollider>().enabled = false;
         }
-
-        if(BezierCurve2.EnableTrackCollision)
-            GetComponent<MeshCollider>().enabled = true;
-        else
-            GetComponent<MeshCollider>().enabled = false;
-
     }
+
+#if UNITY_EDITOR
+    void OnDrawGizmos()
+    {
+        if (!Application.isPlaying)
+        {
+            if (type == (int)pointType.TrafficLight)
+                Gizmos.color = Color.red;
+
+            if (type == (int)pointType.FixedPoint || type == (int)pointType.EventPoint)
+                Gizmos.color = Color.black;
+
+
+            Gizmos.DrawWireSphere(transform.position, 0.05f);
+        }
+    }
+#endif
 
     public void CreatePoints(GameObject temp)
     {
