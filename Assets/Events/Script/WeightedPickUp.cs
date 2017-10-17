@@ -20,23 +20,17 @@ public class WeightedPickUp : MonoBehaviour, IManipulationHandler
     public void OnManipulationCanceled(ManipulationEventData eventData)
     {
         InputManager.Instance.ClearModalInputStack();
-        rigid.useGravity = true;
-        rigid.isKinematic = false;
     }
 
     public void OnManipulationCompleted(ManipulationEventData eventData)
     {
         InputManager.Instance.ClearModalInputStack();
-        rigid.useGravity = true;
-        rigid.isKinematic = false;
     }
 
     public void OnManipulationStarted(ManipulationEventData eventData)
     {
         InputManager.Instance.ClearModalInputStack();
         InputManager.Instance.PushModalInputHandler(gameObject);
-        rigid.useGravity = false;
-        //rigid.isKinematic = true;
     }
 
     public void OnManipulationUpdated(ManipulationEventData eventData)
