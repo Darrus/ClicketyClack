@@ -59,10 +59,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eafbb6dfc5601484b818fc13cf257d86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Gap: 0.08
-  Width: 0.01
+  Gap: 0.11
+  Width: 0.015
   Height: 0.01
   Sub_Gap: 0.1
   Sub_Height: 0.013
-  Sub_Width: 0.013
-  Sub_Length: 0.13
+  Sub_Width: 0.025
+  Sub_Length: 0.16
+  Track_Metal: {fileID: 2100000, guid: d0648364fc800fa4196fd8295de1e206, type: 2}
+  Track_Wood: {fileID: 2100000, guid: 4979188f847279b4fb3b329ea23af359, type: 2}

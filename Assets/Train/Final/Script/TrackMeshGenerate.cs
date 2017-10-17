@@ -16,6 +16,9 @@ public class TrackMeshGenerate : MonoBehaviour
 
     private int totalPoints;
 
+    public Material Track_Metal;
+    public Material Track_Wood;
+
     void Update()
     {
         if (BezierCurve2.updateTrack)
@@ -162,9 +165,8 @@ public class TrackMeshGenerate : MonoBehaviour
 
         Final.AddComponent<MeshFilter>().sharedMesh = combinedMesh;
         MeshRenderer rend = Final.AddComponent<MeshRenderer>();
-        // later
-        rend.sharedMaterial = new Material(Shader.Find("Standard"));
-        rend.sharedMaterial.color = Color.white;
+
+        rend.sharedMaterial = Track_Metal;
     }
 
     private void DrawTrack_Part2()
@@ -374,9 +376,8 @@ public class TrackMeshGenerate : MonoBehaviour
 
         Final.AddComponent<MeshFilter>().sharedMesh = combinedMesh;
         MeshRenderer rend = Final.AddComponent<MeshRenderer>();
-        // later
-        rend.sharedMaterial = new Material(Shader.Find("Standard"));
-        rend.sharedMaterial.color = Color.white;
+
+        rend.sharedMaterial = Track_Wood;
     }
 }
 
