@@ -118,7 +118,7 @@ public class PickAndSnap : MonoBehaviour, IManipulationHandler
         if(other.name == snapTriggerName)
         {
             Transform otherTransform = other.transform;
-            trainEvent = otherTransform.parent.GetComponent<EventBase>();
+            trainEvent = otherTransform.GetComponent<EventBase>();
             if (trainEvent == null || trainEvent.Solved)
             {
                 Debug.Log(trainEvent.Solved);

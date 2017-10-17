@@ -32,7 +32,7 @@ public class BombExplosion : MonoBehaviour {
             {
                 if(col.CompareTag(triggerTag))
                 {
-                    Debug.Log(col.name);
+                    LevelManager.TrianConnected = false;
                     Rigidbody objRigidbody = col.GetComponent<Rigidbody>();
                     objRigidbody.useGravity = true;
                     objRigidbody.isKinematic = false;
