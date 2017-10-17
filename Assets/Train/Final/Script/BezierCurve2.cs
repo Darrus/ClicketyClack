@@ -7,7 +7,7 @@ public static class BezierCurve2 {
 
     public static Vector3[] points = new Vector3[] { };
 
-    private static GameObject[] GO_Points = new GameObject[] { };
+    public static GameObject[] GO_Points = new GameObject[] { };
 
     public static int CruveSteps = 10; // number of points in one curve
 
@@ -38,39 +38,42 @@ public static class BezierCurve2 {
 
     public static void CalcAllTrackLength()
     {
-        int currentPoint = 0;
-        int totalPoint = points.Length;
-
-        float totalDistance = 0f;
-
-        Array.Resize(ref Track_List, (points.Length * CruveSteps) + 1);
-
-        for (int n = 0; n < totalPoint; n++)
+        if (points.Length > 2)
         {
-            MainPoints tempPoint = GO_Points[0].GetComponent(typeof(MainPoints)) as MainPoints;
+            int currentPoint = 0;
+            int totalPoint = points.Length;
 
-            for (int x = 0; x < GO_Points.Length; x++)
+            float totalDistance = 0f;
+
+            Array.Resize(ref Track_List, (points.Length * CruveSteps) + 1);
+
+            for (int n = 0; n < totalPoint; n++)
             {
-                MainPoints temp = GO_Points[x].GetComponent(typeof(MainPoints)) as MainPoints;
-                if (temp.ID == currentPoint)
+                MainPoints tempPoint = GO_Points[0].GetComponent(typeof(MainPoints)) as MainPoints;
+
+                for (int x = 0; x < GO_Points.Length; x++)
                 {
-                    tempPoint = temp;
-                    break;
+                    MainPoints temp = GO_Points[x].GetComponent(typeof(MainPoints)) as MainPoints;
+                    if (temp.ID == currentPoint)
+                    {
+                        tempPoint = temp;
+                        break;
+                    }
                 }
-            }
 
-            if (tempPoint.ID == 0)
-            {
-                Track_List[0].id = 0;
-                Track_List[0].distance = 0f;
-                Track_List[0].position = tempPoint.transform.position;
-                Track_List[0].tangent = GetFirstDerivative(tempPoint.transform.position, tempPoint.ChildPoint_position, tempPoint.Friend_ChildPoint_position, tempPoint.FriendPoint_position, 0).normalized;
-            }
+                if (tempPoint.ID == 0)
+                {
+                    Track_List[0].id = 0;
+                    Track_List[0].distance = 0f;
+                    Track_List[0].position = tempPoint.transform.position;
+                    Track_List[0].tangent = GetFirstDerivative(tempPoint.transform.position, tempPoint.ChildPoint_position, tempPoint.Friend_ChildPoint_position, tempPoint.FriendPoint_position, 0).normalized;
+                }
 
-            totalDistance = CalcCurveLength(tempPoint, totalDistance);
-            currentPoint++;
+                totalDistance = CalcCurveLength(tempPoint, totalDistance);
+                currentPoint++;
+            }
+            Go = true;
         }
-        Go = true;
     }
 
     private static float CalcCurveLength(MainPoints currPoint, float currTotalDistance)
@@ -209,7 +212,7 @@ public static class BezierCurve2 {
 
     public static void updateCurvePoints()
     {
-        if (points.Length >= 2)
+        if (points.Length > 2)
         {
             updatePoints_Position();
 

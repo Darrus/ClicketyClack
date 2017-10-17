@@ -110,6 +110,8 @@ MonoBehaviour:
   NormalPoint: {fileID: 1606996024725562, guid: f29e8bb64ed033842b413b4904baa610,
     type: 2}
   EventPoint: {fileID: 1705506321711058, guid: 88027c7844631dd4ea5e0a913db8547d, type: 2}
+  TrafficLight: {fileID: 1676711296471334, guid: 43ac0be134141954980a287c10f4b286,
+    type: 2}
   ChildPoint_position: {x: 0, y: 0, z: 0}
   Normalized_For_Child: {x: 0, y: 0, z: 0}
   Friend_ChildPoint_position: {x: 0, y: 0, z: 0}
@@ -117,5 +119,5 @@ MonoBehaviour:
   type: 3
   ID: 0
   RoadMaterial: {fileID: 2100000, guid: 7cc702579090fd1488477c5a2dca00c9, type: 2}
-  UpdateMesh: 0
+  UpdateMesh: 1
   UnrenderMesh: 0
