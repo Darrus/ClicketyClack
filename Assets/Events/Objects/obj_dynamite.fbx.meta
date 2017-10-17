@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: ae9e2cc18fad82248ae429d061b106da
-timeCreated: 1507599500
+guid: e5ffc8d473f35474ba4652f4f3d277fb
+timeCreated: 1508127514
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -32,6 +32,7 @@ ModelImporter:
     4300004: obj_dynamite3
     4300006: obj_dynamite2
     4300008: obj_dynamite1
+    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -96,7 +97,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

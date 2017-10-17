@@ -1,42 +1,33 @@
 fileFormatVersion: 2
-guid: 9bcdc5d66cabc6c44933e647c12915c5
-timeCreated: 1507707567
+guid: 43ced51bfeb674e428cca2bb523464d8
+timeCreated: 1508127513
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: obj_female_bandit_comb
-    100002: obj_mafia_boss_comb
-    100004: obj_male_bandit_comb
-    100006: //RootNode
-    100008: obj_timetraveller_comb
-    100010: obj_victim_female_comb
-    100012: obj_victim_male_comb
-    400000: obj_female_bandit_comb
-    400002: obj_mafia_boss_comb
-    400004: obj_male_bandit_comb
-    400006: //RootNode
-    400008: obj_timetraveller_comb
-    400010: obj_victim_female_comb
-    400012: obj_victim_male_comb
-    2300000: obj_female_bandit_comb
-    2300002: obj_mafia_boss_comb
-    2300004: obj_male_bandit_comb
-    2300006: obj_timetraveller_comb
-    2300008: obj_victim_female_comb
-    2300010: obj_victim_male_comb
-    3300000: obj_female_bandit_comb
-    3300002: obj_mafia_boss_comb
-    3300004: obj_male_bandit_comb
-    3300006: obj_timetraveller_comb
-    3300008: obj_victim_female_comb
-    3300010: obj_victim_male_comb
-    4300000: obj_victim_female_comb
-    4300002: obj_mafia_boss_comb
-    4300004: obj_female_bandit_comb
-    4300006: obj_male_bandit_comb
-    4300008: obj_victim_male_comb
-    4300010: obj_timetraveller_comb
+    100000: obj_arrow
+    100002: obj_light_bulbs
+    100004: //RootNode
+    100006: obj_slotmachine_body
+    100008: obj_slotmachine_handle
+    400000: obj_arrow
+    400002: obj_light_bulbs
+    400004: //RootNode
+    400006: obj_slotmachine_body
+    400008: obj_slotmachine_handle
+    2300000: obj_arrow
+    2300002: obj_light_bulbs
+    2300004: obj_slotmachine_body
+    2300006: obj_slotmachine_handle
+    3300000: obj_arrow
+    3300002: obj_light_bulbs
+    3300004: obj_slotmachine_body
+    3300006: obj_slotmachine_handle
+    4300000: obj_arrow
+    4300002: obj_slotmachine_body
+    4300004: obj_slotmachine_handle
+    4300006: obj_light_bulbs
+    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -101,7 +92,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

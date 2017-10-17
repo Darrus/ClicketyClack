@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 0dbad79c5cff4bc44ad5bce072ca928a
-timeCreated: 1507786577
+guid: 9a9d76c4fdb2c6c4e8ab5567d1f207bc
+timeCreated: 1508127514
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -162,6 +162,7 @@ ModelImporter:
     4300056: obj_lamp2
     4300058: obj_lamp3
     4300060: obj_train_station
+    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -226,7 +227,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
