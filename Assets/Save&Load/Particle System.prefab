@@ -19,6 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4403707590925764}
+  - component: {fileID: 114229027295470054}
   m_Layer: 0
   m_Name: Particle System
   m_TagString: Untagged
@@ -101,6 +102,17 @@ Transform:
   m_Father: {fileID: 4052579205242422}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114229027295470054
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1685094266852790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 503716327d7bc5847aa222e00f15e324, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &198180567152197644
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -108,7 +120,7 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1932061990909372}
   serializedVersion: 5
-  lengthInSec: 5
+  lengthInSec: 2
   simulationSpeed: 1
   looping: 0
   prewarm: 0
@@ -158,14 +170,14 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -322457345
+  randomSeed: 247636786
   InitialModule:
     serializedVersion: 3
     enabled: 1
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 0.4
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -206,8 +218,8 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 8
-      minScalar: 4
+      scalar: 32
+      minScalar: 16
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -3155,7 +3167,7 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1940970587837210}
   serializedVersion: 5
-  lengthInSec: 1
+  lengthInSec: 0.2
   simulationSpeed: 1
   looping: 0
   prewarm: 0
@@ -3205,14 +3217,14 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 52882595
+  randomSeed: 1183582723
   InitialModule:
     serializedVersion: 3
     enabled: 1
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 0.4
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -3253,8 +3265,8 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 8
-      minScalar: 4
+      scalar: 32
+      minScalar: 16
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -3762,7 +3774,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 40
+      scalar: 100
       minScalar: 0
       maxCurve:
         serializedVersion: 2

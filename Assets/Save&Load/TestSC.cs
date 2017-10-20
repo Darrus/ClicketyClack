@@ -25,6 +25,7 @@ public class TestSC : MonoBehaviour {
         if(collision.transform.tag == "Floor")
         {
             GameObject newSmoke = Instantiate(smoke, transform.position, Quaternion.identity);
+            GameObject.Destroy(gameObject);
         }
     }
 }
