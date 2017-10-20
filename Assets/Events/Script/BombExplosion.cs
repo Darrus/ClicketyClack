@@ -6,6 +6,7 @@ using UnityEngine;
 public class BombExplosion : MonoBehaviour {
     [TagSelector]
     public string triggerTag;
+    public AudioSource sfx;
     public float timeTillExpload;
     public float explosionForce;
     public bool triggered = false;
@@ -27,6 +28,7 @@ public class BombExplosion : MonoBehaviour {
         if(timeTillExpload <= 0.0f)
         {
             exploaded = true;
+            sfx.Play();
             Collider[] objsWithinRadius = Physics.OverlapSphere(transform.position, sphereCollider.radius);
             foreach(Collider col in objsWithinRadius)
             {
