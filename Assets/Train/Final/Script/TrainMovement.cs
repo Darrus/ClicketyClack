@@ -4,27 +4,53 @@ using UnityEngine;
 
 public class TrainMovement : MonoBehaviour {
 
-    public float speed;
+    public TrainMovementManager Manager;
 
-    private float distacneTravel;
-    public int Point_ID;
+    public int ID;
+    public float distacneTravel;
+    private int Point_ID;
+    private float distanceGap;
+    public bool once;
 
 	// Use this for initialization
 	void Start () {
-        distacneTravel = 0f;
-        Point_ID = 0;
+
+       
     }
 	
 	// Update is called once per frame
 	void Update () {
 
-        if(LevelManager.TrianConnected && LevelManager.MoveOut && !LevelManager.ReachStation && BezierCurve2.Go)
+        if (!once && Manager.once)
         {
-            distacneTravel += Time.deltaTime * speed;
+            for (int i = 0; i < Manager.TheTrain.Length; i++)
+            {
+                if (ID == Manager.TheTrain[i].ID)
+                {
+                    distanceGap = Manager.TheTrain[i].distanceGap;
+                }
+
+            }
+
+            distacneTravel = 0 - distanceGap;
+
+            if(distacneTravel < 0)
+            {
+                distacneTravel = Manager.TotalTrackDistance - distanceGap;
+            }
+
+
+            Point_ID = 0;
+            CheckPosition();
+            once = true;
+        }
+
+        if (LevelManager.TrianConnected && LevelManager.MoveOut && !LevelManager.ReachStation && BezierCurve2.Go)
+        {
+            distacneTravel += Time.deltaTime * Manager.MainSpeed;
             CheckPosition();
         }
     }
-
 
     private void CheckPosition()
     {
@@ -40,11 +66,10 @@ public class TrainMovement : MonoBehaviour {
 
                 LevelManager.ReachStation = true;
             }
-
             if (distacneTravel >= BezierCurve2.Track_List[Temp_Id].distance)
             {
-                transform.position = BezierCurve2.Track_List[Point_ID].position;
-                transform.LookAt(transform.position + BezierCurve2.Track_List[Point_ID].tangent);
+                transform.position = BezierCurve2.Track_List[Temp_Id].position;
+                transform.LookAt(transform.position + BezierCurve2.Track_List[Temp_Id].tangent);
             }
 
             if(distacneTravel < BezierCurve2.Track_List[Temp_Id + 1].distance)

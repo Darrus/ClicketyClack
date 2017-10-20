@@ -43,6 +43,4 @@ public class Save_Load_Data{
         byte[] contentBytes = new UTF8Encoding(true).GetBytes(content);
         stream.Write(contentBytes, 0, contentBytes.Length);
     }
-
-
 }

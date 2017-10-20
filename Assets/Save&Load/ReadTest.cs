@@ -32,6 +32,7 @@ public class ReadTest : MonoBehaviour
     public SaveData SaveData;
 
     public PointManager pointManager;
+    public EventManager eventManager;
 
     // Use this for initialization
     void Start()
@@ -43,15 +44,16 @@ public class ReadTest : MonoBehaviour
     {
         //gameObject.transform.rotation
 
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown("2"))
         {
             Get_All_Points();
+            Get_All_Events();
 
             String saveDataString = JsonUtility.ToJson(SaveData);
             Save_Load_Data.Save(saveDataString);
         }
 
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown("3"))
         {
             if (Save_Load_Data.Check_SaveFile())
             {
@@ -59,6 +61,7 @@ public class ReadTest : MonoBehaviour
 
                 SaveData = JsonUtility.FromJson<SaveData>(Save_Load_Data.load());
                 Create_All_Points();
+                Create_All_Events();
             }
         }
 
@@ -87,4 +90,30 @@ public class ReadTest : MonoBehaviour
             pointManager.AddNewPoints(SaveData.points[i].position, SaveData.points[i].ID, SaveData.points[i].Type);
         }
     }
+
+    void Get_All_Events()
+    {
+        GameObject[] EventList = GameObject.FindGameObjectsWithTag("Event");
+
+        Array.Resize(ref SaveData.events, EventList.Length);
+
+        for (int i = 0; i < EventList.Length; i++)
+        {
+            EventSC tempEvent = EventList[i].GetComponent(typeof(EventSC)) as EventSC;
+
+            SaveData.events[i].position = tempEvent.transform.position;
+            SaveData.events[i].rotation = tempEvent.transform.rotation;
+            SaveData.events[i].Type = tempEvent.type;
+        }
+
+    }
+
+    void Create_All_Events()
+    {
+        for (int i = 0; i < SaveData.events.Length; i++)
+        {
+            eventManager.CreateEvents(SaveData.events[i].position, SaveData.events[i].rotation, SaveData.events[i].Type);
+        }
+    }
+
 }
