@@ -47,7 +47,7 @@ public class ReadTest : MonoBehaviour
         if (Input.GetKeyDown("2"))
         {
             Get_All_Points();
-            Get_All_Events();
+            //Get_All_Events();
 
             String saveDataString = JsonUtility.ToJson(SaveData);
             Save_Load_Data.Save(saveDataString);
@@ -57,11 +57,11 @@ public class ReadTest : MonoBehaviour
         {
             if (Save_Load_Data.Check_SaveFile())
             {
-                BezierCurve2.ClearAllData(); // remove in the furture
+                //BezierCurve2.ClearAllData(); // remove in the furture
 
                 SaveData = JsonUtility.FromJson<SaveData>(Save_Load_Data.load());
-                Create_All_Points();
-                Create_All_Events();
+                //Create_All_Points();
+                //Create_All_Events();
             }
         }
 
