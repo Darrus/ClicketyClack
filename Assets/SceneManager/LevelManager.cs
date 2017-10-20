@@ -68,7 +68,6 @@ public class LevelManager : MonoBehaviour {
             ReachStation = false;
         }
 #endif
-        /*
         if (!MoveOut)
         {
             if (TimeToRollOut >= 0)
@@ -79,7 +78,6 @@ public class LevelManager : MonoBehaviour {
                 ReachStation = false;
             }
         }
-        */
         Check_Win_Lose_Condition();
     }
 

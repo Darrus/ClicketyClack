@@ -14,6 +14,9 @@ public class BulletShot : MonoBehaviour
     [SerializeField]
     private float m_angle = 45.0f;
 
+    [SerializeField]
+    private AudioSource m_SFX;
+
     public GameObject m_target = null;
     public GameObject m_bullet = null;
 
@@ -60,9 +63,8 @@ public class BulletShot : MonoBehaviour
             throw new System.NullReferenceException("m_shootPoint");
         }
 
-
+        m_SFX.Play();
         ShootFixedAngle(i_targetPosition, m_angle);
-
     }
 
     private void ShootFixedAngle(Vector3 i_targetPosition, float i_angle)
