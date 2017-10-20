@@ -45,8 +45,8 @@ public class LevelManager : MonoBehaviour {
 
             Debug.Log("Creating temporary App");
         }
-        GameObject Room = GameObject.Find("TheRoom");
-        Room_Items.transform.SetParent(Room.transform);
+        //GameObject Room = GameObject.Find("TheRoom");
+        //Room_Items.transform.SetParent(Room.transform);
     }
 
     void Start()

@@ -10,31 +10,27 @@ public class PointManager : MonoBehaviour {
 
     public GameObject Point;
 
-    private bool once;
+    public GameObject WayPointList;
 
     public int curveSteps;
 
     public int startSize;
 
     void Start () {
-        once = true;
-       
+        BezierCurve2.CruveSteps = curveSteps;
+        BezierCurve2.ClearAllData();
+        BezierCurve2.IncreaseSize(startSize);
+        BezierCurve2.updateCurvePoints();
+
+        BezierCurve2.updateTrack = true;
+        BezierCurve2.Go = false;
+
+        BezierCurve2.CalcAllTrackLength();
+
     }
 	
 	void Update () {
         BezierCurve2.CruveSteps = curveSteps;
-        if (once)
-        {
-            BezierCurve2.ClearAllData();
-            BezierCurve2.IncreaseSize(startSize);
-            BezierCurve2.updateCurvePoints();
-
-            BezierCurve2.updateTrack = true;
-            BezierCurve2.Go = false;
-            once = false;
-
-            BezierCurve2.CalcAllTrackLength();
-        }
 
 #if UNITY_EDITOR 
         if (Input.GetKeyDown("1"))
@@ -76,7 +72,7 @@ public class PointManager : MonoBehaviour {
         newPoint.ID = ID;
         newPoint.type = type;
         myPoint.tag = "Point";
-        myPoint.transform.parent = transform;
+        myPoint.transform.parent = WayPointList.transform;
 
         BezierCurve2.updateCurvePoints();
         BezierCurve2.updateTrack = true;

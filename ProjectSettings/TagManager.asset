@@ -12,6 +12,7 @@ TagManager:
   - Bound
   - FallPoint
   - Bullet
+  - Event
   layers:
   - Default
   - TransparentFX
