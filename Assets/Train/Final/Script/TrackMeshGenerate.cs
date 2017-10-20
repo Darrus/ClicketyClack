@@ -21,7 +21,7 @@ public class TrackMeshGenerate : MonoBehaviour
 
     void Update()
     {
-        if (BezierCurve2.updateTrack)
+        if (BezierCurve2.updateTrack && BezierCurve2.points.Length > 2)
         {
             BezierCurve2.CalcAllTrackLength();
 

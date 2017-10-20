@@ -67,8 +67,9 @@ public class PointManager : MonoBehaviour {
 
     public void AddNewPoints(Vector3 position, int ID,int type)
     {
-        BezierCurve2.addPoint_shiftID(ID);
+        //BezierCurve2.addPoint_shiftID(ID);
         BezierCurve2.IncreaseSize(1);
+        startSize += 1;
 
         GameObject myPoint = Instantiate(Point, position, Quaternion.identity);
         MainPoints newPoint = myPoint.GetComponent(typeof(MainPoints)) as MainPoints;
@@ -81,4 +82,5 @@ public class PointManager : MonoBehaviour {
         BezierCurve2.updateTrack = true;
         BezierCurve2.Go = false;
     }
+
 }

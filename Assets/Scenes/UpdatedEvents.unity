@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -761,7 +761,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4966308593478320, guid: a795eb11939c1c048930bcfaedf1ffd5, type: 2}
       propertyPath: m_LocalPosition.y
+<<<<<<< HEAD
       value: -0.6052
+=======
+      value: -0.566
+>>>>>>> ac6db1d76a44a60e20af037d411ec92d1c87cef8
       objectReference: {fileID: 0}
     - target: {fileID: 4966308593478320, guid: a795eb11939c1c048930bcfaedf1ffd5, type: 2}
       propertyPath: m_LocalPosition.z
@@ -787,6 +791,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 114929838754191742, guid: a795eb11939c1c048930bcfaedf1ffd5,
         type: 2}
       propertyPath: events.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -805,6 +810,32 @@ Prefab:
         type: 2}
       propertyPath: m_Mass
       value: 0.5
+=======
+    - target: {fileID: 54899640279189864, guid: a795eb11939c1c048930bcfaedf1ffd5,
+        type: 2}
+      propertyPath: m_Constraints
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 65207376119814608, guid: a795eb11939c1c048930bcfaedf1ffd5,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 54899640279189864, guid: a795eb11939c1c048930bcfaedf1ffd5,
+        type: 2}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 54899640279189864, guid: a795eb11939c1c048930bcfaedf1ffd5,
+        type: 2}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114930434589384896, guid: a795eb11939c1c048930bcfaedf1ffd5,
+        type: 2}
+      propertyPath: timeTillExpload
+      value: 1
+>>>>>>> ac6db1d76a44a60e20af037d411ec92d1c87cef8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a795eb11939c1c048930bcfaedf1ffd5, type: 2}
@@ -3517,6 +3548,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 114295325079775146, guid: c495a604f5e1d9b4dbfc6cdee87b2d19,
         type: 2}
       propertyPath: events.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -3536,6 +3568,12 @@ Prefab:
         type: 2}
       propertyPath: m_Pitch
       value: 1
+=======
+    - target: {fileID: 114322975935997764, guid: c495a604f5e1d9b4dbfc6cdee87b2d19,
+        type: 2}
+      propertyPath: slowedSpeed
+      value: 0.2
+>>>>>>> ac6db1d76a44a60e20af037d411ec92d1c87cef8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c495a604f5e1d9b4dbfc6cdee87b2d19, type: 2}
