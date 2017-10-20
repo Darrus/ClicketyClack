@@ -7,7 +7,7 @@ public class TrainMovement : MonoBehaviour {
     public TrainMovementManager Manager;
 
     public int ID;
-    public float distacneTravel;
+    public float distanceTravel;
     private int Point_ID;
     private float distanceGap;
     public bool once;
@@ -32,11 +32,11 @@ public class TrainMovement : MonoBehaviour {
 
             }
 
-            distacneTravel = 0 - distanceGap;
+            distanceTravel = 0 - distanceGap;
 
-            if(distacneTravel < 0)
+            if(distanceTravel < 0)
             {
-                distacneTravel = Manager.TotalTrackDistance - distanceGap;
+                distanceTravel = Manager.TotalTrackDistance - distanceGap;
             }
 
 
@@ -47,7 +47,7 @@ public class TrainMovement : MonoBehaviour {
 
         if (LevelManager.TrianConnected && LevelManager.MoveOut && !LevelManager.ReachStation && BezierCurve2.Go)
         {
-            distacneTravel += Time.deltaTime * Manager.MainSpeed;
+            distanceTravel += Time.deltaTime * Manager.MainSpeed;
             CheckPosition();
         }
     }
@@ -62,17 +62,17 @@ public class TrainMovement : MonoBehaviour {
             if (Temp_Id + 1 == BezierCurve2.Track_List.Length)
             {
                 Temp_Id = 0;
-                distacneTravel = 0;
+                distanceTravel = 0;
 
                 LevelManager.ReachStation = true;
             }
-            if (distacneTravel >= BezierCurve2.Track_List[Temp_Id].distance)
+            if (distanceTravel >= BezierCurve2.Track_List[Temp_Id].distance)
             {
                 transform.position = BezierCurve2.Track_List[Temp_Id].position;
                 transform.LookAt(transform.position + BezierCurve2.Track_List[Temp_Id].tangent);
             }
 
-            if(distacneTravel < BezierCurve2.Track_List[Temp_Id + 1].distance)
+            if(distanceTravel < BezierCurve2.Track_List[Temp_Id + 1].distance)
             {
                 Point_ID = Temp_Id;
                 run = false;

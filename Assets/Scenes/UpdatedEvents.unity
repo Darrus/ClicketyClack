@@ -1557,6 +1557,52 @@ MonoBehaviour:
   Axis0Destination: 0
   Axis1Destination: 2
   Axis2Destination: 6
+--- !u!1 &572007625
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 572007626}
+  - component: {fileID: 572007627}
+  m_Layer: 0
+  m_Name: TrainMovementManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &572007626
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 572007625}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1336607277}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &572007627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 572007625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eaf08a7fabb38d4f92b46f1d6ffe23f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MainSpeed: 0.3
+  TotalTrackDistance: 0
+  TheTrain:
+  - ID: 1
+    distanceGap: 0
+  once: 0
 --- !u!1 &576926725
 GameObject:
   m_ObjectHideFlags: 0
@@ -1832,6 +1878,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Point: {fileID: 1051609272805930, guid: 28eadb4f4f7dd30438f414c11d08e8a3, type: 2}
+  WayPointList: {fileID: 0}
   curveSteps: 500
   startSize: 11
 --- !u!1 &629006292
@@ -2434,7 +2481,7 @@ GameObject:
   - component: {fileID: 727493017}
   - component: {fileID: 727493016}
   m_Layer: 0
-  m_Name: TrianMovement
+  m_Name: TrainMovement
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2452,8 +2499,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b074d843b9c959447b6809a50c92abf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.3
-  Point_ID: 0
+  Manager: {fileID: 572007627}
+  ID: 1
+  distanceTravel: 0
+  once: 0
 --- !u!4 &727493017
 Transform:
   m_ObjectHideFlags: 0
@@ -4071,6 +4120,7 @@ Transform:
   - {fileID: 2078769861}
   - {fileID: 1440912061}
   - {fileID: 2015555509}
+  - {fileID: 572007626}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
