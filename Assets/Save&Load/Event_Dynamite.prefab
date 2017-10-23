@@ -161,7 +161,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1812467098037072
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,7 +196,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4119546389626336
 Transform:
   m_ObjectHideFlags: 1
@@ -297,7 +297,7 @@ Transform:
   m_GameObject: {fileID: 1812467098037072}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4119831787212902}
   - {fileID: 4119546389626336}
@@ -834,6 +834,9 @@ MonoBehaviour:
   timeTillExpload: 1
   explosionForce: 100
   triggered: 0
+  Parent: {fileID: 1174776042173472}
+  ParticleEffect: {fileID: 1732454003042174, guid: 18fec7b6a7811e0468b31868057a42d0,
+    type: 2}
 --- !u!135 &135135402402911664
 SphereCollider:
   m_ObjectHideFlags: 1
