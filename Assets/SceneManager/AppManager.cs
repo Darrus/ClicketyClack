@@ -176,6 +176,6 @@ public class AppManager : MonoBehaviour {
 
     public static void Detach_RoomChild(AppManager Temp)
     {
-        Temp.TheRoom.transform.DetachChildren();
+        //Temp.TheRoom.transform.DetachChildren();
     }
 }

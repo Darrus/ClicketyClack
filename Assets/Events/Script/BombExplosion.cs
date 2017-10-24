@@ -14,6 +14,10 @@ public class BombExplosion : MonoBehaviour {
     private bool exploaded = false;
     private SphereCollider sphereCollider;
 
+    public GameObject Parent;
+    public GameObject ParticleEffect;
+
+
     private void Start()
     {
         sphereCollider = GetComponent<SphereCollider>();
@@ -41,6 +45,9 @@ public class BombExplosion : MonoBehaviour {
                     objRigidbody.AddExplosionForce(explosionForce, transform.position, sphereCollider.radius);
                 }
             }
+
+            CreateExplosion();
+            GameObject.Destroy(Parent);
         }
     }
 
@@ -51,4 +58,10 @@ public class BombExplosion : MonoBehaviour {
             triggered = true;
         }
     }
+
+    private void CreateExplosion()
+    {
+        GameObject.Instantiate(ParticleEffect, Parent.transform.position, Quaternion.identity);
+    }
+
 }

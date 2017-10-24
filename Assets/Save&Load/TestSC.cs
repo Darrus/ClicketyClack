@@ -15,7 +15,7 @@ public class TestSC : MonoBehaviour {
 	void Update () {
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, 10f,0), ForceMode.Impulse);
+            gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, 0.01f,0), ForceMode.Impulse);
 
         }
     }

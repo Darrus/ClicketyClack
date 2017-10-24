@@ -1,14 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DestroyPoint : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+
+    private void OnTriggerEnter(Collider col)
     {
-        if (other.gameObject.tag == "Bullet" )
+        if (col.gameObject.tag == "Bullet")
         {
             Destroy(this.gameObject);
         }
     }
 }
+

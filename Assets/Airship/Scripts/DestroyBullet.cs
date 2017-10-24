@@ -2,11 +2,10 @@
 
 public class DestroyBullet : MonoBehaviour
 {
-    [SerializeField]
-    PlaySoundAtPosition m_ExploadingSFX;
-
     private float delayTime = 3.0f;
-    bool destroy = false;
+    public GameObject Parent;
+    public GameObject ParticleEffect;
+    public GameObject ParticleEffect2;
 
     void Update()
     {
@@ -14,18 +13,21 @@ public class DestroyBullet : MonoBehaviour
 
         if (delayTime < 0)
         {
-            Destroy(this.transform.parent.gameObject);
+            Destroy(this.gameObject);
 
             delayTime = 3.0f;
         }
     }
-
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider col)
     {
-        if (other.gameObject.tag == "FallPoint" || other.gameObject.tag == "Ground")
+        if (col.gameObject.tag == "FallPoint" || col.gameObject.tag == "Ground")
         {
-            m_ExploadingSFX.PlayAtPosition();
-            Destroy(this.transform.parent.gameObject);
+            GameObject.Instantiate(ParticleEffect, transform.position, Quaternion.identity);
+            Destroy(Parent);
+        }
+        if (col.gameObject.tag == "Player")
+        {
+            GameObject.Instantiate(ParticleEffect2, transform.position, Quaternion.identity);
         }
     }
 }
