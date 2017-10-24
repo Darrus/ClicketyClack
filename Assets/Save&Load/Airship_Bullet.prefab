@@ -36,9 +36,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4711397927593360}
-  - component: {fileID: 114023499891391626}
   - component: {fileID: 135646883016579970}
   - component: {fileID: 114992106225990490}
+  - component: {fileID: 114669267428679098}
   m_Layer: 0
   m_Name: DestroyCollider
   m_TagString: Bullet
@@ -396,18 +396,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &114023499891391626
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1279042413286654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dba66a27a6f5ac34fb35e43632868d24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ExploadingSFX: {fileID: 114895750717984262}
 --- !u!114 &114357581761366784
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -447,6 +435,20 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+--- !u!114 &114669267428679098
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1279042413286654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dba66a27a6f5ac34fb35e43632868d24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Parent: {fileID: 1470536710865730}
+  ParticleEffect: {fileID: 1162928357836974, guid: 1f419f5cb650b2e4185a2663f9a450da,
+    type: 2}
 --- !u!114 &114895750717984262
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -527,14 +529,14 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 176509223
+  randomSeed: 422901294
   InitialModule:
     serializedVersion: 3
     enabled: 1
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.5
+      scalar: 0.3
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -1125,7 +1127,7 @@ ParticleSystem:
     rateOverDistance:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1000
+      scalar: 1500
       minScalar: 0
       maxCurve:
         serializedVersion: 2
