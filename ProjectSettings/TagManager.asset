@@ -7,7 +7,6 @@ TagManager:
   - Point
   - Floor
   - DragPoint
-  - test
   - Ground
   - Bound
   - FallPoint

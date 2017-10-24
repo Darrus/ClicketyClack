@@ -178,5 +178,4 @@ public class AppManager : MonoBehaviour {
     {
         Temp.TheRoom.transform.DetachChildren();
     }
-
 }

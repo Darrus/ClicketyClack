@@ -1,43 +1,32 @@
 fileFormatVersion: 2
-guid: 0727f27c6f68c3e4c8b60ef3a212a518
-timeCreated: 1508128201
+guid: 8259d267902eff543b733dd6ecb6e2a9
+timeCreated: 1508742456
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: obj_female_bandit_comb
-    100002: obj_mafia_boss_comb
-    100004: obj_male_bandit_comb
-    100006: //RootNode
-    100008: obj_timetraveller_comb
-    100010: obj_victim_female_comb
-    100012: obj_victim_male_comb
-    400000: obj_female_bandit_comb
-    400002: obj_mafia_boss_comb
-    400004: obj_male_bandit_comb
-    400006: //RootNode
-    400008: obj_timetraveller_comb
-    400010: obj_victim_female_comb
-    400012: obj_victim_male_comb
-    2300000: obj_female_bandit_comb
-    2300002: obj_mafia_boss_comb
-    2300004: obj_male_bandit_comb
-    2300006: obj_timetraveller_comb
-    2300008: obj_victim_female_comb
-    2300010: obj_victim_male_comb
-    3300000: obj_female_bandit_comb
-    3300002: obj_mafia_boss_comb
-    3300004: obj_male_bandit_comb
-    3300006: obj_timetraveller_comb
-    3300008: obj_victim_female_comb
-    3300010: obj_victim_male_comb
-    4300000: obj_timetraveller_comb
-    4300002: obj_victim_female_comb
-    4300004: obj_male_bandit_comb
-    4300006: obj_victim_male_comb
-    4300008: obj_female_bandit_comb
-    4300010: obj_mafia_boss_comb
-    9500000: //RootNode
+    100000: obj_board
+    100002: //RootNode
+    100004: obj_paper
+    100006: obj_paper2
+    100008: obj_paper3
+    400000: obj_board
+    400002: //RootNode
+    400004: obj_paper
+    400006: obj_paper2
+    400008: obj_paper3
+    2300000: obj_board
+    2300002: obj_paper
+    2300004: obj_paper2
+    2300006: obj_paper3
+    3300000: obj_board
+    3300002: obj_paper
+    3300004: obj_paper2
+    3300006: obj_paper3
+    4300000: obj_paper
+    4300002: obj_paper2
+    4300004: obj_paper3
+    4300006: obj_board
   materials:
     importMaterials: 1
     materialName: 0
@@ -102,7 +91,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
