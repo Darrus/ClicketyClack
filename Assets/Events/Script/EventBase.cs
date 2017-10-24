@@ -3,7 +3,8 @@ using UnityEngine.Events;
 
 public class EventBase : MonoBehaviour
 {
-    bool solved;
+    [SerializeField]
+    protected bool solved;
 
     public bool Solved
     {
