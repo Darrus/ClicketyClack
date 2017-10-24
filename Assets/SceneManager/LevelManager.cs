@@ -13,6 +13,8 @@ public class LevelManager : MonoBehaviour {
     public static bool ReachStation;
     public static bool MoveOut;
 
+    public static bool CargoOn;
+
     public GameObject Room_Items;
 
     public GameObject AppPrefab;
@@ -55,6 +57,7 @@ public class LevelManager : MonoBehaviour {
         TrianOnGround = false;
         ReachStation = false;
         MoveOut = false;
+        CargoOn = false;
         TimeToRollOut = 5f;
     }
 
@@ -66,9 +69,10 @@ public class LevelManager : MonoBehaviour {
         {
             MoveOut = true;
             ReachStation = false;
+            CargoOn = true;
         }
 #endif
-        if (!MoveOut)
+        if (!MoveOut && CargoOn)
         {
             if (TimeToRollOut >= 0)
                 TimeToRollOut -= Time.deltaTime;

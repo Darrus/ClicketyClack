@@ -13,6 +13,9 @@ TagManager:
   - FallPoint
   - Bullet
   - Event
+  - Cargo
+  - Connector
+  - Train
   layers:
   - Default
   - TransparentFX

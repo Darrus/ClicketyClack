@@ -6,7 +6,8 @@ public class FallPointSpown : MonoBehaviour
 {
     public GameObject fallpointPrefab;
     public GameObject train;
-    public float spownTime;
+
+    private float spownTime;
     private Vector3 FallPos;
 
 
@@ -17,7 +18,8 @@ public class FallPointSpown : MonoBehaviour
         if (spownTime < 0)
         {
             //FallPos = transform.root.position + RandomPosition();
-            FallPos = train.transform.position + train.transform.forward;
+            FallPos = transform.root.position + transform.root.forward;
+            Debug.Log(FallPos);
 
             GameObject point =Instantiate((GameObject)fallpointPrefab, FallPos, Quaternion.identity);
             spownTime = SpownTime();
@@ -32,7 +34,7 @@ public class FallPointSpown : MonoBehaviour
 
     private float SpownTime()
     {
-        return Random.Range(3.0f, 5.0f);
+        return Random.Range(5.0f, 10.0f);
     }
 
 }

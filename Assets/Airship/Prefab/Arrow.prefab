@@ -9,47 +9,45 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1091553399263994}
+  m_RootGameObject: {fileID: 1910669846184990}
   m_IsPrefabParent: 1
---- !u!1 &1091553399263994
+--- !u!1 &1910669846184990
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4400482926932108}
-  - component: {fileID: 33297914221319582}
-  - component: {fileID: 136909631471963630}
-  - component: {fileID: 23087052760795510}
-  - component: {fileID: 54902662752238850}
-  - component: {fileID: 114250283938169454}
+  - component: {fileID: 4093210038747800}
+  - component: {fileID: 33942131416511698}
+  - component: {fileID: 23931734501161876}
+  - component: {fileID: 114005367694598498}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4400482926932108
+--- !u!4 &4093210038747800
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1091553399263994}
-  m_LocalRotation: {x: 0.3696438, y: -0.099045776, z: 0.23911767, w: 0.89239913}
-  m_LocalPosition: {x: 0.5, y: 0, z: 1}
+  m_GameObject: {fileID: 1910669846184990}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 30}
---- !u!23 &23087052760795510
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &23931734501161876
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1091553399263994}
+  m_GameObject: {fileID: 1910669846184990}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -57,7 +55,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 8b83e3061d7b1c345a956e5f48774241, type: 2}
+  - {fileID: 2100000, guid: dc30168a9c91a12478e3941d65b00fa7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -76,50 +74,22 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33297914221319582
+--- !u!33 &33942131416511698
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1091553399263994}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54902662752238850
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1091553399263994}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &114250283938169454
+  m_GameObject: {fileID: 1910669846184990}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &114005367694598498
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1091553399263994}
+  m_GameObject: {fileID: 1910669846184990}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e2f3fd6455336a4f81e05faf0870e1f, type: 3}
+  m_Script: {fileID: 11500000, guid: 5ab5c2b5141ed204fafc475408f437d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 100
---- !u!136 &136909631471963630
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1091553399263994}
-  m_Material: {fileID: 13400000, guid: 0cf3325bcb6b4984cb527a9ca2ed5cac, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  time: 2
