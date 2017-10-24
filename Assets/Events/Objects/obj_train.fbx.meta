@@ -1,32 +1,30 @@
 fileFormatVersion: 2
-guid: f77a7f924cf21f14daa7ad13f5334e15
-timeCreated: 1508127515
+guid: c4edc43205583d84086fd78a59825c8a
+timeCreated: 1508750596
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: grp_train
-    100002: obj_maintrain_bell
-    100004: obj_maintrain_hammer
-    100006: obj_maintrain_wheel_bk_left
-    100008: obj_maintrain_wheel_bk_right
-    100010: obj_maintrain_wheel_fr_left
-    100012: obj_maintrain_wheel_fr_right
-    100014: obj_maintrain_wheel_support_right
-    100016: obj_maintrain_wheel_support_right1
+    100000: obj_maintrain_bell
+    100002: obj_maintrain_hammer
+    100004: obj_maintrain_wheel_bk_left
+    100006: obj_maintrain_wheel_bk_right
+    100008: obj_maintrain_wheel_fr_left
+    100010: obj_maintrain_wheel_fr_right
+    100012: obj_maintrain_wheel_support_right
+    100014: obj_maintrain_wheel_support_right1
+    100016: //RootNode
     100018: obj_train
-    100020: //RootNode
-    400000: grp_train
-    400002: obj_maintrain_bell
-    400004: obj_maintrain_hammer
-    400006: obj_maintrain_wheel_bk_left
-    400008: obj_maintrain_wheel_bk_right
-    400010: obj_maintrain_wheel_fr_left
-    400012: obj_maintrain_wheel_fr_right
-    400014: obj_maintrain_wheel_support_right
-    400016: obj_maintrain_wheel_support_right1
-    400018: obj_train
-    400020: //RootNode
+    400000: obj_maintrain_bell
+    400002: obj_maintrain_hammer
+    400004: obj_maintrain_wheel_bk_left
+    400006: obj_maintrain_wheel_bk_right
+    400008: obj_maintrain_wheel_fr_left
+    400010: obj_maintrain_wheel_fr_right
+    400012: obj_maintrain_wheel_support_right
+    400014: obj_maintrain_wheel_support_right1
+    400016: obj_train
+    400018: //RootNode
     2300000: obj_maintrain_bell
     2300002: obj_maintrain_hammer
     2300004: obj_maintrain_wheel_bk_left
@@ -54,7 +52,7 @@ ModelImporter:
     4300012: obj_maintrain_hammer
     4300014: obj_maintrain_bell
     4300016: obj_maintrain_wheel_support_right1
-    7400000: Take 001
+    7400000: anim_train
     9500000: //RootNode
     11100000: //RootNode
   materials:
@@ -81,10 +79,10 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: Take 001
+      name: anim_train
       takeName: Take 001
       firstFrame: 1
-      lastFrame: 600
+      lastFrame: 60
       wrapMode: 2
       orientationOffsetY: 0
       level: 0
@@ -107,25 +105,23 @@ ModelImporter:
       transformMask:
       - path: 
         weight: 1
-      - path: grp_train
+      - path: obj_maintrain_bell
         weight: 1
-      - path: grp_train/obj_maintrain_bell
+      - path: obj_maintrain_hammer
         weight: 1
-      - path: grp_train/obj_maintrain_hammer
+      - path: obj_maintrain_wheel_bk_left
         weight: 1
-      - path: grp_train/obj_maintrain_wheel_bk_left
+      - path: obj_maintrain_wheel_bk_right
         weight: 1
-      - path: grp_train/obj_maintrain_wheel_bk_right
+      - path: obj_maintrain_wheel_fr_left
         weight: 1
-      - path: grp_train/obj_maintrain_wheel_fr_left
+      - path: obj_maintrain_wheel_fr_right
         weight: 1
-      - path: grp_train/obj_maintrain_wheel_fr_right
+      - path: obj_maintrain_wheel_support_right
         weight: 1
-      - path: grp_train/obj_maintrain_wheel_support_right
+      - path: obj_maintrain_wheel_support_right1
         weight: 1
-      - path: grp_train/obj_maintrain_wheel_support_right1
-        weight: 1
-      - path: grp_train/obj_train
+      - path: obj_train
         weight: 1
       maskType: 3
       maskSource: {instanceID: 0}

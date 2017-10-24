@@ -64,7 +64,8 @@ public class TrainMovement : MonoBehaviour {
                 Temp_Id = 0;
                 distanceTravel = 0;
 
-                LevelManager.ReachStation = true;
+                if(ID == 1)
+                    LevelManager.ReachStation = true;
             }
             if (distanceTravel >= BezierCurve2.Track_List[Temp_Id].distance)
             {
