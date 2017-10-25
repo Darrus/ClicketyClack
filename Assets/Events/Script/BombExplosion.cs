@@ -46,6 +46,7 @@ public class BombExplosion : MonoBehaviour {
                 }
             }
 
+            LevelManager.TrianConnected = false;
             CreateExplosion();
             GameObject.Destroy(Parent);
         }

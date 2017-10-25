@@ -31,8 +31,9 @@ public class TrainMovement2 : MonoBehaviour {
             else
             {
                 ParticleEffect.GetComponentInChildren<ParticleSystem>().Play();
+                ParticleEffect.transform.rotation = Quaternion.identity;
             }
         }
-        ParticleEffect.transform.rotation = Quaternion.identity;
+       
     }
 }
