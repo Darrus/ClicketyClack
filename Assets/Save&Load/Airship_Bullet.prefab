@@ -449,6 +449,8 @@ MonoBehaviour:
   Parent: {fileID: 1470536710865730}
   ParticleEffect: {fileID: 1162928357836974, guid: 1f419f5cb650b2e4185a2663f9a450da,
     type: 2}
+  ParticleEffect2: {fileID: 1732454003042174, guid: 18fec7b6a7811e0468b31868057a42d0,
+    type: 2}
 --- !u!114 &114895750717984262
 MonoBehaviour:
   m_ObjectHideFlags: 1
