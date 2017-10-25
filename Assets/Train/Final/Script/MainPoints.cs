@@ -171,10 +171,11 @@ public class MainPoints : MonoBehaviour {
       
         Vector3 normal = Vector3.Cross(BezierCurve2.Track_List[(ID * 500) + 1].tangent, Vector3.up).normalized;
 
-        Temp.transform.position = Temp.transform.position + new Vector3(normal.x * 0.4f, 0, normal.z * 0.4f);
+        Temp.transform.position = Temp.transform.position - new Vector3(normal.x * 0.2f, 0, normal.z * 0.2f);  // hard coded
 
         Temp.transform.LookAt(transform.position);
 
+        Temp.transform.position += new Vector3(0, 0.08f, 0); // hard coded
     }
 
     public void BuildRoadMesh()
