@@ -1,11 +1,16 @@
 ﻿using UnityEngine;
 using HoloToolkit.Unity.InputModule;
 
-public class CargoController : MonoBehaviour, IManipulationHandler
+public class CargoControll : MonoBehaviour, IManipulationHandler
 {
     [SerializeField]
-    private float speed = 100.0f;
+    private float speed;
     private float step;
+
+    private void Start()
+    {
+        speed = 100.0f;
+    }
 
     public void OnManipulationCanceled(ManipulationEventData eventData)
     {
@@ -23,16 +28,13 @@ public class CargoController : MonoBehaviour, IManipulationHandler
 
     public void OnManipulationStarted(ManipulationEventData eventData)
     {
-        GetComponent<Rigidbody>().useGravity = false;
-
-        ArrowController._isDead = true;
-
         step = speed * Time.deltaTime;
 
+        ArrowController._isDead = true;
+        GetComponent<Rigidbody>().useGravity = false;
         InputManager.Instance.PushModalInputHandler(this.gameObject);
-
-        Debug.Log(gameObject);
     }
+
 
     public void OnManipulationUpdated(ManipulationEventData eventData)
     {
@@ -44,7 +46,7 @@ public class CargoController : MonoBehaviour, IManipulationHandler
 
         GetComponent<Rigidbody>().velocity = Vector3.zero;
 
-        gameObject.transform.position = Camera.main.transform.position + Camera.main.transform.forward * 1;
+        gameObject.transform.position = Camera.main.transform.position + Camera.main.transform.forward * 1.5f;
 
     }
 

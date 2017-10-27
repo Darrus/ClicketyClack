@@ -15,8 +15,8 @@ public class BulletShot : MonoBehaviour
     [SerializeField]
     private float m_Time = 1.0f;
 
-   private GameObject m_target = null;
-   private GameObject m_bullet = null;
+    private GameObject m_target = null;
+    private GameObject m_bullet = null;
 
     private bool isShot;
     private float shootDelay = 1.0f;
@@ -36,15 +36,13 @@ public class BulletShot : MonoBehaviour
             isShot = true;
             m_bullet = GameObject.FindGameObjectWithTag("Bullet");
         }
+
         if (isShot == true && m_bullet == null)
         {
             //Shoot(m_target.transform.position);
-            Debug.Log("shot");
-
             Shoot(m_target.transform.position);
             play_Particle_Effect();
             isShot = false;  
-
         }
         else
         {
@@ -115,12 +113,16 @@ public class BulletShot : MonoBehaviour
         }
 
         var obj = Instantiate<GameObject>(m_shootObject, m_shootPoint.position, Quaternion.identity);
+        
         var rigidbody = obj.AddComponent<Rigidbody>();
 
         // 速さベクトルのままAddForce()を渡してはいけないぞ。力(速さ×重さ)に変換するんだ
         Vector3 force = i_shootVector * rigidbody.mass;
-
         rigidbody.AddForce(force, ForceMode.Impulse);
+
+
+        var temp = GameObject.FindGameObjectWithTag("Bullet");
+        temp.GetComponent<DestroyBullet>().m_target = m_target;
     }
     private float ComputeVectorFromTime(Vector3 i_targetPosition, float i_time)
     {

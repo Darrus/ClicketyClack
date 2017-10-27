@@ -63,4 +63,10 @@ public class BanditManager : MonoBehaviour {
             }
         }
     }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = new Color(0.0f, 0.0f, 1.0f);
+        Gizmos.DrawWireSphere(transform.position, gatherRadius);
+    }
 }

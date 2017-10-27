@@ -13,9 +13,9 @@ public class TrainMovement2 : MonoBehaviour {
         ParticleEffect.GetComponentInChildren<ParticleSystem>().Stop();
     }
 	
-	// Update is called once per frame
-	void Update () {
-
+    // Update is called once per frame
+    void Update () 
+    {
         if (BezierCurve2.Go)
         {
             if (LevelManager.TrianConnected)
@@ -34,6 +34,11 @@ public class TrainMovement2 : MonoBehaviour {
                 ParticleEffect.transform.rotation = Quaternion.identity;
             }
         }
-       
+
+        if (LevelManager.CargoOn && PointFollow.ID == 1)
+        {
+            // No need Tutorial Mode
+            // this.gameObject.GetComponent<FallPointSpown>().enabled = true;
+        }
     }
 }

@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class ConnectCargo : MonoBehaviour
 {
+    public static bool _isConnect = false;
     public GameObject Connector;
 
-    public static bool _isConnect = false;
     private Collider col;
     private Rigidbody rigid;
+    private GameObject connector;
 
     private void Start()
     {
+        connector = GameObject.FindGameObjectWithTag("Connector");
+
         col = GetComponent<BoxCollider>();
         rigid = GetComponent<Rigidbody>();
     }
@@ -20,24 +23,20 @@ public class ConnectCargo : MonoBehaviour
     {
         if (_isConnect)
         {
-            this.transform.position = Connector.transform.position;
-            rigid.useGravity = false;  
-            rigid.isKinematic = true;
-            LevelManager.CargoOn = true;
+            Destroy(connector);
 
-            
+            LevelManager.CargoOn = true;
+            this.GetComponent<TrainMovement2>().enabled = true;
+
         }
     }
-    private void OnCollisionEnter(Collision col)
+    private void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Connector")
         {
             _isConnect = true;
-            Debug.Log("Success Connect");
-
-            // 親オブジェクトを登録
-            //transform.parent = GameObject.FindGameObjectWithTag("Train").transform;
+            ArrowAnimation.ConnectComp = true;
         }
     }
-
+    
 }

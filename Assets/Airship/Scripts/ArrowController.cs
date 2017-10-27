@@ -5,7 +5,7 @@ using UnityEngine;
 public class ArrowController : MonoBehaviour
 {
     public float time;
-    private GameObject Cargo;
+    public GameObject target;
     public static bool _isDead = false;
 
     private Vector3 StartPos;
@@ -17,13 +17,15 @@ public class ArrowController : MonoBehaviour
     // Initialization
     void Start()
     {
-        Cargo = GameObject.FindGameObjectWithTag("Cargo");
+        var tag = gameObject.transform.root.tag;
 
         StartCoroutine("MovePosition");
 
         // 1秒当たりの移動量を算出
         deltaPos = (EndPos - StartPos) / time;
         elapsedTime = 0;
+
+
     }
 
     void Update()
@@ -37,7 +39,10 @@ public class ArrowController : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        if (transform.root.tag == "Coal")
+        {
 
+        }
         RepetitiveMotion();
     }
 
@@ -46,10 +51,10 @@ public class ArrowController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         StartPos = new Vector3
-            (Cargo.transform.position.x, (Cargo.transform.position.y + 0.2f), Cargo.transform.position.z);
+            (target.transform.position.x, (target.transform.position.y + 0.2f), target.transform.position.z);
 
         EndPos = new Vector3
-            (Cargo.transform.position.x, (Cargo.transform.position.y + 0.5f), Cargo.transform.position.z);
+            (target.transform.position.x, (target.transform.position.y + 0.5f), target.transform.position.z);
 
     }
 
@@ -78,6 +83,17 @@ public class ArrowController : MonoBehaviour
 
             elapsedTime = 0;
         }
+    }
+
+    void ChangePosition()
+    {
 
     }
+
+    void MoveAnimation()
+    {
+
+    }
+
+
 }

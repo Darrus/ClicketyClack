@@ -55,7 +55,7 @@ public class LevelManager : MonoBehaviour {
     {
         TrianConnected = true;
         TrianOnGround = false;
-        ReachStation = false;
+        ReachStation = true;
         MoveOut = false;
         CargoOn = false;
         TimeToRollOut = 5f;
@@ -72,7 +72,7 @@ public class LevelManager : MonoBehaviour {
             CargoOn = true;
         }
 #endif
-        if (!MoveOut && CargoOn)
+        if (!MoveOut && CargoOn && ReachStation)
         {
             if (TimeToRollOut >= 0)
                 TimeToRollOut -= Time.deltaTime;
@@ -94,7 +94,9 @@ public class LevelManager : MonoBehaviour {
 
         if (ReachStation && MoveOut)
         {
+            // CLEAR
             AppManager.NextLevel(AppManager.Singleton);
+            TextControll.textNum = 4;
         }
 
     }

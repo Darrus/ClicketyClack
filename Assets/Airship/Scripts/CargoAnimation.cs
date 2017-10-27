@@ -10,13 +10,15 @@ public class CargoAnimation : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        anim = GetComponent<Animation>();	
-	}
+        anim = GetComponent<Animation>();
+        anim.Stop();
+
+    }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if (ConnectCargo._isConnect)
+        if (LevelManager.CargoOn)
         {
             anim.Play();
         }
