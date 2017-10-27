@@ -2,18 +2,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-/*
-地面に３DText 生成
-チュートリアルシーン作成
-電車とオブジェクト配置
-一連の流れを試す
-調整
-UI移行
-*/
-
 public class TextControll : MonoBehaviour
 {
     public static int textNum;
+    public GameObject HoloLensCamera;
+
     private TextMesh text;
 
     private void Start()
@@ -25,30 +18,37 @@ public class TextControll : MonoBehaviour
     // Update
     void Update()
     {
-
         switch (textNum)
         {
             case 0:
-                text.text = "Place\n" +
-                            "Cargo on Train\n";
+                text.text = "Put Coal\n" +
+                            "in\n" +
+                            "Cargo\n";
                 break;
 
             case 1:
-                text.text = "Defend\n" +
-                            "the\n" +
-                            "Train";
+                text.text = "Place\n" +
+                            "Cargo on Train\n";
                 break;
-
-
+                
             case 2:
-                text.text = "Keep up\n" +
-                            "with the Train\n";
+                text.text = "Protect the Train\n" +
+                            "Watch out for\n" +
+                            "Bandit";
                 break;
 
             case 3:
-                textNum = 0;
+                text.text = "Remove the Rocks\n" +
+                            "from the\n" +
+                            "Cave";
+                break;
+
+            case 4:
+                text.text = "CLAER";
+                textNum = 4;
                 break;
         }
     }
+
 }
 

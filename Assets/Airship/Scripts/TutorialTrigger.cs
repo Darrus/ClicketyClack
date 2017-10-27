@@ -4,40 +4,31 @@ using UnityEngine;
 
 public class TutorialTrigger : MonoBehaviour
 {
-    public GameObject HeadlinePrefab;
+    //public GameObject HeadlinePrefab;
 
-    private GameObject train;
+    private GameObject Train;
     private Vector3 startPos;
     private bool _isTrig;
 
     private void Start()
     {
         _isTrig = false;
-        train = GameObject.FindGameObjectWithTag("Player");
-        startPos = train.transform.position;
+        //Instantiate<GameObject>(HeadlinePrefab, HeadlinePrefab.transform.position, HeadlinePrefab.transform.rotation);
+        Train = GameObject.FindGameObjectWithTag("Player");
+        startPos = Train.transform.position;
     }
 
     private void Update()
     {
         // 電車が動いたら
-        if (startPos != train.transform.position)
+        if (LevelManager.CargoOn)
         {
             if (!_isTrig)
             {
-                TextControll.textNum = 1;
+                TextControll.textNum = 2;
             }
-
             _isTrig = true;
         }
     }
 
-    // 洞窟を通過したら
-    private void OnTriggerEnter(Collider col)
-    {
-        if (col.gameObject.tag == "Player")
-        {
-            TextControll.textNum = 2;
-            Instantiate<GameObject>(HeadlinePrefab, HeadlinePrefab.transform.position, HeadlinePrefab.transform.rotation);
-        }
-    }
 }

@@ -16,6 +16,8 @@ TagManager:
   - Cargo
   - Connector
   - Train
+  - Coal
+  - Rock
   layers:
   - Default
   - TransparentFX

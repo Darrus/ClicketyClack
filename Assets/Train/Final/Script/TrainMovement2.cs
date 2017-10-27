@@ -22,5 +22,10 @@ public class TrainMovement2 : MonoBehaviour {
             //rotation *= Quaternion.Euler(0, -90, 0); // this adds a 90 degrees Y rotation
             //transform.localRotation = rotation;
         }
+        if (LevelManager.CargoOn && PointFollow.ID == 1)
+        {
+            // No need Tutorial Mode
+            // this.gameObject.GetComponent<FallPointSpown>().enabled = true;
+        }
 	}
 }

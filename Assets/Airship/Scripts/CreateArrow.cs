@@ -6,8 +6,9 @@ public class CreateArrow : MonoBehaviour
 {
     public GameObject ArrowPrefab;
     public static bool _isSleep = true;
+    public GameObject target;
+    public float Height = 0.1f; 
 
-    public GameObject Cargo;
     private Rigidbody rigid;
     private int child;
 
@@ -35,6 +36,8 @@ public class CreateArrow : MonoBehaviour
         }
         if (ConnectCargo._isConnect)
         {
+            Debug.Log("Success Connect");
+
             this.gameObject.GetComponent<CreateArrow>().enabled = false;
         }
 
@@ -42,7 +45,7 @@ public class CreateArrow : MonoBehaviour
 
     private IEnumerator createArrow()
     {
-        Vector3 ArrowPos = new Vector3(Cargo.transform.position.x, Cargo.transform.position.y + 0.5f, Cargo.transform.position.z);
+        Vector3 ArrowPos = new Vector3(target.transform.position.x, target.transform.position.y + Height, target.transform.position.z);
         Instantiate<GameObject>(ArrowPrefab, ArrowPos, Quaternion.identity);
         yield break;
     }
