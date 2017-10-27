@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 23120586170377614}
   m_Layer: 0
   m_Name: obj_bomb
-  m_TagString: Bullet
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -451,6 +451,8 @@ MonoBehaviour:
     type: 2}
   ParticleEffect2: {fileID: 1732454003042174, guid: 18fec7b6a7811e0468b31868057a42d0,
     type: 2}
+  explosionSFX: {fileID: 114895750717984262}
+  m_target: {fileID: 0}
 --- !u!114 &114895750717984262
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -531,7 +533,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 422901294
+  randomSeed: -457598499
   InitialModule:
     serializedVersion: 3
     enabled: 1

@@ -10,6 +10,8 @@ public class FallPointSpown : MonoBehaviour
     private float spownTime;
     private Vector3 FallPos;
 
+    private GameObject activeFallPoint = null;
+
 
     void Update ()
     {
@@ -18,9 +20,10 @@ public class FallPointSpown : MonoBehaviour
         if (spownTime < 0)
         {
             //FallPos = transform.root.position + RandomPosition();
-            FallPos = transform.root.position + transform.root.forward;
+            FallPos = transform.position + transform.forward;
+            FallPos.y += 0.01f;
 
-            GameObject point =Instantiate((GameObject)fallpointPrefab, FallPos, Quaternion.identity);
+            activeFallPoint = Instantiate((GameObject)fallpointPrefab, FallPos, Quaternion.identity);
             spownTime = SpownTime();
         }
     }

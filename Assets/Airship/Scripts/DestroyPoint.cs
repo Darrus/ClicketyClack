@@ -2,10 +2,9 @@
 
 public class DestroyPoint : MonoBehaviour
 {
-
     private void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "Bullet")
+        if (col.gameObject.CompareTag("Bullet"))
         {
             Destroy(this.gameObject);
         }

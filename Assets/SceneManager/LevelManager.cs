@@ -57,7 +57,7 @@ public class LevelManager : MonoBehaviour {
         TrianOnGround = false;
         ReachStation = false;
         MoveOut = false;
-        CargoOn = false;
+        CargoOn = true;
         TimeToRollOut = 5f;
     }
 

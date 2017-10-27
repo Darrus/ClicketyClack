@@ -6,6 +6,8 @@ public class DestroyBullet : MonoBehaviour
     public GameObject Parent;
     public GameObject ParticleEffect;
     public GameObject ParticleEffect2;
+    public PlaySoundAtPosition explosionSFX;
+    public GameObject m_target;
 
     void Update()
     {
@@ -13,21 +15,26 @@ public class DestroyBullet : MonoBehaviour
 
         if (delayTime < 0)
         {
-            Destroy(this.gameObject);
-
+            Destroy(Parent);
+            Destroy(m_target);
             delayTime = 3.0f;
         }
     }
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "FallPoint" || col.gameObject.tag == "Ground")
+        if (col.CompareTag("FallPoint")|| col.CompareTag("Ground"))
         {
             GameObject.Instantiate(ParticleEffect, transform.position, Quaternion.identity);
+            explosionSFX.PlayAtPosition();
             Destroy(Parent);
+            Destroy(m_target);
         }
         if (col.gameObject.tag == "Player")
         {
             GameObject.Instantiate(ParticleEffect2, transform.position, Quaternion.identity);
+            explosionSFX.PlayAtPosition();
+            Destroy(Parent);
+            Destroy(m_target);
         }
     }
 }

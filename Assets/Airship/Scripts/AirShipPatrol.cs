@@ -12,7 +12,7 @@ public class AirShipPatrol : MonoBehaviour
     void Update()
     {
         // Homing
-        Vector3 targetPos = target.transform.localPosition;
+        Vector3 targetPos = target.transform.position;
 
         transform.position
             = Vector3.MoveTowards(this.transform.position, new Vector3(targetPos.x, transform.position.y,targetPos.z ), speed * Time.deltaTime);

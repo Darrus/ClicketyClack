@@ -5,7 +5,6 @@ TagManager:
   serializedVersion: 2
   tags:
   - Point
-  - Floor
   - DragPoint
   - Ground
   - Bound
@@ -15,6 +14,8 @@ TagManager:
   - Cargo
   - Connector
   - Train
+  - EventItem
+  - Floor
   layers:
   - Default
   - TransparentFX
