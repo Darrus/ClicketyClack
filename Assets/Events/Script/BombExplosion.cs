@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
-public class BombExplosion : MonoBehaviour {
+public class BombExplosion : MonoBehaviour
+{
     [TagSelector]
     public string triggerTag;
     public AudioSource sfx;
     public float timeTillExpload;
     public float explosionForce;
+    public float explosionRadius;
     public bool triggered = false;
 
     private bool exploaded = false;
@@ -16,7 +18,6 @@ public class BombExplosion : MonoBehaviour {
 
     public GameObject Parent;
     public GameObject ParticleEffect;
-
 
     private void Start()
     {
@@ -29,14 +30,13 @@ public class BombExplosion : MonoBehaviour {
             return;
 
         timeTillExpload -= Time.deltaTime;
-        if(timeTillExpload <= 0.0f)
+        if (timeTillExpload <= 0.0f)
         {
             exploaded = true;
-            sfx.Play();
-            Collider[] objsWithinRadius = Physics.OverlapSphere(transform.position, sphereCollider.radius);
-            foreach(Collider col in objsWithinRadius)
+            Collider[] objsWithinRadius = Physics.OverlapSphere(transform.position, explosionRadius);
+            foreach (Collider col in objsWithinRadius)
             {
-                if(col.CompareTag(triggerTag))
+                if (col.CompareTag(triggerTag))
                 {
                     LevelManager.TrianConnected = false;
                     Rigidbody objRigidbody = col.GetComponent<Rigidbody>();
@@ -46,14 +46,16 @@ public class BombExplosion : MonoBehaviour {
                 }
             }
 
+            LevelManager.TrianConnected = false;
             CreateExplosion();
+            sfx.gameObject.GetComponent<PlaySoundAtPosition>().PlayAtPosition();
             GameObject.Destroy(Parent);
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag(triggerTag))
+        if (other.CompareTag(triggerTag))
         {
             triggered = true;
         }
@@ -64,4 +66,9 @@ public class BombExplosion : MonoBehaviour {
         GameObject.Instantiate(ParticleEffect, Parent.transform.position, Quaternion.identity);
     }
 
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = new Color(1.0f, 0.0f, 0.0f);
+        Gizmos.DrawWireSphere(transform.position, explosionRadius);
+    }
 }

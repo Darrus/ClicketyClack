@@ -46,6 +46,7 @@ public class CargoCollision : MonoBehaviour
 
         if (collision.gameObject.tag == "Coal")
         {
+            Debug.Log("hit");
             Destroy(collision.gameObject);
             CoalInCargo();
         }

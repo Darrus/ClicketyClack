@@ -11,12 +11,6 @@ public class TrainMovement : MonoBehaviour {
     private int Point_ID;
     private float distanceGap;
     public bool once;
-
-	// Use this for initialization
-	void Start () {
-
-       
-    }
 	
 	// Update is called once per frame
 	void Update () {
