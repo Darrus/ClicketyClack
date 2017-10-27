@@ -18,7 +18,7 @@ public class FallPointSpown : MonoBehaviour
         if (spownTime < 0)
         {
             //FallPos = transform.root.position + RandomPosition();
-            FallPos = transform.root.position + transform.root.forward;
+            FallPos = transform.position + transform.forward;
 
             GameObject point =Instantiate((GameObject)fallpointPrefab, FallPos, Quaternion.identity);
             spownTime = SpownTime();
