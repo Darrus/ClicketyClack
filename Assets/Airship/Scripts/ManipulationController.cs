@@ -1,10 +1,15 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using HoloToolkit.Unity.InputModule;
 
 public class ManipulationController : MonoBehaviour, IManipulationHandler
 {
     [SerializeField]
     private float speed = 1.0f;
+
+    [SerializeField]
+    private float ObjectDistance;
+    
     private float step;
 
     
@@ -30,8 +35,6 @@ public class ManipulationController : MonoBehaviour, IManipulationHandler
 
         // need(KORE GA NAITO OBUJEKUTO NI FORCAS DEKINAI)
         InputManager.Instance.PushModalInputHandler(this.gameObject);
-
-        Debug.Log(gameObject);
     }
 
     public void OnManipulationUpdated(ManipulationEventData eventData)
@@ -44,7 +47,7 @@ public class ManipulationController : MonoBehaviour, IManipulationHandler
 
         GetComponent<Rigidbody>().velocity = Vector3.zero;
         
-        gameObject.transform.position = Camera.main.transform.position + Camera.main.transform.forward * 2;
+       gameObject.transform.position = Camera.main.transform.position + Camera.main.transform.forward * ObjectDistance;
 
     }
 

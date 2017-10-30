@@ -6,7 +6,7 @@ using HoloToolkit.Unity.InputModule;
 [RequireComponent(typeof(Rigidbody))]
 public class WeightedPickUp : MonoBehaviour, IManipulationHandler
 {
-    [Range(1.0f, 8.0f)]
+    [Range(0.0f, 8.0f)]
     public float snapDistance = 5.0f;
     public float force;
 

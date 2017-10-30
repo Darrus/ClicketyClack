@@ -21,6 +21,11 @@ public class FallPointSpown : MonoBehaviour
         {
             //FallPos = transform.root.position + RandomPosition();
             FallPos = transform.position + transform.forward;
+
+            GameObject point =Instantiate((GameObject)fallpointPrefab, FallPos, Quaternion.identity);
+
+            //FallPos = transform.root.position + RandomPosition();
+            FallPos = transform.position + transform.forward;
             FallPos.y += 0.01f;
 
             activeFallPoint = Instantiate((GameObject)fallpointPrefab, FallPos, Quaternion.identity);

@@ -4,18 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Point
-  - DragPoint
-  - Ground
-  - Bound
-  - FallPoint
   - Bullet
-  - Event
-  - Cargo
-  - Connector
+  - FallPoint
   - Train
-  - EventItem
-  - Floor
+  - Cargo
   layers:
   - Default
   - TransparentFX
@@ -25,7 +17,7 @@ TagManager:
   - UI
   - 
   - 
-  - Ground
+  - 
   - 
   - 
   - 

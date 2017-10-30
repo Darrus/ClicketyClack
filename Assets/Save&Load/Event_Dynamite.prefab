@@ -467,7 +467,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1174776042173472}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.198, y: -0.574, z: 1.1}
+  m_LocalPosition: {x: 2.1085353, y: -0.781, z: 2.6129353}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4557270216650678}
@@ -1180,7 +1180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35efabb4858901f4d9cca6b3ce3c92eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventBase: {fileID: 0}
+  eventBase: {fileID: 114187618477448764}
   banditTypes:
   - {fileID: 1373607084832810, guid: 269eb929db81d984cb07731b8be85d59, type: 2}
   - {fileID: 1396510136536202, guid: c260c1336481dfd4c8a37dd584b7dcf3, type: 2}
