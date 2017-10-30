@@ -6,12 +6,13 @@ public class TextControll : MonoBehaviour
 {
     public static int textNum;
     public GameObject HoloLensCamera;
-
     private TextMesh text;
+    private float scale;
 
     private void Start()
     {
         text = GetComponent<TextMesh>();
+        scale = GetComponent<FontScalable>().fontScale;    
         textNum = 0;
     }
 
@@ -21,6 +22,9 @@ public class TextControll : MonoBehaviour
         switch (textNum)
         {
             case 0:
+                scale = 6.0f;
+
+
                 text.text = "Put Coal\n" +
                             "in\n" +
                             "Cargo\n";
@@ -49,6 +53,7 @@ public class TextControll : MonoBehaviour
                 break;
         }
     }
+
 
 }
 

@@ -623,7 +623,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 0.01
   runSpeed: 0.2
-  startState: 0
+  startState: 3
 --- !u!137 &137960348120010392
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

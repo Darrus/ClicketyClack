@@ -6,7 +6,7 @@ public class FontScalable : MonoBehaviour
 {
 
     [Range(1, 6)]
-    public float fontScale = 1;
+    public float fontScale;
     TextMesh tetxMesh;
 
 

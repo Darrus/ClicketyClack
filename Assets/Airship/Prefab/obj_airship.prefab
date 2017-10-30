@@ -152,7 +152,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4857103954525278}
-  - component: {fileID: 114453273970290496}
   m_Layer: 0
   m_Name: BulletPoint
   m_TagString: Untagged
@@ -350,7 +349,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1347614559685846}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.4069191, y: 0.48052436, z: 1.819}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_Children:
   - {fileID: 4845085307230986}
@@ -1116,8 +1115,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44eb72f6b8519ad4994da56ea9de3279, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.5
   target: {fileID: 0}
+  mask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &114119248610208478
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1131,21 +1132,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds: []
   fadeInDuration: 0
---- !u!114 &114453273970290496
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1630201975384880}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2927bb86614eba949af6c68fcf9cffa0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_shootPoint: {fileID: 4857103954525278}
-  m_shootObject: {fileID: 1259563953999786, guid: 7cb707fc0570e8242be57d14c9595c61,
-    type: 2}
-  m_angle: 45
-  m_SFX: {fileID: 82238276221901916}
-  m_target: {fileID: 0}
-  m_bullet: {fileID: 0}

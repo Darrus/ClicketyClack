@@ -26,7 +26,7 @@ public class ArrowAnimation : MonoBehaviour
         dy = Time.deltaTime * speed;
 
         // CoalPos
-        transform.position = Coal.transform.position;
+        transform.position = new Vector3(Coal.transform.position.x, -0.355f, Coal.transform.position.z);
     }
 
     private void FixedUpdate()
@@ -42,7 +42,6 @@ public class ArrowAnimation : MonoBehaviour
 
         if (ConnectCargo._isConnect)
         {
-            Debug.Log("TENKUU");
             // TENKUU
             transform.position = new Vector3(0, 0, 10000);
             ConnectCargo._isConnect = false;
@@ -74,14 +73,14 @@ public class ArrowAnimation : MonoBehaviour
 
         v.y += dy;
 
-        if (v.y > -0.33f)
+        if (v.y > -0.1f)
         {
-            v.y = -0.33f;
+            v.y = -0.1f;
             dy *= -1;
         }
-        if (v.y < -0.57f)
+        if (v.y < -0.33f)
         {
-            v.y = -0.57f;
+            v.y = -0.33f;
             dy *= -1;
         }
 
