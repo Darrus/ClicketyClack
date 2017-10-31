@@ -24,6 +24,28 @@ public class PointManagerEditor : Editor
 
             myScript.AddNewPoints(Temp, BezierCurve2.points.Length, 1);
         }
+
+        if (GUILayout.Button("Create line"))
+        {
+            BezierCurve2.CruveSteps = myScript.curveSteps;
+            BezierCurve2.ClearAllData();
+            BezierCurve2.IncreaseSize(myScript.startSize);
+            BezierCurve2.updateCurvePoints();
+            BezierCurve2.CalcAllTrackPointData();
+            myScript.DrawLine_Edtior();
+        }
+
+        if (GUILayout.Button("Save Track Point Data"))
+        {
+            BezierCurve2.SaveTrackPointData(myScript.Level);
+        }
+
+        if (GUILayout.Button("Load Track Point Data && Create Line"))
+        {
+            BezierCurve2.LoadTrackPointData(myScript.Level);
+            myScript.DrawLine_Edtior();
+        }
+
     }
 }
 #endif

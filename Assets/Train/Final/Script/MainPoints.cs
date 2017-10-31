@@ -35,7 +35,7 @@ public class MainPoints : MonoBehaviour {
     public int ID;
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // MESH VAR //
+    // MESH VARs //
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public Material RoadMaterial;
@@ -61,7 +61,7 @@ public class MainPoints : MonoBehaviour {
     {
         if (Application.isPlaying)
         {
-            UpdateMesh = false;
+            UpdateMesh = true;
             UnrenderMesh = true;
 
             if (type == (int)pointType.NormalPoint)
@@ -90,35 +90,39 @@ public class MainPoints : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
         if (Application.isPlaying)
         {
             if (UpdateMesh && BezierCurve2.Go)
             {
-                curveNodes = new Vector3[BezierCurve2.CruveSteps + 1];
-                tangents = new Vector3[BezierCurve2.CruveSteps + 1];
-                vertices = new Vector3[(BezierCurve2.CruveSteps + 1) * 2];
-
-                for (int i = 0; i <= BezierCurve2.CruveSteps; ++i)
+                if (AppManager.curScene == 6)
                 {
+                    curveNodes = new Vector3[BezierCurve2.CruveSteps + 1];
+                    tangents = new Vector3[BezierCurve2.CruveSteps + 1];
+                    vertices = new Vector3[(BezierCurve2.CruveSteps + 1) * 2];
 
-                    if (type == (int)pointType.NormalPoint || type == (int)pointType.FixedPoint || type == (int)pointType.TrafficLight)
+                    for (int i = 0; i <= BezierCurve2.CruveSteps; ++i)
                     {
-                        Vector3 point = (BezierCurve2.GetPoint(transform.position * BezierCurve2.Distance_scaleFacter, ChildPoint_position * BezierCurve2.Distance_scaleFacter, Friend_ChildPoint_position * BezierCurve2.Distance_scaleFacter, FriendPoint_position * BezierCurve2.Distance_scaleFacter, i / (float)BezierCurve2.CruveSteps)) - transform.position * BezierCurve2.Distance_scaleFacter;
-                        curveNodes[i] = point;
 
-                        tangents[i] = BezierCurve2.GetFirstDerivative(transform.position * BezierCurve2.Distance_scaleFacter, ChildPoint_position * BezierCurve2.Distance_scaleFacter, Friend_ChildPoint_position * BezierCurve2.Distance_scaleFacter, FriendPoint_position * BezierCurve2.Distance_scaleFacter, i / (float)BezierCurve2.CruveSteps);
+                        if (type == (int)pointType.NormalPoint || type == (int)pointType.FixedPoint || type == (int)pointType.TrafficLight)
+                        {
+                            Vector3 point = (BezierCurve2.GetPoint(transform.position * BezierCurve2.Distance_scaleFacter, ChildPoint_position * BezierCurve2.Distance_scaleFacter, Friend_ChildPoint_position * BezierCurve2.Distance_scaleFacter, FriendPoint_position * BezierCurve2.Distance_scaleFacter, i / (float)BezierCurve2.CruveSteps)) - transform.position * BezierCurve2.Distance_scaleFacter;
+                            curveNodes[i] = point;
+
+                            tangents[i] = BezierCurve2.GetFirstDerivative(transform.position * BezierCurve2.Distance_scaleFacter, ChildPoint_position * BezierCurve2.Distance_scaleFacter, Friend_ChildPoint_position * BezierCurve2.Distance_scaleFacter, FriendPoint_position * BezierCurve2.Distance_scaleFacter, i / (float)BezierCurve2.CruveSteps);
+                        }
+
+                        if (type == (int)pointType.EventPoint)
+                        {
+                            Vector3 point = (BezierCurve2.GetPoint(transform.position * BezierCurve2.Distance_scaleFacter, transform.position * BezierCurve2.Distance_scaleFacter, FriendPoint_position * BezierCurve2.Distance_scaleFacter, FriendPoint_position * BezierCurve2.Distance_scaleFacter, i / (float)BezierCurve2.CruveSteps)) - transform.position * BezierCurve2.Distance_scaleFacter;
+                            curveNodes[i] = point;
+
+                            tangents[i] = BezierCurve2.GetFirstDerivative(transform.position * BezierCurve2.Distance_scaleFacter, transform.position * BezierCurve2.Distance_scaleFacter, FriendPoint_position * BezierCurve2.Distance_scaleFacter, FriendPoint_position * BezierCurve2.Distance_scaleFacter, i / (float)BezierCurve2.CruveSteps);
+                        }
                     }
 
-                    if (type == (int)pointType.EventPoint)
-                    {
-                        Vector3 point = (BezierCurve2.GetPoint(transform.position * BezierCurve2.Distance_scaleFacter, transform.position * BezierCurve2.Distance_scaleFacter, FriendPoint_position * BezierCurve2.Distance_scaleFacter, FriendPoint_position * BezierCurve2.Distance_scaleFacter, i / (float)BezierCurve2.CruveSteps)) - transform.position * BezierCurve2.Distance_scaleFacter;
-                        curveNodes[i] = point;
-
-                        tangents[i] = BezierCurve2.GetFirstDerivative(transform.position * BezierCurve2.Distance_scaleFacter, transform.position * BezierCurve2.Distance_scaleFacter, FriendPoint_position * BezierCurve2.Distance_scaleFacter, FriendPoint_position * BezierCurve2.Distance_scaleFacter, i / (float)BezierCurve2.CruveSteps);
-                    }
+                    BuildRoadMesh();
                 }
-
-                BuildRoadMesh();
 
                 UpdateMesh = false;
 
@@ -142,22 +146,7 @@ public class MainPoints : MonoBehaviour {
         }
     }
 
-#if UNITY_EDITOR
-    void OnDrawGizmos()
-    {
-        if (!Application.isPlaying)
-        {
-            if (type == (int)pointType.TrafficLight)
-                Gizmos.color = Color.red;
 
-            if (type == (int)pointType.FixedPoint || type == (int)pointType.EventPoint)
-                Gizmos.color = Color.black;
-
-
-            Gizmos.DrawWireSphere(transform.position, 0.05f);
-        }
-    }
-#endif
 
     public void CreatePoints(GameObject temp)
     {
@@ -169,7 +158,7 @@ public class MainPoints : MonoBehaviour {
     {
         GameObject Temp = gameObject.transform.GetChild(0).gameObject;
       
-        Vector3 normal = Vector3.Cross(BezierCurve2.Track_List[(ID * 500) + 1].tangent, Vector3.up).normalized;
+        Vector3 normal = Vector3.Cross(BezierCurve2.GetFirstDerivative(transform.position * BezierCurve2.Distance_scaleFacter, ChildPoint_position * BezierCurve2.Distance_scaleFacter, Friend_ChildPoint_position * BezierCurve2.Distance_scaleFacter, FriendPoint_position * BezierCurve2.Distance_scaleFacter, 0), Vector3.up).normalized;
 
         Temp.transform.position = Temp.transform.position - new Vector3(normal.x * 0.2f, 0, normal.z * 0.2f);  // hard coded
 
@@ -228,4 +217,24 @@ public class MainPoints : MonoBehaviour {
         GetComponent<Renderer>().material = RoadMaterial;
         GetComponent<Renderer>().enabled = true;
     }
+
+#if UNITY_EDITOR
+    void OnDrawGizmos()
+    {
+        if (!Application.isPlaying)
+        {
+            if (type == (int)pointType.TrafficLight)
+                Gizmos.color = Color.red;
+
+            if (type == (int)pointType.FixedPoint || type == (int)pointType.EventPoint)
+                Gizmos.color = Color.black;
+
+
+            Gizmos.DrawWireSphere(transform.position, 0.05f);
+
+            Gizmos.DrawWireSphere(ChildPoint_position, 0.01f);
+        }
+    }
+#endif
+
 }

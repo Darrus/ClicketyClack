@@ -53,7 +53,7 @@ public class TrainMovement : MonoBehaviour {
 
         while (run)
         {
-            if (Temp_Id + 1 == BezierCurve2.Track_List.Length)
+            if (Temp_Id + 1 == BezierCurve2.TrackData_List.Length)
             {
                 Temp_Id = 0;
                 distanceTravel = 0;
@@ -61,13 +61,13 @@ public class TrainMovement : MonoBehaviour {
                 if(ID == 1)
                     LevelManager.ReachStation = true;
             }
-            if (distanceTravel >= BezierCurve2.Track_List[Temp_Id].distance)
+            if (distanceTravel >= BezierCurve2.TrackData_List[Temp_Id].distance)
             {
-                transform.position = BezierCurve2.Track_List[Temp_Id].position;
-                transform.LookAt(transform.position + BezierCurve2.Track_List[Temp_Id].tangent);
+                transform.position = BezierCurve2.TrackData_List[Temp_Id].position;
+                transform.LookAt(transform.position + BezierCurve2.TrackData_List[Temp_Id].tangent);
             }
 
-            if(distanceTravel < BezierCurve2.Track_List[Temp_Id + 1].distance)
+            if(distanceTravel < BezierCurve2.TrackData_List[Temp_Id + 1].distance)
             {
                 Point_ID = Temp_Id;
                 run = false;
