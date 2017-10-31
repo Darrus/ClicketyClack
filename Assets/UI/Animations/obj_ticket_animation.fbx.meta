@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: f69221b2c9f56f146bdc8a464139c15e
-timeCreated: 1508924510
+guid: 83c76de3bdd35ac44a8280aa4b43c893
+timeCreated: 1509336892
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -32,6 +32,7 @@ ModelImporter:
     400022: ticket_joint8
     400024: ticket_joint9
     7400000: anim_ticket
+    7400002: anim_ticket_pull
     9500000: //RootNode
     11100000: //RootNode
   materials:
@@ -50,7 +51,7 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -62,6 +63,60 @@ ModelImporter:
       takeName: Take 001
       firstFrame: 1
       lastFrame: 60
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: ticket_joint1
+        weight: 1
+      - path: ticket_joint1/ticket_joint2
+        weight: 1
+      - path: ticket_joint1/ticket_joint2/ticket_joint3
+        weight: 1
+      - path: ticket_joint1/ticket_joint2/ticket_joint3/ticket_joint4
+        weight: 1
+      - path: ticket_joint1/ticket_joint2/ticket_joint3/ticket_joint4/ticket_joint5
+        weight: 1
+      - path: ticket_joint1/ticket_joint2/ticket_joint3/ticket_joint4/ticket_joint5/ticket_joint6
+        weight: 1
+      - path: ticket_joint1/ticket_joint2/ticket_joint3/ticket_joint4/ticket_joint5/ticket_joint6/ticket_joint7
+        weight: 1
+      - path: ticket_joint1/ticket_joint2/ticket_joint3/ticket_joint4/ticket_joint5/ticket_joint6/ticket_joint7/ticket_joint8
+        weight: 1
+      - path: ticket_joint1/ticket_joint2/ticket_joint3/ticket_joint4/ticket_joint5/ticket_joint6/ticket_joint7/ticket_joint8/ticket_joint9
+        weight: 1
+      - path: ticket_joint1/ticket_joint2/ticket_joint3/ticket_joint4/ticket_joint5/ticket_joint6/ticket_joint7/ticket_joint8/ticket_joint9/ticket_joint10
+        weight: 1
+      - path: ticket_joint1/ticket_joint2/ticket_joint3/ticket_joint4/ticket_joint5/ticket_joint6/ticket_joint7/ticket_joint8/ticket_joint9/ticket_joint10/ticket_joint11
+        weight: 1
+      - path: ticket_joint1/ticket_joint12
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: anim_ticket_pull
+      takeName: Take 001
+      firstFrame: 61
+      lastFrame: 93
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -152,7 +207,7 @@ ModelImporter:
     hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 1
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
