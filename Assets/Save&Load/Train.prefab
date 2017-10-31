@@ -642,7 +642,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4022402568083690}
   - component: {fileID: 114317001476976718}
-  - component: {fileID: 114051393000973568}
   m_Layer: 0
   m_Name: Cargo
   m_TagString: Untagged
@@ -2840,18 +2839,6 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &114051393000973568
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1852311714100436}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85d976cde6c6e614b8f01ec4c4574d2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 100
 --- !u!114 &114074055985509472
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2926,6 +2913,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80f5345285af7aa4286eb80fe2e1b89c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  obj_coal_pile: {fileID: 0}
 --- !u!114 &114710459593374080
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -80,8 +80,10 @@ public class LevelManager : MonoBehaviour {
             {
                 MoveOut = true;
                 ReachStation = false;
+                Debug.Log("GO out");
             }
         }
+
         Check_Win_Lose_Condition();
     }
 
@@ -94,8 +96,9 @@ public class LevelManager : MonoBehaviour {
 
         if (ReachStation && MoveOut)
         {
-            // CLEAR
             AppManager.NextLevel(AppManager.Singleton);
+
+            // CLEAR
             TextControll.textNum = 4;
         }
 

@@ -21,10 +21,6 @@ public class CargoCollision : MonoBehaviour
     private void Update()
     {
 
-        if (ArrowController._isDead)
-        {
-            delayTime -= Time.deltaTime;
-        }
         if (_isCoal)
         {
             TextControll.textNum = 1;
@@ -35,18 +31,10 @@ public class CargoCollision : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Ground")
-        {
-            if (delayTime < 0||ArrowController._isDead)
-            {
-                ArrowController._isDead = false;
-                CreateArrow._isSleep = true;
-            }
-        }
+
 
         if (collision.gameObject.tag == "Coal")
         {
-            Debug.Log("hit");
             Destroy(collision.gameObject);
             CoalInCargo();
         }
