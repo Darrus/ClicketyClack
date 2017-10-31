@@ -8,6 +8,13 @@ TagManager:
   - FallPoint
   - Train
   - Cargo
+  - Point
+  - Ground
+  - Floor
+  - Bound
+  - DragPoint
+  - Connector
+  - EventItem
   layers:
   - Default
   - TransparentFX
@@ -17,7 +24,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Ignore Hololens Raycast
   - 
   - 
   - 

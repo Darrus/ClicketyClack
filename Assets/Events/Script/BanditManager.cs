@@ -69,4 +69,14 @@ public class BanditManager : MonoBehaviour {
         Gizmos.color = new Color(0.0f, 0.0f, 1.0f);
         Gizmos.DrawWireSphere(transform.position, gatherRadius);
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = new Color(0.5f, 0.5f, 0.5f);
+        Vector3 cubeSize = new Vector3(0.05f, 0.05f, 0.05f);
+        foreach (GameObject spawn in spawnPoints)
+        {
+            Gizmos.DrawWireCube(spawn.transform.position, cubeSize);
+        }
+    }
 }

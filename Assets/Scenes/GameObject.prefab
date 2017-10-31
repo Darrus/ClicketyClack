@@ -74,7 +74,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4357245110165034}
-  - component: {fileID: 114548939382973184}
   m_Layer: 0
   m_Name: ArrowFactory
   m_TagString: Untagged
@@ -4528,6 +4527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80f5345285af7aa4286eb80fe2e1b89c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  obj_coal_pile: {fileID: 0}
 --- !u!114 &114147342232492586
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4568,6 +4568,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PointFollow: {fileID: 114255649655470138}
+  ParticleEffect: {fileID: 0}
   TrainHeightGap: 0.09
 --- !u!114 &114216006053478200
 MonoBehaviour:
@@ -4683,6 +4684,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PointFollow: {fileID: 114482565543987400}
+  ParticleEffect: {fileID: 0}
   TrainHeightGap: 0.09
 --- !u!114 &114439766714279158
 MonoBehaviour:
@@ -4787,20 +4789,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e69612c7e3cc8af44bcb86080bd98fdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114548939382973184
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1020843446753266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09d7d5560b3438541ab3049170879810, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ArrowPrefab: {fileID: 1910669846184990, guid: b531569c5c886764b90927c27a35087b,
-    type: 2}
-  Cargo: {fileID: 1780303850209094}
 --- !u!114 &114560523949660080
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4812,6 +4800,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53aa3cd3e6a8bd644b8e4350ff1821c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HoloLensCamera: {fileID: 0}
 --- !u!114 &114589588742052982
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4874,6 +4863,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 100
+  ObjectDistance: 0
 --- !u!114 &114712591661221042
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5010,6 +5000,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PointFollow: {fileID: 114497815128874036}
+  ParticleEffect: {fileID: 0}
   TrainHeightGap: 0.09
 --- !u!114 &114985352168377884
 MonoBehaviour:

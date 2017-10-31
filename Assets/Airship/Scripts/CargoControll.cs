@@ -30,7 +30,6 @@ public class CargoControll : MonoBehaviour, IManipulationHandler
     {
         step = speed * Time.deltaTime;
 
-        ArrowController._isDead = true;
         GetComponent<Rigidbody>().useGravity = false;
         InputManager.Instance.PushModalInputHandler(this.gameObject);
     }
