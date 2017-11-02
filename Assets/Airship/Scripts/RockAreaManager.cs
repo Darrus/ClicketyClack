@@ -15,7 +15,7 @@ public class RockAreaManager : MonoBehaviour
         {
             _isStop = false;
             LevelManager.MoveOut = true;
-            ArrowAnimation.RockComp = true;
+            ArrowControll.RockComp = true;
         }
     }
     private void OnTriggerStay(Collider col)

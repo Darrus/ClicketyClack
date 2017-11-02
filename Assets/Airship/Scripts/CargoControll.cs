@@ -41,7 +41,7 @@ public class CargoControll : MonoBehaviour, IManipulationHandler
 
         // Default Angle
         this.transform.rotation =
-            Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, 0), step);
+            Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 180, 0), step);
 
         GetComponent<Rigidbody>().velocity = Vector3.zero;
 

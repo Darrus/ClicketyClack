@@ -8,6 +8,15 @@ TagManager:
   - FallPoint
   - Train
   - Cargo
+  - Coal
+  - Ground
+  - Point
+  - Bound
+  - Rock
+  - Connector
+  - DragPoint
+  - Floor
+  - Obstacle
   layers:
   - Default
   - TransparentFX
