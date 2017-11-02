@@ -2,6 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 
+#if UNITY_EDITOR
+[ExecuteInEditMode()]
+#endif
 [RequireComponent(typeof(MeshFilter))]
 public class TrackMeshGenerate : MonoBehaviour
 {
@@ -19,18 +22,24 @@ public class TrackMeshGenerate : MonoBehaviour
     public Material Track_Metal;
     public Material Track_Wood;
 
+    public int Level;
+
     void Update()
     {
-        if (BezierCurve2.updateTrack && BezierCurve2.points.Length > 2)
+#if UNITY_EDITOR || UNITY_WSA
+
+        if (BezierCurve2.updateTrack && BezierCurve2.points.Length > 2 && AppManager.curScene == 6)
         {
-            BezierCurve2.CalcAllTrackLength();
+            BezierCurve2.CalcAllTrackPointData();
 
             GenerateMesh();
 
             BezierCurve2.unRenderMesh();
 
             BezierCurve2.updateTrack = false;
+            BezierCurve2.Go = true;
         }
+#endif
     }
 
     private void Start()
@@ -45,7 +54,7 @@ public class TrackMeshGenerate : MonoBehaviour
             DestroyImmediate(transform.GetChild(i).gameObject);
         }
 
-        totalPoints = BezierCurve2.Track_List.Length;
+        totalPoints = BezierCurve2.TrackData_List.Length;
 
         DrawTrack_Part1("inner", true);
         DrawTrack_Part1("outter", false);
@@ -53,7 +62,6 @@ public class TrackMeshGenerate : MonoBehaviour
         DrawTrack_Part2();
 
     }
-
 
     private void DrawTrack_Part1(string Name, bool Inner)
     {
@@ -71,8 +79,8 @@ public class TrackMeshGenerate : MonoBehaviour
             for (int i = 0; i < allPoints.Length; i++)
             {
                 GameObject Temp = new GameObject();
-                Temp.transform.position = BezierCurve2.Track_List[i].position;
-                Temp.transform.LookAt(Temp.transform.position + BezierCurve2.Track_List[i].tangent);
+                Temp.transform.position = BezierCurve2.TrackData_List[i].position;
+                Temp.transform.LookAt(Temp.transform.position + BezierCurve2.TrackData_List[i].tangent);
                 Vector3 TempR = Temp.transform.right;
                 DestroyImmediate(Temp);
 
@@ -83,8 +91,8 @@ public class TrackMeshGenerate : MonoBehaviour
                 Vector3 cross = new Vector3();
                 if (n == 0)
                 {
-                    allPoints[i] = BezierCurve2.Track_List[i].position + Vector3.up * Height + Offset;
-                    cross = Vector3.Cross(Vector3.up, BezierCurve2.Track_List[i].tangent);
+                    allPoints[i] = BezierCurve2.TrackData_List[i].position + Vector3.up * Height + Offset;
+                    cross = Vector3.Cross(Vector3.up, BezierCurve2.TrackData_List[i].tangent);
 
                     cross = cross.normalized;
                     vertices[i * 2] = allPoints[i] + cross * Width;
@@ -92,8 +100,8 @@ public class TrackMeshGenerate : MonoBehaviour
                 }
                 if (n == 1)
                 {
-                    allPoints[i] = BezierCurve2.Track_List[i].position - Vector3.up * Height + Offset;
-                    cross = Vector3.Cross(-Vector3.up, BezierCurve2.Track_List[i].tangent);
+                    allPoints[i] = BezierCurve2.TrackData_List[i].position - Vector3.up * Height + Offset;
+                    cross = Vector3.Cross(-Vector3.up, BezierCurve2.TrackData_List[i].tangent);
 
                     cross = cross.normalized;
                     vertices[i * 2] = allPoints[i] + cross * Width;
@@ -102,8 +110,8 @@ public class TrackMeshGenerate : MonoBehaviour
 
                 if (n == 2)
                 {
-                    allPoints[i] = BezierCurve2.Track_List[i].position - TempR * Width + Offset;
-                    cross = Vector3.Cross(-TempR, BezierCurve2.Track_List[i].tangent);
+                    allPoints[i] = BezierCurve2.TrackData_List[i].position - TempR * Width + Offset;
+                    cross = Vector3.Cross(-TempR, BezierCurve2.TrackData_List[i].tangent);
 
                     cross = cross.normalized;
                     vertices[i * 2] = allPoints[i] + cross * Height;
@@ -111,8 +119,8 @@ public class TrackMeshGenerate : MonoBehaviour
                 }
                 if (n == 3)
                 {
-                    allPoints[i] = BezierCurve2.Track_List[i].position + TempR * Width + Offset;
-                    cross = Vector3.Cross(TempR, BezierCurve2.Track_List[i].tangent);
+                    allPoints[i] = BezierCurve2.TrackData_List[i].position + TempR * Width + Offset;
+                    cross = Vector3.Cross(TempR, BezierCurve2.TrackData_List[i].tangent);
 
                     cross = cross.normalized;
                     vertices[i * 2] = allPoints[i] + cross * Height;
@@ -176,12 +184,14 @@ public class TrackMeshGenerate : MonoBehaviour
         Final.transform.SetParent(transform);
         Final.transform.position = transform.position;
 
-        float MaxTrackLength = BezierCurve2.Track_List[totalPoints - 1].distance;
+        float MaxTrackLength = BezierCurve2.TrackData_List[totalPoints - 1].distance;
         float currDistance = 0f;
         int currID = 0;
 
 
         //Debug.Log(MaxTrackLength);
+
+        List<GameObject> objects = new List<GameObject>();
 
         bool run = true;
 
@@ -192,7 +202,7 @@ public class TrackMeshGenerate : MonoBehaviour
             while (SecondRun)
             {
 
-                if (currDistance >= BezierCurve2.Track_List[currID].distance)
+                if (currDistance >= BezierCurve2.TrackData_List[currID].distance)
                 {
                     currID++;
                 }
@@ -203,9 +213,9 @@ public class TrackMeshGenerate : MonoBehaviour
                 }
 
                 if(SecondRun)
-                    if (currDistance < BezierCurve2.Track_List[currID + 1].distance )
+                    if (currDistance < BezierCurve2.TrackData_List[currID + 1].distance )
                     {
-                        DrawTrack_Part3(currID, Final);
+                        DrawTrack_Part3(currID, Final, objects);
                         SecondRun = false;
                     }
                 
@@ -217,13 +227,28 @@ public class TrackMeshGenerate : MonoBehaviour
             }
             currDistance += Sub_Gap;
         }
+
+
+        Mesh combinedMesh = CombineMeshes.Combine(objects);
+
+        foreach (GameObject obj in objects)
+        {
+            DestroyImmediate(obj);
+        }
+
+        Final.AddComponent<MeshFilter>().sharedMesh = combinedMesh;
+
+        MeshRenderer rend = Final.AddComponent<MeshRenderer>();
+
+        rend.sharedMaterial = Track_Wood;
+
     }
 
-    private void DrawTrack_Part3(int id, GameObject currParent)
+    private void DrawTrack_Part3(int id, GameObject currParent, List<GameObject> ListObjects)
     {
         GameObject Temp = new GameObject();
-        Temp.transform.position = BezierCurve2.Track_List[id].position;
-        Temp.transform.LookAt(Temp.transform.position + BezierCurve2.Track_List[id].tangent);
+        Temp.transform.position = BezierCurve2.TrackData_List[id].position;
+        Temp.transform.LookAt(Temp.transform.position + BezierCurve2.TrackData_List[id].tangent);
         Vector3 TempR = Temp.transform.right;
         DestroyImmediate(Temp);
 
@@ -237,12 +262,12 @@ public class TrackMeshGenerate : MonoBehaviour
 
             for (int i = 0; i < 2; i++)
             {
-                Vector3 currPoint = BezierCurve2.Track_List[id].position;
-                Vector3 currTangent = BezierCurve2.Track_List[id].tangent;
+                Vector3 currPoint = BezierCurve2.TrackData_List[id].position;
+                Vector3 currTangent = BezierCurve2.TrackData_List[id].tangent;
 
                 if(i == 1)
                 {
-                    currPoint = BezierCurve2.Track_List[id].position + BezierCurve2.Track_List[id].tangent * Sub_Width;
+                    currPoint = BezierCurve2.TrackData_List[id].position + BezierCurve2.TrackData_List[id].tangent * Sub_Width;
                 }
 
 
@@ -286,7 +311,7 @@ public class TrackMeshGenerate : MonoBehaviour
                 }
                 if (n == 4)
                 {
-                    currPoint = BezierCurve2.Track_List[id].position;
+                    currPoint = BezierCurve2.TrackData_List[id].position;
 
                     if (i == 0)
                     {
@@ -310,7 +335,7 @@ public class TrackMeshGenerate : MonoBehaviour
                 }
                 if (n == 5)
                 {
-                    currPoint = BezierCurve2.Track_List[id].position + BezierCurve2.Track_List[id].tangent * Sub_Width;
+                    currPoint = BezierCurve2.TrackData_List[id].position + BezierCurve2.TrackData_List[id].tangent * Sub_Width;
 
                     if (i == 0)
                     {
@@ -375,9 +400,9 @@ public class TrackMeshGenerate : MonoBehaviour
         Final.transform.position = currParent.transform.position;
 
         Final.AddComponent<MeshFilter>().sharedMesh = combinedMesh;
-        MeshRenderer rend = Final.AddComponent<MeshRenderer>();
 
-        rend.sharedMaterial = Track_Wood;
+        ListObjects.Add(Final);
+
     }
 }
 

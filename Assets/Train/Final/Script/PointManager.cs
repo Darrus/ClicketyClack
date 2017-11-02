@@ -16,48 +16,32 @@ public class PointManager : MonoBehaviour {
 
     public int startSize;
 
+    public int Level;
+
     void Start () {
-        BezierCurve2.CruveSteps = curveSteps;
-        BezierCurve2.ClearAllData();
-        BezierCurve2.IncreaseSize(startSize);
-        BezierCurve2.updateCurvePoints();
 
-        BezierCurve2.updateTrack = true;
-        BezierCurve2.Go = false;
-
-        BezierCurve2.CalcAllTrackLength();
-
-    }
-	
-	void Update () {
         BezierCurve2.CruveSteps = curveSteps;
 
-#if UNITY_EDITOR 
-        if (Input.GetKeyDown("1"))
+        if(AppManager.curScene != 6)
         {
-            BezierCurve2.updateTrack = true;
-            BezierCurve2.Go = false;
+            BezierCurve2.LoadTrackPointData(Level);
+            BezierCurve2.Go = true;
         }
-
-        if (!Application.isPlaying)
-        {
-            BezierCurve2.ClearAllData();
-            BezierCurve2.IncreaseSize(startSize);
-            BezierCurve2.updateCurvePoints();
-            BezierCurve2.CalcAllTrackLength();
-            DrawLine_Edtior();
-        }
-#endif
+       
     }
 
-    void DrawLine_Edtior()
+    void Update () {
+
+    }
+
+    public void DrawLine_Edtior()
     {
-        for (int i = 0; i < BezierCurve2.Track_List.Length; i++)
+        for (int i = 0; i < BezierCurve2.TrackData_List.Length; i++)
         {
-            if (i != BezierCurve2.Track_List.Length - 1)
-                Debug.DrawLine(BezierCurve2.Track_List[i].position, BezierCurve2.Track_List[i + 1].position, Color.cyan);
+            if (i != BezierCurve2.TrackData_List.Length - 1)
+                Debug.DrawLine(BezierCurve2.TrackData_List[i].position, BezierCurve2.TrackData_List[i + 1].position, Color.cyan);
             else
-                Debug.DrawLine(BezierCurve2.Track_List[i].position, BezierCurve2.Track_List[0].position, Color.cyan);
+                Debug.DrawLine(BezierCurve2.TrackData_List[i].position, BezierCurve2.TrackData_List[0].position, Color.cyan);
         }
     }
 

@@ -10,6 +10,9 @@ public struct TrainPart
     public float distanceGap; // gap from the front part of the train
 }
 
+#if UNITY_EDITOR
+[ExecuteInEditMode()]
+#endif
 public class TrainMovementManager : MonoBehaviour {
     
     public float MainSpeed;
@@ -29,7 +32,7 @@ public class TrainMovementManager : MonoBehaviour {
     {
         if (!once)
         {
-            TotalTrackDistance = BezierCurve2.Track_List[BezierCurve2.Track_List.Length - 1].distance;
+            TotalTrackDistance = BezierCurve2.TrackData_List[BezierCurve2.TrackData_List.Length - 1].distance;
             once = true;
         }
     }
