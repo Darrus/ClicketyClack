@@ -34,11 +34,11 @@ public class TrainMovement2 : MonoBehaviour {
                 ParticleEffect.transform.rotation = Quaternion.identity;
             }
         }
-
-        if (LevelManager.CargoOn && PointFollow.ID == 1)
+        else if(LevelManager.CargoOn)
         {
-            // No need Tutorial Mode
-            // this.gameObject.GetComponent<FallPointSpown>().enabled = true;
+            transform.position = new Vector3(PointFollow.transform.position.x, PointFollow.transform.position.y + TrainHeightGap, PointFollow.transform.position.z);
+            transform.localRotation = PointFollow.transform.localRotation;
         }
+
     }
 }

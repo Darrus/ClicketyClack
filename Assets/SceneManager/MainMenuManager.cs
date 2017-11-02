@@ -94,11 +94,11 @@ public class MainMenuManager : MonoBehaviour
                     Temp.LevelPage.SetActive(true);
                     break;
                 }
-            case (int)MenuPages.Customization:
-                {
-                    //Temp.CustomizePage.SetActive(true);
-                    break;
-                }
+            //case (int)MenuPages.Customization:
+            //    {
+            //        Temp.CustomizePage.SetActive(true);
+            //        break;
+            //    }
         }
     }
 
@@ -110,7 +110,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void Button_Temp()
     {
-        AppManager.curScene = (int)AppManager.GameScene.ArtScene;
+        AppManager.curScene = (int)AppManager.GameScene.Tutorial;
         AppManager.LoadScene(AppManager.Singleton);
 
         //MainMenuManager.curPage = (int)MainMenuManager.MenuPages.Customization;

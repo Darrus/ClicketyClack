@@ -9,11 +9,23 @@ public class OutOfBounds : MonoBehaviour {
     private Vector3 position;
     private Quaternion rotation;
 
+    private bool once;
+
     void Start ()
     {
-        position = transform.position;
-        rotation = transform.rotation;
-	}
+        once = true;
+
+    }
+
+    void Update()
+    {
+        if (once)
+        {
+            position = transform.position;
+            rotation = transform.rotation;
+            once = false;
+        }
+    }
 
     private void OnTriggerExit(Collider other)
     {

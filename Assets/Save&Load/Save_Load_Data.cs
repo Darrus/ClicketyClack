@@ -9,6 +9,8 @@ public class Save_Load_Data{
 
     public static String Testpath = Application.streamingAssetsPath + "/test.json";
 
+
+    public static String Tutorial = Application.streamingAssetsPath + "/Tutorial.json";
     public static String Level_one_TrackData = Application.streamingAssetsPath + "/TrackData_one.json";
     public static String Level_two_TrackData = Application.streamingAssetsPath + "/TrackData_two.json";
     public static String Level_three_TrackData = Application.streamingAssetsPath + "/TrackData_three.json";

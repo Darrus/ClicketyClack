@@ -9,7 +9,7 @@ public class CountAnimation : CreateCount
 
     private void Start()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("MainCamara");
+        GameObject player = GameObject.FindGameObjectWithTag("MainCamera");
         transform.LookAt(player.transform.position);
     }
 

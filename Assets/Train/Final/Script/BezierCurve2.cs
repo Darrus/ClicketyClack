@@ -586,6 +586,11 @@ public static class BezierCurve2 {
 
         switch(Level)
         {
+            case 0:
+                {
+                    path = Save_Load_Data.Tutorial;
+                    break;
+                }
             case 1:
                 {
                     path = Save_Load_Data.Level_one_TrackData;
@@ -619,6 +624,11 @@ public static class BezierCurve2 {
 
         switch (Level)
         {
+            case 0:
+                {
+                    path = Save_Load_Data.Tutorial;
+                    break;
+                }
             case 1:
                 {
                     path = Save_Load_Data.Level_one_TrackData;

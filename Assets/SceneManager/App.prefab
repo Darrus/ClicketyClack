@@ -57,5 +57,5 @@ MonoBehaviour:
   Level_2: Game_Level_2
   Level_3: Game_Level_3
   Level_4: Game_Level_4
-  ArtScene: TestSaveLoad
+  Tutorial: TemplateScene
   TheRoom: {fileID: 0}
