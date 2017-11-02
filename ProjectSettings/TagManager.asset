@@ -8,14 +8,20 @@ TagManager:
   - FallPoint
   - Train
   - Cargo
-  - Point
+  - Coal
   - Ground
-  - Floor
+  - Point
   - Bound
-  - DragPoint
+  - Rock
   - Connector
+<<<<<<< HEAD
   - EventItem
   - TheRoom
+=======
+  - DragPoint
+  - Floor
+  - Obstacle
+>>>>>>> d9aedab2ce43eab9a15b50919a11d28981ceedb6
   layers:
   - Default
   - TransparentFX
@@ -25,7 +31,7 @@ TagManager:
   - UI
   - 
   - 
-  - Ignore Hololens Raycast
+  - 
   - 
   - 
   - 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CargoAnimation : MonoBehaviour
+public class TrainAnimation : MonoBehaviour
 {
 
     private Animation anim;
@@ -12,7 +12,6 @@ public class CargoAnimation : MonoBehaviour
     {
         anim = GetComponent<Animation>();
         anim.Stop();
-
     }
 	
 	// Update is called once per frame
@@ -21,6 +20,10 @@ public class CargoAnimation : MonoBehaviour
         if (LevelManager.CargoOn)
         {
             anim.Play();
+        }
+        if (LevelManager.ReachStation && LevelManager.MoveOut)
+        {
+            anim.Stop();
         }
     }
 }

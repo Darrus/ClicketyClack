@@ -35,7 +35,7 @@ public class ConnectCargo : MonoBehaviour
         if (col.gameObject.tag == "Connector")
         {
             _isConnect = true;
-            ArrowAnimation.ConnectComp = true;
+            ArrowControll.ConnectComp = true;
         }
     }
     

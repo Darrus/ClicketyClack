@@ -24,7 +24,7 @@ public class CargoCollision : MonoBehaviour
         if (_isCoal)
         {
             TextControll.textNum = 1;
-            ArrowAnimation.coalComp = true;
+            ArrowControll.coalComp = true;
             _isCoal = false;
         }
     }
@@ -35,6 +35,7 @@ public class CargoCollision : MonoBehaviour
 
         if (collision.gameObject.tag == "Coal")
         {
+            CreateCount._isTri = true;
             Destroy(collision.gameObject);
             CoalInCargo();
         }

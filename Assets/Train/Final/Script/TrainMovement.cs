@@ -8,7 +8,7 @@ public class TrainMovement : MonoBehaviour {
 
     public int ID;
     public float distanceTravel;
-    private int Point_ID;
+    public int Point_ID;
     private float distanceGap;
     public bool once;
 	
