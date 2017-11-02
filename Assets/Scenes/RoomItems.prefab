@@ -270,7 +270,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4103623497445206}
   - component: {fileID: 114539237635044038}
-  - component: {fileID: 114636540390882110}
   m_Layer: 0
   m_Name: Cargo
   m_TagString: Untagged
@@ -11381,6 +11380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80f5345285af7aa4286eb80fe2e1b89c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  obj_coal_pile: {fileID: 0}
 --- !u!114 &114503789165357358
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -11519,18 +11519,6 @@ MonoBehaviour:
   RoadMaterial: {fileID: 0}
   UpdateMesh: 1
   UnrenderMesh: 0
---- !u!114 &114636540390882110
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1076187205573154}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85d976cde6c6e614b8f01ec4c4574d2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 100
 --- !u!114 &114639461186843264
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -11558,6 +11546,7 @@ MonoBehaviour:
   WayPointList: {fileID: 0}
   curveSteps: 500
   startSize: 17
+  Level: 0
 --- !u!114 &114662897994229356
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -63,8 +63,8 @@ public class AppManager : MonoBehaviour {
             once = true;
 
 #if UNITY_EDITOR
-            curScene = (int)GameScene.mainmenu;
-            LoadScene(this);
+            curScene = (int)GameScene.level_1;
+            SceneManager.LoadScene(Level_1);
 #endif
 
         }
@@ -84,7 +84,7 @@ public class AppManager : MonoBehaviour {
         if (once && Room.Instance.done)
         {
             curScene = (int)GameScene.mainmenu;
-            LoadScene(this);
+            SceneManager.LoadScene(MainMenu);
             once = false;
         }
 #endif
@@ -176,6 +176,6 @@ public class AppManager : MonoBehaviour {
 
     public static void Detach_RoomChild(AppManager Temp)
     {
-        Temp.TheRoom.transform.DetachChildren();
+        Destroy(Temp.TheRoom.transform.GetChild(0).gameObject);
     }
 }

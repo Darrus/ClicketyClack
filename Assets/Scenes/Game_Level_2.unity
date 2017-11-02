@@ -7607,12 +7607,13 @@ MonoBehaviour:
   Width: 0.005
   Height: 0.01
   Sub_Gap: 0.08
-  Sub_Height: 0.0025
+  Sub_Height: 0.0000048828124
   Sub_Width: 0.01
   Sub_Length: 0.07
   Track_Metal: {fileID: 2100000, guid: d0648364fc800fa4196fd8295de1e206, type: 2}
   Track_Wood: {fileID: 2100000, guid: 4979188f847279b4fb3b329ea23af359, type: 2}
   Level: 2
+  FadingParent: {fileID: 0}
 --- !u!33 &160061901
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -8066,11 +8067,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4030643905336636, guid: 0e99dd044193f5a4ea956998c7af6c58, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 1.208
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4030643905336636, guid: 0e99dd044193f5a4ea956998c7af6c58, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -0.843
+      value: -0.59
       objectReference: {fileID: 0}
     - target: {fileID: 4391286766367328, guid: 0e99dd044193f5a4ea956998c7af6c58, type: 2}
       propertyPath: m_LocalScale.x
@@ -8720,7 +8721,7 @@ MeshRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 324485669}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -10053,7 +10054,7 @@ GameObject:
   - component: {fileID: 607208175}
   m_Layer: 0
   m_Name: Cargo
-  m_TagString: Cargo
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10110,7 +10111,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 607208173}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8731d1a2eb078fb4f9842d87f2d1a1d0, type: 3}
   m_Name: 
@@ -10123,7 +10124,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 607208173}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 80f5345285af7aa4286eb80fe2e1b89c, type: 3}
   m_Name: 
@@ -10900,7 +10901,6 @@ GameObject:
   m_Component:
   - component: {fileID: 760483866}
   - component: {fileID: 760483868}
-  - component: {fileID: 760483867}
   m_Layer: 0
   m_Name: Cargo
   m_TagString: Untagged
@@ -10923,18 +10923,6 @@ Transform:
   m_Father: {fileID: 304306711}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: -169.177, z: 0}
---- !u!114 &760483867
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114636540390882110, guid: e74ed7c87c8523f48aeea5de8eb1549d,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 760483865}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85d976cde6c6e614b8f01ec4c4574d2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &760483868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17561,7 +17549,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4030643905336636, guid: 0e99dd044193f5a4ea956998c7af6c58, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -1.367
+      value: -1.35
       objectReference: {fileID: 0}
     - target: {fileID: 1933432090528962, guid: 0e99dd044193f5a4ea956998c7af6c58, type: 2}
       propertyPath: m_Name
@@ -18604,7 +18592,12 @@ Prefab:
         type: 2}
       propertyPath: Room_Items
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1687701121}
+    - target: {fileID: 114108300837642390, guid: 78cc0bfc6d520844c95f17953a1e0603,
+        type: 2}
+      propertyPath: pointManager
+      value: 
+      objectReference: {fileID: 1179625869}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 78cc0bfc6d520844c95f17953a1e0603, type: 2}
   m_IsPrefabParent: 0
@@ -19132,7 +19125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MainSpeed: 0.3
-  TotalTrackDistance: 15.467112
+  TotalTrackDistance: 13.915949
   TheTrain:
   - ID: 1
     distanceGap: 0
@@ -19140,7 +19133,7 @@ MonoBehaviour:
     distanceGap: 0.165
   - ID: 3
     distanceGap: 0.348
-  once: 1
+  once: 0
 --- !u!4 &1093479676
 Transform:
   m_ObjectHideFlags: 0
@@ -19630,7 +19623,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Point: {fileID: 1051609272805930, guid: 28eadb4f4f7dd30438f414c11d08e8a3, type: 2}
-  WayPointList: {fileID: 0}
+  WayPointList: {fileID: 1179625867}
   curveSteps: 500
   startSize: 18
   Level: 2
@@ -20113,7 +20106,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1262303804}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.042, y: 0.468, z: -0.777}
+  m_LocalPosition: {x: -1.176, y: 0.468, z: 1.048}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 871998154}
@@ -25175,11 +25168,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4030643905336636, guid: 0e99dd044193f5a4ea956998c7af6c58, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -0.463
+      value: -0.43
       objectReference: {fileID: 0}
     - target: {fileID: 4030643905336636, guid: 0e99dd044193f5a4ea956998c7af6c58, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 1.733
+      value: 0.81
       objectReference: {fileID: 0}
     - target: {fileID: 4391286766367328, guid: 0e99dd044193f5a4ea956998c7af6c58, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y

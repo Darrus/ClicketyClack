@@ -9,7 +9,6 @@ using UnityEngine;
 public class PointManager : MonoBehaviour {
 
     public GameObject Point;
-
     public GameObject WayPointList;
 
     public int curveSteps;
@@ -20,18 +19,22 @@ public class PointManager : MonoBehaviour {
 
     void Start () {
 
+        BezierCurve2.Go = false;
         BezierCurve2.CruveSteps = curveSteps;
-
-        if(AppManager.curScene != 6)
-        {
-            BezierCurve2.LoadTrackPointData(Level);
-            BezierCurve2.Go = true;
-        }
-       
     }
 
     void Update () {
+      
+    }
 
+    public void UpdatePoints()
+    {
+            //BezierCurve2.LoadTrackPointData(Level);
+            BezierCurve2.ClearAllData();
+            BezierCurve2.IncreaseSize(startSize);
+            BezierCurve2.updateCurvePoints();
+            BezierCurve2.CalcAllTrackPointData();
+            BezierCurve2.Go = true;
     }
 
     public void DrawLine_Edtior()

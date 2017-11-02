@@ -30,7 +30,7 @@ public class TrainMovementManager : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (!once)
+        if (!once && BezierCurve2.Go)
         {
             TotalTrackDistance = BezierCurve2.TrackData_List[BezierCurve2.TrackData_List.Length - 1].distance;
             once = true;

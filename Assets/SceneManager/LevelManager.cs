@@ -18,7 +18,8 @@ public class LevelManager : MonoBehaviour {
     public GameObject Room_Items;
 
     public GameObject AppPrefab;
-
+    public PointManager pointManager;
+    public bool Tutorial;
 
     public static LevelManager Singleton = null;
 
@@ -47,8 +48,13 @@ public class LevelManager : MonoBehaviour {
 
             Debug.Log("Creating temporary App");
         }
-        //GameObject Room = GameObject.Find("TheRoom");
-        //Room_Items.transform.SetParent(Room.transform);
+    }
+
+    public static void Add_Child_ToRoom(LevelManager Temp)
+    {
+        GameObject Room = GameObject.FindGameObjectWithTag("TheRoom");
+        Temp.Room_Items.transform.SetParent(Room.transform);
+        Debug.Log("Room Child Added");
     }
 
     void Start()
@@ -58,7 +64,13 @@ public class LevelManager : MonoBehaviour {
         ReachStation = true;
         MoveOut = false;
         CargoOn = false;
-        TimeToRollOut = 5f;
+        TimeToRollOut = 10f;
+
+        if(!Tutorial)
+        {
+            CargoOn = true;
+        }
+
     }
 
     void Update()
@@ -78,6 +90,9 @@ public class LevelManager : MonoBehaviour {
                 TimeToRollOut -= Time.deltaTime;
             else
             {
+                pointManager.UpdatePoints();
+                Debug.Log("Points Updated");
+
                 MoveOut = true;
                 ReachStation = false;
                 Debug.Log("GO out");
@@ -106,8 +121,8 @@ public class LevelManager : MonoBehaviour {
 
     void ResetLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         AppManager.Detach_RoomChild(AppManager.Singleton);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
 }

@@ -708,7 +708,6 @@ GameObject:
   m_Component:
   - component: {fileID: 63511458}
   - component: {fileID: 63511460}
-  - component: {fileID: 63511459}
   m_Layer: 0
   m_Name: Cargo
   m_TagString: Untagged
@@ -731,18 +730,6 @@ Transform:
   m_Father: {fileID: 169454249}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: -169.177, z: 0}
---- !u!114 &63511459
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114636540390882110, guid: e74ed7c87c8523f48aeea5de8eb1549d,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 63511457}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85d976cde6c6e614b8f01ec4c4574d2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &63511460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11275,12 +11262,13 @@ MonoBehaviour:
   Width: 0.005
   Height: 0.01
   Sub_Gap: 0.08
-  Sub_Height: 0.00125
+  Sub_Height: 0.0000012207031
   Sub_Width: 0.01
   Sub_Length: 0.07
   Track_Metal: {fileID: 2100000, guid: d0648364fc800fa4196fd8295de1e206, type: 2}
   Track_Wood: {fileID: 2100000, guid: 4979188f847279b4fb3b329ea23af359, type: 2}
   Level: 3
+  FadingParent: {fileID: 0}
 --- !u!33 &644690800
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -16199,11 +16187,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4030643905336636, guid: 0e99dd044193f5a4ea956998c7af6c58, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0.306
+      value: -0.07
       objectReference: {fileID: 0}
     - target: {fileID: 4030643905336636, guid: 0e99dd044193f5a4ea956998c7af6c58, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -0.67
+      value: -0.281
       objectReference: {fileID: 0}
     - target: {fileID: 4030643905336636, guid: 0e99dd044193f5a4ea956998c7af6c58, type: 2}
       propertyPath: m_LocalPosition.y
@@ -19431,6 +19419,11 @@ Prefab:
       propertyPath: Room_Items
       value: 
       objectReference: {fileID: 50308435}
+    - target: {fileID: 114108300837642390, guid: 78cc0bfc6d520844c95f17953a1e0603,
+        type: 2}
+      propertyPath: pointManager
+      value: 
+      objectReference: {fileID: 2064407127}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 78cc0bfc6d520844c95f17953a1e0603, type: 2}
   m_IsPrefabParent: 0
@@ -24714,6 +24707,11 @@ MonoBehaviour:
   RoadMaterial: {fileID: 2100000, guid: 7cc702579090fd1488477c5a2dca00c9, type: 2}
   UpdateMesh: 1
   UnrenderMesh: 0
+--- !u!1 &1282471498 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1679023118343276, guid: fbfb02b126b93d94da26c10dab64aab0,
+    type: 2}
+  m_PrefabInternal: {fileID: 1562565028}
 --- !u!4 &1284388433 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4383688105171822, guid: fbfb02b126b93d94da26c10dab64aab0,
@@ -29302,6 +29300,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 809177835}
     m_Modifications:
+    - target: {fileID: 114726738147580276, guid: fbfb02b126b93d94da26c10dab64aab0,
+        type: 2}
+      propertyPath: events.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4383688105171822, guid: fbfb02b126b93d94da26c10dab64aab0, type: 2}
       propertyPath: m_LocalPosition.x
       value: -3.696
@@ -29334,7 +29337,28 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 114726738147580276, guid: fbfb02b126b93d94da26c10dab64aab0,
+        type: 2}
+      propertyPath: triggerTag
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 114726738147580276, guid: fbfb02b126b93d94da26c10dab64aab0,
+        type: 2}
+      propertyPath: events.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114726738147580276, guid: fbfb02b126b93d94da26c10dab64aab0,
+        type: 2}
+      propertyPath: events.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114726738147580276, guid: fbfb02b126b93d94da26c10dab64aab0,
+        type: 2}
+      propertyPath: events.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1282471498}
+    m_RemovedComponents:
+    - {fileID: 114726738147580276, guid: fbfb02b126b93d94da26c10dab64aab0, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: fbfb02b126b93d94da26c10dab64aab0, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1569281046
@@ -30334,7 +30358,7 @@ MeshRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1696061556}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -34156,7 +34180,7 @@ GameObject:
   - component: {fileID: 1781913002}
   m_Layer: 0
   m_Name: Cargo
-  m_TagString: Cargo
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34213,7 +34237,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1781913000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8731d1a2eb078fb4f9842d87f2d1a1d0, type: 3}
   m_Name: 
@@ -34226,7 +34250,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1781913000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 80f5345285af7aa4286eb80fe2e1b89c, type: 3}
   m_Name: 
@@ -34671,6 +34695,41 @@ Prefab:
         type: 2}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114350767568094176, guid: fbab5e1d7f5513941be6f639a771758d,
+        type: 2}
+      propertyPath: snapDistance
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114593088647972846, guid: fbab5e1d7f5513941be6f639a771758d,
+        type: 2}
+      propertyPath: snapDistance
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114604523818807680, guid: fbab5e1d7f5513941be6f639a771758d,
+        type: 2}
+      propertyPath: snapDistance
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114532263991284826, guid: fbab5e1d7f5513941be6f639a771758d,
+        type: 2}
+      propertyPath: snapDistance
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114241925507593250, guid: fbab5e1d7f5513941be6f639a771758d,
+        type: 2}
+      propertyPath: snapDistance
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114123428606666652, guid: fbab5e1d7f5513941be6f639a771758d,
+        type: 2}
+      propertyPath: snapDistance
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114241043059748594, guid: fbab5e1d7f5513941be6f639a771758d,
+        type: 2}
+      propertyPath: snapDistance
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fbab5e1d7f5513941be6f639a771758d, type: 2}
@@ -36278,7 +36337,7 @@ MonoBehaviour:
     distanceGap: 0.165
   - ID: 3
     distanceGap: 0.348
-  once: 1
+  once: 0
 --- !u!1 &2088824980
 GameObject:
   m_ObjectHideFlags: 0

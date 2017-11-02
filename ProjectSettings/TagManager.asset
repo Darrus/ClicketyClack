@@ -15,6 +15,7 @@ TagManager:
   - DragPoint
   - Connector
   - EventItem
+  - TheRoom
   layers:
   - Default
   - TransparentFX

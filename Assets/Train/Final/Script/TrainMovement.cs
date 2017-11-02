@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,33 +14,47 @@ public class TrainMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-        if (!once && Manager.once)
+        if (ID != 0)
         {
-            for (int i = 0; i < Manager.TheTrain.Length; i++)
+            if (!once && Manager.once)
             {
-                if (ID == Manager.TheTrain[i].ID)
+                for (int i = 0; i < Manager.TheTrain.Length; i++)
                 {
-                    distanceGap = Manager.TheTrain[i].distanceGap;
+                    if (ID == Manager.TheTrain[i].ID)
+                    {
+                        distanceGap = Manager.TheTrain[i].distanceGap;
+                    }
+
                 }
 
+                distanceTravel = 0 - distanceGap;
+
+                if (distanceTravel < 0)
+                {
+                    distanceTravel = Manager.TotalTrackDistance - distanceGap;
+                }
+
+
+                Point_ID = 0;
+                CheckPosition();
+                once = true;
             }
 
-            distanceTravel = 0 - distanceGap;
-
-            if(distanceTravel < 0)
+            if (LevelManager.TrianConnected && LevelManager.MoveOut && !LevelManager.ReachStation && BezierCurve2.Go)
             {
-                distanceTravel = Manager.TotalTrackDistance - distanceGap;
+                distanceTravel += Time.deltaTime * Manager.MainSpeed;
+                CheckPosition();
+            }
+        }
+        else
+        {
+            if (!once)
+            {
+                Point_ID = 0;
+                CheckPosition();
+                once = true;
             }
 
-
-            Point_ID = 0;
-            CheckPosition();
-            once = true;
-        }
-
-        if (LevelManager.TrianConnected && LevelManager.MoveOut && !LevelManager.ReachStation && BezierCurve2.Go)
-        {
             distanceTravel += Time.deltaTime * Manager.MainSpeed;
             CheckPosition();
         }
