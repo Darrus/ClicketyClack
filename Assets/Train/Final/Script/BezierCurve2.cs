@@ -11,8 +11,6 @@ public static class BezierCurve2 {
 
     public static int CruveSteps = 10; // number of points in one curve
 
-    public static float Child_Distance = 0.5f; // hardcorded
-
     public static float Distance_scaleFacter = 10f; // becasue position also need scale down when size scale down
 
     public static bool updateTrack = false;
@@ -22,11 +20,25 @@ public static class BezierCurve2 {
     public static bool EnableTrackCollision = false;
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Store Point's num of CruveSteps  //
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    [System.Serializable]
+    public struct PointData
+    {
+        public int id;
+        public float distance; //distance from this point to next point
+        public int pointCruveSteps;
+    }
+
+    public static PointData[] PointData_List;
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Calc SPLINE&TRACK Length //
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    
-    public struct TrackDatas
+    [System.Serializable]
+    public struct TrackData
     {
         public Vector3 position;
         public Vector3 tangent;
@@ -34,9 +46,16 @@ public static class BezierCurve2 {
         public int id;
     }
 
-    public static TrackDatas[] Track_List;
+    public static TrackData[] TrackData_List;
 
-    public static void CalcAllTrackLength()
+    public static void CalcAllTrackPointData()
+    {
+        CalcAllTrackLength(true);
+        CalcAllTrackLength(false);
+        //Debug.Log("HI");
+    }
+
+    public static void CalcAllTrackLength(bool T)
     {
         if (points.Length > 2)
         {
@@ -45,7 +64,26 @@ public static class BezierCurve2 {
 
             float totalDistance = 0f;
 
-            Array.Resize(ref Track_List, (points.Length * CruveSteps) + 1);
+            
+
+            if (T)
+            {
+                Array.Resize(ref TrackData_List, (points.Length * CruveSteps) + 1);
+                Array.Resize(ref PointData_List, (points.Length));
+            }
+            else
+            {
+                Array.Resize(ref TrackData_List, 0);
+                
+                int numOfSubPoint = 0;
+                for(int i = 0;i< PointData_List.Length;i++)
+                {
+                    numOfSubPoint += PointData_List[i].pointCruveSteps;
+                }
+
+                Array.Resize(ref TrackData_List, numOfSubPoint + 1);
+                //Debug.Log(numOfSubPoint + 1);
+            }
 
             for (int n = 0; n < totalPoint; n++)
             {
@@ -63,33 +101,64 @@ public static class BezierCurve2 {
 
                 if (tempPoint.ID == 0)
                 {
-                    Track_List[0].id = 0;
-                    Track_List[0].distance = 0f;
-                    Track_List[0].position = tempPoint.transform.position;
-                    Track_List[0].tangent = GetFirstDerivative(tempPoint.transform.position, tempPoint.ChildPoint_position, tempPoint.Friend_ChildPoint_position, tempPoint.FriendPoint_position, 0).normalized;
+                    TrackData_List[0].id = 0;
+                    TrackData_List[0].distance = 0f;
+                    TrackData_List[0].position = tempPoint.transform.position;
+                    TrackData_List[0].tangent = GetFirstDerivative(tempPoint.transform.position, tempPoint.ChildPoint_position, tempPoint.Friend_ChildPoint_position, tempPoint.FriendPoint_position, 0).normalized;
                 }
 
-                totalDistance = CalcCurveLength(tempPoint, totalDistance);
+                 
+                float TempTotalDistance = CalcCurveLength(tempPoint, totalDistance,T);
+
+                if (T)
+                {
+                    PointData_List[n].id = n;
+                    PointData_List[n].distance = TempTotalDistance - totalDistance;
+                    PointData_List[n].pointCruveSteps = (int)(PointData_List[n].distance * 100); // every 1 unit space, 100 sub point
+                    //Debug.Log(n + " : "+ PointData_List[n].pointCruveSteps);
+                }
+
+                totalDistance = TempTotalDistance;
+
                 currentPoint++;
             }
             Go = true;
         }
     }
 
-    private static float CalcCurveLength(MainPoints currPoint, float currTotalDistance)
+    private static float CalcCurveLength(MainPoints currPoint, float currTotalDistance, bool T)
     {
         Vector3 prevPoint = currPoint.transform.position;
         Vector3 pt = new Vector3();
         Vector3 tangent = new Vector3();
 
-        int currID = (currPoint.ID * CruveSteps) + 1;
+        int currID = 1;
+        float step = 0.0f;
+        int MaxCurrID = 0;
 
-        float step = 1f / (float)CruveSteps;
-
-       
-
-        for (float f = step; f < 1.0000000001f; f += step) // this is so dumb
+        if (T)
         {
+            currID += (currPoint.ID * CruveSteps);
+
+            MaxCurrID = currID + CruveSteps;
+
+            step = 1f / (float)CruveSteps;
+        }
+        else
+        {
+            for (int i = 0; i < currPoint.ID; i++)
+            {
+                currID += PointData_List[i].pointCruveSteps;
+            }
+
+            step = 1f / (float)PointData_List[currPoint.ID].pointCruveSteps;
+
+            MaxCurrID = currID + PointData_List[currPoint.ID].pointCruveSteps;
+        }
+
+        for (float f = step; currID < MaxCurrID; f += step) // this is so dumb
+        {
+            
             if (currPoint.type == (int)MainPoints.pointType.NormalPoint || currPoint.type == (int)MainPoints.pointType.FixedPoint || currPoint.type == (int)MainPoints.pointType.TrafficLight)
             {
                 pt = GetPoint(currPoint.transform.position, currPoint.ChildPoint_position, currPoint.Friend_ChildPoint_position, currPoint.FriendPoint_position, f);
@@ -106,10 +175,10 @@ public static class BezierCurve2 {
                 tangent = (currPoint.FriendPoint_position - currPoint.transform.position).normalized;
             }
 
-            Track_List[currID].id = currPoint.ID;
-            Track_List[currID].distance = currTotalDistance;
-            Track_List[currID].position = pt;
-            Track_List[currID].tangent = tangent.normalized;
+            TrackData_List[currID].id = currPoint.ID;
+            TrackData_List[currID].distance = currTotalDistance;
+            TrackData_List[currID].position = pt;
+            TrackData_List[currID].tangent = tangent.normalized;
 
             prevPoint = pt;
             currID++;
@@ -293,10 +362,47 @@ public static class BezierCurve2 {
                     SecondPoint = GO_Points[i].GetComponent(typeof(MainPoints)) as MainPoints;
                     if (SecondPoint.ID == x_y)
                     {
-                        Vector3 Temp = (ThirdPointObject.transform.position - FristPointObject.transform.position).normalized;
+                        Vector3 normal = (ThirdPointObject.transform.position - FristPointObject.transform.position).normalized;
 
-                        SecondPoint.Normalized_For_Child = Temp;
-                        SecondPoint.ChildPoint_position = SecondPoint.transform.position + (SecondPoint.Normalized_For_Child * Child_Distance);
+
+                        SecondPoint.Normalized_For_Child = normal;
+
+                        // make a scale for child distance
+                        float distance_AC = (ThirdPointObject.transform.position - FristPointObject.transform.position).magnitude * 0.5f;
+
+                        float distance_AB = (SecondPoint.transform.position - FristPointObject.transform.position).magnitude;
+                        float distance_BC = (ThirdPointObject.transform.position - SecondPoint.transform.position).magnitude;
+
+                        if (distance_AC > distance_AB || distance_AC > distance_BC)
+                        {
+
+
+
+                            if (distance_AB > distance_BC)
+                            {
+                                distance_BC *= 0.3f;
+                                SecondPoint.ChildPoint_position = SecondPoint.transform.position + (SecondPoint.Normalized_For_Child * distance_BC);
+                                break;
+                            }
+                            else
+                            {
+                                distance_AB *= 0.3f;
+                                SecondPoint.ChildPoint_position = SecondPoint.transform.position + (SecondPoint.Normalized_For_Child * distance_AB);
+                                break;
+                            }
+                        }
+                        else if (distance_AB > distance_AC && distance_AC < distance_BC)
+                        {
+                            while (distance_AC * 2 < distance_AB || distance_AC * 2 < distance_BC)
+                            {
+                                distance_AC *= 2.0f;
+                            }
+
+                            distance_AC *= 0.3f;
+                            SecondPoint.ChildPoint_position = SecondPoint.transform.position + (SecondPoint.Normalized_For_Child * distance_AC);
+                            break;
+                        }
+
                         break;
                     }
                 }
@@ -334,7 +440,7 @@ public static class BezierCurve2 {
                 {
                     FristPoint.FriendPoint_position = SecondPoint.transform.position;
 
-                    Vector3 Temp = SecondPoint.transform.position - (SecondPoint.Normalized_For_Child * Child_Distance);
+                    Vector3 Temp = SecondPoint.transform.position + (SecondPoint.transform.position - SecondPoint.ChildPoint_position);
                     FristPoint.Friend_ChildPoint_position = Temp;
                     break;
                 }
@@ -415,8 +521,8 @@ public static class BezierCurve2 {
 
         Array.Resize(ref GO_Points, 0);
 
-        Array.Resize(ref Track_List, 0);
-
+        Array.Resize(ref TrackData_List, 0);
+        Array.Resize(ref PointData_List, 0);
     }
 
 
@@ -456,6 +562,93 @@ public static class BezierCurve2 {
         }
     }
 
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // SAVE AND LOAD //
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    [System.Serializable]
+    public struct TrackPointData
+    {
+        public PointData[] pointData_List;
+        public TrackData[] trackData_List;
+    }
 
+    public static void SaveTrackPointData(int Level)
+    {
+        TrackPointData DataList = new TrackPointData();
+        DataList.pointData_List = PointData_List;
+        DataList.trackData_List = TrackData_List;
+
+        //Debug.Log(DataList.pointData_List[1].id);
+
+        String saveDataString = JsonUtility.ToJson(DataList);
+        String path = "";
+
+        switch(Level)
+        {
+            case 1:
+                {
+                    path = Save_Load_Data.Level_one_TrackData;
+                    break;
+                }
+            case 2:
+                {
+                    path = Save_Load_Data.Level_two_TrackData;
+                    break;
+                }
+            case 3:
+                {
+                    path = Save_Load_Data.Level_three_TrackData;
+                    break;
+                }
+            case 4:
+                {
+                    path = Save_Load_Data.Level_four_TrackData;
+                    break;
+                }
+        }
+
+        Save_Load_Data.Save(path,saveDataString);
+    }
+
+    public static void LoadTrackPointData(int Level)
+    {
+        TrackPointData DataList = new TrackPointData();
+
+        String path = "";
+
+        switch (Level)
+        {
+            case 1:
+                {
+                    path = Save_Load_Data.Level_one_TrackData;
+                    break;
+                }
+            case 2:
+                {
+                    path = Save_Load_Data.Level_two_TrackData;
+                    break;
+                }
+            case 3:
+                {
+                    path = Save_Load_Data.Level_three_TrackData;
+                    break;
+                }
+            case 4:
+                {
+                    path = Save_Load_Data.Level_four_TrackData;
+                    break;
+                }
+        }
+
+        if (Save_Load_Data.Check_SaveFile(path))
+        {
+            DataList = JsonUtility.FromJson<TrackPointData>(Save_Load_Data.load(path));
+
+            Array.Resize(ref TrackData_List, 0);
+            Array.Resize(ref PointData_List, 0);
+            TrackData_List = DataList.trackData_List;
+            PointData_List = DataList.pointData_List;
+        }
+    }
 }

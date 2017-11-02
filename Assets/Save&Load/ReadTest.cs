@@ -50,19 +50,19 @@ public class ReadTest : MonoBehaviour
             //Get_All_Events();
 
             String saveDataString = JsonUtility.ToJson(SaveData);
-            Save_Load_Data.Save(saveDataString);
+            //Save_Load_Data.Save(saveDataString);
         }
 
         if (Input.GetKeyDown("3"))
         {
-            if (Save_Load_Data.Check_SaveFile())
-            {
-                //BezierCurve2.ClearAllData(); // remove in the furture
+            //if (Save_Load_Data.Check_SaveFile())
+            //{
+            //    //BezierCurve2.ClearAllData(); // remove in the furture
 
-                SaveData = JsonUtility.FromJson<SaveData>(Save_Load_Data.load());
-                //Create_All_Points();
-                //Create_All_Events();
-            }
+            //    SaveData = JsonUtility.FromJson<SaveData>(Save_Load_Data.load());
+            //    //Create_All_Points();
+            //    //Create_All_Events();
+            //}
         }
 
     }
