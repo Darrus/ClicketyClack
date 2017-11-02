@@ -189,7 +189,7 @@ public class BulletShot : MonoBehaviour
 
     private void play_Particle_Effect()
     {
-        ParticleEffect.GetComponent<ParticleSystem>().Play();
+        ParticleEffect.transform.GetChild(0).gameObject.GetComponent<ParticleSystem>().Play();
     }
 
 }
