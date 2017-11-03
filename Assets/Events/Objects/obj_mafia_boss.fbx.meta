@@ -1,50 +1,48 @@
 fileFormatVersion: 2
-guid: a24e66ef635f45b4996b8d8453f4599b
-timeCreated: 1508643080
+guid: 8ff8f3118619a294eb7802f53129be82
+timeCreated: 1509242529
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: ctrl_human
+    100000: //RootNode
     100002: obj_mafia_boss
-    100004: //RootNode
-    100006: timetraveller_body
-    100008: timetraveller_head
-    100010: timetraveller_left_arm
-    100012: timetraveller_left_feet
-    100014: timetraveller_left_hand
-    100016: timetraveller_left_hip
-    100018: timetraveller_left_knee
-    100020: timetraveller_left_pelvis
-    100022: timetraveller_left_shoulder
-    100024: timetraveller_neck
-    100026: timetraveller_right_arm
-    100028: timetraveller_right_feet
-    100030: timetraveller_right_hand
-    100032: timetraveller_right_hip
-    100034: timetraveller_right_knee
-    100036: timetraveller_right_shoulder
-    100038: timetraveller_torso
-    400000: ctrl_human
-    400002: //RootNode
-    400004: obj_mafia_boss
-    400006: timetraveller_body
-    400008: timetraveller_head
-    400010: timetraveller_left_arm
-    400012: timetraveller_left_feet
-    400014: timetraveller_left_hand
-    400016: timetraveller_left_hip
-    400018: timetraveller_left_knee
-    400020: timetraveller_left_pelvis
-    400022: timetraveller_left_shoulder
-    400024: timetraveller_neck
-    400026: timetraveller_right_arm
-    400028: timetraveller_right_feet
-    400030: timetraveller_right_hand
-    400032: timetraveller_right_hip
-    400034: timetraveller_right_knee
-    400036: timetraveller_right_shoulder
-    400038: timetraveller_torso
+    100004: timetraveller_body
+    100006: timetraveller_head
+    100008: timetraveller_left_arm
+    100010: timetraveller_left_feet
+    100012: timetraveller_left_hand
+    100014: timetraveller_left_hip
+    100016: timetraveller_left_knee
+    100018: timetraveller_left_pelvis
+    100020: timetraveller_left_shoulder
+    100022: timetraveller_neck
+    100024: timetraveller_right_arm
+    100026: timetraveller_right_feet
+    100028: timetraveller_right_hand
+    100030: timetraveller_right_hip
+    100032: timetraveller_right_knee
+    100034: timetraveller_right_shoulder
+    100036: timetraveller_torso
+    400000: //RootNode
+    400002: obj_mafia_boss
+    400004: timetraveller_body
+    400006: timetraveller_head
+    400008: timetraveller_left_arm
+    400010: timetraveller_left_feet
+    400012: timetraveller_left_hand
+    400014: timetraveller_left_hip
+    400016: timetraveller_left_knee
+    400018: timetraveller_left_pelvis
+    400020: timetraveller_left_shoulder
+    400022: timetraveller_neck
+    400024: timetraveller_right_arm
+    400026: timetraveller_right_feet
+    400028: timetraveller_right_hand
+    400030: timetraveller_right_hip
+    400032: timetraveller_right_knee
+    400034: timetraveller_right_shoulder
+    400036: timetraveller_torso
     4300000: obj_mafia_boss
     9500000: //RootNode
     11100000: //RootNode
@@ -53,8 +51,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: tx_default
-    second: {fileID: 2100000, guid: 5872d388b8afd2346ad03c3c1424c5a9, type: 2}
+      name: tx_default1
+    second: {fileID: 2100000, guid: 340101cff99fb4c44bea99b501382cf0, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

@@ -15,6 +15,8 @@ public class LevelManager : MonoBehaviour {
 
     public static bool CargoOn;
 
+    public static bool Play;
+
     public GameObject Room_Items;
 
     public GameObject AppPrefab;
@@ -48,11 +50,15 @@ public class LevelManager : MonoBehaviour {
 
             Debug.Log("Creating temporary App");
         }
+
+        Play = true;
+        Room_Items.SetActive(true);
     }
 
     public static void Add_Child_ToRoom(LevelManager Temp)
     {
         GameObject Room = GameObject.FindGameObjectWithTag("TheRoom");
+        Debug.Log(Room.name + " : " + Room.tag);
         Temp.Room_Items.transform.SetParent(Room.transform);
         Debug.Log("Room Child Added");
     }
@@ -86,16 +92,24 @@ public class LevelManager : MonoBehaviour {
 #endif
         if (!MoveOut && CargoOn && ReachStation)
         {
-            if (TimeToRollOut >= 0)
-                TimeToRollOut -= Time.deltaTime;
+            if (!Play)
+            {
+                TimeToRollOut = 10f;
+            }
             else
             {
-                pointManager.UpdatePoints();
-                Debug.Log("Points Updated");
 
-                MoveOut = true;
-                ReachStation = false;
-                Debug.Log("GO out");
+                if (TimeToRollOut >= 0)
+                    TimeToRollOut -= Time.deltaTime;
+                else
+                {
+                    pointManager.UpdatePoints();
+                    Debug.Log("Points Updated");
+
+                    MoveOut = true;
+                    ReachStation = false;
+                    Debug.Log("GO out");
+                }
             }
         }
 

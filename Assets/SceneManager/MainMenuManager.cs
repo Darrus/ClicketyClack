@@ -51,7 +51,7 @@ public class MainMenuManager : MonoBehaviour
 
             Debug.Log("Creating temporary App");
         }
-       
+        Room_Items.SetActive(true);
     }
 
     public static void Add_Child_ToRoom(MainMenuManager Temp)

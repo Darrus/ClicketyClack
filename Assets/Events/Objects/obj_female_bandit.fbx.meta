@@ -1,54 +1,52 @@
 fileFormatVersion: 2
-guid: b935cf622aa2a4341bdb8fe6d7c84fcb
-timeCreated: 1508643080
+guid: 5e4f9e32823e9674780474d10f109fe6
+timeCreated: 1509171152
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: ctrl_human
-    100002: obj_female_bandit
-    100004: //RootNode
-    100006: timetraveller_body
-    100008: timetraveller_head
-    100010: timetraveller_left_arm
-    100012: timetraveller_left_feet
-    100014: timetraveller_left_hand
-    100016: timetraveller_left_hip
-    100018: timetraveller_left_knee
-    100020: timetraveller_left_pelvis
-    100022: timetraveller_left_shoulder
-    100024: timetraveller_leftboob
-    100026: timetraveller_neck
-    100028: timetraveller_right_arm
-    100030: timetraveller_right_feet
-    100032: timetraveller_right_hand
-    100034: timetraveller_right_hip
-    100036: timetraveller_right_knee
-    100038: timetraveller_right_shoulder
-    100040: timetraveller_rightboob
-    100042: timetraveller_torso
-    400000: ctrl_human
-    400002: //RootNode
-    400004: obj_female_bandit
-    400006: timetraveller_body
-    400008: timetraveller_head
-    400010: timetraveller_left_arm
-    400012: timetraveller_left_feet
-    400014: timetraveller_left_hand
-    400016: timetraveller_left_hip
-    400018: timetraveller_left_knee
-    400020: timetraveller_left_pelvis
-    400022: timetraveller_left_shoulder
-    400024: timetraveller_leftboob
-    400026: timetraveller_neck
-    400028: timetraveller_right_arm
-    400030: timetraveller_right_feet
-    400032: timetraveller_right_hand
-    400034: timetraveller_right_hip
-    400036: timetraveller_right_knee
-    400038: timetraveller_right_shoulder
-    400040: timetraveller_rightboob
-    400042: timetraveller_torso
+    100000: obj_female_bandit
+    100002: //RootNode
+    100004: timetraveller_body
+    100006: timetraveller_head
+    100008: timetraveller_left_arm
+    100010: timetraveller_left_feet
+    100012: timetraveller_left_hand
+    100014: timetraveller_left_hip
+    100016: timetraveller_left_knee
+    100018: timetraveller_left_pelvis
+    100020: timetraveller_left_shoulder
+    100022: timetraveller_leftboob
+    100024: timetraveller_neck
+    100026: timetraveller_right_arm
+    100028: timetraveller_right_feet
+    100030: timetraveller_right_hand
+    100032: timetraveller_right_hip
+    100034: timetraveller_right_knee
+    100036: timetraveller_right_shoulder
+    100038: timetraveller_rightboob
+    100040: timetraveller_torso
+    400000: //RootNode
+    400002: obj_female_bandit
+    400004: timetraveller_body
+    400006: timetraveller_head
+    400008: timetraveller_left_arm
+    400010: timetraveller_left_feet
+    400012: timetraveller_left_hand
+    400014: timetraveller_left_hip
+    400016: timetraveller_left_knee
+    400018: timetraveller_left_pelvis
+    400020: timetraveller_left_shoulder
+    400022: timetraveller_leftboob
+    400024: timetraveller_neck
+    400026: timetraveller_right_arm
+    400028: timetraveller_right_feet
+    400030: timetraveller_right_hand
+    400032: timetraveller_right_hip
+    400034: timetraveller_right_knee
+    400036: timetraveller_right_shoulder
+    400038: timetraveller_rightboob
+    400040: timetraveller_torso
     4300000: obj_female_bandit
     9500000: //RootNode
     11100000: //RootNode

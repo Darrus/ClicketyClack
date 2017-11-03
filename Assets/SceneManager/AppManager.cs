@@ -170,6 +170,13 @@ public class AppManager : MonoBehaviour {
                     SceneManager.LoadScene(Temp.MainMenu);
                     break;
                 }
+            case (int)GameScene.Tutorial:
+                {
+                    curScene = (int)GameScene.mainmenu;
+                    SceneManager.LoadScene(Temp.MainMenu);
+                    break;
+                }
+
         }
         Detach_RoomChild(Temp);
     }

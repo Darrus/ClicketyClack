@@ -1755,7 +1755,6 @@ GameObject:
   - component: {fileID: 4750007189871446}
   - component: {fileID: 95853125192786536}
   - component: {fileID: 65756744874041944}
-  - component: {fileID: 114132719035312860}
   - component: {fileID: 114117238485452368}
   - component: {fileID: 114238839861094582}
   m_Layer: 8
@@ -2085,7 +2084,6 @@ GameObject:
   - component: {fileID: 4480173213541656}
   - component: {fileID: 95540378853874408}
   - component: {fileID: 65218576524031052}
-  - component: {fileID: 114803021574071632}
   - component: {fileID: 114652707070379264}
   - component: {fileID: 114376725087076494}
   m_Layer: 8
@@ -4449,50 +4447,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6469d76eecf84544e9c7725d2e09ed08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114132719035312860
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1823618305154310}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 042ad49dd20e5694485a87bada4c432a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lookDistance: 2
-  onLookEvents:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114117238485452368}
-        m_MethodName: PlayAnimation
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  onLookAwayEvents:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114117238485452368}
-        m_MethodName: ReverseAnimation
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
 --- !u!114 &114175824996365788
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4536,40 +4490,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1462440131398320}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 042ad49dd20e5694485a87bada4c432a, type: 3}
+  m_Script: {fileID: 11500000, guid: 4fcebf35a6f233d43bb2adfcc55b1259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   lookDistance: 2
   onLookEvents:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114682057464301052}
-        m_MethodName: PlayAnimation
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   onLookAwayEvents:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114682057464301052}
-        m_MethodName: ReverseAnimation
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
 --- !u!114 &114359647436103516
@@ -4661,50 +4593,6 @@ MonoBehaviour:
   events:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
---- !u!114 &114803021574071632
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1986892339519212}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 042ad49dd20e5694485a87bada4c432a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lookDistance: 2
-  onLookEvents:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114652707070379264}
-        m_MethodName: PlayAnimation
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  onLookAwayEvents:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114652707070379264}
-        m_MethodName: ReverseAnimation
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
 --- !u!114 &114953061515179978

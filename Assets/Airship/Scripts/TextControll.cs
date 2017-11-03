@@ -22,33 +22,23 @@ public class TextControll : MonoBehaviour
         switch (textNum)
         {
             case 0:
-                scale = 6.0f;
-
-
-                text.text = "Put Coal\n" +
-                            "in\n" +
-                            "Cargo\n";
+                text.text = "Pick up the pieces coals \n and place it into the cargo.";
                 break;
 
             case 1:
-                text.text = "Place\n" +
-                            "Cargo on Train\n";
+                text.text = "Lift the cargo \n and attach it into the train";
                 break;
                 
             case 2:
-                text.text = "Protect the Train\n" +
-                            "Watch out for\n" +
-                            "Bandit";
+                text.text = "Bandits will attempt to \n destroy the train, \n protect it at all cause!";
                 break;
 
             case 3:
-                text.text = "Remove the Rocks\n" +
-                            "from the\n" +
-                            "Cave";
+                text.text = "The Bandits have set up \n a trap for the train, \n Clear the path of rocks";
                 break;
 
             case 4:
-                text.text = "CLAER";
+                text.text = "LEVEL CLEAR";
                 textNum = 4;
                 break;
         }

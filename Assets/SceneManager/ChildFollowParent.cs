@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChildFollowParent : MonoBehaviour {
+public class ChildFollowParent : MonoBehaviour
+{
 
     private bool once;
 
@@ -16,16 +17,19 @@ public class ChildFollowParent : MonoBehaviour {
         }
         else
         {
+            Debug.Log(LevelManager.Singleton);
             LevelManager.Add_Child_ToRoom(LevelManager.Singleton);
+            Debug.Log("Room Child Test");
         }
     }
-        // Use this for initialization
-    void Start () {
+    // Use this for initialization
+    void Start()
+    {
         if (once && transform.parent != null)
         {
             transform.localPosition = new Vector3(0, 0, 0);
             transform.localRotation = Quaternion.identity;
-            
+
             Debug.Log("Room Child loaded");
 
             Debug.Log("Room Child's P :" + transform.position);
@@ -33,8 +37,13 @@ public class ChildFollowParent : MonoBehaviour {
             once = false;
         }
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (once && transform.parent != null)
+        {
+            Debug.Log("Room Child Order Wrong");
+        }
     }
 }

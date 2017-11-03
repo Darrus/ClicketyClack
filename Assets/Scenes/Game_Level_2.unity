@@ -3735,6 +3735,7 @@ MonoBehaviour:
   FriendPoint_position: {x: -2.5559442, y: -0.48555005, z: 1.340332}
   type: 4
   ID: 3
+  done: 0
   RoadMaterial: {fileID: 0}
   UpdateMesh: 1
   UnrenderMesh: 0
@@ -7607,13 +7608,13 @@ MonoBehaviour:
   Width: 0.005
   Height: 0.01
   Sub_Gap: 0.08
-  Sub_Height: 0.0000012207031
+  Sub_Height: 0.0000000047683715
   Sub_Width: 0.01
   Sub_Length: 0.07
   Track_Metal: {fileID: 2100000, guid: d0648364fc800fa4196fd8295de1e206, type: 2}
   Track_Wood: {fileID: 2100000, guid: 4979188f847279b4fb3b329ea23af359, type: 2}
   Level: 2
-  FadingParent: {fileID: 0}
+  FadingParent: {fileID: 591799683}
 --- !u!33 &160061901
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -8101,6 +8102,26 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 114367532121807364, guid: 0e99dd044193f5a4ea956998c7af6c58,
+        type: 2}
+      propertyPath: events.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 499891253}
+    - target: {fileID: 114367532121807364, guid: 0e99dd044193f5a4ea956998c7af6c58,
+        type: 2}
+      propertyPath: events.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlayFadeIn
+      objectReference: {fileID: 0}
+    - target: {fileID: 114683251272146166, guid: 0e99dd044193f5a4ea956998c7af6c58,
+        type: 2}
+      propertyPath: events.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 499891253}
+    - target: {fileID: 114683251272146166, guid: 0e99dd044193f5a4ea956998c7af6c58,
+        type: 2}
+      propertyPath: events.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StopFadeOut
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0e99dd044193f5a4ea956998c7af6c58, type: 2}
   m_IsPrefabParent: 0
@@ -8161,6 +8182,7 @@ MonoBehaviour:
   FriendPoint_position: {x: -3.8349442, y: -0.49805003, z: 2.929332}
   type: 2
   ID: 17
+  done: 0
   RoadMaterial: {fileID: 0}
   UpdateMesh: 1
   UnrenderMesh: 0
@@ -8883,6 +8905,7 @@ MonoBehaviour:
   FriendPoint_position: {x: -3.1739442, y: -0.48205006, z: 4.1533318}
   type: 1
   ID: 14
+  done: 0
   RoadMaterial: {fileID: 0}
   UpdateMesh: 1
   UnrenderMesh: 0
@@ -9699,8 +9722,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 481259794}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.67, y: 1, z: 2.51}
-  m_LocalScale: {x: 1, y: 0.3, z: 1}
+  m_LocalPosition: {x: -0.67, y: 0, z: 2.51}
+  m_LocalScale: {x: 1, y: 0.4, z: 1}
   m_Children: []
   m_Father: {fileID: 1176759288}
   m_RootOrder: 7
@@ -10039,6 +10062,53 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 564285855}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &591799682
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4549919189513780, guid: 013767b22679b044bac605dadafba1c3, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549919189513780, guid: 013767b22679b044bac605dadafba1c3, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549919189513780, guid: 013767b22679b044bac605dadafba1c3, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549919189513780, guid: 013767b22679b044bac605dadafba1c3, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549919189513780, guid: 013767b22679b044bac605dadafba1c3, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549919189513780, guid: 013767b22679b044bac605dadafba1c3, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549919189513780, guid: 013767b22679b044bac605dadafba1c3, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549919189513780, guid: 013767b22679b044bac605dadafba1c3, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 013767b22679b044bac605dadafba1c3, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1 &591799683 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1725787533134330, guid: 013767b22679b044bac605dadafba1c3,
+    type: 2}
+  m_PrefabInternal: {fileID: 591799682}
 --- !u!1 &607208173
 GameObject:
   m_ObjectHideFlags: 0
@@ -10243,6 +10313,7 @@ MonoBehaviour:
   FriendPoint_position: {x: -0.6439443, y: -0.48555005, z: 4.282332}
   type: 4
   ID: 12
+  done: 0
   RoadMaterial: {fileID: 0}
   UpdateMesh: 1
   UnrenderMesh: 0
@@ -10695,6 +10766,7 @@ MonoBehaviour:
   FriendPoint_position: {x: 0.3590557, y: -0.43205005, z: 1.5323321}
   type: 4
   ID: 7
+  done: 0
   RoadMaterial: {fileID: 0}
   UpdateMesh: 1
   UnrenderMesh: 0
@@ -17588,6 +17660,26 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114367532121807364, guid: 0e99dd044193f5a4ea956998c7af6c58,
+        type: 2}
+      propertyPath: events.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 499891253}
+    - target: {fileID: 114367532121807364, guid: 0e99dd044193f5a4ea956998c7af6c58,
+        type: 2}
+      propertyPath: events.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlayFadeIn
+      objectReference: {fileID: 0}
+    - target: {fileID: 114683251272146166, guid: 0e99dd044193f5a4ea956998c7af6c58,
+        type: 2}
+      propertyPath: events.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 499891253}
+    - target: {fileID: 114683251272146166, guid: 0e99dd044193f5a4ea956998c7af6c58,
+        type: 2}
+      propertyPath: events.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StopFadeOut
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0e99dd044193f5a4ea956998c7af6c58, type: 2}
   m_IsPrefabParent: 0
@@ -18285,6 +18377,7 @@ MonoBehaviour:
   FriendPoint_position: {x: -3.8839443, y: -0.49805003, z: 2.669332}
   type: 2
   ID: 0
+  done: 0
   RoadMaterial: {fileID: 2100000, guid: 7cc702579090fd1488477c5a2dca00c9, type: 2}
   UpdateMesh: 1
   UnrenderMesh: 0
@@ -18345,6 +18438,7 @@ MonoBehaviour:
   FriendPoint_position: {x: -1.7889444, y: -0.48555005, z: 0.6193321}
   type: 1
   ID: 4
+  done: 0
   RoadMaterial: {fileID: 0}
   UpdateMesh: 1
   UnrenderMesh: 0
@@ -19094,6 +19188,7 @@ MonoBehaviour:
   FriendPoint_position: {x: 0.60205567, y: -0.43205005, z: 2.9113321}
   type: 1
   ID: 10
+  done: 0
   RoadMaterial: {fileID: 0}
   UpdateMesh: 1
   UnrenderMesh: 0
@@ -19263,6 +19358,7 @@ MonoBehaviour:
   FriendPoint_position: {x: 0.4470557, y: -0.48205006, z: 3.3703322}
   type: 1
   ID: 11
+  done: 0
   RoadMaterial: {fileID: 0}
   UpdateMesh: 1
   UnrenderMesh: 0
@@ -19750,6 +19846,7 @@ MonoBehaviour:
   FriendPoint_position: {x: 0.1770557, y: -0.48205006, z: 1.172332}
   type: 1
   ID: 6
+  done: 0
   RoadMaterial: {fileID: 0}
   UpdateMesh: 1
   UnrenderMesh: 0
@@ -20131,6 +20228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boundTag: Bound
+  groundTag: Ground
 --- !u!114 &1262303807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20264,15 +20362,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4313542499211360, guid: ab4342c1d0b51dc469320ba5371f1cef, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -3.549
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4313542499211360, guid: ab4342c1d0b51dc469320ba5371f1cef, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.6485
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4313542499211360, guid: ab4342c1d0b51dc469320ba5371f1cef, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 3.019
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4313542499211360, guid: ab4342c1d0b51dc469320ba5371f1cef, type: 2}
       propertyPath: m_LocalRotation.x
@@ -20710,6 +20808,7 @@ MonoBehaviour:
   FriendPoint_position: {x: 0.40305567, y: -0.34205002, z: 1.7783321}
   type: 1
   ID: 8
+  done: 0
   RoadMaterial: {fileID: 0}
   UpdateMesh: 1
   UnrenderMesh: 0
@@ -24209,6 +24308,7 @@ MonoBehaviour:
   FriendPoint_position: {x: -0.8909443, y: -0.48555005, z: 1.198332}
   type: 1
   ID: 5
+  done: 0
   RoadMaterial: {fileID: 0}
   UpdateMesh: 1
   UnrenderMesh: 0
@@ -25147,7 +25247,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1687701122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25175,7 +25275,7 @@ Transform:
   - {fileID: 362436905}
   - {fileID: 1289848296}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1688887581
 Prefab:
@@ -25216,38 +25316,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4030643905336636, guid: 0e99dd044193f5a4ea956998c7af6c58, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -0.43
-      objectReference: {fileID: 0}
-    - target: {fileID: 4030643905336636, guid: 0e99dd044193f5a4ea956998c7af6c58, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0.81
-      objectReference: {fileID: 0}
-    - target: {fileID: 4391286766367328, guid: 0e99dd044193f5a4ea956998c7af6c58, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
-      objectReference: {fileID: 0}
-    - target: {fileID: 4438032603221612, guid: 0e99dd044193f5a4ea956998c7af6c58, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4438032603221612, guid: 0e99dd044193f5a4ea956998c7af6c58, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4438032603221612, guid: 0e99dd044193f5a4ea956998c7af6c58, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4438032603221612, guid: 0e99dd044193f5a4ea956998c7af6c58, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4438032603221612, guid: 0e99dd044193f5a4ea956998c7af6c58, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
-      objectReference: {fileID: 0}
+    - target: {fileID: 114683251272146166, guid: 0e99dd044193f5a4ea956998c7af6c58,
+        type: 2}
+      propertyPath: events.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 499891253}
+    - target: {fileID: 114367532121807364, guid: 0e99dd044193f5a4ea956998c7af6c58,
+        type: 2}
+      propertyPath: events.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 499891253}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0e99dd044193f5a4ea956998c7af6c58, type: 2}
   m_IsPrefabParent: 0
@@ -25369,6 +25447,7 @@ MonoBehaviour:
   FriendPoint_position: {x: -3.7339442, y: -0.49805003, z: 3.455332}
   type: 1
   ID: 16
+  done: 0
   RoadMaterial: {fileID: 0}
   UpdateMesh: 1
   UnrenderMesh: 0
@@ -25516,6 +25595,7 @@ MonoBehaviour:
   FriendPoint_position: {x: -3.6589441, y: -0.49805003, z: 3.8483322}
   type: 4
   ID: 15
+  done: 0
   RoadMaterial: {fileID: 0}
   UpdateMesh: 1
   UnrenderMesh: 0
@@ -32151,6 +32231,7 @@ MonoBehaviour:
   FriendPoint_position: {x: -3.7409441, y: -0.48205006, z: 1.561332}
   type: 1
   ID: 2
+  done: 0
   RoadMaterial: {fileID: 2100000, guid: 7cc702579090fd1488477c5a2dca00c9, type: 2}
   UpdateMesh: 1
   UnrenderMesh: 0
@@ -32742,6 +32823,7 @@ MonoBehaviour:
   FriendPoint_position: {x: -3.9599442, y: -0.49805003, z: 2.277332}
   type: 1
   ID: 1
+  done: 0
   RoadMaterial: {fileID: 2100000, guid: 7cc702579090fd1488477c5a2dca00c9, type: 2}
   UpdateMesh: 1
   UnrenderMesh: 0
@@ -32898,7 +32980,7 @@ MonoBehaviour:
   events:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 499891253}
         m_MethodName: StopFadeOut
         m_Mode: 5
         m_Arguments:
@@ -32927,7 +33009,7 @@ MonoBehaviour:
   events:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 499891253}
         m_MethodName: PlayFadeIn
         m_Mode: 5
         m_Arguments:
@@ -33433,6 +33515,7 @@ MonoBehaviour:
   FriendPoint_position: {x: -2.0529442, y: -0.48555005, z: 3.752332}
   type: 1
   ID: 13
+  done: 0
   RoadMaterial: {fileID: 0}
   UpdateMesh: 1
   UnrenderMesh: 0
@@ -33892,6 +33975,7 @@ MonoBehaviour:
   FriendPoint_position: {x: 0.5590557, y: -0.34205002, z: 2.665332}
   type: 2
   ID: 9
+  done: 0
   RoadMaterial: {fileID: 0}
   UpdateMesh: 1
   UnrenderMesh: 0

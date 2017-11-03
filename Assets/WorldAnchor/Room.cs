@@ -44,6 +44,6 @@ public class Room : Singleton<Room> {
             done = true;
         }
 #endif
-
+        gameObject.tag = "TheRoom";
     }
 }
