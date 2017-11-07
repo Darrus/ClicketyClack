@@ -4,19 +4,20 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Bullet
-  - FallPoint
-  - Train
+  - TheRoom
   - Cargo
-  - Coal
-  - Ground
-  - Point
-  - Bound
-  - Rock
   - Connector
-  - DragPoint
+  - Train
+  - FallPoint
+  - Bound
+  - Ground
   - Floor
-  - Obstacle
+  - Point
+  - DragPoint
+  - Coal
+  - Rock
+  - Bullet
+  - EventItem
   layers:
   - Default
   - TransparentFX
@@ -26,7 +27,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Ignore Raycast Hololens
   - 
   - 
   - 

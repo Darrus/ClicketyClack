@@ -18,11 +18,14 @@ public class TrackMeshGenerate : MonoBehaviour
     public float Sub_Length;
 
     private int totalPoints;
+    private List<int> RailList;
 
     public Material Track_Metal;
     public Material Track_Wood;
 
     public int Level;
+
+    public GameObject FadingParent;
 
     void Update()
     {
@@ -59,7 +62,7 @@ public class TrackMeshGenerate : MonoBehaviour
         DrawTrack_Part1("inner", true);
         DrawTrack_Part1("outter", false);
 
-        DrawTrack_Part2();
+        DrawTrack_Part2(true, gameObject);
 
     }
 
@@ -177,12 +180,16 @@ public class TrackMeshGenerate : MonoBehaviour
         rend.sharedMaterial = Track_Metal;
     }
 
-    private void DrawTrack_Part2()
+    private List<GameObject> DrawTrack_Part2(bool One_P, GameObject parent)
     {
         GameObject Final = new GameObject("Rail");
+        if(RailList == null)
+            RailList = new List<int>();
+        else
+            RailList.Clear();
 
-        Final.transform.SetParent(transform);
-        Final.transform.position = transform.position;
+        Final.transform.SetParent(parent.transform);
+        Final.transform.position = parent.transform.position;
 
         float MaxTrackLength = BezierCurve2.TrackData_List[totalPoints - 1].distance;
         float currDistance = 0f;
@@ -190,7 +197,6 @@ public class TrackMeshGenerate : MonoBehaviour
 
 
         //Debug.Log(MaxTrackLength);
-
         List<GameObject> objects = new List<GameObject>();
 
         bool run = true;
@@ -212,13 +218,13 @@ public class TrackMeshGenerate : MonoBehaviour
                     SecondRun = false;
                 }
 
-                if(SecondRun)
-                    if (currDistance < BezierCurve2.TrackData_List[currID + 1].distance )
+                if (SecondRun)
+                    if (currDistance < BezierCurve2.TrackData_List[currID + 1].distance)
                     {
-                        DrawTrack_Part3(currID, Final, objects);
+                        DrawTrack_Part3(currID, One_P, Final, objects);
                         SecondRun = false;
                     }
-                
+
             }
 
             if (currID >= totalPoints - 1)
@@ -228,23 +234,30 @@ public class TrackMeshGenerate : MonoBehaviour
             currDistance += Sub_Gap;
         }
 
-
-        Mesh combinedMesh = CombineMeshes.Combine(objects);
-
-        foreach (GameObject obj in objects)
+        if (One_P)
         {
-            DestroyImmediate(obj);
+            Mesh combinedMesh = CombineMeshes.Combine(objects);
+
+            foreach (GameObject obj in objects)
+            {
+                DestroyImmediate(obj);
+            }
+
+            Final.AddComponent<MeshFilter>().sharedMesh = combinedMesh;
+
+            MeshRenderer rend = Final.AddComponent<MeshRenderer>();
+
+            rend.sharedMaterial = Track_Wood;
+
+            return null;
         }
-
-        Final.AddComponent<MeshFilter>().sharedMesh = combinedMesh;
-
-        MeshRenderer rend = Final.AddComponent<MeshRenderer>();
-
-        rend.sharedMaterial = Track_Wood;
-
+        else
+        {
+            return objects;
+        }
     }
 
-    private void DrawTrack_Part3(int id, GameObject currParent, List<GameObject> ListObjects)
+    private void DrawTrack_Part3(int id, bool One_P, GameObject currParent, List<GameObject> ListObjects)
     {
         GameObject Temp = new GameObject();
         Temp.transform.position = BezierCurve2.TrackData_List[id].position;
@@ -395,14 +408,181 @@ public class TrackMeshGenerate : MonoBehaviour
         }
 
         GameObject Final = new GameObject(id.ToString());
+        RailList.Add(id);
 
         Final.transform.SetParent(currParent.transform);
         Final.transform.position = currParent.transform.position;
 
         Final.AddComponent<MeshFilter>().sharedMesh = combinedMesh;
 
+        MeshRenderer rend = Final.AddComponent<MeshRenderer>();
+
+        if (!One_P)
+            rend.enabled = false;
+
+        rend.sharedMaterial = Track_Wood;
+
         ListObjects.Add(Final);
 
     }
+
+    
+    public void GenerateMesh2()
+    {
+        for (int i = FadingParent.transform.childCount - 1; i >= 0; i--)
+        {
+            DestroyImmediate(FadingParent.transform.GetChild(i).gameObject);
+        }
+
+        totalPoints = BezierCurve2.TrackData_List.Length;
+
+        FadeInTracks FadeSc = FadingParent.GetComponent(typeof(FadeInTracks))as FadeInTracks;
+
+        FadeSc.Inner = DrawTrack_Part4("inner", true);
+        FadeSc.Outter = DrawTrack_Part4("outter", false);
+
+        FadeSc.Rail = DrawTrack_Part2(false, FadingParent);
+        FadeSc.RailList = RailList;
+    }
+
+    private List<GameObject> DrawTrack_Part4(string Name, bool Inner)
+    {
+        GameObject parent = new GameObject(Name);
+        parent.transform.SetParent(FadingParent.transform);
+        parent.transform.position = FadingParent.transform.position;
+
+        List<GameObject> objectsList = new List<GameObject>();
+
+        for (int id = 0; id < totalPoints; id++)
+        {
+            GameObject Temp = new GameObject();
+            Temp.transform.position = BezierCurve2.TrackData_List[id].position;
+            Temp.transform.LookAt(Temp.transform.position + BezierCurve2.TrackData_List[id].tangent);
+            Vector3 TempR = Temp.transform.right;
+            DestroyImmediate(Temp);
+
+            Vector3 Offset = TempR * Gap;
+            if (Inner)
+                Offset = -Offset;
+
+            List<GameObject> objects = new List<GameObject>();
+
+            for (int n = 0; n < 4; n++)
+            {
+                MeshBuilder2 meshBuilder = new MeshBuilder2();
+
+                Vector3[] vertices = new Vector3[4];
+
+                for (int i = 0; i < 2; i++)
+                {
+                    Vector3 currPoint = BezierCurve2.TrackData_List[id].position;
+                    Vector3 currTangent = BezierCurve2.TrackData_List[id].tangent;
+
+                    if (i == 1)
+                    {
+                        if (id + 1 != totalPoints)
+                        {
+                            currPoint = BezierCurve2.TrackData_List[id + 1].position;
+                            currTangent = BezierCurve2.TrackData_List[id + 1].tangent;
+                        }
+                        else
+                        {
+                            currPoint = BezierCurve2.TrackData_List[0].position;
+                            currTangent = BezierCurve2.TrackData_List[0].tangent;
+                        }
+                    }
+
+                    Vector3 cross = new Vector3();
+
+                    if (n == 0)
+                    {
+                        currPoint = currPoint + Vector3.up * Height + Offset;
+                        cross = Vector3.Cross(Vector3.up, currTangent);
+
+                        cross = cross.normalized;
+                        vertices[i * 2] = currPoint + cross * Width;
+                        vertices[i * 2 + 1] = currPoint - cross * Width;
+                    }
+                    if (n == 1)
+                    {
+                        currPoint = currPoint - Vector3.up * Height + Offset;
+                        cross = Vector3.Cross(-Vector3.up, currTangent);
+
+                        cross = cross.normalized;
+                        vertices[i * 2] = currPoint + cross * Width;
+                        vertices[i * 2 + 1] = currPoint - cross * Width;
+                    }
+
+                    if (n == 2)
+                    {
+                        currPoint = currPoint - TempR * Width + Offset;
+                        cross = Vector3.Cross(-TempR, currTangent);
+
+                        cross = cross.normalized;
+                        vertices[i * 2] = currPoint + cross * Height;
+                        vertices[i * 2 + 1] = currPoint - cross * Height;
+                    }
+                    if (n == 3)
+                    {
+                        currPoint = currPoint + TempR * Width + Offset;
+                        cross = Vector3.Cross(TempR, currTangent);
+
+                        cross = cross.normalized;
+                        vertices[i * 2] = currPoint + cross * Height;
+                        vertices[i * 2 + 1] = currPoint - cross * Height;
+                    }
+
+                    Vector2 uv2 = new Vector2(0, 1);
+                    Vector2 uv1 = new Vector2(1, 1);
+
+                    meshBuilder.UVs.Add(uv1);
+                    meshBuilder.UVs.Add(uv2);
+                }
+
+                meshBuilder.Vertices.AddRange(vertices);
+
+                // Build triangle list
+
+                meshBuilder.AddTriangle(0, 1, 2);
+
+                meshBuilder.AddTriangle(1, 3, 2);
+
+                Mesh mesh = meshBuilder.CreateMesh();
+
+                mesh.RecalculateNormals();
+
+                GameObject piece = new GameObject();
+
+                piece.AddComponent<MeshFilter>().sharedMesh = mesh;
+
+                objects.Add(piece);
+            }
+
+            Mesh combinedMesh = CombineMeshes.Combine(objects);
+
+            foreach (GameObject obj in objects)
+            {
+                DestroyImmediate(obj);
+            }
+
+            GameObject Final = new GameObject(id.ToString());
+
+            Final.transform.SetParent(parent.transform);
+            Final.transform.position = parent.transform.position;
+
+            Final.AddComponent<MeshFilter>().sharedMesh = combinedMesh;
+
+            MeshRenderer rend = Final.AddComponent<MeshRenderer>();
+
+            rend.enabled = false;
+
+            rend.sharedMaterial = Track_Metal;
+
+            objectsList.Add(Final);
+        }
+
+        return objectsList;
+    }
+
 }
 

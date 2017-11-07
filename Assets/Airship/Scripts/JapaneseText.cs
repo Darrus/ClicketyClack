@@ -16,15 +16,6 @@ public class JapaneseText : FontScalable
 
     private void Update()
     {
-        //// test mode
-        //if (Input.GetButtonDown("Fire1"))
-        //{
-        //    Number++;
-        //}
-        //else if (Input.GetButtonDown("Fire2"))
-        //{
-        //    Number--;
-        //}
 
         switch (TextControll.textNum)
         {

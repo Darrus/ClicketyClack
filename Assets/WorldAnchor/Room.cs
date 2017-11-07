@@ -6,7 +6,7 @@ using HoloToolkit.Unity.SpatialMapping;
 
 public class Room : Singleton<Room> {
     public bool done = false;
-    public GameObject[] objectsToActivate;
+    //public GameObject[] objectsToActivate;
     Anchor anchor;
 
     protected override void Awake()
@@ -14,10 +14,10 @@ public class Room : Singleton<Room> {
         base.Awake();
         DontDestroyOnLoad(this.gameObject);
 #if !UNITY_EDITOR && UNITY_WSA
-    foreach(GameObject go in objectsToActivate)
-    {
-        go.SetActive(false);
-    }
+    //foreach(GameObject go in objectsToActivate)
+    //{
+    //    go.SetActive(false);
+    //}
 #endif
     }
 
@@ -34,12 +34,16 @@ public class Room : Singleton<Room> {
         if (!WorldAnchorManager.Instance.importing && !done)
         {
             anchor.LoadAnchor();
-            foreach(GameObject go in objectsToActivate)
-            {
-                go.SetActive(true);
-            }
+
+            //foreach(GameObject go in objectsToActivate)
+            //{
+            //    go.SetActive(true);
+            //}
+
+            Debug.Log("Room's P :" + transform.position);
             done = true;
         }
 #endif
+        gameObject.tag = "TheRoom";
     }
 }

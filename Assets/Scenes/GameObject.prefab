@@ -924,9 +924,6 @@ GameObject:
   - component: {fileID: 4444096051334184}
   - component: {fileID: 65672193504416740}
   - component: {fileID: 54216369727322076}
-  - component: {fileID: 114837269654943300}
-  - component: {fileID: 114028850219988986}
-  - component: {fileID: 114516362217772584}
   m_Layer: 0
   m_Name: Cargo
   m_TagString: Cargo
@@ -4516,18 +4513,6 @@ Animation:
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &114028850219988986
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1780303850209094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80f5345285af7aa4286eb80fe2e1b89c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obj_coal_pile: {fileID: 0}
 --- !u!114 &114147342232492586
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4556,6 +4541,7 @@ MonoBehaviour:
   WayPointList: {fileID: 0}
   curveSteps: 500
   startSize: 11
+  Level: 0
 --- !u!114 &114187037598537680
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4621,6 +4607,7 @@ MonoBehaviour:
   Manager: {fileID: 0}
   ID: 1
   distanceTravel: 0
+  Point_ID: 0
   once: 0
 --- !u!114 &114275872198600204
 MonoBehaviour:
@@ -4725,6 +4712,7 @@ MonoBehaviour:
   Manager: {fileID: 0}
   ID: 3
   distanceTravel: 0
+  Point_ID: 0
   once: 0
 --- !u!114 &114497815128874036
 MonoBehaviour:
@@ -4740,6 +4728,7 @@ MonoBehaviour:
   Manager: {fileID: 0}
   ID: 2
   distanceTravel: 0
+  Point_ID: 0
   once: 0
 --- !u!114 &114501782173216508
 MonoBehaviour:
@@ -4766,18 +4755,6 @@ MonoBehaviour:
   RoadMaterial: {fileID: 0}
   UpdateMesh: 1
   UnrenderMesh: 0
---- !u!114 &114516362217772584
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1780303850209094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8731d1a2eb078fb4f9842d87f2d1a1d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Connector: {fileID: 1205472187621640}
 --- !u!114 &114527732001937074
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4976,18 +4953,6 @@ MonoBehaviour:
   RoadMaterial: {fileID: 0}
   UpdateMesh: 1
   UnrenderMesh: 0
---- !u!114 &114837269654943300
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1780303850209094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85d976cde6c6e614b8f01ec4c4574d2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 100
 --- !u!114 &114976771075846332
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5015,7 +4980,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fallpointPrefab: {fileID: 1841728456325026, guid: c011cca3eaeec4d46a210eb1fbad5bc4,
     type: 2}
-  train: {fileID: 1007375156519028}
 --- !u!198 &198741184088947018
 ParticleSystem:
   m_ObjectHideFlags: 1

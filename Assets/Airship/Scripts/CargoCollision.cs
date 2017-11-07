@@ -44,7 +44,7 @@ public class CargoCollision : MonoBehaviour
         {
             Debug.Log("Stop");
             Destroy(collision.gameObject);
-
+            
             TextControll.textNum = 3;
 
             _isArrow = true;

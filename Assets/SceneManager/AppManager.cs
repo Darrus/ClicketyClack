@@ -13,7 +13,7 @@ public class AppManager : MonoBehaviour {
     public String Level_2;
     public String Level_3;
     public String Level_4;
-    public String ArtScene;
+    public String Tutorial;
 
     public enum GameScene
     {
@@ -22,7 +22,7 @@ public class AppManager : MonoBehaviour {
         level_2 = 2,
         level_3 = 3,
         level_4 = 4,
-        ArtScene = 5,
+        Tutorial = 5,
         TestLevelCreation = 6
 
     };
@@ -63,8 +63,8 @@ public class AppManager : MonoBehaviour {
             once = true;
 
 #if UNITY_EDITOR
-            curScene = (int)GameScene.mainmenu;
-            LoadScene(this);
+            curScene = (int)GameScene.Tutorial;
+            SceneManager.LoadScene(Tutorial);
 #endif
 
         }
@@ -84,7 +84,7 @@ public class AppManager : MonoBehaviour {
         if (once && Room.Instance.done)
         {
             curScene = (int)GameScene.mainmenu;
-            LoadScene(this);
+            SceneManager.LoadScene(MainMenu);
             once = false;
         }
 #endif
@@ -129,9 +129,9 @@ public class AppManager : MonoBehaviour {
                     SceneManager.LoadScene(Temp.Level_4);
                     break;
                 }
-            case (int)GameScene.ArtScene:
+            case (int)GameScene.Tutorial:
                 {
-                    SceneManager.LoadScene(Temp.ArtScene);
+                    SceneManager.LoadScene(Temp.Tutorial);
                     break;
                 }
             case (int)GameScene.TestLevelCreation:
@@ -170,12 +170,19 @@ public class AppManager : MonoBehaviour {
                     SceneManager.LoadScene(Temp.MainMenu);
                     break;
                 }
+            case (int)GameScene.Tutorial:
+                {
+                    curScene = (int)GameScene.mainmenu;
+                    SceneManager.LoadScene(Temp.MainMenu);
+                    break;
+                }
+
         }
         Detach_RoomChild(Temp);
     }
 
     public static void Detach_RoomChild(AppManager Temp)
     {
-        //Temp.TheRoom.transform.DetachChildren();
+        Destroy(Temp.TheRoom.transform.GetChild(0).gameObject);
     }
 }

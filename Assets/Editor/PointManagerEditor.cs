@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-#if !UNITY_WSA && UNITY_EDITOR
-
 using UnityEditor;
 
 [CustomEditor(typeof(PointManager))]
@@ -48,4 +46,3 @@ public class PointManagerEditor : Editor
 
     }
 }
-#endif

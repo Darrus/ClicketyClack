@@ -24,7 +24,6 @@ public class HumanAI : HumanController
 
         if (onState)
         {
-            //ChangeState(CharacterStates.IDLE);
             RandomState();
             onState = false;
             delayTime = 2f;

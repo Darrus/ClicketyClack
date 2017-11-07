@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class ObjectBillboard : MonoBehaviour
 {
-    public GameObject Target;
+    private GameObject Target;
+
+
+    private void Start()
+    {
+        Target = GameObject.FindGameObjectWithTag("MainCamera");
+    }
 
     // Update
     void Update ()

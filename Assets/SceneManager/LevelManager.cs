@@ -15,10 +15,13 @@ public class LevelManager : MonoBehaviour {
 
     public static bool CargoOn;
 
+    public static bool Play;
+
     public GameObject Room_Items;
 
     public GameObject AppPrefab;
-
+    public PointManager pointManager;
+    public bool Tutorial;
 
     public static LevelManager Singleton = null;
 
@@ -26,8 +29,6 @@ public class LevelManager : MonoBehaviour {
     {
         get { return Singleton; }
     }
-
-    private float TimeToRollOut;
 
     void Awake()
     {
@@ -47,8 +48,17 @@ public class LevelManager : MonoBehaviour {
 
             Debug.Log("Creating temporary App");
         }
-        //GameObject Room = GameObject.Find("TheRoom");
-        //Room_Items.transform.SetParent(Room.transform);
+
+        Play = true;
+        Room_Items.SetActive(true);
+    }
+
+    public static void Add_Child_ToRoom(LevelManager Temp)
+    {
+        GameObject Room = GameObject.FindGameObjectWithTag("TheRoom");
+        Debug.Log(Room.name + " : " + Room.tag);
+        Temp.Room_Items.transform.SetParent(Room.transform);
+        Debug.Log("Room Child Added");
     }
 
     void Start()
@@ -58,30 +68,20 @@ public class LevelManager : MonoBehaviour {
         ReachStation = true;
         MoveOut = false;
         CargoOn = false;
-        TimeToRollOut = 5f;
+
+        if(!Tutorial)
+        {
+            CargoOn = true;
+        }
+
     }
 
     void Update()
     {
-
-#if UNITY_EDITOR
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            MoveOut = true;
-            ReachStation = false;
-            CargoOn = true;
-        }
-#endif
         if (!MoveOut && CargoOn && ReachStation)
         {
-            if (TimeToRollOut >= 0)
-                TimeToRollOut -= Time.deltaTime;
-            else
-            {
-                MoveOut = true;
-                ReachStation = false;
-                Debug.Log("GO out");
-            }
+            BezierCurve2.Go = true;
+            ReachStation = false;
         }
 
         Check_Win_Lose_Condition();
@@ -106,8 +106,8 @@ public class LevelManager : MonoBehaviour {
 
     void ResetLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         AppManager.Detach_RoomChild(AppManager.Singleton);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
 }

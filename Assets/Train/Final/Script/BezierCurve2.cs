@@ -33,6 +33,27 @@ public static class BezierCurve2 {
 
     public static PointData[] PointData_List;
 
+    public static int getTotalCruveStepsTo(int ID)
+    {
+        int Result = 0;
+
+        for (int i = 0; i < ID; i++)
+        {
+            for (int n = 0; n < PointData_List.Length; n++)
+            {
+                if (PointData_List[n].id == i)
+                {
+                    Result += PointData_List[n].pointCruveSteps;
+                    break;
+                }
+            }
+        }
+
+        return Result;
+    }
+
+
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Calc SPLINE&TRACK Length //
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -586,6 +607,11 @@ public static class BezierCurve2 {
 
         switch(Level)
         {
+            case 0:
+                {
+                    path = Save_Load_Data.Tutorial;
+                    break;
+                }
             case 1:
                 {
                     path = Save_Load_Data.Level_one_TrackData;
@@ -619,6 +645,11 @@ public static class BezierCurve2 {
 
         switch (Level)
         {
+            case 0:
+                {
+                    path = Save_Load_Data.Tutorial;
+                    break;
+                }
             case 1:
                 {
                     path = Save_Load_Data.Level_one_TrackData;

@@ -33,6 +33,7 @@ public class MainPoints : MonoBehaviour {
     
     public int type;
     public int ID;
+    public bool done;
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // MESH VARs //
@@ -61,6 +62,7 @@ public class MainPoints : MonoBehaviour {
     {
         if (Application.isPlaying)
         {
+            done = false;
             UpdateMesh = true;
             UnrenderMesh = true;
 
@@ -84,6 +86,7 @@ public class MainPoints : MonoBehaviour {
             {
                 CreatePoints(TrafficLight);
                 gameObject.name = ID.ToString() + "_TrafficLight";
+               
             }
         }
     }
@@ -93,7 +96,7 @@ public class MainPoints : MonoBehaviour {
 
         if (Application.isPlaying)
         {
-            if (UpdateMesh && BezierCurve2.Go)
+            if (UpdateMesh)
             {
                 if (AppManager.curScene == 6)
                 {
@@ -132,7 +135,7 @@ public class MainPoints : MonoBehaviour {
                     UnrenderMesh = false;
                 }
 
-                if (type == (int)pointType.TrafficLight)
+                if (type == (int)pointType.TrafficLight && !done)
                 {
                     UpdateTrafficLightPoints();
                 }
@@ -165,6 +168,11 @@ public class MainPoints : MonoBehaviour {
         Temp.transform.LookAt(transform.position);
 
         Temp.transform.position += new Vector3(0, 0.08f, 0); // hard coded
+
+        FadeInTracks tempFadeSc = GameObject.FindObjectOfType<FadeInTracks>().GetComponent(typeof(FadeInTracks)) as FadeInTracks;
+        tempFadeSc.GetPointObject(Temp, ID);
+
+        done = true;
     }
 
     public void BuildRoadMesh()

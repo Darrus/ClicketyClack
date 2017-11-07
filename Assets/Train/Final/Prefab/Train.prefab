@@ -124,7 +124,6 @@ GameObject:
   - component: {fileID: 114034717221062508}
   - component: {fileID: 114618925505669552}
   - component: {fileID: 114683899523486980}
-  - component: {fileID: 114996055003025066}
   m_Layer: 0
   m_Name: Cargo
   m_TagString: Cargo
@@ -225,7 +224,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4334333591551544}
-  - component: {fileID: 114634065540795864}
   m_Layer: 0
   m_Name: Arrow
   m_TagString: Untagged
@@ -615,7 +613,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4943145651403072}
   - component: {fileID: 65561673704514886}
-  - component: {fileID: 114568064865774842}
   - component: {fileID: 54745748943974758}
   m_Layer: 0
   m_Name: TriggerPoint
@@ -2835,17 +2832,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextSource: {fileID: 82475688804617702}
---- !u!114 &114568064865774842
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1829419070127730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f52e5c0d11fa3648aa16a96fb054215, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114596896723806262
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2869,21 +2855,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Connector: {fileID: 1678677722506744}
---- !u!114 &114634065540795864
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1313344863613150}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09d7d5560b3438541ab3049170879810, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ArrowPrefab: {fileID: 1910669846184990, guid: b531569c5c886764b90927c27a35087b,
-    type: 2}
-  target: {fileID: 1170421138679534}
-  Height: 0.5
 --- !u!114 &114683899523486980
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2896,18 +2867,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obj_coal_pile: {fileID: 0}
---- !u!114 &114996055003025066
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1170421138679534}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 956b30b16f7a8824dbefd55f064726c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 100
 --- !u!198 &198686294179360290
 ParticleSystem:
   m_ObjectHideFlags: 1

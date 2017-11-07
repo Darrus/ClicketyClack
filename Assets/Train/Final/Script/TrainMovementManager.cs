@@ -16,10 +16,13 @@ public struct TrainPart
 public class TrainMovementManager : MonoBehaviour {
     
     public float MainSpeed;
+    public float RenderSpeed;
     public float TotalTrackDistance;
 
     public TrainPart[] TheTrain;
+
     public bool once;
+
 
     // Use this for initialization
     void Start () {
@@ -30,7 +33,7 @@ public class TrainMovementManager : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (!once)
+        if (!once && BezierCurve2.Go)
         {
             TotalTrackDistance = BezierCurve2.TrackData_List[BezierCurve2.TrackData_List.Length - 1].distance;
             once = true;
