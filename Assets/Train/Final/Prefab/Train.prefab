@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 114034717221062508}
   - component: {fileID: 114618925505669552}
   - component: {fileID: 114683899523486980}
-  - component: {fileID: 114954854119194090}
+  - component: {fileID: 114996055003025066}
   m_Layer: 0
   m_Name: Cargo
   m_TagString: Cargo
@@ -2780,6 +2780,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PointFollow: {fileID: 0}
+  ParticleEffect: {fileID: 0}
   TrainHeightGap: 0
 --- !u!114 &114034717221062508
 MonoBehaviour:
@@ -2793,6 +2794,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PointFollow: {fileID: 0}
+  ParticleEffect: {fileID: 0}
   TrainHeightGap: 0
 --- !u!114 &114211972202003896
 MonoBehaviour:
@@ -2806,6 +2808,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PointFollow: {fileID: 0}
+  ParticleEffect: {fileID: 0}
   TrainHeightGap: 0
 --- !u!114 &114398288717840012
 MonoBehaviour:
@@ -2820,7 +2823,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fallpointPrefab: {fileID: 1841728456325026, guid: c011cca3eaeec4d46a210eb1fbad5bc4,
     type: 2}
-  train: {fileID: 1313544407704680}
 --- !u!114 &114508701852566116
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2893,8 +2895,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80f5345285af7aa4286eb80fe2e1b89c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coalPile: {fileID: 1996475133547938}
---- !u!114 &114954854119194090
+  obj_coal_pile: {fileID: 0}
+--- !u!114 &114996055003025066
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -2902,7 +2904,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1170421138679534}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c66efb0852782084e94862e3472921b9, type: 3}
+  m_Script: {fileID: 11500000, guid: 956b30b16f7a8824dbefd55f064726c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 100

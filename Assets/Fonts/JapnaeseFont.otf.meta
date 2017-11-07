@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 08adeb75b4c4a2f40b0ef1816b553104
+timeCreated: 1509681348
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Yokosuka Block
+  fontNames:
+  - Yokosuka Block
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
