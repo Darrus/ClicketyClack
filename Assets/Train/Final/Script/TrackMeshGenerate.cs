@@ -183,7 +183,10 @@ public class TrackMeshGenerate : MonoBehaviour
     private List<GameObject> DrawTrack_Part2(bool One_P, GameObject parent)
     {
         GameObject Final = new GameObject("Rail");
-        RailList.Clear();
+        if(RailList == null)
+            RailList = new List<int>();
+        else
+            RailList.Clear();
 
         Final.transform.SetParent(parent.transform);
         Final.transform.position = parent.transform.position;
@@ -573,7 +576,7 @@ public class TrackMeshGenerate : MonoBehaviour
 
             rend.enabled = false;
 
-            rend.sharedMaterial = Track_Wood;
+            rend.sharedMaterial = Track_Metal;
 
             objectsList.Add(Final);
         }

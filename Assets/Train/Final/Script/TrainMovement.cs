@@ -55,7 +55,7 @@ public class TrainMovement : MonoBehaviour {
                 once = true;
             }
 
-            distanceTravel += Time.deltaTime * Manager.MainSpeed;
+            distanceTravel += Time.deltaTime * Manager.RenderSpeed;
             CheckPosition();
         }
     }

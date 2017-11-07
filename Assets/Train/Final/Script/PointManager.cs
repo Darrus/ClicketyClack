@@ -25,22 +25,11 @@ public class PointManager : MonoBehaviour {
         BezierCurve2.ClearAllData();
         BezierCurve2.IncreaseSize(startSize);
         BezierCurve2.updateCurvePoints();
-        BezierCurve2.ClearAllData();
-
+        BezierCurve2.CalcAllTrackPointData();
     }
 
     void Update () {
       
-    }
-
-    public void UpdatePoints()
-    {
-            //BezierCurve2.LoadTrackPointData(Level);
-            BezierCurve2.ClearAllData();
-            BezierCurve2.IncreaseSize(startSize);
-            BezierCurve2.updateCurvePoints();
-            BezierCurve2.CalcAllTrackPointData();
-            BezierCurve2.Go = true;
     }
 
     public void DrawLine_Edtior()

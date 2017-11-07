@@ -30,8 +30,6 @@ public class LevelManager : MonoBehaviour {
         get { return Singleton; }
     }
 
-    private float TimeToRollOut;
-
     void Awake()
     {
         Debug.Log("Level: Starting.");
@@ -70,7 +68,6 @@ public class LevelManager : MonoBehaviour {
         ReachStation = true;
         MoveOut = false;
         CargoOn = false;
-        TimeToRollOut = 10f;
 
         if(!Tutorial)
         {
@@ -81,36 +78,10 @@ public class LevelManager : MonoBehaviour {
 
     void Update()
     {
-
-#if UNITY_EDITOR
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            MoveOut = true;
-            ReachStation = false;
-            CargoOn = true;
-        }
-#endif
         if (!MoveOut && CargoOn && ReachStation)
         {
-            if (!Play)
-            {
-                TimeToRollOut = 10f;
-            }
-            else
-            {
-
-                if (TimeToRollOut >= 0)
-                    TimeToRollOut -= Time.deltaTime;
-                else
-                {
-                    pointManager.UpdatePoints();
-                    Debug.Log("Points Updated");
-
-                    MoveOut = true;
-                    ReachStation = false;
-                    Debug.Log("GO out");
-                }
-            }
+            BezierCurve2.Go = true;
+            ReachStation = false;
         }
 
         Check_Win_Lose_Condition();

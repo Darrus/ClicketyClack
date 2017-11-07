@@ -16,10 +16,13 @@ public struct TrainPart
 public class TrainMovementManager : MonoBehaviour {
     
     public float MainSpeed;
+    public float RenderSpeed;
     public float TotalTrackDistance;
 
     public TrainPart[] TheTrain;
+
     public bool once;
+
 
     // Use this for initialization
     void Start () {

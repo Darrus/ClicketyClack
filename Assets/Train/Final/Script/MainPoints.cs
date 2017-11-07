@@ -169,6 +169,9 @@ public class MainPoints : MonoBehaviour {
 
         Temp.transform.position += new Vector3(0, 0.08f, 0); // hard coded
 
+        FadeInTracks tempFadeSc = GameObject.FindObjectOfType<FadeInTracks>().GetComponent(typeof(FadeInTracks)) as FadeInTracks;
+        tempFadeSc.GetPointObject(Temp, ID);
+
         done = true;
     }
 
