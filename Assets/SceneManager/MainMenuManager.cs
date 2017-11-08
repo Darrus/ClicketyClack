@@ -51,13 +51,14 @@ public class MainMenuManager : MonoBehaviour
 
             Debug.Log("Creating temporary App");
         }
-        Room_Items.SetActive(true);
+
+        OrderExecution.Done = true;
     }
 
-    public static void Add_Child_ToRoom(MainMenuManager Temp)
+    public static void Add_Child_ToRoom(MainMenuManager singleton)
     {
         GameObject Room = GameObject.FindGameObjectWithTag("TheRoom");
-        Temp.Room_Items.transform.SetParent(Room.transform);
+        //singleton.Room_Items.transform.SetParent(Room.transform);
         Debug.Log("Room Child Added");
     }
 
@@ -74,24 +75,39 @@ public class MainMenuManager : MonoBehaviour
 
     void Update()
     {
+        if(OrderExecution.Singleton != null)
+        {
+            if(OrderExecution.LifeGoalReached)
+            {
+                OrderExecution.SelfDestory(OrderExecution.Singleton);
+            }
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            AppManager.curScene = (int)AppManager.GameScene.level_1;
+            AppManager.LoadScene(AppManager.Singleton);
+        }
+
     }
 
-    public static void UpdateMainMenu(MainMenuManager Temp)
+    public static void UpdateMainMenu(MainMenuManager singleton)
     {
-        Temp.MenuPage.SetActive(false);
-        Temp.LevelPage.SetActive(false);
+        singleton.MenuPage.SetActive(false);
+        singleton.LevelPage.SetActive(false);
         //Temp.CustomizePage.SetActive(false);
 
         switch (curPage)
         {
             case (int)MenuPages.Base_Menu:
                 {
-                    Temp.MenuPage.SetActive(true);
+                    singleton.MenuPage.SetActive(true);
                     break;
                 }
             case (int)MenuPages.Level_Selection:
                 {
-                    Temp.LevelPage.SetActive(true);
+                    singleton.LevelPage.SetActive(true);
                     break;
                 }
             //case (int)MenuPages.Customization:
@@ -151,6 +167,11 @@ public class MainMenuManager : MonoBehaviour
     public void Button_Load_Level()
     {
         AppManager.LoadScene(AppManager.Singleton);
+    }
+
+    public static void SelfDestory(MainMenuManager singleton)
+    {
+        MainMenuManager.Destroy(singleton.gameObject);
     }
 
 }

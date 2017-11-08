@@ -50,14 +50,14 @@ public class LevelManager : MonoBehaviour {
         }
 
         Play = true;
-        Room_Items.SetActive(true);
+        OrderExecution.Done = true;
     }
 
-    public static void Add_Child_ToRoom(LevelManager Temp)
+    public static void Add_Child_ToRoom(LevelManager singleton)
     {
         GameObject Room = GameObject.FindGameObjectWithTag("TheRoom");
         Debug.Log(Room.name + " : " + Room.tag);
-        Temp.Room_Items.transform.SetParent(Room.transform);
+        //singleton.Room_Items.transform.SetParent(Room.transform);
         Debug.Log("Room Child Added");
     }
 
@@ -78,10 +78,14 @@ public class LevelManager : MonoBehaviour {
 
     void Update()
     {
-        if (!MoveOut && CargoOn && ReachStation)
+        if (!MoveOut && CargoOn && ReachStation && OrderExecution.Singleton != null)
         {
-            BezierCurve2.Go = true;
-            ReachStation = false;
+            if(OrderExecution.LifeGoalReached)
+            {
+                BezierCurve2.Go = true;
+                ReachStation = false;
+                OrderExecution.SelfDestory(OrderExecution.Singleton);
+            }
         }
 
         Check_Win_Lose_Condition();
@@ -109,5 +113,11 @@ public class LevelManager : MonoBehaviour {
         AppManager.Detach_RoomChild(AppManager.Singleton);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
+    public static void SelfDestory(LevelManager singleton)
+    {
+        LevelManager.Destroy(singleton.gameObject);
+    }
+
 
 }
