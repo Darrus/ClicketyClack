@@ -25,6 +25,7 @@ public class HumanController : MonoBehaviour
 
     Queue<HumanCommand> commandQueue;
 
+    public bool _isEnd = false;
     public float walkSpeed;
     public float runSpeed;
 
@@ -33,8 +34,8 @@ public class HumanController : MonoBehaviour
 
     [SerializeField]
     CharacterStates startState = CharacterStates.IDLE;
-
     CharacterStates characterState = CharacterStates.IDLE;
+
     public CharacterStates CurrentState
     {
         get
@@ -57,13 +58,15 @@ public class HumanController : MonoBehaviour
         anim.SetInteger("State", (int)characterState);
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if(commandQueue.Count != 0)
         {
             if(HandleCommand(commandQueue.Peek()))
             {
                 commandQueue.Dequeue();
+                _isEnd = true;
+                Debug.Log("END");
             }
         }
     }
@@ -117,10 +120,12 @@ public class HumanController : MonoBehaviour
                 else
                     rigid.MovePosition(transform.position + dir.normalized * runSpeed * Time.deltaTime);
 
-                if (dist > 0.01f)
-                    return false;
+                if (dist <= 0.01f)
+                    return true;
                 break;
+            default:
+                return true;
         }
-        return true;
+        return false;
     }
 }

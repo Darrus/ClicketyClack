@@ -9,8 +9,7 @@ public class CountAnimation : CreateCount
 
     private void Start()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("MainCamera");
-        transform.LookAt(player.transform.position);
+        transform.LookAt(Camera.main.transform.position);
     }
 
     void Update()
@@ -35,17 +34,8 @@ public class CountAnimation : CreateCount
     void FadeOutText()
     {
         alpha -= 1f * Time.deltaTime;
-
-        //if (MaxCnt < nowCnt)
-        //{
-        //    GetComponent<TextMesh>().color = new Color(255, 255, 255, alpha);
-        //}
-        //else
-        //{
-        //    Debug.Log("123");
-            GetComponent<TextMesh>().color = new Color(40, 219, 64, alpha);
-       // }
-
+       GetComponent<TextMesh>().color = new Color(40, 219, 64, alpha);
+        
         if (alpha < 0)
         {
             Destroy(this.gameObject);

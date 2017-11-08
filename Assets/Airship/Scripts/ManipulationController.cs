@@ -5,7 +5,7 @@ using HoloToolkit.Unity.InputModule;
 public class ManipulationController : MonoBehaviour, IManipulationHandler
 {
     [SerializeField]
-    private float speed = 1.0f;
+    private float speed = 100.0f;
 
     [SerializeField]
     private float ObjectDistance;

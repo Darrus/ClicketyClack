@@ -31,7 +31,7 @@ namespace HoloToolkit.Unity.InputModule
 
         [Tooltip("Scale by which hand movement in z is multipled to move the dragged object.")]
         public float DistanceScale = 2f;
-        
+
         public enum RotationModeEnum
         {
             Default,
@@ -49,6 +49,10 @@ namespace HoloToolkit.Unity.InputModule
         [Tooltip("Controls the speed at which the object will interpolate toward the desired rotation")]
         [Range(0.01f, 1.0f)]
         public float RotationLerpSpeed = 0.2f;
+
+        [SerializeField]
+        private float speed = 100.0f;
+        private float step;
 
         public bool IsDraggingEnabled = true;
 
@@ -118,6 +122,10 @@ namespace HoloToolkit.Unity.InputModule
             InputManager.Instance.PushModalInputHandler(gameObject);
 
             isDragging = true;
+
+            // Back to Default Angle
+            step = speed * Time.deltaTime;
+
             //GazeCursor.Instance.SetState(GazeCursor.State.Move);
             //GazeCursor.Instance.SetTargetObject(HostTransform);
 
@@ -187,6 +195,11 @@ namespace HoloToolkit.Unity.InputModule
         /// </summary>
         private void UpdateDragging()
         {
+
+            // Default Angle
+            this.transform.rotation =
+                Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, 0), step);
+
             Vector3 newHandPosition;
             currentInputSource.TryGetPosition(currentInputSourceId, out newHandPosition);
 
@@ -206,7 +219,7 @@ namespace HoloToolkit.Unity.InputModule
 
             draggingPosition = pivotPosition + (targetDirection * targetDistance);
 
-            if (RotationMode == RotationModeEnum.OrientTowardUser || RotationMode == RotationModeEnum.OrientTowardUserAndKeepUpright) 
+            if (RotationMode == RotationModeEnum.OrientTowardUser || RotationMode == RotationModeEnum.OrientTowardUserAndKeepUpright)
             {
                 draggingRotation = Quaternion.LookRotation(HostTransform.position - pivotPosition);
             }
@@ -226,10 +239,10 @@ namespace HoloToolkit.Unity.InputModule
             // Apply Final Rotation
             HostTransform.rotation = Quaternion.Lerp(HostTransform.rotation, draggingRotation, RotationLerpSpeed);
 
-            if (RotationMode == RotationModeEnum.OrientTowardUserAndKeepUpright)		
-            {		
-                Quaternion upRotation = Quaternion.FromToRotation(HostTransform.up, Vector3.up);		
-                HostTransform.rotation = upRotation * HostTransform.rotation;		
+            if (RotationMode == RotationModeEnum.OrientTowardUserAndKeepUpright)
+            {
+                Quaternion upRotation = Quaternion.FromToRotation(HostTransform.up, Vector3.up);
+                HostTransform.rotation = upRotation * HostTransform.rotation;
             }
         }
 
@@ -238,8 +251,12 @@ namespace HoloToolkit.Unity.InputModule
         /// </summary>
         public void StopDragging()
         {
+            GetComponent<Rigidbody>().useGravity = true;
+
             if (!isDragging)
             {
+
+                GetComponent<Rigidbody>().useGravity = true;
                 return;
             }
 
@@ -283,6 +300,8 @@ namespace HoloToolkit.Unity.InputModule
 
         public void OnInputUp(InputEventData eventData)
         {
+            GetComponent<Rigidbody>().useGravity = true;
+
             if (currentInputSource != null &&
                 eventData.SourceId == currentInputSourceId)
             {
@@ -292,6 +311,8 @@ namespace HoloToolkit.Unity.InputModule
 
         public void OnInputDown(InputEventData eventData)
         {
+            GetComponent<Rigidbody>().useGravity = false;
+
             if (isDragging)
             {
                 // We're already handling drag input, so we can't start a new drag operation.

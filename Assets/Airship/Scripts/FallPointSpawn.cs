@@ -37,27 +37,14 @@ public class FallPointSpawn : MonoBehaviour
 
             // 電車が次に目指すレール上に落下地点をスポーン
             // 20% HIT
-            switch (rate)
+
+            if (rate > 1)
             {
-                case 1:
-                    FallPos = transform.position + transform.forward / 2f;
-                    break;
-
-                case 2:
-                    FallPos = transform.position + RandomPosition();
-                    break;
-
-                case 3:
-                    FallPos = transform.position + RandomPosition();
-                    break;
-
-                case 4:
-                    FallPos = transform.position + RandomPosition();
-                    break;
-
-                case 5:
-                    FallPos = transform.position + RandomPosition();
-                    break;
+                FallPos = transform.position + RandomPosition();
+            }
+            else
+            {
+                FallPos = transform.position + transform.forward / 2f;
             }
 
             FallPos.y += 0.01f;
