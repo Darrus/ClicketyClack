@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TrainAnimation : MonoBehaviour
 {
-
     private Animation anim;
 
 	// Use this for initialization

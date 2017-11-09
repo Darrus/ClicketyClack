@@ -27,6 +27,8 @@ public class ConnectCargo : MonoBehaviour
             Debug.Log("Connect");
             LevelManager.CargoOn = true;
             this.GetComponent<TrainMovement2>().enabled = true;
+            TextControll.textNum = 2;
+
 
         }
     }

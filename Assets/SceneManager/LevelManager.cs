@@ -20,7 +20,6 @@ public class LevelManager : MonoBehaviour {
     public GameObject Room_Items;
 
     public GameObject AppPrefab;
-    public PointManager pointManager;
     public bool Tutorial;
 
     public static LevelManager Singleton = null;
@@ -82,6 +81,7 @@ public class LevelManager : MonoBehaviour {
         {
             BezierCurve2.Go = true;
             ReachStation = false;
+            MoveOut = true;
         }
 
         Check_Win_Lose_Condition();

@@ -57,7 +57,7 @@ public class MainMenuManager : MonoBehaviour
     public static void Add_Child_ToRoom(MainMenuManager Temp)
     {
         GameObject Room = GameObject.FindGameObjectWithTag("TheRoom");
-        Temp.Room_Items.transform.SetParent(Room.transform);
+        //Temp.Room_Items.transform.SetParent(Room.transform);
         Debug.Log("Room Child Added");
     }
 
