@@ -27,6 +27,7 @@ public class PointManager : MonoBehaviour {
         BezierCurve2.IncreaseSize(startSize);
         BezierCurve2.updateCurvePoints();
         BezierCurve2.CalcAllTrackPointData();
+        OrderExecution.Done = true;
     }
 
     void Update () {

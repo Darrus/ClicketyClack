@@ -30,6 +30,12 @@ public class FadeInTracks : MonoBehaviour {
     private int preEvent_List_ID;
     private int currEvent_List_ID;
 
+
+    private void Awake()
+    {
+        OrderExecution.Done = true;
+    }
+
     // Use this for initialization
     void Start () {
         prePoint_ID = 0;

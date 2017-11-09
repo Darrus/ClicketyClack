@@ -53,6 +53,7 @@ public class TrainMovement : MonoBehaviour {
                 Point_ID = 0;
                 CheckPosition();
                 once = true;
+                OrderExecution.Done = true;
             }
 
             distanceTravel += Time.deltaTime * Manager.RenderSpeed;

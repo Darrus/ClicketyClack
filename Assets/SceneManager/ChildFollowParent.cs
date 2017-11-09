@@ -21,6 +21,8 @@ public class ChildFollowParent : MonoBehaviour
             LevelManager.Add_Child_ToRoom(LevelManager.Singleton);
             Debug.Log("Room Child Test");
         }
+
+        OrderExecution.Done = true;
     }
     // Use this for initialization
     void Start()
