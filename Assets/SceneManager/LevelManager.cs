@@ -57,7 +57,7 @@ public class LevelManager : MonoBehaviour {
     {
         GameObject Room = GameObject.FindGameObjectWithTag("TheRoom");
         Debug.Log(Room.name + " : " + Room.tag);
-        //singleton.Room_Items.transform.SetParent(Room.transform);
+        singleton.Room_Items.transform.SetParent(Room.transform);
         Debug.Log("Room Child Added");
     }
 
@@ -69,7 +69,7 @@ public class LevelManager : MonoBehaviour {
         MoveOut = false;
         CargoOn = false;
 
-        if(!Tutorial)
+        if (!Tutorial)
         {
             CargoOn = true;
         }
@@ -82,6 +82,7 @@ public class LevelManager : MonoBehaviour {
         {
             if(OrderExecution.LifeGoalReached)
             {
+                AppManager.RenderingTrack = true;
                 BezierCurve2.Go = true;
                 ReachStation = false;
                 OrderExecution.SelfDestory(OrderExecution.Singleton);
@@ -102,7 +103,6 @@ public class LevelManager : MonoBehaviour {
         {
             AppManager.NextLevel(AppManager.Singleton);
 
-            // CLEAR
             TextControll.textNum = 4;
         }
 
@@ -110,7 +110,6 @@ public class LevelManager : MonoBehaviour {
 
     void ResetLevel()
     {
-        AppManager.Detach_RoomChild(AppManager.Singleton);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 

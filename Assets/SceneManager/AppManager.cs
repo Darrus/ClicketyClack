@@ -35,6 +35,8 @@ public class AppManager : MonoBehaviour {
     public static String curScene_Name;
     public static String preScene_Name;
 
+    public static bool RenderingTrack;
+    public static bool UnRenderingTrack;
 
     public GameScene TestScene;
 
@@ -60,6 +62,9 @@ public class AppManager : MonoBehaviour {
 
         curScene_Name = "Application";
         preScene_Name = "Application";
+
+        RenderingTrack = false;
+        UnRenderingTrack = false;
     }
    
     void Start()
@@ -98,18 +103,37 @@ public class AppManager : MonoBehaviour {
         }
 #endif
 
-        if (SceneManager.GetSceneByName(curScene_Name).isLoaded && preScene_Name != curScene_Name)
+        if (SceneManager.GetSceneByName(curScene_Name).isLoaded && preScene_Name != curScene_Name && !UnRenderingTrack)
         {
-            SceneManager.SetActiveScene(SceneManager.GetSceneByName(curScene_Name));
+            if (preScene_Name != MainMenu && preScene_Name != "Application")
+                UnRenderingTrack = true;
 
-            SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName(preScene_Name).buildIndex);
 
-            preScene_Name = curScene_Name;
-
-            if(OrderExecution.Singleton != null)
-                OrderExecution.LifeGoalReached = true;
+#if UNITY_EDITOR
+            if (once)
+            {
+                ChangeScene();
+                once = false;
+            }
+#endif
         }
     }
+    
+
+    public static void ChangeScene()
+    {
+        Detach_RoomChild(Singleton);
+
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(curScene_Name));
+
+        SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName(preScene_Name).buildIndex);
+
+        if (OrderExecution.Singleton != null)
+            OrderExecution.LifeGoalReached = true;
+
+        preScene_Name = curScene_Name;
+    }
+
 
     public static void Quit()
     {
@@ -172,7 +196,6 @@ public class AppManager : MonoBehaviour {
                     break;
                 }
         }
-        Detach_RoomChild(Temp);
     }
 
     public static void NextLevel(AppManager Temp)
@@ -182,41 +205,38 @@ public class AppManager : MonoBehaviour {
             case (int)GameScene.level_1:
                 {
                     curScene = (int)GameScene.level_2;
-                    SceneManager.LoadScene(Temp.Level_2);
                     break;
                 }
             case (int)GameScene.level_2:
                 {
                     curScene = (int)GameScene.level_3;
-                    SceneManager.LoadScene(Temp.Level_3);
                     break;
                 }
             case (int)GameScene.level_3:
                 {
                     curScene = (int)GameScene.level_4;
-                    SceneManager.LoadScene(Temp.Level_4);
                     break;
                 }
             case (int)GameScene.level_4:
                 {
                     curScene = (int)GameScene.mainmenu;
-                    SceneManager.LoadScene(Temp.MainMenu);
                     break;
                 }
             case (int)GameScene.Tutorial:
                 {
                     curScene = (int)GameScene.mainmenu;
-                    SceneManager.LoadScene(Temp.MainMenu);
                     break;
                 }
 
         }
-        Detach_RoomChild(Temp);
+
+        LoadScene(Temp);
     }
 
     public static void Detach_RoomChild(AppManager Temp)
     {
-        //Destroy(Temp.TheRoom.transform.GetChild(0).gameObject);
+        if(preScene_Name != "Application")
+            Destroy(Temp.TheRoom.transform.GetChild(0).gameObject);
     }
 
     private void CheckAndDestoryManagers()

@@ -41,8 +41,12 @@ public class OrderExecution : MonoBehaviour {
 
         if (Done)
         {
-            
             Done = false;
+
+            if(currOrder != 0)
+            {
+                RunOrder[currOrder - 1].SetActive(false);
+            }
 
             if (currOrder != RunOrder.Count)
                 RunOrder[currOrder].SetActive(true);
@@ -55,8 +59,8 @@ public class OrderExecution : MonoBehaviour {
                     LifeGoalReached = true;
                 }
             }
+
             currOrder++;
-            
         }
 
         if(LifeGoalReached)

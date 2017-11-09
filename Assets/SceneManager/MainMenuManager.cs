@@ -58,7 +58,7 @@ public class MainMenuManager : MonoBehaviour
     public static void Add_Child_ToRoom(MainMenuManager singleton)
     {
         GameObject Room = GameObject.FindGameObjectWithTag("TheRoom");
-        //singleton.Room_Items.transform.SetParent(Room.transform);
+        singleton.Room_Items.transform.SetParent(Room.transform);
         Debug.Log("Room Child Added");
     }
 
@@ -70,7 +70,7 @@ public class MainMenuManager : MonoBehaviour
             MenuPage.SetActive(true);
             Debug.Log("Base Menu On");
         }
-        
+
     }
 
     void Update()

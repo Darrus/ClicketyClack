@@ -17,6 +17,7 @@ public class TrainMovementManager : MonoBehaviour {
     
     public float MainSpeed;
     public float RenderSpeed;
+    public float UnRenderSpeed;
     public float TotalTrackDistance;
 
     public TrainPart[] TheTrain;
