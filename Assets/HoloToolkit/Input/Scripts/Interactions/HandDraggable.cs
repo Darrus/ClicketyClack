@@ -50,10 +50,6 @@ namespace HoloToolkit.Unity.InputModule
         [Range(0.01f, 1.0f)]
         public float RotationLerpSpeed = 0.2f;
 
-        [SerializeField]
-        private float speed = 100.0f;
-        private float step;
-
         public bool IsDraggingEnabled = true;
 
         private Camera mainCamera;
@@ -122,9 +118,6 @@ namespace HoloToolkit.Unity.InputModule
             InputManager.Instance.PushModalInputHandler(gameObject);
 
             isDragging = true;
-
-            // Back to Default Angle
-            step = speed * Time.deltaTime;
 
             //GazeCursor.Instance.SetState(GazeCursor.State.Move);
             //GazeCursor.Instance.SetTargetObject(HostTransform);
@@ -195,11 +188,6 @@ namespace HoloToolkit.Unity.InputModule
         /// </summary>
         private void UpdateDragging()
         {
-
-            // Default Angle
-            this.transform.rotation =
-                Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, 0), step);
-
             Vector3 newHandPosition;
             currentInputSource.TryGetPosition(currentInputSourceId, out newHandPosition);
 

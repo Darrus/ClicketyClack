@@ -9,46 +9,46 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1231957574203460}
+  m_RootGameObject: {fileID: 1146255056541486}
   m_IsPrefabParent: 1
---- !u!1 &1231957574203460
+--- !u!1 &1146255056541486
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4194432510190944}
-  - component: {fileID: 23390115715511568}
-  - component: {fileID: 102765504868604202}
-  - component: {fileID: 114648889770555532}
-  - component: {fileID: 114756518974030376}
+  - component: {fileID: 4713967210002876}
+  - component: {fileID: 23874143422832814}
+  - component: {fileID: 102421277771767628}
+  - component: {fileID: 114501922388452326}
+  - component: {fileID: 114981209199966180}
   m_Layer: 0
-  m_Name: SignText(JPN)
+  m_Name: Text(JPN)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4194432510190944
+--- !u!4 &4713967210002876
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1231957574203460}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.057344005, y: 0.057344005, z: 0.057344005}
+  m_GameObject: {fileID: 1146255056541486}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.006}
+  m_LocalScale: {x: 0.0384, y: 0.0384, z: 0.0384}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23390115715511568
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!23 &23874143422832814
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1231957574203460}
+  m_GameObject: {fileID: 1146255056541486}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -75,13 +75,13 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!102 &102765504868604202
+--- !u!102 &102421277771767628
 TextMesh:
   serializedVersion: 3
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1231957574203460}
+  m_GameObject: {fileID: 1146255056541486}
   m_Text: "\u77F3\u70AD\u3092\u8CA8\u7269\u306B\n\u7A4D\u3093\u3067\u307F\u3088\u3046"
   m_OffsetZ: 0
   m_CharacterSize: 0.05
@@ -96,33 +96,35 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
---- !u!114 &114648889770555532
+--- !u!114 &114501922388452326
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1231957574203460}
+  m_GameObject: {fileID: 1146255056541486}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 80da81f528102734fa86b31522c824ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fontScale: 2.24
---- !u!114 &114756518974030376
+  fontScale: 1.5
+--- !u!114 &114981209199966180
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1231957574203460}
+  m_GameObject: {fileID: 1146255056541486}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa5dcf7ba12c3fa44a45edeaa442e67a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fontScale: 0.5
+  fontScale: 0.57
   japanese:
   - "\u77F3\u70AD\u3092\u8CA8\u7269\u306B\n\u7A4D\u3093\u3067\u307F\u3088\u3046"
   - "\u8CA8\u7269\u3092\u5217\u8ECA\u306B\n\u9023\u7D50\u3057\u3066\u307F\u3088\u3046"
   - "\u99C5\u306B\u7740\u304F\u307E\u3067\u306B\n\u969C\u5BB3\u7269\u3084\u76D7\u8CCA\u304B\u3089\n\u5217\u8ECA\u3092\u9632\u885B\u3057\u3088\u3046"
   - "\u6700\u5F8C\u306B\n\u30C8\u30F3\u30CD\u30EB\u306E\u5CA9\u3092\n\u3069\u3051\u3066\u307F\u3088\u3046"
-  - CLEAR
+  - 'TUTORIAL
+
+    CLEAR'
