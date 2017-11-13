@@ -4,15 +4,15 @@ using UnityEngine.UI;
 
 public class TextControll : MonoBehaviour
 {
+    [Multiline]
+    public string[] English;
     public static int textNum;
-    public GameObject HoloLensCamera;
+
     private TextMesh text;
-    private float scale;
 
     private void Start()
     {
         text = GetComponent<TextMesh>();
-        scale = GetComponent<FontScalable>().fontScale;    
         textNum = 0;
     }
 
@@ -22,23 +22,23 @@ public class TextControll : MonoBehaviour
         switch (textNum)
         {
             case 0:
-                text.text = "Pick up the pieces coals \n and place it into the cargo.";
+                text.text = English[0];
                 break;
 
             case 1:
-                text.text = "Lift the cargo \n and attach it into the train";
+                text.text = English[1];
                 break;
                 
             case 2:
-                text.text = "Bandits will attempt to \n destroy the train, \n protect it at all cause!";
+                text.text = English[2];
                 break;
 
             case 3:
-                text.text = "The Bandits have set up \n a trap for the train, \n Clear the path of rocks";
+                text.text = English[3];
                 break;
 
             case 4:
-                text.text = "LEVEL CLEAR";
+                text.text = English[4];
                 textNum = 4;
                 break;
         }

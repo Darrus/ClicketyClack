@@ -20,15 +20,16 @@ public class RunEventOnLook : MonoBehaviour
 
     private void Update()
     {
-        RaycastHit hit;
-        Physics.Raycast(mainCam.transform.position, mainCam.transform.forward, out hit);
+        Ray ray = new Ray(mainCam.transform.position, mainCam.transform.forward);
+        RaycastHit hitInfo;
+        bool hit = col.Raycast(ray, out hitInfo, lookDistance);
 
-        if(!looked && hit.transform != null && hit.distance <= lookDistance && hit.collider == col)
+        if (hit && !looked)
         {
             looked = true;
             onLookEvents.Invoke();
         }
-        else if(looked && (hit.transform == null || hit.collider != col))
+        else if(looked && !hit)
         {
             looked = false;
             onLookAwayEvents.Invoke();

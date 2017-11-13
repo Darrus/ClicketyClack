@@ -14,7 +14,7 @@ public class Pluck : MonoBehaviour, INavigationHandler
 
     public float force;
 
-    private Animator myAnimator;
+    Animator myAnimator;
     Rigidbody myRigidbody;
     public bool plucked = false;
 

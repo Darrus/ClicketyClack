@@ -26,23 +26,51 @@ namespace HoloToolkit.Unity
         [Tooltip("Display a small green cube where the target position is.")]
         public bool DebugDisplayTargetPosition = false;
 
+        [Range(5f,10f)]
+        public float initialDistanceToCamera = 5f;
+
+        public bool _isHide =false;
+
         private Vector3 targetPosition;
         private Vector3 optimalPosition;
-        private float initialDistanceToCamera;
 
         void Start()
         {
-            initialDistanceToCamera = Vector3.Distance(this.transform.position, Camera.main.transform.position);
+            //initialDistanceToCamera = Vector3.Distance(this.transform.position, Camera.main.transform.position);
         }
 
         void Update()
         {
-            optimalPosition = Camera.main.transform.position + Camera.main.transform.forward * initialDistanceToCamera;
+            if (_isHide)
+            {
+                OnHide();
+            }
+            else
+            {
+                optimalPosition = Camera.main.transform.position + Camera.main.transform.forward * initialDistanceToCamera;
 
-            Vector3 offsetDir = this.transform.position - optimalPosition;
+                Vector3 offsetDir = this.transform.position - optimalPosition;
+                if (offsetDir.magnitude > SphereRadius)
+                {
+                    targetPosition = optimalPosition + offsetDir.normalized * SphereRadius;
+
+                    float deltaTime = UseUnscaledTime
+                        ? Time.unscaledDeltaTime
+                        : Time.deltaTime;
+
+                    this.transform.position = Vector3.Lerp(this.transform.position, targetPosition, MoveSpeed * deltaTime);
+                }
+            }
+        }
+        void OnHide()
+        {
+
+            Vector3 hidePosition = Camera.main.transform.position + Camera.main.transform.right * initialDistanceToCamera;
+
+            Vector3 offsetDir = this.transform.position - hidePosition;
             if (offsetDir.magnitude > SphereRadius)
             {
-                targetPosition = optimalPosition + offsetDir.normalized * SphereRadius;
+                targetPosition = hidePosition + offsetDir.normalized * SphereRadius;
 
                 float deltaTime = UseUnscaledTime
                     ? Time.unscaledDeltaTime

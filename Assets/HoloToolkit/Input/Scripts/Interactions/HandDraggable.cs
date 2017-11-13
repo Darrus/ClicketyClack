@@ -104,6 +104,8 @@ namespace HoloToolkit.Unity.InputModule
         /// </summary>
         public void StartDragging()
         {
+            GetComponent<Rigidbody>().useGravity = false;
+
             if (!IsDraggingEnabled)
             {
                 return;
@@ -238,6 +240,8 @@ namespace HoloToolkit.Unity.InputModule
         /// </summary>
         public void StopDragging()
         {
+            GetComponent<Rigidbody>().useGravity = true;
+
             if (!isDragging)
             {
                 return;
@@ -283,6 +287,8 @@ namespace HoloToolkit.Unity.InputModule
 
         public void OnInputUp(InputEventData eventData)
         {
+            GetComponent<Rigidbody>().useGravity = true;
+
             if (currentInputSource != null &&
                 eventData.SourceId == currentInputSourceId)
             {
@@ -292,6 +298,8 @@ namespace HoloToolkit.Unity.InputModule
 
         public void OnInputDown(InputEventData eventData)
         {
+            GetComponent<Rigidbody>().useGravity = false;
+
             if (isDragging)
             {
                 // We're already handling drag input, so we can't start a new drag operation.

@@ -41,7 +41,7 @@ public class OutOfBounds : MonoBehaviour {
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if(other.CompareTag(groundTag))
         {

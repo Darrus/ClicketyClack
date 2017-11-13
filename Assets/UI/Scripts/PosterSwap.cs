@@ -2,9 +2,13 @@
 
 [RequireComponent(typeof(ReversePlayAnimation))]
 public class PosterSwap : MonoBehaviour {
-    public Renderer targetMesh;
-    public Material[] materials;
+    [SerializeField]
+    Pluck1 targetPluck;
 
+    [SerializeField]
+    Renderer targetMesh;
+
+    public Material[] materials;
     ReversePlayAnimation controller;
 
     private void Awake()
@@ -14,7 +18,7 @@ public class PosterSwap : MonoBehaviour {
 
     private void Update()
     {
-        if(controller.previousState == ReversePlayAnimation.ANIM_STATE.REVERSE && controller.State == ReversePlayAnimation.ANIM_STATE.REVERSED)
+        if(controller.previousState == ReversePlayAnimation.ANIM_STATE.REVERSE && controller.State == ReversePlayAnimation.ANIM_STATE.REVERSED && !targetPluck.plucked)
         {
             targetMesh.material = materials[Random.Range(0, materials.Length)];        
         }

@@ -25,7 +25,6 @@ public class TutorialTrigger : MonoBehaviour
         {
             if (!_isTrig)
             {
-                TextControll.textNum = 2;
             }
             _isTrig = true;
         }

@@ -1,21 +1,20 @@
-﻿
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using HoloToolkit.Unity.InputModule;
 
 public class CargoCollision : MonoBehaviour
 {
     public static bool _isArrow = false;
+    public GameObject obj_coal_pile;
 
     private  bool _isCoal = false;
     private int coalCount;
-    private float delayTime = 3.0f;
-    public GameObject obj_coal_pile;
 
     private void Start()
     {
         coalCount = 0;
-        this.gameObject.GetComponent<CargoControll>().enabled = false;
+       GetComponent<HandDraggable>().enabled = false;
     }
 
     private void Update()
@@ -64,7 +63,7 @@ public class CargoCollision : MonoBehaviour
         else
         {
             _isCoal = true;
-            this.gameObject.GetComponent<CargoControll>().enabled = true;
+            GetComponent<HandDraggable>().enabled = true;
         }
     }
 }
