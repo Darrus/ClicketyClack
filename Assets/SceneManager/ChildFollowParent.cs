@@ -21,6 +21,8 @@ public class ChildFollowParent : MonoBehaviour
             LevelManager.Add_Child_ToRoom(LevelManager.Singleton);
             Debug.Log("Room Child Test");
         }
+
+        OrderExecution.Done = true;
     }
     // Use this for initialization
     void Start()
@@ -41,9 +43,6 @@ public class ChildFollowParent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (once && transform.parent != null)
-        {
-            Debug.Log("Room Child Order Wrong");
-        }
+
     }
 }

@@ -7,7 +7,6 @@ public class TextControll : MonoBehaviour
     [Multiline]
     public string[] English;
     public static int textNum;
-
     private TextMesh text;
 
     private void Start()

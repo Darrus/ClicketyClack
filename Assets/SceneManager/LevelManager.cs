@@ -7,7 +7,42 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour {
 
-    public static bool TrianConnected;
+    [System.Serializable]
+    public struct Train
+    {
+        public bool head;
+        public bool Carriage;
+        public bool Cargo;
+        public int Life;
+
+        public Train(bool T)
+        {
+            head = T;
+            Carriage = T;
+            Cargo = T;
+            Life = 3;
+        }
+
+        public void killHead()
+        {
+            head = false;
+            Carriage = false;
+            Cargo = false;
+            Life = 0;
+        }
+
+        public void KillCarriage()
+        {
+            Carriage = false;
+            Cargo = false;
+            Life = 1;
+        }
+        public void KillCargo()
+        {
+            Cargo = false;
+            Life = 2;
+        }
+    };
     public static bool TrianOnGround;
 
     public static bool ReachStation;
@@ -23,14 +58,14 @@ public class LevelManager : MonoBehaviour {
     public PointManager pointManager;
     public bool Tutorial;
 
+    public static Train TheTrainLife = new Train(true);
+
     public static LevelManager Singleton = null;
 
     public static LevelManager Instance
     {
         get { return Singleton; }
     }
-
-    private float TimeToRollOut;
 
     void Awake()
     {
@@ -52,27 +87,25 @@ public class LevelManager : MonoBehaviour {
         }
 
         Play = true;
-        Room_Items.SetActive(true);
+        OrderExecution.Done = true;
     }
 
-    public static void Add_Child_ToRoom(LevelManager Temp)
+    public static void Add_Child_ToRoom(LevelManager singleton)
     {
         GameObject Room = GameObject.FindGameObjectWithTag("TheRoom");
         Debug.Log(Room.name + " : " + Room.tag);
-        Temp.Room_Items.transform.SetParent(Room.transform);
+        singleton.Room_Items.transform.SetParent(Room.transform);
         Debug.Log("Room Child Added");
     }
 
     void Start()
     {
-        TrianConnected = true;
         TrianOnGround = false;
         ReachStation = true;
         MoveOut = false;
         CargoOn = false;
-        TimeToRollOut = 10f;
 
-        if(!Tutorial)
+        if (!Tutorial)
         {
             CargoOn = true;
         }
@@ -81,62 +114,43 @@ public class LevelManager : MonoBehaviour {
 
     void Update()
     {
-
-#if UNITY_EDITOR
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (!MoveOut && CargoOn && ReachStation && OrderExecution.Singleton != null)
         {
-            MoveOut = true;
-            ReachStation = false;
-            CargoOn = true;
-        }
-#endif
-        if (!MoveOut && CargoOn && ReachStation)
-        {
-            if (!Play)
+            if(OrderExecution.LifeGoalReached)
             {
-                TimeToRollOut = 10f;
-            }
-            else
-            {
-
-                if (TimeToRollOut >= 0)
-                    TimeToRollOut -= Time.deltaTime;
-                else
-                {
-                    pointManager.UpdatePoints();
-                    Debug.Log("Points Updated");
-
-                    MoveOut = true;
-                    ReachStation = false;
-                    Debug.Log("GO out");
-                }
+                AppManager.RenderingTrack = true;
+                BezierCurve2.Go = true;
+                ReachStation = false;
+                OrderExecution.SelfDestory(OrderExecution.Singleton);
             }
         }
 
         Check_Win_Lose_Condition();
+
+
+
     }
 
     void Check_Win_Lose_Condition()
     {
-        if (!TrianConnected && TrianOnGround)
+        if (TheTrainLife.Life == 0 && TrianOnGround && !AppManager.ReStartLevel)
         {
-            ResetLevel();
+            AppManager.ReStartLevel = true;
         }
 
         if (ReachStation && MoveOut)
         {
             AppManager.NextLevel(AppManager.Singleton);
 
-            // CLEAR
             TextControll.textNum = 4;
         }
 
     }
 
-    void ResetLevel()
+    public static void SelfDestory(LevelManager singleton)
     {
-        AppManager.Detach_RoomChild(AppManager.Singleton);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        LevelManager.Destroy(singleton.gameObject);
     }
+
 
 }

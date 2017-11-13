@@ -6,7 +6,6 @@ public class JapaneseText : FontScalable
 {
     [Multiline]
     public string[] japanese;
-
     private TextMesh text;
 
     private void Awake()

@@ -38,15 +38,26 @@ public class BombExplosion : MonoBehaviour
             {
                 if (col.CompareTag(triggerTag))
                 {
-                    LevelManager.TrianConnected = false;
+                    if(col.gameObject.name == "head")
+                    {
+                        LevelManager.TheTrainLife.killHead();
+                    }
+                    if (col.gameObject.name == "carriage")
+                    {
+                        LevelManager.TheTrainLife.KillCarriage();
+                    }
+                    if (col.gameObject.name == "cargo")
+                    {
+                        LevelManager.TheTrainLife.KillCargo();
+                    }
+
                     Rigidbody objRigidbody = col.GetComponent<Rigidbody>();
-                    objRigidbody.useGravity = true;
-                    objRigidbody.isKinematic = false;
-                    objRigidbody.AddExplosionForce(explosionForce, transform.position, sphereCollider.radius);
+                        objRigidbody.useGravity = true;
+                        objRigidbody.isKinematic = false;
+                        objRigidbody.AddExplosionForce(explosionForce, transform.position, sphereCollider.radius);
+               
                 }
             }
-
-            LevelManager.TrianConnected = false;
             CreateExplosion();
             sfx.gameObject.GetComponent<PlaySoundAtPosition>().PlayAtPosition();
             GameObject.Destroy(Parent);

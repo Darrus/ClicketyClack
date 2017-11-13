@@ -15,6 +15,7 @@ public class AppManager : MonoBehaviour {
     public String Level_4;
     public String Tutorial;
 
+    [System.Serializable]
     public enum GameScene
     {
         mainmenu = 0,
@@ -31,9 +32,19 @@ public class AppManager : MonoBehaviour {
 
     public static int curScene;
 
-    public static AppManager Singleton = null;
+    public static String curScene_Name;
+    public static String preScene_Name;
+
+    public static bool ReStartLevel;
+
+    public static bool RenderingTrack;
+    public static bool UnRenderingTrack;
+
+    public GameScene TestScene;
 
     public GameObject TheRoom;
+
+    public static AppManager Singleton = null;
 
     public static AppManager Instance
     {
@@ -51,6 +62,12 @@ public class AppManager : MonoBehaviour {
         }
         Singleton = this;
 
+        curScene_Name = "Application";
+        preScene_Name = "Application";
+
+        RenderingTrack = false;
+        UnRenderingTrack = false;
+        ReStartLevel = false;
     }
    
     void Start()
@@ -63,14 +80,13 @@ public class AppManager : MonoBehaviour {
             once = true;
 
 #if UNITY_EDITOR
-            curScene = (int)GameScene.Tutorial;
-            SceneManager.LoadScene(Tutorial);
+            curScene = (int)TestScene;
+            LoadScene(Singleton);
 #endif
-
         }
     }
 
-   
+
     void Update()
     {
 #if UNITY_EDITOR
@@ -88,7 +104,43 @@ public class AppManager : MonoBehaviour {
             once = false;
         }
 #endif
+        if (OrderExecution.Singleton != null && ReStartLevel)
+        {
+            OrderExecution.LifeGoalReached = true;
+            ReStartLevel = false;
+        }
+        if (SceneManager.GetSceneByName(curScene_Name).isLoaded && preScene_Name != curScene_Name && !UnRenderingTrack)
+        {
+            if (preScene_Name != MainMenu && preScene_Name != "Application")
+                UnRenderingTrack = true;
+
+
+#if UNITY_EDITOR
+            if (once)
+            {
+                ChangeScene();
+                once = false;
+            }
+#endif
+        }
     }
+    
+
+    public static void ChangeScene()
+    {
+        Detach_RoomChild(Singleton);
+
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(curScene_Name));
+
+        SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName(preScene_Name).buildIndex);
+
+        if (OrderExecution.Singleton != null)
+            OrderExecution.LifeGoalReached = true;
+
+        preScene_Name = curScene_Name;
+       
+    }
+
 
     public static void Quit()
     {
@@ -97,41 +149,53 @@ public class AppManager : MonoBehaviour {
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
-        Application.Quit();
+#if UNITY_WSA
+        //Application.Current.Exit();
+        //Application.Quit();
+#endif
+
     }
 
     public static void LoadScene(AppManager Temp)
     {
-        switch(curScene)
+        Temp.CheckAndDestoryManagers();
+
+        switch (curScene)
         {
             case (int)GameScene.mainmenu:
                 {
-                    SceneManager.LoadScene(Temp.MainMenu);
+                    curScene_Name = Temp.MainMenu;
+                    SceneManager.LoadSceneAsync(Temp.MainMenu,LoadSceneMode.Additive);
                     break;
                 }
             case (int)GameScene.level_1:
                 {
-                    SceneManager.LoadScene(Temp.Level_1);
+                    curScene_Name = Temp.Level_1;
+                    SceneManager.LoadSceneAsync(Temp.Level_1, LoadSceneMode.Additive);
                     break;
                 }
             case (int)GameScene.level_2:
                 {
-                    SceneManager.LoadScene(Temp.Level_2);
+                    curScene_Name = Temp.Level_2;
+                    SceneManager.LoadSceneAsync(Temp.Level_2, LoadSceneMode.Additive);
                     break;
                 }
             case (int)GameScene.level_3:
                 {
-                    SceneManager.LoadScene(Temp.Level_3);
+                    curScene_Name = Temp.Level_3;
+                    SceneManager.LoadSceneAsync(Temp.Level_3, LoadSceneMode.Additive);
                     break;
                 }
             case (int)GameScene.level_4:
                 {
-                    SceneManager.LoadScene(Temp.Level_4);
+                    curScene_Name = Temp.Level_4;
+                    SceneManager.LoadSceneAsync(Temp.Level_4, LoadSceneMode.Additive);
                     break;
                 }
             case (int)GameScene.Tutorial:
                 {
-                    SceneManager.LoadScene(Temp.Tutorial);
+                    curScene_Name = Temp.Tutorial;
+                    SceneManager.LoadSceneAsync(Temp.Tutorial, LoadSceneMode.Additive);
                     break;
                 }
             case (int)GameScene.TestLevelCreation:
@@ -139,7 +203,6 @@ public class AppManager : MonoBehaviour {
                     break;
                 }
         }
-        Detach_RoomChild(Temp);
     }
 
     public static void NextLevel(AppManager Temp)
@@ -149,40 +212,50 @@ public class AppManager : MonoBehaviour {
             case (int)GameScene.level_1:
                 {
                     curScene = (int)GameScene.level_2;
-                    SceneManager.LoadScene(Temp.Level_2);
                     break;
                 }
             case (int)GameScene.level_2:
                 {
                     curScene = (int)GameScene.level_3;
-                    SceneManager.LoadScene(Temp.Level_3);
                     break;
                 }
             case (int)GameScene.level_3:
                 {
                     curScene = (int)GameScene.level_4;
-                    SceneManager.LoadScene(Temp.Level_4);
                     break;
                 }
             case (int)GameScene.level_4:
                 {
                     curScene = (int)GameScene.mainmenu;
-                    SceneManager.LoadScene(Temp.MainMenu);
                     break;
                 }
             case (int)GameScene.Tutorial:
                 {
                     curScene = (int)GameScene.mainmenu;
-                    SceneManager.LoadScene(Temp.MainMenu);
                     break;
                 }
 
         }
-        Detach_RoomChild(Temp);
+
+        LoadScene(Temp);
     }
 
     public static void Detach_RoomChild(AppManager Temp)
     {
-        Destroy(Temp.TheRoom.transform.GetChild(0).gameObject);
+        if(preScene_Name != "Application")
+            Destroy(Temp.TheRoom.transform.GetChild(0).gameObject);
+    }
+
+    private void CheckAndDestoryManagers()
+    {
+        if(LevelManager.Singleton != null)
+        {
+            LevelManager.SelfDestory(LevelManager.Singleton);
+        }
+
+        if(MainMenuManager.Singleton != null)
+        {
+            MainMenuManager.SelfDestory(MainMenuManager.Singleton);
+        }
     }
 }

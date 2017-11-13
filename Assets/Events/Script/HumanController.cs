@@ -66,6 +66,7 @@ public class HumanController : MonoBehaviour
             {
                 commandQueue.Dequeue();
                 _isEnd = true;
+                Debug.Log("END");
             }
         }
     }
@@ -122,7 +123,6 @@ public class HumanController : MonoBehaviour
                 if (dist <= 0.01f)
                     return true;
                 break;
-
             default:
                 return true;
         }

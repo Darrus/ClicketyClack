@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: fa642a6b36d4c6742a9fb6d40083b000
+timeCreated: 1509681876
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Nicoca
+  fontNames:
+  - Nicoca
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

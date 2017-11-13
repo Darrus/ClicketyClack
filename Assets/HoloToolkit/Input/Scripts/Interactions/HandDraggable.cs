@@ -31,7 +31,7 @@ namespace HoloToolkit.Unity.InputModule
 
         [Tooltip("Scale by which hand movement in z is multipled to move the dragged object.")]
         public float DistanceScale = 2f;
-        
+
         public enum RotationModeEnum
         {
             Default,
@@ -120,6 +120,7 @@ namespace HoloToolkit.Unity.InputModule
             InputManager.Instance.PushModalInputHandler(gameObject);
 
             isDragging = true;
+
             //GazeCursor.Instance.SetState(GazeCursor.State.Move);
             //GazeCursor.Instance.SetTargetObject(HostTransform);
 
@@ -208,7 +209,7 @@ namespace HoloToolkit.Unity.InputModule
 
             draggingPosition = pivotPosition + (targetDirection * targetDistance);
 
-            if (RotationMode == RotationModeEnum.OrientTowardUser || RotationMode == RotationModeEnum.OrientTowardUserAndKeepUpright) 
+            if (RotationMode == RotationModeEnum.OrientTowardUser || RotationMode == RotationModeEnum.OrientTowardUserAndKeepUpright)
             {
                 draggingRotation = Quaternion.LookRotation(HostTransform.position - pivotPosition);
             }
@@ -228,10 +229,10 @@ namespace HoloToolkit.Unity.InputModule
             // Apply Final Rotation
             HostTransform.rotation = Quaternion.Lerp(HostTransform.rotation, draggingRotation, RotationLerpSpeed);
 
-            if (RotationMode == RotationModeEnum.OrientTowardUserAndKeepUpright)		
-            {		
-                Quaternion upRotation = Quaternion.FromToRotation(HostTransform.up, Vector3.up);		
-                HostTransform.rotation = upRotation * HostTransform.rotation;		
+            if (RotationMode == RotationModeEnum.OrientTowardUserAndKeepUpright)
+            {
+                Quaternion upRotation = Quaternion.FromToRotation(HostTransform.up, Vector3.up);
+                HostTransform.rotation = upRotation * HostTransform.rotation;
             }
         }
 
@@ -244,6 +245,8 @@ namespace HoloToolkit.Unity.InputModule
 
             if (!isDragging)
             {
+
+                GetComponent<Rigidbody>().useGravity = true;
                 return;
             }
 
