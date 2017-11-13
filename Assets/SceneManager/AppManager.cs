@@ -35,6 +35,8 @@ public class AppManager : MonoBehaviour {
     public static String curScene_Name;
     public static String preScene_Name;
 
+    public static bool ReStartLevel;
+
     public static bool RenderingTrack;
     public static bool UnRenderingTrack;
 
@@ -65,6 +67,7 @@ public class AppManager : MonoBehaviour {
 
         RenderingTrack = false;
         UnRenderingTrack = false;
+        ReStartLevel = false;
     }
    
     void Start()
@@ -80,7 +83,6 @@ public class AppManager : MonoBehaviour {
             curScene = (int)TestScene;
             LoadScene(Singleton);
 #endif
-            
         }
     }
 
@@ -102,7 +104,11 @@ public class AppManager : MonoBehaviour {
             once = false;
         }
 #endif
-
+        if (OrderExecution.Singleton != null && ReStartLevel)
+        {
+            OrderExecution.LifeGoalReached = true;
+            ReStartLevel = false;
+        }
         if (SceneManager.GetSceneByName(curScene_Name).isLoaded && preScene_Name != curScene_Name && !UnRenderingTrack)
         {
             if (preScene_Name != MainMenu && preScene_Name != "Application")
@@ -132,6 +138,7 @@ public class AppManager : MonoBehaviour {
             OrderExecution.LifeGoalReached = true;
 
         preScene_Name = curScene_Name;
+       
     }
 
 
@@ -143,7 +150,7 @@ public class AppManager : MonoBehaviour {
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
 #if UNITY_WSA
-        Application.Current.Exit();
+        //Application.Current.Exit();
         //Application.Quit();
 #endif
 

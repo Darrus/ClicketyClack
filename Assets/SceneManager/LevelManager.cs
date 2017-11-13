@@ -7,7 +7,42 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour {
 
-    public static bool TrianConnected;
+    [System.Serializable]
+    public struct Train
+    {
+        public bool head;
+        public bool Carriage;
+        public bool Cargo;
+        public int Life;
+
+        public Train(bool T)
+        {
+            head = T;
+            Carriage = T;
+            Cargo = T;
+            Life = 3;
+        }
+
+        public void killHead()
+        {
+            head = false;
+            Carriage = false;
+            Cargo = false;
+            Life = 0;
+        }
+
+        public void KillCarriage()
+        {
+            Carriage = false;
+            Cargo = false;
+            Life = 1;
+        }
+        public void KillCargo()
+        {
+            Cargo = false;
+            Life = 2;
+        }
+    };
     public static bool TrianOnGround;
 
     public static bool ReachStation;
@@ -22,6 +57,8 @@ public class LevelManager : MonoBehaviour {
     public GameObject AppPrefab;
     public PointManager pointManager;
     public bool Tutorial;
+
+    public static Train TheTrainLife = new Train(true);
 
     public static LevelManager Singleton = null;
 
@@ -63,7 +100,6 @@ public class LevelManager : MonoBehaviour {
 
     void Start()
     {
-        TrianConnected = true;
         TrianOnGround = false;
         ReachStation = true;
         MoveOut = false;
@@ -90,13 +126,16 @@ public class LevelManager : MonoBehaviour {
         }
 
         Check_Win_Lose_Condition();
+
+
+
     }
 
     void Check_Win_Lose_Condition()
     {
-        if (!TrianConnected && TrianOnGround)
+        if (TheTrainLife.Life == 0 && TrianOnGround && !AppManager.ReStartLevel)
         {
-            ResetLevel();
+            AppManager.ReStartLevel = true;
         }
 
         if (ReachStation && MoveOut)
@@ -106,11 +145,6 @@ public class LevelManager : MonoBehaviour {
             TextControll.textNum = 4;
         }
 
-    }
-
-    void ResetLevel()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public static void SelfDestory(LevelManager singleton)

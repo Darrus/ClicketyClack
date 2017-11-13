@@ -89,7 +89,7 @@ public class TrainMovement : MonoBehaviour {
             once = true;
         }
 
-        if (LevelManager.TrianConnected && LevelManager.MoveOut && !LevelManager.ReachStation && BezierCurve2.Go && LevelManager.Play)
+        if (LevelManager.TheTrainLife.Life != 0 && LevelManager.MoveOut && !LevelManager.ReachStation && BezierCurve2.Go && LevelManager.Play)
         {
             distanceTravel += Time.deltaTime * Manager.MainSpeed;
             CheckPosition(true);

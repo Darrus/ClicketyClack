@@ -41,7 +41,7 @@ public class BanditManager : MonoBehaviour {
 
     public void BanditsDefeat()
     {
-        if (!spawned || !LevelManager.TrianConnected)
+        if (!spawned || LevelManager.TheTrainLife.Life == 0)
             return;
 
         defeat = true;

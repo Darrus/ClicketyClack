@@ -24,8 +24,6 @@ public class MainMenuManager : MonoBehaviour
 
     public GameObject AppPrefab;
 
-    public bool TestScene;
-
     public static MainMenuManager Singleton = null;
 
     public static MainMenuManager Instance
@@ -64,7 +62,7 @@ public class MainMenuManager : MonoBehaviour
 
     void Start()
     {
-        if (!TestScene)
+        if (!AppManager.ReStartLevel)
         {
             curPage = (int)MenuPages.Base_Menu;
             MenuPage.SetActive(true);
@@ -83,13 +81,13 @@ public class MainMenuManager : MonoBehaviour
             }
         }
 
-
+#if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.Space))
         {
             AppManager.curScene = (int)AppManager.GameScene.level_1;
             AppManager.LoadScene(AppManager.Singleton);
         }
-
+#endif
     }
 
     public static void UpdateMainMenu(MainMenuManager singleton)

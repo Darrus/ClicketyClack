@@ -15,7 +15,20 @@ public class BridgeEvent : EventBase {
             Rigidbody rigid = other.transform.GetComponent<Rigidbody>();
             rigid.useGravity = true;
             rigid.isKinematic = false;
-            LevelManager.TrianConnected = false;
+
+            if (other.gameObject.name == "head")
+            {
+                LevelManager.TheTrainLife.killHead();
+            }
+            if (other.gameObject.name == "carriage")
+            {
+                LevelManager.TheTrainLife.KillCarriage();
+            }
+            if (other.gameObject.name == "cargo")
+            {
+                LevelManager.TheTrainLife.KillCargo();
+            }
+
         }
     }
 }
