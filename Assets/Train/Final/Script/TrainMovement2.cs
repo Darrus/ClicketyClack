@@ -23,6 +23,8 @@ public class TrainMovement2 : MonoBehaviour {
             {
                 transform.position = new Vector3(PointFollow.transform.position.x, PointFollow.transform.position.y + TrainHeightGap, PointFollow.transform.position.z);
                 transform.localRotation = PointFollow.transform.localRotation;
+
+
                 //Vector3 lookPos = transform.position + BezierCurve2.TrackData_List[PointFollow.Point_ID].tangent;
                 //var rotation = Quaternion.LookRotation(lookPos);
                 //rotation *= Quaternion.Euler(0, -90, 0); // this adds a 90 degrees Y rotation
@@ -42,11 +44,6 @@ public class TrainMovement2 : MonoBehaviour {
             transform.position = new Vector3(PointFollow.transform.position.x, PointFollow.transform.position.y + TrainHeightGap, PointFollow.transform.position.z);
             transform.localRotation = PointFollow.transform.localRotation;
         }
-
-
-
-
-
     }
 
     void checkConnection()

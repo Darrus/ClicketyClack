@@ -20,7 +20,6 @@ public class PickAndSnap : MonoBehaviour, IManipulationHandler
     bool picked = false;
     EventBase trainEvent;
 
-
     private void Start()
     {
         objCollider = GetComponent<Collider>();

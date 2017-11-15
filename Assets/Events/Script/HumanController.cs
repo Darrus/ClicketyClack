@@ -66,7 +66,6 @@ public class HumanController : MonoBehaviour
             {
                 commandQueue.Dequeue();
                 _isEnd = true;
-                Debug.Log("END");
             }
         }
     }

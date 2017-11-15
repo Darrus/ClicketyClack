@@ -96,14 +96,14 @@ public class AppManager : MonoBehaviour {
         }
 #endif
 
-#if UNITY_WSA
-        if (once && Room.Instance.done)
-        {
-            curScene = (int)GameScene.mainmenu;
-            SceneManager.LoadScene(MainMenu);
-            once = false;
-        }
-#endif
+//#if UNITY_WSA
+//        if (once && Room.Instance.done)
+//        {
+//            curScene = (int)GameScene.mainmenu;
+//            SceneManager.LoadScene(MainMenu);
+//            once = false;
+//        }
+//#endif
         if (OrderExecution.Singleton != null && ReStartLevel)
         {
             OrderExecution.LifeGoalReached = true;
@@ -123,6 +123,13 @@ public class AppManager : MonoBehaviour {
             }
 #endif
         }
+    }
+
+    public void StartGame()
+    {
+        curScene = (int)GameScene.mainmenu;
+        SceneManager.LoadScene(MainMenu);
+        once = false;
     }
     
 
