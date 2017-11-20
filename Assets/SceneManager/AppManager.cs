@@ -104,7 +104,7 @@ public class AppManager : MonoBehaviour {
     public void StartGame()
     {
         curScene = GameScene.mainmenu;
-        SceneManager.LoadScene(MainMenu_Scene);
+        LoadScene();
     }
 
     public void ChangeScene()
