@@ -33,9 +33,37 @@ public class LevelCutscene : MonoBehaviour {
     public GameObject train;
     public HumanController[] victims;
 
+    private bool once;
+
     private void Start()
     {
-        ExecuteCutscene();
+        once = false;
+    }
+
+    private void Update()
+    {
+        if (LevelManager.Singleton != null)
+        {
+            if (!once && !AppManager.Instance.RenderingTrack && LevelManager.Instance.MoveOut)
+            {
+                ExecuteCutscene();
+                once = true;
+            }
+            else if (once && !LevelManager.Instance.Play)
+            {
+                bool check = true;
+                foreach (HumanController victim in victims)
+                {
+                    if (victim.gameObject.activeSelf)
+                        check = false;
+                }
+                if (check)
+                {
+                    LevelManager.Instance.Button_Play();
+                    (GetComponent(typeof(LevelCutscene)) as LevelCutscene).enabled = false;
+                }
+            }
+        }
     }
 
     public void ExecuteCutscene()

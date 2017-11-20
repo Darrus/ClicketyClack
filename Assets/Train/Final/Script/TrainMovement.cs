@@ -11,9 +11,18 @@ public class TrainMovement : MonoBehaviour {
     public int Point_ID;
     private float distanceGap;
     public bool once;
-	
-	// Update is called once per frame
-	void Update () {
+
+    private Transform parent;
+
+
+    private void Awake()
+    {
+        if (ID == 0)
+            OrderExecution.Instance.Done = true;
+    }
+
+    // Update is called once per frame
+    void Update () {
 
         if (ID == 0)
             TrainRenderUpdate();
@@ -32,10 +41,9 @@ public class TrainMovement : MonoBehaviour {
             Point_ID = 0;
             CheckPosition(true);
             once = true;
-            OrderExecution.Done = true;
         }
 
-        if (AppManager.RenderingTrack)
+        if (AppManager.Instance.RenderingTrack)
         {
             distanceTravel += Time.deltaTime * Manager.RenderSpeed;
             CheckPosition(true);
@@ -44,8 +52,6 @@ public class TrainMovement : MonoBehaviour {
 
     private void TrainUnRenderUpdate()
     {
-
-       
         if (!once && Manager.once)
         {
             Point_ID = BezierCurve2.TrackData_List.Length;
@@ -53,10 +59,9 @@ public class TrainMovement : MonoBehaviour {
             distanceTravel = Manager.TotalTrackDistance;
             CheckPosition(false);
             once = true;
-            OrderExecution.Done = true;
         }
 
-        if (AppManager.UnRenderingTrack)
+        if (AppManager.Instance.UnRenderingTrack)
         {
             distanceTravel -= Time.deltaTime * Manager.UnRenderSpeed;
             CheckPosition(false);
@@ -89,10 +94,13 @@ public class TrainMovement : MonoBehaviour {
             once = true;
         }
 
-        if (LevelManager.TheTrainLife.Life != 0 && LevelManager.MoveOut && !LevelManager.ReachStation && BezierCurve2.Go && LevelManager.Play)
+        if (GameBoard.Singleton != null)
         {
-            distanceTravel += Time.deltaTime * Manager.MainSpeed;
-            CheckPosition(true);
+            if (GameBoard.Instance.TheTrainLife.Life != 0 && LevelManager.Instance.MoveOut && !LevelManager.Instance.ReachStation && BezierCurve2.Go && LevelManager.Instance.Play)
+            {
+                distanceTravel += Time.deltaTime * Manager.MainSpeed;
+                CheckPosition(true);
+            }
         }
     }
 
@@ -119,7 +127,7 @@ public class TrainMovement : MonoBehaviour {
 
                     if (ID == 1)
                     {
-                        LevelManager.ReachStation = true;
+                        LevelManager.Instance.ReachStation = true;
                         gameObject.SetActive(false);
                         break;
                     }
@@ -154,6 +162,7 @@ public class TrainMovement : MonoBehaviour {
                         break;
                     }
                 }
+
                 if (distanceTravel <= BezierCurve2.TrackData_List[Temp_Id].distance)
                 {
                     transform.position = BezierCurve2.TrackData_List[Temp_Id].position;

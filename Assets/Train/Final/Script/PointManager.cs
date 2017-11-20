@@ -17,17 +17,21 @@ public class PointManager : MonoBehaviour {
 
     public int Level;
 
+    private Transform WayPointList_parent;
+
     void Start () {
 
         BezierCurve2.Go = false;
         BezierCurve2.CruveSteps = curveSteps;
 
-        Debug.Log("Test");
+        WayPointList_parent = WayPointList.transform.parent;
+        WayPointList.transform.parent = null;
         BezierCurve2.ClearAllData();
         BezierCurve2.IncreaseSize(startSize);
         BezierCurve2.updateCurvePoints();
         BezierCurve2.CalcAllTrackPointData();
-        OrderExecution.Done = true;
+        WayPointList.transform.parent = WayPointList_parent;
+        OrderExecution.Instance.Done = true;
     }
 
     void Update () {

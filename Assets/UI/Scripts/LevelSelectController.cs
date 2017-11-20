@@ -1,6 +1,15 @@
-﻿using UnityEngine;
+﻿/** 
+ *  @file    LevelSelectController.cs
+ *  @author  Darrus
+ *  @date    17/11/2017  
+ *  @brief   Controls the animation & level transition of the main menu scene
+ */
+using UnityEngine;
 using System.Collections;
 
+/**
+ * @brief   Controls the animation & level transition of the main menu scene
+ */
 public class LevelSelectController : MonoBehaviour {
     public MainMenuManager mainMenu;
     public GameObject[] boardButtons;
@@ -10,24 +19,44 @@ public class LevelSelectController : MonoBehaviour {
     public Transform[] banditIdlePoints;
     public Transform[] tunnels;
 
+    bool changeLevel = false;
+
+    /**
+     * @brief Updates every frame, Debug controls for Unity Editor
+     */
 #if UNITY_EDITOR
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-            PlayStartingAnimation();
+        //if (Input.GetKeyDown(KeyCode.Space))
+            //PlayStartingAnimation();
     }
 #endif
 
+    /**
+     * @brief Plays the StartingAnimation coroutine
+     */
     public void PlayStartingAnimation()
     {
         StartCoroutine(StartingAnimation());
     }
 
+    /**
+     * @brief Plays the TransitionAnimation to transition to desired level.
+     * @param level, an integer to select what level to transition to.
+     */
     public void SelectLevel(int level)
     {
+        if (changeLevel)
+            return;
+
+        changeLevel = true;
         StartCoroutine(TransitionAnimation(level));
     }
 
+    /**
+     * @brief Starting animation when the players chooses level select.
+     * @return IEnumerator, returns this coroutine state
+     */
     IEnumerator StartingAnimation()
     {
         for(int i = 0; i < victims.Length; ++i)
@@ -49,9 +78,19 @@ public class LevelSelectController : MonoBehaviour {
         {
             boardButtons[i].SetActive(true);
         }
+
+        for (int i = 0; i < tunnels.Length; ++i)
+        {
+            tunnels[i].GetComponent<OnClick>().enabled = true;
+        }
         yield break;
     }
 
+    /**
+     * @brief Transition animation, plays the transitioning animation and eventually calls the main menu to change scene
+     * @param level, an integer to select what level to transition to.
+     * @return IEnumerator, returns this coroutine state
+     */
     IEnumerator TransitionAnimation(int level)
     {
         foreach(Transform child in tunnels[level])
@@ -62,7 +101,7 @@ public class LevelSelectController : MonoBehaviour {
             }
         }
 
-        float timeTillBanditMove = 3.0f;
+        float timeTillBanditMove = 1.5f;
         yield return new WaitForSeconds(timeTillBanditMove);
 
         foreach (Transform child in tunnels[level])
@@ -73,7 +112,7 @@ public class LevelSelectController : MonoBehaviour {
             }
         }
 
-        float timeTillSceneTransition = 8.0f;
+        float timeTillSceneTransition = 6.0f;
         yield return new WaitForSeconds(timeTillSceneTransition);
 
         switch(level)

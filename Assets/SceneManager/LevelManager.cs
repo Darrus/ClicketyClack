@@ -7,58 +7,22 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour {
 
-    [System.Serializable]
-    public struct Train
-    {
-        public bool head;
-        public bool Carriage;
-        public bool Cargo;
-        public int Life;
-
-        public Train(bool T)
-        {
-            head = T;
-            Carriage = T;
-            Cargo = T;
-            Life = 3;
-        }
-
-        public void killHead()
-        {
-            head = false;
-            Carriage = false;
-            Cargo = false;
-            Life = 0;
-        }
-
-        public void KillCarriage()
-        {
-            Carriage = false;
-            Cargo = false;
-            Life = 1;
-        }
-        public void KillCargo()
-        {
-            Cargo = false;
-            Life = 2;
-        }
-    };
-    public static bool TrianOnGround;
-
-    public static bool ReachStation;
-    public static bool MoveOut;
-
-    public static bool CargoOn;
-
-    public static bool Play;
+    [HideInInspector]
+    public bool ReachStation;
+    [HideInInspector]
+    public bool MoveOut;
+    [HideInInspector]
+    public bool CargoOn;
+    [HideInInspector]
+    public bool Play;
 
     public GameObject Room_Items;
 
     public GameObject AppPrefab;
-    public PointManager pointManager;
-    public bool Tutorial;
 
-    public static Train TheTrainLife = new Train(true);
+    public PointManager pointManager;
+
+    public bool Tutorial;
 
     public static LevelManager Singleton = null;
 
@@ -86,22 +50,22 @@ public class LevelManager : MonoBehaviour {
             Debug.Log("Creating temporary App");
         }
 
-        Play = true;
-        OrderExecution.Done = true;
+        Play = false;
+        BezierCurve2.Go = false;
+        
     }
 
-    public static void Add_Child_ToRoom(LevelManager singleton)
+    public void Add_Child_ToRoom()
     {
         GameObject Room = GameObject.FindGameObjectWithTag("TheRoom");
         Debug.Log(Room.name + " : " + Room.tag);
-        singleton.Room_Items.transform.SetParent(Room.transform);
+        Room_Items.transform.SetParent(Room.transform);
         Debug.Log("Room Child Added");
     }
 
     void Start()
     {
-        TrianOnGround = false;
-        ReachStation = true;
+        ReachStation = false;
         MoveOut = false;
         CargoOn = false;
 
@@ -109,47 +73,54 @@ public class LevelManager : MonoBehaviour {
         {
             CargoOn = true;
         }
-
+        OrderExecution.Instance.Done = true;
     }
 
     void Update()
     {
-        if (!MoveOut && CargoOn && ReachStation && OrderExecution.Singleton != null)
+
+        if (Tutorial && !CargoOn)
         {
-            if(OrderExecution.LifeGoalReached)
-            {
-                AppManager.RenderingTrack = true;
-                BezierCurve2.Go = true;
-                ReachStation = false;
-                OrderExecution.SelfDestory(OrderExecution.Singleton);
-            }
+            AppManager.Instance.RenderingTrack = true;
+            BezierCurve2.Go = true;
         }
 
-        Check_Win_Lose_Condition();
+        if (Tutorial && CargoOn && !AppManager.Instance.RenderingTrack)
+        {
+            Button_Play();
+        }
 
-
-
+        if (!MoveOut && CargoOn && !Tutorial)
+        {
+            AppManager.Instance.RenderingTrack = true;
+            MoveOut = true;
+            BezierCurve2.Go = true;
+        }
     }
 
-    void Check_Win_Lose_Condition()
+    public void Button_Menu()
     {
-        if (TheTrainLife.Life == 0 && TrianOnGround && !AppManager.ReStartLevel)
-        {
-            AppManager.ReStartLevel = true;
-        }
-
-        if (ReachStation && MoveOut)
-        {
-            AppManager.NextLevel(AppManager.Singleton);
-
-            TextControll.textNum = 4;
-        }
-
+        AppManager.Instance.RenderingTrack = false;
+        AppManager.Instance.curScene = AppManager.GameScene.mainmenu;
+        AppManager.Instance.LoadScene();
     }
 
-    public static void SelfDestory(LevelManager singleton)
+    public void Button_Play()
     {
-        LevelManager.Destroy(singleton.gameObject);
+        Play = true;
+    }
+
+    public void Button_Pause()
+    {
+        Play = false;
+    }
+
+    public void SelfDestory()
+    {
+        Singleton = null;
+        if(pointManager != null)
+            pointManager.WayPointList.SetActive(false);
+        GameObject.Destroy(gameObject);
     }
 
 

@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 #if UNITY_EDITOR
+using UnityEditor;
+
 [ExecuteInEditMode()]
 #endif
 [RequireComponent(typeof(MeshFilter))]
@@ -31,7 +33,7 @@ public class TrackMeshGenerate : MonoBehaviour
     {
 #if UNITY_EDITOR || UNITY_WSA
 
-        if (BezierCurve2.updateTrack && BezierCurve2.points.Length > 2 && AppManager.curScene == 6)
+        if (BezierCurve2.updateTrack && BezierCurve2.points.Length > 2 && AppManager.Instance.curScene == AppManager.GameScene.Customization)
         {
             BezierCurve2.CalcAllTrackPointData();
 
@@ -177,6 +179,12 @@ public class TrackMeshGenerate : MonoBehaviour
         Final.AddComponent<MeshFilter>().sharedMesh = combinedMesh;
         MeshRenderer rend = Final.AddComponent<MeshRenderer>();
 
+//#if UNITY_EDITOR
+//        combinedMesh.name = Name + "_" + Level.ToString();
+        
+//        AssetDatabase.CreateAsset(combinedMesh, FileUtil.GetProjectRelativePath(Application.streamingAssetsPath + "/" + Level.ToString() + "/" + combinedMesh.name + ".asset"));
+//        AssetDatabase.SaveAssets();
+//#endif
         rend.sharedMaterial = Track_Metal;
     }
 
@@ -246,6 +254,12 @@ public class TrackMeshGenerate : MonoBehaviour
             Final.AddComponent<MeshFilter>().sharedMesh = combinedMesh;
 
             MeshRenderer rend = Final.AddComponent<MeshRenderer>();
+
+//#if UNITY_EDITOR
+//            combinedMesh.name = Final.name + "_" + Level.ToString();
+//            AssetDatabase.CreateAsset(combinedMesh, FileUtil.GetProjectRelativePath(Application.streamingAssetsPath + "/" + Level.ToString() + "/" + combinedMesh.name + ".asset"));
+//            AssetDatabase.SaveAssets();
+//#endif
 
             rend.sharedMaterial = Track_Wood;
 
@@ -423,10 +437,9 @@ public class TrackMeshGenerate : MonoBehaviour
         rend.sharedMaterial = Track_Wood;
 
         ListObjects.Add(Final);
-
     }
 
-    
+
     public void GenerateMesh2()
     {
         for (int i = FadingParent.transform.childCount - 1; i >= 0; i--)
@@ -573,6 +586,13 @@ public class TrackMeshGenerate : MonoBehaviour
             Final.AddComponent<MeshFilter>().sharedMesh = combinedMesh;
 
             MeshRenderer rend = Final.AddComponent<MeshRenderer>();
+
+//#if UNITY_EDITOR
+//            combinedMesh.name = Final.name + "_" + Level.ToString();
+
+//            AssetDatabase.CreateAsset(combinedMesh, FileUtil.GetProjectRelativePath(Application.streamingAssetsPath + "/" + Level.ToString() + "/" + combinedMesh.name + ".asset"));
+//            AssetDatabase.SaveAssets();
+//#endif
 
             rend.enabled = false;
 

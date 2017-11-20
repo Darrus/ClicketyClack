@@ -4,25 +4,24 @@ using UnityEngine;
 
 public class ChildFollowParent : MonoBehaviour
 {
-
     private bool once;
 
     void Awake()
     {
         once = true;
         Debug.Log("Room Childposition start");
-        if (AppManager.curScene == (int)AppManager.GameScene.mainmenu)
+        if (AppManager.Instance.curScene == AppManager.GameScene.mainmenu)
         {
-            MainMenuManager.Add_Child_ToRoom(MainMenuManager.Singleton);
+            MainMenuManager.Instance.Add_Child_ToRoom();
         }
         else
         {
             Debug.Log(LevelManager.Singleton);
-            LevelManager.Add_Child_ToRoom(LevelManager.Singleton);
+            LevelManager.Instance.Add_Child_ToRoom();
             Debug.Log("Room Child Test");
         }
 
-        OrderExecution.Done = true;
+        OrderExecution.Instance.Done = true;
     }
     // Use this for initialization
     void Start()

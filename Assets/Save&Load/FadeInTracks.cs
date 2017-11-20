@@ -31,11 +31,6 @@ public class FadeInTracks : MonoBehaviour {
     private int preEvent_List_ID;
     private int currEvent_List_ID;
 
-    private void Awake()
-    {
-        OrderExecution.Done = true;
-    }
-
     // Use this for initialization
     void Start () {
         prePoint_ID = 0;
@@ -58,12 +53,12 @@ public class FadeInTracks : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (AppManager.RenderingTrack && !AppManager.UnRenderingTrack)
+        if (AppManager.Instance.RenderingTrack && !AppManager.Instance.UnRenderingTrack)
         {
             RenderAll();
         }
 
-        if (AppManager.UnRenderingTrack && !AppManager.RenderingTrack)
+        if (AppManager.Instance.UnRenderingTrack && !AppManager.Instance.RenderingTrack)
         {
             if (TheRealTrack.activeSelf)
                 TheRealTrack.SetActive(false);
@@ -75,7 +70,7 @@ public class FadeInTracks : MonoBehaviour {
     void RenderAll()
     {
         int temp = 0;
-        if (prePoint_ID != Inner.Count)
+        if (prePoint_ID != BezierCurve2.TrackData_List.Length)
         {
             if (RenderPoint.Point_ID < prePoint_ID)
                 temp = Inner.Count;
@@ -92,9 +87,8 @@ public class FadeInTracks : MonoBehaviour {
         }
         else
         {
-            AppManager.RenderingTrack = false;
+            AppManager.Instance.RenderingTrack = false;
             TheRealTrack.SetActive(true);
-            LevelManager.MoveOut = true;
         }
     }
 
@@ -121,11 +115,11 @@ public class FadeInTracks : MonoBehaviour {
 
             if (preEvent_List_ID != -1)
                 UnRenderEvent();
-        }
+        } 
         else
         {
-            AppManager.UnRenderingTrack = false;
-            AppManager.ChangeScene();
+            AppManager.Instance.UnRenderingTrack = false;
+            AppManager.Instance.ChangeScene();
         }
     }
 
@@ -263,8 +257,10 @@ public class FadeInTracks : MonoBehaviour {
 
 
         for (int i = preEvent_List_ID; i > currEvent_List_ID; i--)
-            Event_Data_List[i].Object.SetActive(false);
-
+        {
+            if(Event_Data_List[i].Object != null)
+                Event_Data_List[i].Object.SetActive(false);
+        }
 
         preEvent_List_ID = currEvent_List_ID;
     }

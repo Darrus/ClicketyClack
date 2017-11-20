@@ -38,7 +38,7 @@ public class CargoAnimation : MonoBehaviour
     void Update ()
     {
         // 貨物が連結されたら
-        if (LevelManager.CargoOn)
+        if (LevelManager.Instance.CargoOn)
         {
             // アニメーション開始
             anim.Play();

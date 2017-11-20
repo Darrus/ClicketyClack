@@ -559,6 +559,7 @@ public static class BezierCurve2 {
     public static void IncreaseSize(int i)
     {
         Array.Resize(ref points, points.Length + i);
+        Array.Resize(ref GO_Points, GO_Points.Length + i);
     }
 
     public static void addPoint_shiftID(int ID)

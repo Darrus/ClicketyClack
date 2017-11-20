@@ -7,19 +7,6 @@ using UnityEngine.SceneManagement;
 public class MainMenuManager : MonoBehaviour
 {
 
-    public enum MenuPages
-    {
-        Base_Menu = 0,
-        Level_Selection = 1,
-        Customization = 2
-    }
-
-    public static int curPage;
-
-    public GameObject MenuPage;
-    public GameObject LevelPage;
-    //public GameObject CustomizePage;
-
     public GameObject Room_Items;
 
     public GameObject AppPrefab;
@@ -50,126 +37,65 @@ public class MainMenuManager : MonoBehaviour
             Debug.Log("Creating temporary App");
         }
 
-        OrderExecution.Done = true;
+        OrderExecution.Instance.Done = true;
     }
 
-    public static void Add_Child_ToRoom(MainMenuManager singleton)
+    public void Add_Child_ToRoom()
     {
         GameObject Room = GameObject.FindGameObjectWithTag("TheRoom");
-        singleton.Room_Items.transform.SetParent(Room.transform);
+        Room_Items.transform.SetParent(Room.transform);
         Debug.Log("Room Child Added");
     }
 
     void Start()
     {
-        if (!AppManager.ReStartLevel)
-        {
-            curPage = (int)MenuPages.Base_Menu;
-            MenuPage.SetActive(true);
-            Debug.Log("Base Menu On");
-        }
 
     }
 
     void Update()
     {
-        if(OrderExecution.Singleton != null)
-        {
-            if(OrderExecution.LifeGoalReached)
-            {
-                OrderExecution.SelfDestory(OrderExecution.Singleton);
-            }
-        }
-
-#if UNITY_EDITOR
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            AppManager.curScene = (int)AppManager.GameScene.level_1;
-            AppManager.LoadScene(AppManager.Singleton);
-        }
-#endif
     }
 
-    public static void UpdateMainMenu(MainMenuManager singleton)
+    public void Button_Tutorial()
     {
-        singleton.MenuPage.SetActive(false);
-        singleton.LevelPage.SetActive(false);
-        //Temp.CustomizePage.SetActive(false);
-
-        switch (curPage)
-        {
-            case (int)MenuPages.Base_Menu:
-                {
-                    singleton.MenuPage.SetActive(true);
-                    break;
-                }
-            case (int)MenuPages.Level_Selection:
-                {
-                    singleton.LevelPage.SetActive(true);
-                    break;
-                }
-            //case (int)MenuPages.Customization:
-            //    {
-            //        Temp.CustomizePage.SetActive(true);
-            //        break;
-            //    }
-        }
-    }
-
-    public void Button_Start()
-    {
-        curPage = (int)MenuPages.Level_Selection;
-        UpdateMainMenu(Singleton);
-    }
-
-    public void Button_Temp()
-    {
-        AppManager.curScene = (int)AppManager.GameScene.Tutorial;
-        AppManager.LoadScene(AppManager.Singleton);
-
-        //MainMenuManager.curPage = (int)MainMenuManager.MenuPages.Customization;
-        //MainMenuManager.UpdateMainMenu(MainMenuManager.Singleton);
-    }
-
-    public void Button_Quit()
-    {
-        AppManager.Quit();
-    }
-
-    public void Button_Back()
-    {
-        curPage = (int)MenuPages.Base_Menu;
-        UpdateMainMenu(Singleton);
+        AppManager.Instance.curScene = AppManager.GameScene.Tutorial;
+        AppManager.Instance.LoadScene();
     }
 
     public void Button_Level_1()
     {
-        AppManager.curScene = (int)AppManager.GameScene.level_1;
+        AppManager.Instance.curScene = AppManager.GameScene.level_1;
     }
 
     public void Button_Level_2()
     {
-        AppManager.curScene = (int)AppManager.GameScene.level_2;
+        AppManager.Instance.curScene = AppManager.GameScene.level_2;
     }
 
     public void Button_Level_3()
     {
-        AppManager.curScene = (int)AppManager.GameScene.level_3;
+        AppManager.Instance.curScene = AppManager.GameScene.level_3;
     }
 
     public void Button_Level_4()
     {
-        AppManager.curScene = (int)AppManager.GameScene.level_4;
+        AppManager.Instance.curScene = AppManager.GameScene.level_4;
     }
 
     public void Button_Load_Level()
     {
-        AppManager.LoadScene(AppManager.Singleton);
+        AppManager.Instance.LoadScene();
     }
 
-    public static void SelfDestory(MainMenuManager singleton)
+    public void Button_Quit()
     {
-        MainMenuManager.Destroy(singleton.gameObject);
+        AppManager.Instance.Quit();
+    }
+
+    public void SelfDestory()
+    {
+        Singleton = null;
+        GameObject.Destroy(gameObject);
     }
 
 }

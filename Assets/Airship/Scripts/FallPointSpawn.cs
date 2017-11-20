@@ -32,21 +32,28 @@ public class FallPointSpawn : MonoBehaviour
         createTime = 3.0f;
     }
 
-/**
-*   @brief   毎フレーム呼び出される関数
-*   @param  nothing
-*   @return nothing 
+    /**
+    *   @brief   毎フレーム呼び出される関数
+    *   @param  nothing
+    *   @return nothing 
 */
     void Update()
     {
-        // 飛行船が発射可能になった時
         if (AirShipPatrol.CanShot)
         {
-            // FallPoint出現
-            CreateFallpoint();
+            // 飛行船が発射可能になった時
+            if (AirShipPatrol.CanShot && LevelManager.Singleton != null && GameBoard.Singleton != null)
+            {
+                if (LevelManager.Instance.Play && LevelManager.Instance.MoveOut &&
+                        !LevelManager.Instance.ReachStation && GameBoard.Instance.TheTrainLife.Life > 0)
+                {
+                    // FallPoint出現
+                    CreateFallpoint();
+                }
+
+            }
         }
     }
-
 /**
 *   @brief   FallPointの生成する関数
 *   @param  nothing

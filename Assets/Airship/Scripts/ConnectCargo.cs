@@ -26,8 +26,12 @@ public class ConnectCargo : MonoBehaviour
         // 接続したら
         if (_isConnect)
         {
+
+            //Destroy(connector);
+
             // 電車を発進
-            LevelManager.CargoOn = true;
+            LevelManager.Instance.CargoOn = true;
+            
             // 移動先を設定
             this.GetComponent<TrainMovement2>().enabled = true;
 

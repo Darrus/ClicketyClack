@@ -6,10 +6,14 @@ public class OrderExecution : MonoBehaviour {
 
     public List<GameObject> RunOrder;
 
-    public static bool Done;
-    private int currOrder;
+    [HideInInspector]
+    public bool Done;
+    [HideInInspector]
+    public bool AllDone;
 
-    public static bool LifeGoalReached;
+    private int currOrder;
+    [HideInInspector]
+    public bool LifeGoalReached;
 
     public static OrderExecution Singleton = null;
 
@@ -30,8 +34,9 @@ public class OrderExecution : MonoBehaviour {
         }
         Singleton = this;
 
-        SetAllActive(Singleton, false);
+        SetAllActive( false);
 
+        AllDone = false;
         Done = true;
         LifeGoalReached = false;
         currOrder = 0;
@@ -49,38 +54,37 @@ public class OrderExecution : MonoBehaviour {
             }
 
             if (currOrder != RunOrder.Count)
+            {
                 RunOrder[currOrder].SetActive(true);
+            }
             else
             {
-                SetAllActive(Singleton, false);
-
-                if (AppManager.curScene == (int)AppManager.GameScene.mainmenu)
-                {
-                    LifeGoalReached = true;
-                }
+                SetAllActive(false);
+                AllDone = true;
             }
-
+    
             currOrder++;
         }
 
         if(LifeGoalReached)
         {
-            SetAllActive(Singleton, true);
+            SetAllActive( true);
+            SelfDestory();
         }
 	}
 
-    public static void SetAllActive(OrderExecution singleton, bool T)
+    public void SetAllActive(bool T)
     {
-        for (int i = 0; i < singleton.RunOrder.Count; i++)
+        for (int i = 0; i < RunOrder.Count; i++)
         {
-            singleton.RunOrder[i].SetActive(T);
+            if(RunOrder[i].gameObject != null)
+                RunOrder[i].SetActive(T);
         }
     }
 
-    public static void SelfDestory(OrderExecution singleton)
+    public void SelfDestory()
     {
-        GameObject Temp = singleton.gameObject;
-        singleton = null;
-        GameObject.Destroy(Temp);
+        Singleton = null;
+        GameObject.Destroy(gameObject);
     }
 }

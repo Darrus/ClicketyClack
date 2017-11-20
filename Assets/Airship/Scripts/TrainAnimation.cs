@@ -16,7 +16,7 @@ public class TrainAnimation : MonoBehaviour
 {
     private Animation anim;                 ///< アニメーション
 
-	void Start ()
+    void Start()
     {
         // アニメーションの取得
         anim = GetComponent<Animation>();
@@ -24,20 +24,23 @@ public class TrainAnimation : MonoBehaviour
         // アニメーションの停止
         anim.Stop();
     }
-	
-	void Update ()
+
+    void Update()
     {
-        // 貨物が取り付けられたら
-        if (LevelManager.CargoOn)
+        if (LevelManager.Singleton != null)
         {
-            // アニメーションを始める
-            anim.Play();
-        }
-        // もし電車が停止したら
-        if (LevelManager.ReachStation && LevelManager.MoveOut)
-        {
-            // アニメーションの停止
-            anim.Stop();
+            // 貨物が取り付けられたら
+            if (LevelManager.Instance.CargoOn)
+            {
+                // アニメーションを始める
+                anim.Play();
+            }
+            // もし電車が停止したら
+            if (LevelManager.Instance.ReachStation && LevelManager.Instance.MoveOut)
+            {
+                // アニメーションの停止
+                anim.Stop();
+            }
         }
     }
 }

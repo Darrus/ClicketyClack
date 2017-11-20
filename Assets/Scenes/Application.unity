@@ -1172,7 +1172,42 @@ Prefab:
     - target: {fileID: 114255529684967090, guid: b8402251d5f7b3643b692e519828235e,
         type: 2}
       propertyPath: TestScene
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114255529684967090, guid: b8402251d5f7b3643b692e519828235e,
+        type: 2}
+      propertyPath: MainMenu_Scene
+      value: MainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 114255529684967090, guid: b8402251d5f7b3643b692e519828235e,
+        type: 2}
+      propertyPath: Level_1_Scene
+      value: Game_Level_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114255529684967090, guid: b8402251d5f7b3643b692e519828235e,
+        type: 2}
+      propertyPath: Level_2_Scene
+      value: Game_Level_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114255529684967090, guid: b8402251d5f7b3643b692e519828235e,
+        type: 2}
+      propertyPath: Level_3_Scene
+      value: Game_Level_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114255529684967090, guid: b8402251d5f7b3643b692e519828235e,
+        type: 2}
+      propertyPath: Level_4_Scene
+      value: Game_Level_4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114255529684967090, guid: b8402251d5f7b3643b692e519828235e,
+        type: 2}
+      propertyPath: Tutorial_Scene
+      value: Tutorial
+      objectReference: {fileID: 0}
+    - target: {fileID: 114255529684967090, guid: b8402251d5f7b3643b692e519828235e,
+        type: 2}
+      propertyPath: TempChange_Scene
+      value: ChangeScene
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b8402251d5f7b3643b692e519828235e, type: 2}
@@ -2210,6 +2245,18 @@ Prefab:
     - target: {fileID: 4053823184066200, guid: e5e9de1cc0764744c9784680cd179b5f, type: 2}
       propertyPath: m_RootOrder
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4613472624389946, guid: e5e9de1cc0764744c9784680cd179b5f, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.01152
+      objectReference: {fileID: 0}
+    - target: {fileID: 4613472624389946, guid: e5e9de1cc0764744c9784680cd179b5f, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.01152
+      objectReference: {fileID: 0}
+    - target: {fileID: 4613472624389946, guid: e5e9de1cc0764744c9784680cd179b5f, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 0.01152
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e5e9de1cc0764744c9784680cd179b5f, type: 2}

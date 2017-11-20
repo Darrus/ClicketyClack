@@ -5,7 +5,7 @@ public class StartingBoard : MonoBehaviour {
     {
         if(Room.Instance.done)
         {
-            gameObject.SetActive(true);
+            transform.GetChild(0).gameObject.SetActive(true);
         }
     }
 }

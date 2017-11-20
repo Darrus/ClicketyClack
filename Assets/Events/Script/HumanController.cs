@@ -1,7 +1,16 @@
-﻿using System.Collections;
+﻿/** 
+ *  @file    HumanController.cs
+ *  @author  Darrus
+ *  @date    17/11/2017  
+ *  @brief   Contains the controller class for human AIs
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/** 
+ *  @brief   Human Controller class that controls the animator and state changes.
+ */
 [RequireComponent(typeof(Animator))]
 public class HumanController : MonoBehaviour
 {
@@ -17,6 +26,9 @@ public class HumanController : MonoBehaviour
         JUMP,
     };
 
+    /** 
+     *  @brief   Human command struct that's only used in this class
+     */
     struct HumanCommand
     {
         public CharacterStates state;
@@ -36,6 +48,9 @@ public class HumanController : MonoBehaviour
     CharacterStates startState = CharacterStates.IDLE;
     CharacterStates characterState = CharacterStates.IDLE;
 
+    /** 
+     *  @brief   Getter and Setter for the current state of the AI, Upon setting it'll change the animator state as well.
+     */
     public CharacterStates CurrentState
     {
         get
@@ -49,6 +64,9 @@ public class HumanController : MonoBehaviour
         }
     }
 
+    /** 
+     *  @brief   Initializes the variables as well as setting the start state of the AI
+     */
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -58,6 +76,9 @@ public class HumanController : MonoBehaviour
         anim.SetInteger("State", (int)characterState);
     }
 
+    /** 
+     *  @brief   Checks if the queue is empty, if not updates the commands
+     */
     protected virtual void Update()
     {
         if (commandQueue.Count != 0)
@@ -70,6 +91,10 @@ public class HumanController : MonoBehaviour
         }
     }
 
+    /** 
+     *  @brief   Run to the designated position stated, will also change the state of the AI to Run
+     *  @param   position, the designated position for the AI to run to
+     */
     public void RunTo(Vector3 position)
     {
         HumanCommand command = new HumanCommand();
@@ -83,6 +108,10 @@ public class HumanController : MonoBehaviour
         commandQueue.Enqueue(command);
     }
 
+    /** 
+     *  @brief   Walk to the designated position stated, will also change the state of the AI to Walk
+     *  @param   position, the designated position for the AI to walk to
+     */
     public void WalkTo(Vector3 position)
     {
         HumanCommand command = new HumanCommand();
@@ -96,6 +125,10 @@ public class HumanController : MonoBehaviour
         commandQueue.Enqueue(command);
     }
 
+    /** 
+     *  @brief   Change the state of the AI to the desired state
+     *  @param   state, the state to change into
+     */
     public void ChangeState(CharacterStates state)
     {
         HumanCommand command = new HumanCommand();
@@ -103,6 +136,11 @@ public class HumanController : MonoBehaviour
         commandQueue.Enqueue(command);
     }
 
+    /** 
+     *  @brief   Handles the given command
+     *  @param   command, the command to handle
+     *  @return  returns true when the command is done, and return false when the command is still not done
+     */
     bool HandleCommand(HumanCommand command)
     {
         CurrentState = command.state;

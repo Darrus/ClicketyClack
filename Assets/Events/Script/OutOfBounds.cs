@@ -1,7 +1,16 @@
-﻿using System.Collections;
+﻿/** 
+ *  @file    OutOfBounds.cs
+ *  @author  Darrus
+ *  @date    17/11/2017  
+ *  @brief   Contains out of bound script
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/** 
+ *  @brief   returns the object back to it's last position on the ground when it flys out of bounds
+ */
 public class OutOfBounds : MonoBehaviour {
     [TagSelector]
     public string boundTag;
@@ -30,6 +39,9 @@ public class OutOfBounds : MonoBehaviour {
     //    }
     //}
 
+    /** 
+     *  @brief   Returns the object to it's last saved location upon exiting the out of bound trigger zone
+     */
     private void OnTriggerExit(Collider other)
     {
         if(other.CompareTag(boundTag))
@@ -41,6 +53,9 @@ public class OutOfBounds : MonoBehaviour {
         }
     }
 
+    /** 
+     *  @brief   As long as the object is touching the ground, saves the object's spawn position as the touched position
+     */
     private void OnTriggerStay(Collider other)
     {
         if(other.CompareTag(groundTag))

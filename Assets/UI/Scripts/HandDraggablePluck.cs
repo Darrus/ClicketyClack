@@ -210,7 +210,7 @@ namespace HoloToolkit.Unity.InputModule
             targetDirection = mainCamera.transform.TransformDirection(targetDirection); // back to world space
 
             float currenthandDistance = Vector3.Magnitude(newHandPosition - pivotPosition);
-            Debug.Log(currenthandDistance);
+            //Debug.Log(currenthandDistance);
 
 
             if (!isPlucked)
