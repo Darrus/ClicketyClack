@@ -98,7 +98,7 @@ public class MainPoints : MonoBehaviour {
         {
             if (UpdateMesh)
             {
-                if (AppManager.curScene == 6)
+                if (AppManager.Instance.curScene == AppManager.GameScene.Customization)
                 {
                     curveNodes = new Vector3[BezierCurve2.CruveSteps + 1];
                     tangents = new Vector3[BezierCurve2.CruveSteps + 1];

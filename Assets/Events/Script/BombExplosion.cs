@@ -1,7 +1,17 @@
-﻿using System.Collections;
+﻿/** 
+ *  @file    BombExplosion.cs
+ *  @author  Darrus
+ *  @date    17/11/2017  
+ *  @brief   Bomb explosion handler
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/** 
+ *  @brief   Handles the explosion of the bomb towards the affected target
+ */
 [RequireComponent(typeof(SphereCollider))]
 public class BombExplosion : MonoBehaviour
 {
@@ -19,11 +29,17 @@ public class BombExplosion : MonoBehaviour
     public GameObject Parent;
     public GameObject ParticleEffect;
 
+    /** 
+     *  @brief   Get the Sphere Collider from this game object
+     */
     private void Start()
     {
         sphereCollider = GetComponent<SphereCollider>();
     }
 
+    /** 
+     *  @brief   When the bomb is triggered, it counts down until it exploads
+     */
     private void Update()
     {
         if (!triggered || exploaded)
@@ -40,15 +56,15 @@ public class BombExplosion : MonoBehaviour
                 {
                     if(col.gameObject.name == "head")
                     {
-                        LevelManager.TheTrainLife.killHead();
+                        GameBoard.Instance.TheTrainLife.killHead();
                     }
                     if (col.gameObject.name == "carriage")
                     {
-                        LevelManager.TheTrainLife.KillCarriage();
+                        GameBoard.Instance.TheTrainLife.KillCarriage();
                     }
                     if (col.gameObject.name == "cargo")
                     {
-                        LevelManager.TheTrainLife.KillCargo();
+                        GameBoard.Instance.TheTrainLife.KillCargo();
                     }
 
                     Rigidbody objRigidbody = col.GetComponent<Rigidbody>();
@@ -64,6 +80,9 @@ public class BombExplosion : MonoBehaviour
         }
     }
 
+    /** 
+     *  @brief   Sets the boolean to true when it runs into the collided tag
+     */
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(triggerTag))
@@ -72,11 +91,17 @@ public class BombExplosion : MonoBehaviour
         }
     }
 
+    /** 
+     *  @brief   Creates the particle effect of the explosion
+     */
     private void CreateExplosion()
     {
         GameObject.Instantiate(ParticleEffect, Parent.transform.position, Quaternion.identity);
     }
 
+    /** 
+     *  @brief   Draws the explosion radius
+     */
     void OnDrawGizmosSelected()
     {
         Gizmos.color = new Color(1.0f, 0.0f, 0.0f);

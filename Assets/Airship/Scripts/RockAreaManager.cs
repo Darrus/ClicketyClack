@@ -14,7 +14,7 @@ public class RockAreaManager : MonoBehaviour
         if (!T)
         {
             _isStop = false;
-            LevelManager.MoveOut = true;
+            LevelManager.Instance.MoveOut = true;
             ArrowControll.RockComp = true;
         }
     }

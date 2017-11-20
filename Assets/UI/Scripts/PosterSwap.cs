@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
+using HoloToolkit.Unity.InputModule;
 
 [RequireComponent(typeof(ReversePlayAnimation))]
 public class PosterSwap : MonoBehaviour {
     [SerializeField]
-    Pluck1 targetPluck;
+    HandDraggablePluck targetPluck;
 
     [SerializeField]
     Renderer targetMesh;
@@ -18,7 +19,7 @@ public class PosterSwap : MonoBehaviour {
 
     private void Update()
     {
-        if(controller.previousState == ReversePlayAnimation.ANIM_STATE.REVERSE && controller.State == ReversePlayAnimation.ANIM_STATE.REVERSED && !targetPluck.plucked)
+        if(controller.previousState == ReversePlayAnimation.ANIM_STATE.REVERSE && controller.State == ReversePlayAnimation.ANIM_STATE.REVERSED && !targetPluck.isPlucked)
         {
             targetMesh.material = materials[Random.Range(0, materials.Length)];        
         }

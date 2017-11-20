@@ -20,9 +20,10 @@ public class FallPointSpawn : MonoBehaviour
 
     void Update()
     {
-        if (AirShipPatrol.CanShot)
+        if (AirShipPatrol.CanShot && LevelManager.Singleton != null && GameBoard.Singleton != null)
         {
-            CreateFallpoint();
+            if(LevelManager.Instance.Play && LevelManager.Instance.MoveOut && !LevelManager.Instance.ReachStation && GameBoard.Instance.TheTrainLife.Life > 0)
+                CreateFallpoint();
         }
     }
 

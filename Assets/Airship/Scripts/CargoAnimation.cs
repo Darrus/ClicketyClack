@@ -18,7 +18,7 @@ public class CargoAnimation : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        if (LevelManager.CargoOn)
+        if (LevelManager.Instance.CargoOn)
         {
             anim.Play();
         }

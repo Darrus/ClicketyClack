@@ -16,13 +16,16 @@ public class TrainAnimation : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        if (LevelManager.CargoOn)
+        if (LevelManager.Singleton != null)
         {
-            anim.Play();
-        }
-        if (LevelManager.ReachStation && LevelManager.MoveOut)
-        {
-            anim.Stop();
+            if (LevelManager.Instance.CargoOn)
+            {
+                anim.Play();
+            }
+            if (LevelManager.Instance.ReachStation && LevelManager.Instance.MoveOut)
+            {
+                anim.Stop();
+            }
         }
     }
 }

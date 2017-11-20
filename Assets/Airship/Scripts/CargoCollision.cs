@@ -48,7 +48,7 @@ public class CargoCollision : MonoBehaviour
 
             _isArrow = true;
             RockAreaManager._isStop = true;
-            LevelManager.MoveOut = false;
+            LevelManager.Instance.Play = false;
         }
     }
 
