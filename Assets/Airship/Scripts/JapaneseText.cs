@@ -1,22 +1,40 @@
-﻿using System.Collections;
+﻿/**
+ * @file : JapaneseText.cs
+ * @author : Tokiya Ogaki
+ * @date : 17/11/2017
+ * @brief : 日本語版テキスト
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JapaneseText : FontScalable
+/**
+ * @brief : 日本語のテキストを制御するクラス
+ */
+public class JapaneseText : MonoBehaviour
 {
     [Multiline]
-    public string[] japanese;
-    private TextMesh text;
+    public string[] japanese;           ///< 文字を確保するための配列
+    private TextMesh text;            ///< テキストメッシュのテキスト
 
-    private void Awake()
+    private void Start()
     {
+        // テキストメッシュの取得
         text = GetComponent<TextMesh>();
+
+        // 初期テキスト
         TextControll.textNum = 0;
     }
 
+/**
+*   @brief   毎フレーム呼び出される関数
+*   @param  nothing
+*   @return nothing 
+*/
     private void Update()
     {
-
+        // 番号ごとに文字が変わる
         switch (TextControll.textNum)
         {
             case 0:
@@ -42,20 +60,3 @@ public class JapaneseText : FontScalable
         }
     }
 }
-/*
- 石炭を貨物に
-積んでみよう
-
-
-    貨物を列車に
-連結してみよう
-
-    駅に着くまでに
-障害物や盗賊から
-列車を防衛しよう
-
-
-    最後に
-トンネルの岩を
-どけてみよう
-     */

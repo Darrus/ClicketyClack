@@ -1986,12 +1986,6 @@ MonoBehaviour:
   Axis0Destination: 0
   Axis1Destination: 4
   Axis2Destination: 6
---- !u!114 &594411590 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114909740371025434, guid: e5e9de1cc0764744c9784680cd179b5f,
-    type: 2}
-  m_PrefabInternal: {fileID: 642760980}
-  m_Script: {fileID: 11500000, guid: 6b4c79102f2e531488286ef89fecc9bb, type: 3}
 --- !u!1 &598440184
 GameObject:
   m_ObjectHideFlags: 0
@@ -2185,21 +2179,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114071382475764800, guid: e5e9de1cc0764744c9784680cd179b5f,
-        type: 2}
-      propertyPath: Page.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114909740371025434, guid: e5e9de1cc0764744c9784680cd179b5f,
-        type: 2}
-      propertyPath: Page.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114983357807074650, guid: e5e9de1cc0764744c9784680cd179b5f,
-        type: 2}
-      propertyPath: Explane.Array.size
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 4053823184066200, guid: e5e9de1cc0764744c9784680cd179b5f, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2231,81 +2210,6 @@ Prefab:
     - target: {fileID: 4053823184066200, guid: e5e9de1cc0764744c9784680cd179b5f, type: 2}
       propertyPath: m_RootOrder
       value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 114983357807074650, guid: e5e9de1cc0764744c9784680cd179b5f,
-        type: 2}
-      propertyPath: Explane.Array.data[0]
-      value: 'Pinch your finger to
-
-        pick to spawn bandits.'
-      objectReference: {fileID: 0}
-    - target: {fileID: 114983357807074650, guid: e5e9de1cc0764744c9784680cd179b5f,
-        type: 2}
-      propertyPath: Explane.Array.data[1]
-      value: 'Pick up the bandits by
-
-        pinching them and
-
-        moving your hand.'
-      objectReference: {fileID: 0}
-    - target: {fileID: 114983357807074650, guid: e5e9de1cc0764744c9784680cd179b5f,
-        type: 2}
-      propertyPath: Explane.Array.data[2]
-      value: "Moving your head\nmoves the \nwhite cursor."
-      objectReference: {fileID: 0}
-    - target: {fileID: 102769580675988450, guid: e5e9de1cc0764744c9784680cd179b5f,
-        type: 2}
-      propertyPath: m_CharacterSize
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4613472624389946, guid: e5e9de1cc0764744c9784680cd179b5f, type: 2}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4234247727284302, guid: e5e9de1cc0764744c9784680cd179b5f, type: 2}
-      propertyPath: m_RootOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4042350963705292, guid: e5e9de1cc0764744c9784680cd179b5f, type: 2}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 114983357807074650, guid: e5e9de1cc0764744c9784680cd179b5f,
-        type: 2}
-      propertyPath: Explane.Array.data[3]
-      value: 'World Anchor is currently loading,
-
-        A board will appear when it''s done loading.'
-      objectReference: {fileID: 0}
-    - target: {fileID: 114071382475764800, guid: e5e9de1cc0764744c9784680cd179b5f,
-        type: 2}
-      propertyPath: Page.Array.data[3]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114909740371025434, guid: e5e9de1cc0764744c9784680cd179b5f,
-        type: 2}
-      propertyPath: Page.Array.data[3]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114252520247731156, guid: e5e9de1cc0764744c9784680cd179b5f,
-        type: 2}
-      propertyPath: eventOnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 594411590}
-    - target: {fileID: 114252520247731156, guid: e5e9de1cc0764744c9784680cd179b5f,
-        type: 2}
-      propertyPath: eventOnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: RightClick
-      objectReference: {fileID: 0}
-    - target: {fileID: 114979480174126422, guid: e5e9de1cc0764744c9784680cd179b5f,
-        type: 2}
-      propertyPath: eventOnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1042513698}
-    - target: {fileID: 114979480174126422, guid: e5e9de1cc0764744c9784680cd179b5f,
-        type: 2}
-      propertyPath: eventOnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LeftClick
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e5e9de1cc0764744c9784680cd179b5f, type: 2}
@@ -3123,12 +3027,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &1042513698 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114071382475764800, guid: e5e9de1cc0764744c9784680cd179b5f,
-    type: 2}
-  m_PrefabInternal: {fileID: 642760980}
-  m_Script: {fileID: 11500000, guid: 6b4c79102f2e531488286ef89fecc9bb, type: 3}
 --- !u!1 &1052063970
 GameObject:
   m_ObjectHideFlags: 0

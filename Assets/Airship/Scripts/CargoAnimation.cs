@@ -1,25 +1,46 @@
-﻿using System.Collections;
+﻿/**
+ * @file : CargoAnimation.cs
+ * @author : Tokiya Ogaki
+ * @date : 17/11/2017
+ * @brief : 貨物のアニメーション制御
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * @brief : 貨物のアニメーションのタイミングを管理するクラス
+ */
 public class CargoAnimation : MonoBehaviour
 {
+    private Animation anim;             /// アニメーション制御
 
-    private Animation anim;
-
-	// Use this for initialization
-	void Start ()
+/**
+ *   @brief   デバッグ時に１フレームだけ呼び出される関数
+ *   @param  nothing
+ *   @return nothing 
+*/
+    void Start ()
     {
+        // アニメーションの取得
         anim = GetComponent<Animation>();
-        anim.Stop();
 
+        // アニメーション停止
+        anim.Stop();
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+/**
+*   @brief   毎フレーム呼び出される関数
+*   @param  nothing
+*   @return nothing 
+*/
+    void Update ()
     {
+        // 貨物が連結されたら
         if (LevelManager.CargoOn)
         {
+            // アニメーション開始
             anim.Play();
         }
     }
