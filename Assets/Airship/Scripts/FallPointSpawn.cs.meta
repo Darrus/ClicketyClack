@@ -1,10 +1,12 @@
 fileFormatVersion: 2
 guid: bb9b473b65aab4444a2d291a8fdd9591
-timeCreated: 1507705379
+timeCreated: 1510883923
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - fallpointPrefab: {fileID: 1841728456325026, guid: c011cca3eaeec4d46a210eb1fbad5bc4,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
