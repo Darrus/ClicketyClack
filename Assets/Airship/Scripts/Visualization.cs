@@ -13,7 +13,7 @@ using UnityEngine;
  */
 public class Visualization : MonoBehaviour
 {
-    public GameObject[] victim; ///< Victimを収納
+    public GameObject[] victim;                      ///< Victimを収納
 
 
 /**
