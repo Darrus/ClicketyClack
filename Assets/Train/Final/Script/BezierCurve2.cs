@@ -1,38 +1,58 @@
-﻿using System.Collections;
+﻿/** 
+*  @file    BezierCurve2.cs
+*  @author  Yin Shuyu (150713R) 
+*  
+*  @brief   Contain static class BezierCurve2
+*
+*/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+/**
+*  @brief A Static class for calculation for track points using bezier curve formula
+*/
 public static class BezierCurve2 {
 
-    public static Vector3[] points = new Vector3[] { };
+    public static Vector3[] points = new Vector3[] { };  ///< Array of Vector3 storing the position of the track waypoint
 
-    public static GameObject[] GO_Points = new GameObject[] { };
+    public static GameObject[] GO_Points = new GameObject[] { }; ///< Array of GameObject storing the gameobject of the track waypoints
 
-    public static int CruveSteps = 10; // number of points in one curve
+    public static int CruveSteps = 10;  ///< Number of how many sub-point between two wayPoints
 
-    public static float Distance_scaleFacter = 10f; // becasue position also need scale down when size scale down
+    public static float Distance_scaleFacter = 10f; ///< Scale down the position distance of the waypoint as we Scale down the actual scene (hardcoded)
 
-    public static bool updateTrack = false;
+    public static bool updateTrack = false; ///< Bool trigger for func for other scripts
 
-    public static bool Go = false;
+    public static bool Go = false; ///< Bool trigger for starting the Train 
 
-    public static bool EnableTrackCollision = false;
+    public static bool EnableTrackCollision = false; ///< Bool trigger mesh collision for Rail Track
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Store Point's num of CruveSteps  //
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    /**
+    *  @brief Struct save all the track's WayPoint Data
+    */
     [System.Serializable]
     public struct PointData
     {
-        public int id;
-        public float distance; //distance from this point to next point
-        public int pointCruveSteps;
+        public int id; ///< ID of the wayPoint
+        public float distance; ///< Distance from the current waypoint to the next waypoint
+        public int pointCruveSteps; ///< Number of sub-point between the current waypoint and the next waypoint
     }
 
-    public static PointData[] PointData_List;
+    public static PointData[] PointData_List; ///< Array of PointData struct Stores all the Track's WayPoint
 
+    /**
+   *   @brief calculate the total number of sub-points from start to a specific WayPoint
+   *  
+   *   @param int ID, id of the WayPoint we want to sreach to
+   *   
+   *   @return int Result, the total number of sub-points
+   */
     public static int getTotalCruveStepsTo(int ID)
     {
         int Result = 0;
@@ -58,24 +78,38 @@ public static class BezierCurve2 {
     // Calc SPLINE&TRACK Length //
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    /**
+    *  @brief Struct save all the track's Sub-Point Data
+    */
     [System.Serializable]
     public struct TrackData
     {
-        public Vector3 position;
-        public Vector3 tangent;
-        public float distance;
-        public int id;
+        public Vector3 position; ///< Vector3 position of the sub-point
+        public Vector3 tangent; ///< Vector3 tangent of the sub-point
+        public float distance; ///< Distance of the sub-point from start
+        public int id; ///< id of the sub-point
     }
 
-    public static TrackData[] TrackData_List;
+    public static TrackData[] TrackData_List; ///< Array of TrackData struct Stores all the track's Sub-Point
 
+    /**
+    *   @brief A function to run CalcAllTrackLength func two time in different way
+    *   
+    *   @return nothing 
+    */
     public static void CalcAllTrackPointData()
     {
         CalcAllTrackLength(true);
         CalcAllTrackLength(false);
-        //Debug.Log("HI");
     }
 
+    /**
+    *   @brief A function to calculation All Track's Data, also reassign the pointCruveSteps for each WayPoint to optimistic the polygon count for track Mesh
+    *  
+    *   @param bool T, whether run for the first time
+    *   
+    *   @return nothing 
+    */
     public static void CalcAllTrackLength(bool T)
     {
         if (points.Length > 2)
@@ -103,7 +137,6 @@ public static class BezierCurve2 {
                 }
 
                 Array.Resize(ref TrackData_List, numOfSubPoint + 1);
-                //Debug.Log(numOfSubPoint + 1);
             }
 
             for (int n = 0; n < totalPoint; n++)
@@ -147,6 +180,17 @@ public static class BezierCurve2 {
         }
     }
 
+    /**
+    *   @brief A function to calculation the distance for the track
+    *  
+    *   @param MainPoints currPoint, Get current point Data
+    *   
+    *   @param float currTotalDistance, total distance of track till this waypoint
+    *   
+    *   @param bool T, pass down from CalcAllTrackLength function
+    *   
+    *   @return float currTotalDistance, total distance of track till this waypoint
+    */
     private static float CalcCurveLength(MainPoints currPoint, float currTotalDistance, bool T)
     {
         Vector3 prevPoint = currPoint.transform.position;
@@ -180,7 +224,7 @@ public static class BezierCurve2 {
         for (float f = step; currID < MaxCurrID; f += step) // this is so dumb
         {
             
-            if (currPoint.type == (int)MainPoints.pointType.NormalPoint || currPoint.type == (int)MainPoints.pointType.FixedPoint || currPoint.type == (int)MainPoints.pointType.TrafficLight)
+            if (currPoint.type == MainPoints.pointType.NormalPoint || currPoint.type == MainPoints.pointType.FixedPoint || currPoint.type == MainPoints.pointType.TrafficLight)
             {
                 pt = GetPoint(currPoint.transform.position, currPoint.ChildPoint_position, currPoint.Friend_ChildPoint_position, currPoint.FriendPoint_position, f);
                 currTotalDistance += (pt - prevPoint).magnitude;
@@ -188,7 +232,7 @@ public static class BezierCurve2 {
                 tangent = GetFirstDerivative(currPoint.transform.position, currPoint.ChildPoint_position, currPoint.Friend_ChildPoint_position, currPoint.FriendPoint_position, f);
             }
 
-            if(currPoint.type == (int)MainPoints.pointType.EventPoint)
+            if(currPoint.type == MainPoints.pointType.EventPoint)
             {
                 pt = GetPoint(currPoint.transform.position, currPoint.transform.position, currPoint.FriendPoint_position, currPoint.FriendPoint_position, f);
                 currTotalDistance += (pt - prevPoint).magnitude;
@@ -212,6 +256,17 @@ public static class BezierCurve2 {
     // TRACK MESH //
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    /**
+    *   @brief A function to get the interpolate point of the waypoint
+    *  
+    *   @param int i, the id of the waypoint
+    *   
+    *   @param float t, interpolate percentage of the waypoint
+    *   
+    *   @param out Vector3 tangent, to get the tangent of the interpolate point 
+    *   
+    *   @return Vector3, position of the interpolate point 
+    */
     public static Vector3 Interpolate(int i, float t, out Vector3 tangent)
     {
 
@@ -220,11 +275,29 @@ public static class BezierCurve2 {
         return GetPoint_Track(i, t);
     }
 
+    /**
+    *   @brief A function to get the direction it is facing at the interpolate point of the waypoint
+    *  
+    *   @param int i, the id of the waypoint
+    *   
+    *   @param float t, interpolate percentage of the waypoint
+    *   
+    *   @return Vector3, direction of the interpolate point 
+    */
     public static Vector3 GetDirection(int i, float t)
     {
         return GetVelocity(i, t).normalized;
     }
 
+    /**
+    *   @brief A function to get the Velocity at the interpolate point of the waypoint
+    *  
+    *   @param int i, the id of the waypoint
+    *   
+    *   @param float t, interpolate percentage of the waypoint
+    *   
+    *   @return Vector3, Velocity of the interpolate point 
+    */
     public static Vector3 GetVelocity(int i, float t)
     {
         int x = i;
@@ -260,6 +333,15 @@ public static class BezierCurve2 {
         return GetFirstDerivative(p0, p1, p3, p2, t);
     }
 
+    /**
+    *   @brief A function to get the Position of the interpolate point of the waypoint
+    *  
+    *   @param int i, the id of the waypoint
+    *   
+    *   @param float t, interpolate percentage of the waypoint
+    *   
+    *   @return Vector3, Position of the interpolate point 
+    */
     public static Vector3 GetPoint_Track(int i, float t)
     {
          int x = i;
@@ -300,6 +382,11 @@ public static class BezierCurve2 {
     // UPDATE CURVE POINTS //
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    /**
+    *   @brief A function to Update the Curve of the of the Track 
+    *   
+    *   @return nothing 
+    */
     public static void updateCurvePoints()
     {
         if (points.Length > 2)
@@ -315,6 +402,11 @@ public static class BezierCurve2 {
         }
     }
 
+    /**
+    *   @brief A function to unRender the 2D mesh of Track
+    *  
+    *   @return nothing 
+    */
     public static void unRenderMesh()
     {
         for (int i = 0; i < GO_Points.Length; i++)
@@ -324,6 +416,12 @@ public static class BezierCurve2 {
             newPoint.UnrenderMesh = true;
         }
     }
+
+    /**
+    *   @brief A function to Update the position data of the waypoint with Distance_scaleFacter
+    *  
+    *   @return nothing 
+    */
     private static void updatePoints_Position()
     {
         GO_Points = GameObject.FindGameObjectsWithTag("Point");
@@ -341,6 +439,11 @@ public static class BezierCurve2 {
         }
     }
 
+    /**
+    *   @brief A function to Update the position data of the waypoint's Child-point using waypoints data with another waypoint data
+    *   
+    *   @return nothing 
+    */
     private static void updateChild_Position()
     {
         if (points.Length >= 3)
@@ -431,6 +534,11 @@ public static class BezierCurve2 {
         }
     }
 
+    /**
+    *   @brief A function to Update the position data of the waypoint's friend(the next point)
+    *   
+    *   @return nothing 
+    */
     private static void updateFriendPoints()
     {
         for (int x = 0; x < points.Length; x++)
@@ -469,6 +577,11 @@ public static class BezierCurve2 {
         }
     }
 
+    /**
+    *   @brief A function to trigger the MainPoint script to update
+    *   
+    *   @return nothing 
+    */
     private static void TriggerUpdate()
     {
         for (int i = 0; i < GO_Points.Length; i++)
@@ -483,6 +596,19 @@ public static class BezierCurve2 {
     // BEZIER //
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    /**
+    *   @brief A function to get the position of the interpolate point out of the Three Vector3 using bezier curve formula
+    *  
+    *   @param Vector3 p0, start point of curve 
+    *   
+    *   @param Vector3 p1, the point determine curve of the curve
+    *   
+    *   @param Vector3 p2, end point of curve 
+    *   
+    *   @param float t,interpolate percentage of the curve
+    *   
+    *   @return Vector3, position of the interpolate point
+    */
     public static Vector3 GetPoint(Vector3 p0, Vector3 p1, Vector3 p2, float t)
     {
         t = Mathf.Clamp01(t);
@@ -493,6 +619,19 @@ public static class BezierCurve2 {
             t * t * p2;
     }
 
+    /**
+   *   @brief A function to get the Velocity of the interpolate point out of the Three Vector3 using bezier curve formula
+   *  
+   *   @param Vector3 p0, start point of curve 
+   *   
+   *   @param Vector3 p1, the point determine curve of the curve
+   *   
+   *   @param Vector3 p2, end point of curve 
+   *   
+   *   @param float t,interpolate percentage of the curve
+   *   
+   *   @return Vector3, Velocity of the interpolate point
+   */
     public static Vector3 GetFirstDerivative(Vector3 p0, Vector3 p1, Vector3 p2, float t)
     {
         return
@@ -500,6 +639,21 @@ public static class BezierCurve2 {
             2f * t * (p2 - p1);
     }
 
+    /**
+     *   @brief A function to get the position of the interpolate point out of the four Vector3 using bezier curve formula
+     *  
+     *   @param Vector3 p0, start point of curve 
+     *   
+     *   @param Vector3 p1, the point determine curve of p0
+     *   
+     *   @param Vector3 p2, end point of curve 
+     *   
+     *   @param Vector3 p3, the point determine curve of p2
+     * 
+     *   @param float t,interpolate percentage of the curve
+     *   
+     *   @return Vector3, position of the interpolate point
+     */
     public static Vector3 GetPoint(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, float t)
     {
         t = Mathf.Clamp01(t);
@@ -511,6 +665,21 @@ public static class BezierCurve2 {
             t * t * t * p3;
     }
 
+    /**
+     *   @brief A function to get the Velocity of the interpolate point out of the four Vector3 using bezier curve formula
+     *  
+     *   @param Vector3 p0, start point of curve 
+     *   
+     *   @param Vector3 p1, the point determine curve of p0
+     *   
+     *   @param Vector3 p2, end point of curve 
+     *   
+     *   @param Vector3 p3, the point determine curve of p2
+     * 
+     *   @param float t,interpolate percentage of the curve
+     *   
+     *   @return Vector3, Velocity of the interpolate point
+     */
     public static Vector3 GetFirstDerivative(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, float t)
     {
         t = Mathf.Clamp01(t);
@@ -525,6 +694,11 @@ public static class BezierCurve2 {
     // DEFAULT //
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    /**
+    *   @brief A function to Clear all the Array Data to size 0
+    *   
+    *   @return nothing 
+    */
     public static void ClearAllData()
     {
 
@@ -546,7 +720,15 @@ public static class BezierCurve2 {
         Array.Resize(ref PointData_List, 0);
     }
 
-
+    /**
+    *   @brief A function to Increase the size of the WayPoint Array (old Codes)
+    *  
+    *   @param Array of Vector3 newPoints, Array of Previous WayPoints
+    *   
+    *   @param int i, size increase
+    *   
+    *   @return nothing 
+    */
     public static void IncreaseSize(Vector3[] newPoints, int i)
     {
         Array.Resize(ref points, points.Length + i);
@@ -556,12 +738,26 @@ public static class BezierCurve2 {
         }
     }
 
+    /**
+     *   @brief A function to Increase the size of the WayPoint data and object Arrays
+     *   
+     *   @param int i, size increase
+     *   
+     *   @return nothing 
+     */
     public static void IncreaseSize(int i)
     {
         Array.Resize(ref points, points.Length + i);
         Array.Resize(ref GO_Points, GO_Points.Length + i);
     }
 
+    /**
+     *   @brief A function to Add new WayPoint in bewteen waypoints and update all the waypoint's id accordingly 
+     *   
+     *   @param int ID, the new WayPoint's ID
+     *   
+     *   @return nothing 
+     */
     public static void addPoint_shiftID(int ID)
     {
         int lastID = points.Length-1;
@@ -588,6 +784,9 @@ public static class BezierCurve2 {
     // SAVE AND LOAD //
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    /**
+    *  @brief Struct Contain both Track Data and Point Data
+    */
     [System.Serializable]
     public struct TrackPointData
     {
@@ -595,6 +794,13 @@ public static class BezierCurve2 {
         public TrackData[] trackData_List;
     }
 
+    /**
+    *   @brief A function to Call the Save_Load_Data.cs to save TrackPointData of the level
+    *  
+    *   @param int level, level of the TrackPointData
+    *   
+    *   @return nothing 
+    */
     public static void SaveTrackPointData(int Level)
     {
         TrackPointData DataList = new TrackPointData();
@@ -610,27 +816,27 @@ public static class BezierCurve2 {
         {
             case 0:
                 {
-                    path = Save_Load_Data.Tutorial;
+                    path = Save_Load_Data.Tutorial_path;
                     break;
                 }
             case 1:
                 {
-                    path = Save_Load_Data.Level_one_TrackData;
+                    path = Save_Load_Data.Level_one_TrackData_path;
                     break;
                 }
             case 2:
                 {
-                    path = Save_Load_Data.Level_two_TrackData;
+                    path = Save_Load_Data.Level_two_TrackData_path;
                     break;
                 }
             case 3:
                 {
-                    path = Save_Load_Data.Level_three_TrackData;
+                    path = Save_Load_Data.Level_three_TrackData_path;
                     break;
                 }
             case 4:
                 {
-                    path = Save_Load_Data.Level_four_TrackData;
+                    path = Save_Load_Data.Level_four_TrackData_path;
                     break;
                 }
         }
@@ -638,6 +844,13 @@ public static class BezierCurve2 {
         Save_Load_Data.Save(path,saveDataString);
     }
 
+    /**
+    *   @brief A function to Call the Save_Load_Data.cs to Load TrackPointData of the level
+    *  
+    *   @param int level, level of the TrackPointData
+    *   
+    *   @return nothing 
+    */
     public static void LoadTrackPointData(int Level)
     {
         TrackPointData DataList = new TrackPointData();
@@ -648,27 +861,27 @@ public static class BezierCurve2 {
         {
             case 0:
                 {
-                    path = Save_Load_Data.Tutorial;
+                    path = Save_Load_Data.Tutorial_path;
                     break;
                 }
             case 1:
                 {
-                    path = Save_Load_Data.Level_one_TrackData;
+                    path = Save_Load_Data.Level_one_TrackData_path;
                     break;
                 }
             case 2:
                 {
-                    path = Save_Load_Data.Level_two_TrackData;
+                    path = Save_Load_Data.Level_two_TrackData_path;
                     break;
                 }
             case 3:
                 {
-                    path = Save_Load_Data.Level_three_TrackData;
+                    path = Save_Load_Data.Level_three_TrackData_path;
                     break;
                 }
             case 4:
                 {
-                    path = Save_Load_Data.Level_four_TrackData;
+                    path = Save_Load_Data.Level_four_TrackData_path;
                     break;
                 }
         }

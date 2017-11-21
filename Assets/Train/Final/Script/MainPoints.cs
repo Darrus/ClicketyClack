@@ -1,63 +1,71 @@
-﻿using System.Collections;
+﻿/** 
+*  @file    MainPoints.cs
+*  @author  Yin Shuyu (150713R) 
+*  
+*  @brief Contain class MainPoints
+*  
+*/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+/**
+*  @brief Class contain Track WayPoint data 
+*/
 #if UNITY_EDITOR
 [ExecuteInEditMode()]
 #endif
 public class MainPoints : MonoBehaviour {
 
+    /**
+    *  @brief enum PointType, all types of Track WayPoint
+    */
     public enum pointType
     {
         None = 0,
-        FixedPoint = 1,
+        FixedPoint = 1, 
         EventPoint = 2,
         NormalPoint = 3,
         TrafficLight = 4
     };
 
-    public GameObject NormalPoint;
-    //public GameObject FixedPoint;
-    public GameObject EventPoint;
-    public GameObject TrafficLight;
+    //public GameObject NormalPoint; ///< GameObject prefab for NormalPoint type 
+    //public GameObject FixedPoint; ///< GameObject prefab for FixedPoint type 
+    //public GameObject EventPoint; ///< GameObject prefab for EventPoint type 
+    public GameObject TrafficLight; ///< GameObject prefab for TrafficLight type 
 
     [HideInInspector]
-    public Vector3 ChildPoint_position;
+    public Vector3 ChildPoint_position; ///< Vector3 Position of child (child determine the curve of this point)
     [HideInInspector]
-    public Vector3 Normalized_For_Child; // tangent form parent and friend, using this to get child position
+    public Vector3 Normalized_For_Child; ///< Vector3 tangent of child position, using this to get child position
     [HideInInspector]
-    public Vector3 Friend_ChildPoint_position;
+    public Vector3 Friend_ChildPoint_position; ///< Vector3 Position of Friend's child (next point's child determine the curve of next point)
     [HideInInspector]
-    public Vector3 FriendPoint_position;
-    
-    public int type;
-    public int ID;
-    public bool done;
+    public Vector3 FriendPoint_position; ///< Vector3 Position of Friend (the next point, needed to determine the curve)
+
+    public pointType type; ///< pointType of the waypoint
+    public int ID; ///< ID of this waypoint
+    public bool done; ///< bool a once run for pointType.TrafficLight
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // MESH VARs //
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public Material RoadMaterial;
+    public Material Track2DMaterial; ///< Material for the 2D Track
 
-    public Vector3[] CurveNodes
-    {
-        get { return curveNodes; }
-        set { }
-    }
-
-    Vector3[] curveNodes;
-    Vector3[] tangents;
-    Vector3[] vertices;
+    Vector3[] curveNodes; ///< Array of Vector3 curve nodes for Generating the 2d track mesh
+    Vector3[] tangents; ///< Array of Vector3 tangents for Generating the 2d track mesh
+    Vector3[] vertices; ///< Array of Vector3 vertices points for Generating the 2d track mesh
 
     [HideInInspector]
-    public bool UpdateMesh;
+    public bool UpdateMesh; ///< bool trigger for updating the mesh
 
     [HideInInspector]
-    public bool UnrenderMesh;
+    public bool UnrenderMesh; ///< bool trigger for whether to render the 2d track mesh
 
-    // Use this for initialization
+    /**
+    *  @brief Set some bools, and change name and Create PointType Object
+    */
     void Start()
     {
         if (Application.isPlaying)
@@ -66,39 +74,41 @@ public class MainPoints : MonoBehaviour {
             UpdateMesh = true;
             UnrenderMesh = true;
 
-            if (type == (int)pointType.NormalPoint)
+            if (type == pointType.NormalPoint)
             {
                 //CreatePoints(NormalPoint);
                 gameObject.name = ID.ToString() + "_Normal";
             }
 
-            if (type == (int)pointType.FixedPoint)
+            if (type == pointType.FixedPoint)
             {
                 gameObject.name = ID.ToString() + "_Fixed";
             }
 
-            if (type == (int)pointType.EventPoint)
+            if (type == pointType.EventPoint)
             {
                 gameObject.name = ID.ToString() + "_Event";
             }
 
-            if (type == (int)pointType.TrafficLight)
+            if (type == pointType.TrafficLight)
             {
-                CreatePoints(TrafficLight);
+                CreatePointTypeObject(TrafficLight);
                 gameObject.name = ID.ToString() + "_TrafficLight";
                
             }
         }
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    /**
+    *  @brief Update the 2D Track Mesh if UpdateMesh == true, and trigger MeshCollider
+    */
+    void Update () {
 
         if (Application.isPlaying)
         {
             if (UpdateMesh)
             {
-                if (AppManager.Instance.curScene == AppManager.GameScene.Customization)
+                if (AppManager.Instance.gameState == AppManager.GameScene.Customization)
                 {
                     curveNodes = new Vector3[BezierCurve2.CruveSteps + 1];
                     tangents = new Vector3[BezierCurve2.CruveSteps + 1];
@@ -107,7 +117,7 @@ public class MainPoints : MonoBehaviour {
                     for (int i = 0; i <= BezierCurve2.CruveSteps; ++i)
                     {
 
-                        if (type == (int)pointType.NormalPoint || type == (int)pointType.FixedPoint || type == (int)pointType.TrafficLight)
+                        if (type == pointType.NormalPoint || type == pointType.FixedPoint || type == pointType.TrafficLight)
                         {
                             Vector3 point = (BezierCurve2.GetPoint(transform.position * BezierCurve2.Distance_scaleFacter, ChildPoint_position * BezierCurve2.Distance_scaleFacter, Friend_ChildPoint_position * BezierCurve2.Distance_scaleFacter, FriendPoint_position * BezierCurve2.Distance_scaleFacter, i / (float)BezierCurve2.CruveSteps)) - transform.position * BezierCurve2.Distance_scaleFacter;
                             curveNodes[i] = point;
@@ -115,7 +125,7 @@ public class MainPoints : MonoBehaviour {
                             tangents[i] = BezierCurve2.GetFirstDerivative(transform.position * BezierCurve2.Distance_scaleFacter, ChildPoint_position * BezierCurve2.Distance_scaleFacter, Friend_ChildPoint_position * BezierCurve2.Distance_scaleFacter, FriendPoint_position * BezierCurve2.Distance_scaleFacter, i / (float)BezierCurve2.CruveSteps);
                         }
 
-                        if (type == (int)pointType.EventPoint)
+                        if (type == pointType.EventPoint)
                         {
                             Vector3 point = (BezierCurve2.GetPoint(transform.position * BezierCurve2.Distance_scaleFacter, transform.position * BezierCurve2.Distance_scaleFacter, FriendPoint_position * BezierCurve2.Distance_scaleFacter, FriendPoint_position * BezierCurve2.Distance_scaleFacter, i / (float)BezierCurve2.CruveSteps)) - transform.position * BezierCurve2.Distance_scaleFacter;
                             curveNodes[i] = point;
@@ -124,7 +134,7 @@ public class MainPoints : MonoBehaviour {
                         }
                     }
 
-                    BuildRoadMesh();
+                    BuildTrack2DMesh();
                 }
 
                 UpdateMesh = false;
@@ -135,28 +145,36 @@ public class MainPoints : MonoBehaviour {
                     UnrenderMesh = false;
                 }
 
-                if (type == (int)pointType.TrafficLight && !done)
+                if (type == pointType.TrafficLight && !done)
                 {
                     UpdateTrafficLightPoints();
                 }
 
             }
 
-            if (BezierCurve2.EnableTrackCollision)
-                GetComponent<MeshCollider>().enabled = true;
-            else
-                GetComponent<MeshCollider>().enabled = false;
+            GetComponent<MeshCollider>().enabled = BezierCurve2.EnableTrackCollision;
         }
     }
 
 
-
-    public void CreatePoints(GameObject temp)
+    /**
+    *   @brief A function to Create PointType gameobject prefab
+    *  
+    *   @param GameObject temp, which prefab to Instantiate
+    *   
+    *   @return nothing
+    */
+    public void CreatePointTypeObject(GameObject temp)
     {
         GameObject myPoint = Instantiate(temp, transform.position, Quaternion.identity);
         myPoint.transform.parent = transform;
     }
 
+    /**
+    *   @brief A function for TrafficLight prefab to update its position
+    *  
+    *   @return nothing
+    */
     public void UpdateTrafficLightPoints()
     {
         GameObject Temp = gameObject.transform.GetChild(0).gameObject;
@@ -175,7 +193,12 @@ public class MainPoints : MonoBehaviour {
         done = true;
     }
 
-    public void BuildRoadMesh()
+    /**
+    *   @brief A function to Generate 2D Track Mesh
+    *  
+    *   @return nothing
+    */
+    public void BuildTrack2DMesh()
     {
 
         // Get vertices for road edges
@@ -222,19 +245,22 @@ public class MainPoints : MonoBehaviour {
         //GetComponent<MeshCollider>().convex = true;
         //GetComponent<MeshCollider>().isTrigger = true;
 
-        GetComponent<Renderer>().material = RoadMaterial;
+        GetComponent<Renderer>().material = Track2DMaterial;
         GetComponent<Renderer>().enabled = true;
     }
 
+    /**
+    *   @brief to Draw Wire Sphere at waypoint
+    */
 #if UNITY_EDITOR
     void OnDrawGizmos()
     {
         if (!Application.isPlaying)
         {
-            if (type == (int)pointType.TrafficLight)
+            if (type == pointType.TrafficLight)
                 Gizmos.color = Color.red;
 
-            if (type == (int)pointType.FixedPoint || type == (int)pointType.EventPoint)
+            if (type == pointType.FixedPoint || type == pointType.EventPoint)
                 Gizmos.color = Color.black;
 
 

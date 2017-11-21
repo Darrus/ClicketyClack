@@ -1,37 +1,51 @@
-﻿using System.Collections;
+﻿/** 
+*  @file    FadeInTracks.cs
+*  @author  Yin Shuyu (150713R) 
+*  
+*  @brief Contain class FadeInTracks
+*  
+*/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+*  @brief A class that manager Rendering/UnRendering the track
+*/
 public class FadeInTracks : MonoBehaviour {
 
-
+    /**
+    *  @brief Struct of Game Event Data
+    */
     [System.Serializable]
     public struct Event_Data
     {
-        public GameObject Object;
-        public int Point_ID;
+        public GameObject Object; ///< GameObject of the Event
+        public int Point_ID; ///< ID of the Event on the Sub-Point of the Track
     }
 
-    public GameObject TheRealTrack;
+    public GameObject TheRealTrack; ///< GameObject of the Actual Whole Track Mesh
 
-    public TrainMovement RenderPoint;
-    public TrainMovement UnRenderPoint;
+    public TrainMovement RenderPoint; ///< TrainMovement of the rendering point
+    public TrainMovement UnRenderPoint; ///< TrainMovement of the unrendering point
 
-    public List<GameObject> Inner;
-    public List<GameObject> Outter;
-    public List<GameObject> Rail;
-    public List<int> RailList;
-    public List<Event_Data> Event_Data_List;
+    public List<GameObject> Inner; ///< List of GameObject of the individual parts of the Track Mesh of the inner Steel rail
+    public List<GameObject> Outter; ///< List of GameObject of the individual parts of the Track Mesh of the outter Steel rail
+    public List<GameObject> Rail; ///< List of GameObject of the individual parts of the Track Mesh of the Rail Plate
+    public List<int> RailList;  ///< List of ID of the sub-point for the individual parts of the Track Mesh of the Rail Plate
+    public List<Event_Data> Event_Data_List; ///< list of Struct Event_Data
 
-    private int prePoint_ID;
+    private int prePoint_ID; ///< previous sub-Point ID
 
-    private int preRail_List_ID;
-    private int currRail_List_ID;
+    private int preRail_List_ID; ///< previous Rail Plate List ID
+    private int currRail_List_ID; ///< Current Rail Plate List ID
 
-    private int preEvent_List_ID;
-    private int currEvent_List_ID;
+    private int preEvent_List_ID; ///< previous Event Data List ID
+    private int currEvent_List_ID; ///< Current Event Data List ID
 
-    // Use this for initialization
+    /**
+    *  @brief InActive all gameobject in Event_Data_List
+    */
     void Start () {
         prePoint_ID = 0;
 
@@ -67,6 +81,11 @@ public class FadeInTracks : MonoBehaviour {
         }
     }
 
+    /**
+    *  @brief Render All Individual Track Mesh and Event Gameobject as it follow along TrainMovement RenderPoint
+    *  
+    *  @return null
+    */
     void RenderAll()
     {
         int temp = 0;
@@ -92,6 +111,11 @@ public class FadeInTracks : MonoBehaviour {
         }
     }
 
+    /**
+    *  @brief unRender All Individual Track Mesh and Event Gameobject as it follow along TrainMovement UnRenderPoint
+    *  
+    *  @return null
+    */
     void UnRenderAll()
     {
         int temp = 0;
@@ -123,8 +147,13 @@ public class FadeInTracks : MonoBehaviour {
         }
     }
 
-
-
+    /**
+    *  @brief Render Individual Steel Rail Track Mesh till a specific sub-Point
+    *  
+    *  @param int temp, ID of sub-Point to render to
+    *  
+    *  @return null
+    */
     void RenderTrack_Part_1(int temp)
     {
         for (int i = prePoint_ID; i < temp; i++)
@@ -139,6 +168,11 @@ public class FadeInTracks : MonoBehaviour {
         prePoint_ID = temp;
     }
 
+    /**
+    *  @brief Render Individual Rail Plate Track Mesh till to prePoint_ID of the sub-point
+    *  
+    *  @return null
+    */
     void RenderTrack_Part_2()
     {
         for (int i = preRail_List_ID; i < RailList.Count; i++)
@@ -162,6 +196,11 @@ public class FadeInTracks : MonoBehaviour {
         }
     }
 
+    /**
+    *  @brief Render Individual Event Gameobject till to prePoint_ID of the sub-point
+    *  
+    *  @return null
+    */
     void RenderEvent()
     {
         for (int i = preEvent_List_ID; i < Event_Data_List.Count; i++)
@@ -182,6 +221,13 @@ public class FadeInTracks : MonoBehaviour {
         }
     }
 
+    /**
+    *  @brief unRender Individual Steel Rail Track Mesh till a specific sub-Point
+    *  
+    *  @param int temp, ID of sub-Point to unrender to
+    *  
+    *  @return null
+    */
     void UnRenderTrack_Part_1(int temp)
     {
         for (int i = prePoint_ID; i > temp; i--)
@@ -196,6 +242,11 @@ public class FadeInTracks : MonoBehaviour {
         prePoint_ID = temp;
     }
 
+    /**
+    *  @brief unRender Individual Rail Plate Track Mesh till to prePoint_ID of the sub-point
+    *  
+    *  @return null
+    */
     void UnRenderTrack_Part_2()
     {
 
@@ -232,6 +283,11 @@ public class FadeInTracks : MonoBehaviour {
         preRail_List_ID = currRail_List_ID;
     }
 
+    /**
+    *  @brief unRender Individual Event Gameobject till to prePoint_ID of the sub-point
+    *  
+    *  @return null
+    */
     void UnRenderEvent()
     {
         if(Event_Data_List.Count == preEvent_List_ID)
@@ -266,6 +322,15 @@ public class FadeInTracks : MonoBehaviour {
     }
 
 
+    /**
+    *  @brief pushing the traffic Light Gameobject into the Event_Data_List (traffic Light only create in runtime)
+    *  
+    *  @param GameObject T, the traffic Light 
+    *  
+    *  @param int ID, id of the wayPoint of which the traffic Light belong to
+    * 
+    *  @return null
+    */
     public void GetPointObject(GameObject T, int ID)
     {
         Event_Data temp = new Event_Data();
