@@ -13,6 +13,8 @@ using System.Collections;
 public class LevelSelectController : MonoBehaviour {
     public MainMenuManager mainMenu;
     public GameObject[] boardButtons;
+    public GameObject[] signs;
+    public int[] victimRequired = new int[4];
     public HumanController[] victims;
     public HumanController[] bandits;
     public Transform[] victimIdlePoints;
@@ -20,6 +22,19 @@ public class LevelSelectController : MonoBehaviour {
     public Transform[] tunnels;
 
     bool changeLevel = false;
+
+    // Placed holder for total saved victims
+    int n = 3;
+
+    private void Start()
+    {
+        for (int i = 0; i < victimRequired.Length; ++i)
+        {
+            // TODO
+            if (n >= victimRequired[i])
+                signs[i].SetActive(false);
+        }
+    }
 
     /**
      * @brief Updates every frame, Debug controls for Unity Editor
@@ -49,6 +64,9 @@ public class LevelSelectController : MonoBehaviour {
         if (changeLevel)
             return;
 
+        if (n < victimRequired[level])
+            return;
+
         changeLevel = true;
         StartCoroutine(TransitionAnimation(level));
     }
@@ -70,11 +88,35 @@ public class LevelSelectController : MonoBehaviour {
             bandits[i].RunTo(banditIdlePoints[i].position);
             bandits[i].ChangeState(HumanController.CharacterStates.CHEER);
         }
+        yield return new WaitForEndOfFrame();
 
-        float timeTillBoardAppear = 10.0f;
-        yield return new WaitForSeconds(timeTillBoardAppear);
+        bool next = false;
+        while(!next)
+        {
+            for (int i = 0; i < victims.Length; ++i)
+            {
+                next = victims[i].CurrentState != HumanController.CharacterStates.RUN;
+                if (!next)
+                    break;
+            }
 
-        for(int i = 0; i < boardButtons.Length; ++i)
+            if (!next)
+                yield return null;
+
+            for (int i = 0; i < bandits.Length; ++i)
+            {
+                next = bandits[i].CurrentState != HumanController.CharacterStates.RUN;
+                if (!next)
+                    break;
+            }
+
+            yield return null;
+        }
+
+        //float timeTillBoardAppear = 10.0f;
+        //yield return new WaitForSeconds(timeTillBoardAppear);
+
+        for (int i = 0; i < boardButtons.Length; ++i)
         {
             boardButtons[i].SetActive(true);
         }
