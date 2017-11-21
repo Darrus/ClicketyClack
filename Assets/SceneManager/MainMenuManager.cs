@@ -30,8 +30,8 @@ public class MainMenuManager : MonoBehaviour
         get { return Singleton; }
     }
 
-	/**
-    *  @brief At the Awake of the gameobject, need to set the Singleton 
+    /**
+    *  @brief At the Awake of the gameobject, need to set the Singleton ,Set the Victim List in VictimManager and updated the victim status 
     */
     void Awake()
     {
@@ -44,10 +44,19 @@ public class MainMenuManager : MonoBehaviour
         }
         Singleton = this;
 
+        if (VictimManager.All_VictimData == null)
+            VictimManager.All_VictimData = VictimList;
+        else
+            VictimManager.Check_All_VictimData(VictimList);
+
+        VictimManager.Check_VictimRemain();
+
+        VictimManager.Level_RequireVictimSave = All_Level_RequireVictimSave;
+
         OrderExecution.Instance.Done = true;
     }
 
-	/**
+    /**
 	*   @brief Function to Add the Room_Items to the World Anchor's GameObject
 	*  
 	*   @return null
@@ -58,19 +67,9 @@ public class MainMenuManager : MonoBehaviour
         Room_Items.transform.SetParent(Room.transform);
     }
 
-    /**
-    *  @brief Set the Victim List in VictimManager and updated the victim status 
-    */
+
     void Start()
-    {
-        if (VictimManager.All_VictimData == null)
-            VictimManager.All_VictimData = VictimList;
-        else
-            VictimManager.Check_All_VictimData(VictimList);
-
-        VictimManager.Check_VictimRemain();
-
-        VictimManager.Level_RequireVictimSave = All_Level_RequireVictimSave;
+    { 
     }
 
 	/**

@@ -24,6 +24,7 @@ public static class VictimManager
         public GameObject theVictim; ///< GameObject of the victim
         public int Victim_ID; ///< id of the victim
         public AppManager.GameScene Level; ///< level of the victim belong to 
+        [HideInInspector]
         public bool Saved; ///< bool trigger whether victim saved
 
         /**
@@ -44,6 +45,8 @@ public static class VictimManager
     public struct Level_VictimData
     {
         public List<VictimData> Victim_List; ///< list of VictimData struct
+
+        [HideInInspector]
         public int VictimRemain; ///< number of Victim remain in the level to save
 
 
@@ -55,6 +58,12 @@ public static class VictimManager
         public void UpdateVictimList()
         {
             VictimRemain = 0;
+
+            if (All_VictimData == null)
+                return;
+            if (Victim_List == null)
+                return;
+
 
             for (int i = 0; i < All_VictimData.Count; i++)
             {
@@ -96,9 +105,10 @@ public static class VictimManager
     */
     public static void Check_All_VictimData(List<VictimData> temp)
     {
+
         for (int i = 0; i < All_VictimData.Count; i++)
         {
-            for (int n = 0; n < temp.Count; i++)
+            for (int n = 0; n < temp.Count; n++)
             {
                 if(All_VictimData[i].Victim_ID == temp[n].Victim_ID)
                 {
@@ -144,12 +154,12 @@ public static class VictimManager
     public static void Check_VictimRemain()
     {
         Num_VictimSaved = 0;
-        VictimRemain_Level = new List<int>((int)AppManager.GameScene.TotalScene);
+        VictimRemain_Level = new List<int>(5) { 0,0,0,0,0};
 
         for (int i = 0; i < All_VictimData.Count; i++)
         {
             if (!All_VictimData[i].Saved)
-                VictimRemain_Level[(int)All_VictimData[i].Level] += 1;
+                VictimRemain_Level[(int)(All_VictimData[i].Level) - 1] += 1;
             else
                 Num_VictimSaved += 1;
         }

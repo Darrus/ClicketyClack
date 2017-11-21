@@ -14,7 +14,7 @@ public class LevelSelectController : MonoBehaviour {
     public MainMenuManager mainMenu;
     public GameObject[] boardButtons;
     public GameObject[] signs;
-    public int[] victimRequired = new int[4];
+    public TextMesh[] victimsLeftText;
     public HumanController[] victims;
     public HumanController[] bandits;
     public Transform[] victimIdlePoints;
@@ -23,16 +23,24 @@ public class LevelSelectController : MonoBehaviour {
 
     bool changeLevel = false;
 
-    // Placed holder for total saved victims
-    int n = 3;
 
     private void Start()
     {
-        for (int i = 0; i < victimRequired.Length; ++i)
+        for (int i = 0; i < 4; ++i)
         {
-            // TODO
-            if (n >= victimRequired[i])
+            if (VictimManager.Check_Level_RequireVictimSave(i+1) == 0)
+            {
+                victimsLeftText[i].color = Color.white;
+                // Number of victims left
+                victimsLeftText[i].text = " : " + VictimManager.VictimRemain_Level[i];
                 signs[i].SetActive(false);
+            }
+            else
+            {
+                victimsLeftText[i].color = Color.red;
+                // Number of victims required
+                victimsLeftText[i].text = " : " + VictimManager.Check_Level_RequireVictimSave(i + 1);
+            }
         }
     }
 
@@ -64,7 +72,7 @@ public class LevelSelectController : MonoBehaviour {
         if (changeLevel)
             return;
 
-        if (n < victimRequired[level])
+        if (VictimManager.Check_Level_RequireVictimSave(level+1) != 0)
             return;
 
         changeLevel = true;

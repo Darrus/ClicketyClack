@@ -33,6 +33,8 @@ public class LevelManager : MonoBehaviour {
 
     public PointManager pointManager; ///< PointManager point Manager of current level
 
+    public TrainMovementManager TrainManager; ///< TrainMovementManager train Manager of current level
+
     public bool Tutorial; ///< bool Check Whether level is Tutorial, tutorial run codes differently
 
     public static LevelManager Singleton = null; ///< Static Singleton of the LevelManager
@@ -58,7 +60,8 @@ public class LevelManager : MonoBehaviour {
 
         Play = false;
         BezierCurve2.Go = false;
-        
+
+        VictimList.UpdateVictimList();
     }
 
     /**
@@ -87,8 +90,6 @@ public class LevelManager : MonoBehaviour {
         {
             CargoOn = true;
         }
-
-        VictimList.UpdateVictimList();
 
         OrderExecution.Instance.Done = true;
     }

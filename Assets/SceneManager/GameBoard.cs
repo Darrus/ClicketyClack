@@ -90,9 +90,14 @@ public class GameBoard : MonoBehaviour
 
     public GameObject Victory_Screen; ///< GameObject of the Victory Screen
     public GameObject Lose_Screen; ///< GameObject of the Lose Screen
+    public GameObject LevelStatus; ///< GameObject of the level status data
 
     public TrainMovement Train_Head_Movement; ///< TrainMovement of the Head of the Train
-    public TextMesh BoardText; ///< Text of the Game Progress State
+
+    public TextMesh Progress; ///< Text of the Game Progress State
+    public TextMesh victimLeft; ///< Text of number victim left in level to save
+
+    public TextMesh feedback; ///< Text for some feedback
 
     public static GameBoard Singleton = null; ///< Static Singleton of the GameBoard
 
@@ -117,12 +122,18 @@ public class GameBoard : MonoBehaviour
 
         Victory_Screen.SetActive(false);
         Lose_Screen.SetActive(false);
+        LevelStatus.SetActive(true);
     }
 
     // Use this for initialization
     void Start()
     {
-        BoardText.text = "At Station";
+        UpdateVictimText();
+    }
+
+    public void UpdateVictimText()
+    {
+        victimLeft.text = VictimManager.VictimRemain_Level[(int)(AppManager.Instance.gameState)-1].ToString();
     }
 
     // Update is called once per frame
@@ -143,7 +154,7 @@ public class GameBoard : MonoBehaviour
         if (LevelManager.Instance.MoveOut && LevelManager.Instance.Play && !LevelManager.Instance.ReachStation && TheTrainLife.Life != 0)
         {
             Check_Progress();
-            BoardText.text = "Progress: " + Check_Progress() + "%";
+            Progress.text = ": " + Check_Progress() + " %";
         }
 
     }
@@ -171,7 +182,7 @@ public class GameBoard : MonoBehaviour
         {
             if (!Lose_Screen.activeSelf)
             {
-                BoardText.text = "Derailed!";
+                LevelStatus.SetActive(false);
                 Lose_Screen.SetActive(true);
 
                 if (Victory_Screen.activeSelf)
@@ -186,10 +197,9 @@ public class GameBoard : MonoBehaviour
             if (!Victory_Screen.activeSelf)
             {
 
-                BoardText.text = "Right On Track!";
+                LevelManager.Instance.VictimList.UpdateVictimList();
 
-                LevelManager.Instance.VictimList.UpdataVictimList();
-
+                LevelStatus.SetActive(false);
                 Victory_Screen.SetActive(true);
             }
 
@@ -229,12 +239,12 @@ public class GameBoard : MonoBehaviour
     */
     public void Button_NextLevel()
     {
-        int temp = VictimManager.Check_Level_RequireVictimSave((int)AppManager.Instance.gameState);
+        int temp = VictimManager.Check_Level_RequireVictimSave((int)(AppManager.Instance.gameState) + 1);
         if (temp == 0)
             AppManager.Instance.NextLevel();
         else
         {
-            BoardText.text = "Need to save " + temp + " more victim !!";
+            feedback.text = "Need to save \n" + temp + " more victim !!";
         }
     }
 

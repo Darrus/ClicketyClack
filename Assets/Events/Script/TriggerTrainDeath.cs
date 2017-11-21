@@ -22,18 +22,20 @@ public class TriggerTrainDeath : MonoBehaviour {
     {
         if(collision.gameObject.CompareTag(triggerTag))
         {
-
-            if (collision.gameObject.name == "head")
+            if (GameBoard.Singleton != null)
             {
-                GameBoard.Instance.TheTrainLife.killHead();
-            }
-            if (collision.gameObject.name == "carriage")
-            {
-                GameBoard.Instance.TheTrainLife.KillCarriage();
-            }
-            if (collision.gameObject.name == "cargo")
-            {
-                GameBoard.Instance.TheTrainLife.KillCargo();
+                if (collision.gameObject.name == "head")
+                {
+                    GameBoard.Instance.TheTrainLife.killHead();
+                }
+                if (collision.gameObject.name == "carriage")
+                {
+                    GameBoard.Instance.TheTrainLife.KillCarriage();
+                }
+                if (collision.gameObject.name == "cargo")
+                {
+                    GameBoard.Instance.TheTrainLife.KillCargo();
+                }
             }
 
             Rigidbody rigid = collision.transform.GetComponent<Rigidbody>();

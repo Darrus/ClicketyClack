@@ -2,10 +2,9 @@
  *  @file    OnHold.cs
  *  @author  Darrus
  *  @date    17/11/2017  
- *  @brief   Contains the OnClick class
+ *  @brief   Contains the OnHold class
  */
 using UnityEngine;
-using UnityEngine.Events;
 using HoloToolkit.Unity.InputModule;
 
 /** 
@@ -13,21 +12,12 @@ using HoloToolkit.Unity.InputModule;
  */
 public class OnHold : MonoBehaviour, IManipulationHandler
 {
-    public UnityEvent eventOnHold;
-    public UnityEvent eventOnRelease;
+    private float defaultSpeed;
 
-#if UNITY_EDITOR
-    public KeyCode holdKey;
-    public KeyCode releaseKey;
-
-    public void Update()
+    private void Start()
     {
-        if (Input.GetKeyDown(holdKey))
-            eventOnHold.Invoke();
-        if (Input.GetKeyDown(releaseKey))
-            eventOnRelease.Invoke();
+        defaultSpeed = LevelManager.Instance.TrainManager.MainSpeed;
     }
-#endif
 
     /** 
       *  @brief  On manipulation started, invoke event on hold
@@ -35,7 +25,11 @@ public class OnHold : MonoBehaviour, IManipulationHandler
       */
     public void OnManipulationStarted(ManipulationEventData eventData)
     {
-        eventOnHold.Invoke();
+        if(LevelManager.Singleton != null)
+        {
+            LevelManager.Instance.TrainManager.MainSpeed *= 0.6f;
+        }
+        
     }
 
     public void OnManipulationUpdated(ManipulationEventData eventData)
@@ -48,7 +42,10 @@ public class OnHold : MonoBehaviour, IManipulationHandler
        */
     public void OnManipulationCompleted(ManipulationEventData eventData)
     {
-        eventOnRelease.Invoke();
+        if (LevelManager.Singleton != null)
+        {
+            LevelManager.Instance.TrainManager.MainSpeed = defaultSpeed;
+        }
     }
 
     /** 
@@ -57,6 +54,9 @@ public class OnHold : MonoBehaviour, IManipulationHandler
       */
     public void OnManipulationCanceled(ManipulationEventData eventData)
     {
-        eventOnRelease.Invoke();
+        if (LevelManager.Singleton != null)
+        {
+            LevelManager.Instance.TrainManager.MainSpeed = defaultSpeed;
+        }
     }
 }
