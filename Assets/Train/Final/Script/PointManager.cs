@@ -1,24 +1,37 @@
-﻿using System.Collections;
+﻿/** 
+*  @file    PointManager.cs
+*  @author  Yin Shuyu (150713R) 
+*  
+*  @brief Contain class PointManager
+*  
+*/
+using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
 
+/**
+*  @brief Class manage all the Mainpoint data
+*/
 #if UNITY_EDITOR
 [ExecuteInEditMode()]
 #endif
 public class PointManager : MonoBehaviour {
 
-    public GameObject Point;
-    public GameObject WayPointList;
+    public GameObject Point; ///< GameObject prefab of a empty waypoint
+    public GameObject WayPointList; ///< GameObject of all WayPoint's Parent 
 
-    public int curveSteps;
+    public int curveSteps;  ///< Default number of curveSteps
 
-    public int startSize;
+    public int startSize;  ///< size of the wayPoint List
 
-    public int Level;
+    public int CurrentLevel; ///< current scene Level
 
-    private Transform WayPointList_parent;
+    private Transform WayPointList_parent; ///< Transform of all WayPoint's Parent's Parent
 
+    /**
+    *  @brief Caculate All Track Point data once, and take WayPointList out from unactive parent to get data from all MainPoint once
+    */
     void Start () {
 
         BezierCurve2.Go = false;
@@ -38,6 +51,12 @@ public class PointManager : MonoBehaviour {
       
     }
 
+    /**
+    *   @brief A function to Draw the Track in Line
+    *  
+    *   @return nothing
+    */
+#if UNITY_EDITOR
     public void DrawLine_Edtior()
     {
         for (int i = 0; i < BezierCurve2.TrackData_List.Length; i++)
@@ -48,8 +67,20 @@ public class PointManager : MonoBehaviour {
                 Debug.DrawLine(BezierCurve2.TrackData_List[i].position, BezierCurve2.TrackData_List[0].position, Color.cyan);
         }
     }
+#endif
 
-    public void AddNewPoints(Vector3 position, int ID,int type)
+    /**
+    *   @brief A function to Add a new waypoint into the the WayPointList
+    *  
+    *   @param Vector3 position, position of the new waypoint
+    *   
+    *   @param  int ID, ID of the new waypoint
+    *   
+    *   @param MainPoints.pointType type, type of the new waypoint
+    *   
+    *   @return nothing
+    */
+    public void AddNewPoints(Vector3 position, int ID,MainPoints.pointType type)
     {
         //BezierCurve2.addPoint_shiftID(ID);
         BezierCurve2.IncreaseSize(1);
