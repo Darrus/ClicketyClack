@@ -1,5 +1,14 @@
-﻿using UnityEngine;
+﻿/** 
+ *  @file     ReversePlayAnimation.cs
+ *  @author Darrus
+ *  @date    21/11/2017  
+ *  @brief   Contains the reverse play animation class
+ */
+using UnityEngine;
 
+/** 
+ *  @brief   Play and Reverse state controller
+ */
 [RequireComponent(typeof(Animator))]
 public class ReversePlayAnimation : MonoBehaviour {
 
@@ -40,6 +49,9 @@ public class ReversePlayAnimation : MonoBehaviour {
         myAnimator = GetComponent<Animator>();
     }
 
+    /** 
+      *  @brief   Update each states of the animation
+      */
     private void Update()
     {
         animatorState = myAnimator.GetCurrentAnimatorStateInfo(0);
@@ -71,18 +83,27 @@ public class ReversePlayAnimation : MonoBehaviour {
         }
     }
 
+    /** 
+      *  @brief   Plays the animation as per normal
+      */
     public void PlayAnimation()
     {
         prevState = state;
         state = ANIM_STATE.PLAY;
     }
 
+    /** 
+      *  @brief   Reverse play the animation
+      */
     public void ReverseAnimation()
     {
         prevState = state;
         state = ANIM_STATE.REVERSE;
     }
 
+    /** 
+      *  @brief   Stop the animation
+      */
     public void StopAnimation()
     {
         prevState = state;

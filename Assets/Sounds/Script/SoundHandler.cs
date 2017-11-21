@@ -1,18 +1,34 @@
-﻿using System.Collections;
+﻿/** 
+ *  @file     SoundHandler.cs
+ *  @author Darrus
+ *  @date    21/11/2017  
+ *  @brief   Contains the sound handler class
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/** 
+ *  @brief   Manager of all the audio source under the game object that this script is attach to
+ */
 public class SoundHandler : MonoBehaviour {
     public AudioSource[] sounds;
 
     [SerializeField]
     private float fadeInDuration;
 
+    /** 
+      *  @brief   Get all children components Audio Source
+      */
     private void Awake()
     {
         sounds = GetComponentsInChildren<AudioSource>();
     }
 
+    /** 
+      *  @brief   Plays the audio source given the index
+      *  @param  index, index of the audio source
+      */
     public void Play(int index)
     {
         if (index > sounds.Length || index < 0)
@@ -26,6 +42,10 @@ public class SoundHandler : MonoBehaviour {
         sounds[index].Play();
     }
 
+    /** 
+      *  @brief   Plays the audio source given the index
+      *  @param  name, name of the audio source to play
+      */
     public void Play(string name)
     {
         for(int i = 0; i < sounds.Length; ++i)
@@ -45,6 +65,10 @@ public class SoundHandler : MonoBehaviour {
         Debug.LogWarning("Unable to find sound \"" + name + "\"");
     }
 
+    /** 
+      *  @brief   Play and Fades in the audio with the given index
+      *  @param  index, index of the audio source
+      */
     public void PlayFadeIn(int index)
     {
         if (index > sounds.Length || index < 0)
@@ -58,6 +82,10 @@ public class SoundHandler : MonoBehaviour {
         StartCoroutine(FadeInSound(sounds[index]));
     }
 
+    /** 
+      *  @brief   Play and Fades in the audio with the given name
+      *  @param  name, name of the audio source to play
+      */
     public void PlayFadeIn(string name)
     {
         for (int i = 0; i < sounds.Length; ++i)
@@ -78,6 +106,10 @@ public class SoundHandler : MonoBehaviour {
         Debug.LogWarning("Unable to find sound \"" + name + "\"");
     }
 
+    /** 
+      *  @brief   Fades in the sound given a fade in duration
+      *  @param  source, audio source to fade into
+      */
     IEnumerator FadeInSound(AudioSource source)
     {
         float sourceVolume = source.volume;
@@ -96,6 +128,10 @@ public class SoundHandler : MonoBehaviour {
         yield break;
     }
 
+    /** 
+      *  @brief   Stop the sound with the given index
+      *  @param  index, index of the audio source
+      */
     public void Stop(int index)
     {
         if (index > sounds.Length || index < 0)
@@ -104,6 +140,10 @@ public class SoundHandler : MonoBehaviour {
         sounds[index].Stop();
     }
 
+    /** 
+      *  @brief   Stop the sound with the given name
+      *  @param  name, name of the audio source to play
+      */
     public void Stop(string name)
     {
         for (int i = 0; i < sounds.Length; ++i)
@@ -118,6 +158,10 @@ public class SoundHandler : MonoBehaviour {
         Debug.LogWarning("Unable to find sound \"" + name + "\"");
     }
 
+    /** 
+      *  @brief   Stop and Fades out the audio with the given index
+      *  @param  index, index of the audio source
+      */
     public void StopFadeOut(int index)
     {
         if (index > sounds.Length || index < 0)
@@ -126,6 +170,10 @@ public class SoundHandler : MonoBehaviour {
         StartCoroutine(FadeOutSound(sounds[index]));
     }
 
+    /** 
+      *  @brief   Stop and Fades out the audio with the given name
+      *  @param  name, name of the audio source to play
+      */
     public void StopFadeOut(string name)
     {
         for (int i = 0; i < sounds.Length; ++i)
@@ -140,6 +188,10 @@ public class SoundHandler : MonoBehaviour {
         Debug.LogWarning("Unable to find sound \"" + name + "\"");
     }
 
+    /** 
+      *  @brief   Coroutine to fades out the sound
+      *  @param  source, audio source to fade into
+      */
     IEnumerator FadeOutSound(AudioSource source)
     {
         float sourceVolume = source.volume;
@@ -157,6 +209,10 @@ public class SoundHandler : MonoBehaviour {
         yield break;
     }
 
+    /** 
+     *  @brief   Pause the sound with the given index
+     *  @param  index, index of the audio source
+     */
     public void Pause(int index)
     {
         if (index > sounds.Length || index < 0)
@@ -165,6 +221,10 @@ public class SoundHandler : MonoBehaviour {
         sounds[index].Pause();
     }
 
+    /** 
+    *  @brief   Pause the sound with the given name
+    *  @param  name, name of the audio source to play
+    */
     public void Pause(string name)
     {
         for (int i = 0; i < sounds.Length; ++i)

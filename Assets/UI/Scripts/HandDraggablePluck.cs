@@ -324,8 +324,6 @@ namespace HoloToolkit.Unity.InputModule
         {
             GetComponent<Rigidbody>().useGravity = false;
 
-            Debug.Log("TEST");
-
             if (isDragging)
             {
                 // We're already handling drag input, so we can't start a new drag operation.
