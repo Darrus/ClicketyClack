@@ -1,7 +1,7 @@
 ﻿/** 
 *  @file    MainMenuManager.cs
 *  @author  Yin Shuyu (150713R) 
-*  
+*  @date    21/11/2017
 *  @brief Contain Singleton class MainMenuManager
 *  
 */
@@ -16,6 +16,10 @@ using UnityEngine.SceneManagement;
 */
 public class MainMenuManager : MonoBehaviour
 {
+
+    public List<VictimManager.VictimData> VictimList; ///< List of VictimManager's VictimData Struct of All Victim
+
+    public List<int> All_Level_RequireVictimSave; ///< List of number of Victim needed to save to unlock level
 
     public GameObject Room_Items; ///< GameObject of the RoomItem needed be align with the World Anchor
 
@@ -54,13 +58,19 @@ public class MainMenuManager : MonoBehaviour
         Room_Items.transform.SetParent(Room.transform);
     }
 
+    /**
+    *  @brief Set the Victim List in VictimManager and updated the victim status 
+    */
     void Start()
     {
+        if (VictimManager.All_VictimData == null)
+            VictimManager.All_VictimData = VictimList;
+        else
+            VictimManager.Check_All_VictimData(VictimList);
 
-    }
+        VictimManager.Check_VictimRemain();
 
-    void Update()
-    {
+        VictimManager.Level_RequireVictimSave = All_Level_RequireVictimSave;
     }
 
 	/**

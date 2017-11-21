@@ -1,7 +1,7 @@
 ﻿/** 
 *  @file    TestSc.cs
 *  @author  Yin Shuyu (150713R) 
-*  
+*  @date    21/11/2017
 *  @brief Contain class TestSc (Currently project not in use)
 *  
 */

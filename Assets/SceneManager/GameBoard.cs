@@ -1,7 +1,7 @@
 ﻿/** 
 *  @file    GameBoard.cs
 *  @author  Yin Shuyu (150713R) 
-*  
+*  @date    21/11/2017
 *  @brief Contain Singleton class GameBoard
 *  
 */
@@ -188,6 +188,8 @@ public class GameBoard : MonoBehaviour
 
                 BoardText.text = "Right On Track!";
 
+                LevelManager.Instance.VictimList.UpdataVictimList();
+
                 Victory_Screen.SetActive(true);
             }
 
@@ -227,7 +229,13 @@ public class GameBoard : MonoBehaviour
     */
     public void Button_NextLevel()
     {
-        AppManager.Instance.NextLevel();
+        int temp = VictimManager.Check_Level_RequireVictimSave((int)AppManager.Instance.gameState);
+        if (temp == 0)
+            AppManager.Instance.NextLevel();
+        else
+        {
+            BoardText.text = "Need to save " + temp + " more victim !!";
+        }
     }
 
 	/**

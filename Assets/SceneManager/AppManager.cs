@@ -1,7 +1,7 @@
 ﻿/** 
 *  @file    AppManager.cs
 *  @author  Yin Shuyu (150713R) 
-*  
+*  @date    21/11/2017
 *  @brief Contain Singleton class AppManager
 *  
 */
@@ -43,7 +43,9 @@ public class AppManager : MonoBehaviour {
         level_3 = 3,
         level_4 = 4,
         Tutorial = 5,
-        Customization = 6
+        Customization = 6,
+
+        TotalScene = 7
     };
 
     [HideInInspector]

@@ -1,7 +1,7 @@
 ﻿/** 
 *  @file    LevelManager.cs
 *  @author  Yin Shuyu (150713R) 
-*  
+*  @date    21/11/2017
 *  @brief Contain Singleton class LevelManager
 *  
 */
@@ -16,6 +16,9 @@ using UnityEngine.SceneManagement;
 *  @brief Singleton Class for Level Management for setting Some Game State purpose 
 */
 public class LevelManager : MonoBehaviour {
+
+
+    public VictimManager.Level_VictimData VictimList; ///< VictimManager's Level_VictimData Struct for Victim list
 
     [HideInInspector]
     public bool ReachStation; ///< bool trigger when Train Reach Station after one round
@@ -84,6 +87,9 @@ public class LevelManager : MonoBehaviour {
         {
             CargoOn = true;
         }
+
+        VictimList.UpdateVictimList();
+
         OrderExecution.Instance.Done = true;
     }
 

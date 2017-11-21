@@ -1,7 +1,7 @@
 ﻿/** 
 *  @file    TrainMovement2.cs
 *  @author  Yin Shuyu (150713R) 
-*  
+*  @date    21/11/2017
 *  @brief Contain class TrainMovement2
 *  
 */
