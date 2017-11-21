@@ -1,19 +1,28 @@
-﻿ using System.Collections;
+﻿/** 
+*  @file    TrainMovement.cs
+*  @author  Yin Shuyu (150713R) 
+*  
+*  @brief Contain class TrainMovement
+*  
+*/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+*  @brief Class of Moving point for both train and rending track purpose
+*/
 public class TrainMovement : MonoBehaviour {
 
-    public TrainMovementManager Manager;
+    public TrainMovementManager Manager; ///< TrainMovementManager manager script for Data of the trains and the speed
 
-    public int ID;
-    public float distanceTravel;
-    public int Point_ID;
-    private float distanceGap;
-    public bool once;
+    public int ID; ///< ID of this TrainMovement point
+    public float distanceTravel; ///< ID distance of the TrainMovement point on the track
+    public int Point_ID; ///< ID of the Waypoint the TrainMovement point currently in
+    private float distanceGap; ///< distance apart from the start of the station (waypoint 0)
+    public bool once; ///< bool once trigger for run some function runing once
 
-    private Transform parent;
-
+    private Transform parent; ///< Transform of the Parent 
 
     private void Awake()
     {
@@ -21,7 +30,9 @@ public class TrainMovement : MonoBehaviour {
             OrderExecution.Instance.Done = true;
     }
 
-    // Update is called once per frame
+    /**
+    *  @brief call update depend on ID (0 for rending, 666 for unrending)
+    */
     void Update () {
 
         if (ID == 0)
@@ -34,6 +45,11 @@ public class TrainMovement : MonoBehaviour {
             TrainMovementUpdate();
     }
 
+    /**
+   *   @brief Update for Rending TrainMovement point, ID == 0
+   *  
+   *   @return null
+   */
     private void TrainRenderUpdate()
     {
         if (!once)
@@ -50,6 +66,11 @@ public class TrainMovement : MonoBehaviour {
         }
     }
 
+    /**
+    *   @brief Update for UnRending TrainMovement point, ID == 666
+    *  
+    *   @return null
+    */
     private void TrainUnRenderUpdate()
     {
         if (!once && Manager.once)
@@ -68,6 +89,11 @@ public class TrainMovement : MonoBehaviour {
         }
     }
 
+    /**
+    *   @brief Update for Train Movement
+    *  
+    *   @return null
+    */
     private void TrainMovementUpdate()
     {
         if (!once && Manager.once)
@@ -104,6 +130,13 @@ public class TrainMovement : MonoBehaviour {
         }
     }
 
+    /**
+   *  @brief Check for next Position and update the position and rotation of the TrainMovement point
+   *  
+   *  @param bool T, whether the point moving for forthward or backward
+   *  
+   *  @return null
+   */
     private void CheckPosition(bool T)
     {
         bool run = true;

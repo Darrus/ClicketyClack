@@ -1,36 +1,47 @@
-﻿using UnityEngine;
+﻿/** 
+*  @file    LevelManager.cs
+*  @author  Yin Shuyu (150713R) 
+*  
+*  @brief Contain Singleton class LevelManager
+*  
+*/
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System;
 using UnityEngine.SceneManagement;
 
+/**
+*  @brief Singleton Class for Level Management for setting Some Game State purpose 
+*/
 public class LevelManager : MonoBehaviour {
 
     [HideInInspector]
-    public bool ReachStation;
+    public bool ReachStation; ///< bool trigger when Train Reach Station after one round
     [HideInInspector]
-    public bool MoveOut;
+    public bool MoveOut; ///< bool Trigger when all Track preparation is done
     [HideInInspector]
-    public bool CargoOn;
+    public bool CargoOn; ///< bool check for Cargo Connect to the Train
     [HideInInspector]
-    public bool Play;
+    public bool Play; ///< Bool Trigger for Starting the Train
 
-    public GameObject Room_Items;
+    public GameObject Room_Items; ///< GameObject of the RoomItem needed be align with the World Anchor
 
-    public GameObject AppPrefab;
+    public PointManager pointManager; ///< PointManager point Manager of current level
 
-    public PointManager pointManager;
+    public bool Tutorial; ///< bool Check Whether level is Tutorial, tutorial run codes differently
 
-    public bool Tutorial;
+    public static LevelManager Singleton = null; ///< Static Singleton of the LevelManager
 
-    public static LevelManager Singleton = null;
-
-    public static LevelManager Instance
+    public static LevelManager Instance ///< Static Instance function to get all the Data of LevelManager
     {
         get { return Singleton; }
     }
 
+    /**
+    *  @brief At the Awake of the gameobject, need to set the Singleton 
+    */
     void Awake()
     {
         Debug.Log("Level: Starting.");
@@ -42,19 +53,16 @@ public class LevelManager : MonoBehaviour {
         }
         Singleton = this;
 
-        // Is the controlling App already in existence?
-        if (GameObject.Find("App") == null)
-        {
-            Instantiate(AppPrefab);
-
-            Debug.Log("Creating temporary App");
-        }
-
         Play = false;
         BezierCurve2.Go = false;
         
     }
 
+    /**
+	*   @brief Function to Add the Room_Items to the World Anchor's GameObject
+	*  
+	*   @return null
+	*/
     public void Add_Child_ToRoom()
     {
         GameObject Room = GameObject.FindGameObjectWithTag("TheRoom");
@@ -63,6 +71,9 @@ public class LevelManager : MonoBehaviour {
         Debug.Log("Room Child Added");
     }
 
+    /**
+    *  @brief Setting some Default values
+    */
     void Start()
     {
         ReachStation = false;
@@ -76,6 +87,9 @@ public class LevelManager : MonoBehaviour {
         OrderExecution.Instance.Done = true;
     }
 
+    /**
+    *  @brief Update Game State when condition met
+    */
     void Update()
     {
 
@@ -98,23 +112,43 @@ public class LevelManager : MonoBehaviour {
         }
     }
 
+    /**
+	*   @brief Change Scene to MainMenu Scene
+	*  
+	*   @return null
+	*/
     public void Button_Menu()
     {
         AppManager.Instance.RenderingTrack = false;
-        AppManager.Instance.curScene = AppManager.GameScene.mainmenu;
+        AppManager.Instance.gameState = AppManager.GameScene.mainmenu;
         AppManager.Instance.LoadScene();
     }
 
+    /**
+	*   @brief Allow the train to Move
+	*  
+	*   @return null
+	*/
     public void Button_Play()
     {
         Play = true;
     }
 
+    /**
+	*   @brief Dont Allow the train to Move
+	*  
+	*   @return null
+	*/
     public void Button_Pause()
     {
         Play = false;
     }
 
+    /**
+	*   @brief to Destroy LevelManager's Singleton and gameObject
+	*  
+	*   @return null
+	*/
     public void SelfDestory()
     {
         Singleton = null;

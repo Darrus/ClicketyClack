@@ -1,16 +1,29 @@
-﻿using System.Collections;
+﻿/** 
+*  @file    TrainMovement2.cs
+*  @author  Yin Shuyu (150713R) 
+*  
+*  @brief Contain class TrainMovement2
+*  
+*/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+*  @brief Class for Train to Move along with the TrainMovement Point
+*/
 public class TrainMovement2 : MonoBehaviour {
 
-    public TrainMovement PointFollow;
+    public TrainMovement PointFollow; ///< TrainMovement point to get the position and the rotation
 
-    public GameObject SmokeParticleEffect;
-    public GameObject FlameParticleEffect;
-    public float TrainHeightGap;
-    private bool connected;
-    // Use this for initialization
+    public GameObject SmokeParticleEffect; ///< GameObject of the Smoke Particle Effect
+    public GameObject FlameParticleEffect; ///< GameObject of the Flame Particle Effect
+    public float TrainHeightGap; ///< height gap of the train to align with the track
+    private bool connected; ///< bool trigger connection between TrainMovement point
+
+    /**
+    *  @brief Set ParticleEffects state
+    */
     void Start () {
 
         FlameParticleEffect.GetComponentInChildren<ParticleSystem>().Stop();
@@ -19,8 +32,10 @@ public class TrainMovement2 : MonoBehaviour {
             SmokeParticleEffect.GetComponent<ParticleSystem>().Play();
         connected = true;
     }
-	
-    // Update is called once per frame
+
+    /**
+    *  @brief update check for Death, movement and ParticleEffects
+    */
     void Update () 
     {
         if (BezierCurve2.Go)
@@ -57,6 +72,11 @@ public class TrainMovement2 : MonoBehaviour {
         }
     }
 
+    /**
+   *   @brief Update Train connection with train death
+   *  
+   *   @return null
+   */
     void checkConnection()
     {
         if (GameBoard.Singleton != null)

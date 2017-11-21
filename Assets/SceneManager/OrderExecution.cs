@@ -1,28 +1,40 @@
-﻿using System.Collections;
+﻿/** 
+*  @file    OrderExecution.cs
+*  @author  Yin Shuyu (150713R) 
+*  
+*  @brief Contain Singleton class OrderExecution
+*  
+*/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+*  @brief Singleton Class for Order Execution Management for controling some scripts run order 
+*/
 public class OrderExecution : MonoBehaviour {
 
-    public List<GameObject> RunOrder;
+    public List<GameObject> RunOrder; ///< List of GameObject to run ascending order
 
     [HideInInspector]
-    public bool Done;
+    public bool Done; ///< bool trigger for Scripts when reach a specific point in the script
     [HideInInspector]
-    public bool AllDone;
+    public bool AllDone; ///< bool trigger when all RunOrder's script run once
 
-    private int currOrder;
+    private int currOrder; ///< id of script, current in the RunOrder
     [HideInInspector]
-    public bool LifeGoalReached;
+    public bool LifeGoalReached; ///< bool trigger when the purpose of OrderExecution is fulfill
 
-    public static OrderExecution Singleton = null;
+    public static OrderExecution Singleton = null; ///< Static Singleton of the OrderExecution
 
-    public static OrderExecution Instance
+    public static OrderExecution Instance ///< Static Instance function to get all the Data of OrderExecution
     {
         get { return Singleton; }
     }
 
-    // Use this for initialization
+    /**
+   *  @brief At the Awake of the gameobject, need to set the Singleton And Set all Data to default values
+   */
     void Awake()
     {
         Debug.Log("Order Execution: Starting.");
@@ -41,8 +53,11 @@ public class OrderExecution : MonoBehaviour {
         LifeGoalReached = false;
         currOrder = 0;
     }
-	// Update is called once per frame
-	void Update () {
+
+    /**
+    *  @brief Running all RunOrder's script in ascending order once
+    */
+    void Update () {
 
         if (Done)
         {
@@ -73,6 +88,13 @@ public class OrderExecution : MonoBehaviour {
         }
 	}
 
+    /**
+	*   @brief Set all RunOrder's GameObject to Active/inActive
+	*  
+    *   @param bool T, whether Set All Active/inActive
+    *  
+	*   @return null
+	*/
     public void SetAllActive(bool T)
     {
         for (int i = 0; i < RunOrder.Count; i++)
@@ -82,6 +104,11 @@ public class OrderExecution : MonoBehaviour {
         }
     }
 
+    /**
+	*   @brief to Destroy OrderExecution's Singleton and gameObject
+	*  
+	*   @return null
+	*/
     public void SelfDestory()
     {
         Singleton = null;

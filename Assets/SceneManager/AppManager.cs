@@ -1,26 +1,39 @@
-﻿using UnityEngine;
+﻿/** 
+*  @file    AppManager.cs
+*  @author  Yin Shuyu (150713R) 
+*  
+*  @brief Contain Singleton class AppManager
+*  
+*/
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine.SceneManagement;
 
+/**
+*  @brief A Singleton Class for all Scene Management and as well as game state
+*/
 public class AppManager : MonoBehaviour {
 
-    public String GameTitle = "ClicketyClack";
+    public String GameTitle = "ClicketyClack"; ///< String GameTitle
 
-    public String MainMenu_Scene;
-    public String Level_1_Scene;
-    public String Level_2_Scene;
-    public String Level_3_Scene;
-    public String Level_4_Scene;
-    public String Tutorial_Scene;
-    public String TempChange_Scene;
+    public String MainMenu_Scene; ///< String Mainmenu scene name
+    public String Level_1_Scene; ///< String Level 1 scene name
+    public String Level_2_Scene; ///< String Level 2 scene name
+    public String Level_3_Scene; ///< String Level 3 scene name
+    public String Level_4_Scene; ///< String Level 4 scene name
+    public String Tutorial_Scene; ///< String Tutorial scene name
+    public String TempChange_Scene; ///< String Temp Restart Change Scene name (currently hardcore, cant save level in prefab bacasue of track mesh, furture can save level data, and restart level data but not the envriment and the track)
 
     [HideInInspector]
-    public String curScene_Name;
+    public String NextScene_Name; ///< String Scene name of scene needed to changed to  
     [HideInInspector]
-    public String preScene_Name;
+    public String CurrScene_Name; ///< String current Active Scene name
 
+    /**
+    *  @brief Enum of All Game Scenes
+    */
     [System.Serializable]
     public enum GameScene
     {
@@ -34,25 +47,28 @@ public class AppManager : MonoBehaviour {
     };
 
     [HideInInspector]
-    public GameScene curScene;
+    public GameScene gameState; ///< Scene of the game state should be
     [HideInInspector]
-    public bool ReStartLevel;
+    public bool ReStartLevel; ///< bool trigger of restart the same scene (currently hardcored)
     [HideInInspector]
-    public bool RenderingTrack;
+    public bool RenderingTrack; ///< bool trigger for rendering the track 
     [HideInInspector]
-    public bool UnRenderingTrack;
+    public bool UnRenderingTrack; ///< bool trigger for unrendering the track 
 
-    public GameScene TestScene;
+    public GameScene TestScene; ///< Scene of the application to change to at the start application run (UNITY_EDITOR) 
 
-    public GameObject TheRoom;
+    public GameObject TheRoom; ///< GamObject that will be apply the world anchor to, also the all the visualable gameobjects should be
 
-    public static AppManager Singleton = null;
+    public static AppManager Singleton = null; ///< Static Singleton of the AppManager
 
-    public static AppManager Instance
+    public static AppManager Instance ///< Static Instance function to get all the Data of the AppManager
     {
         get { return Singleton; }
     }
-   
+
+    /**
+    *  @brief At the Awake of the gameobject, need to set the Singleton and all Scene Data to current "Application" scene
+    */
     void Awake()
     {
         Debug.Log("App Awake!");
@@ -64,14 +80,17 @@ public class AppManager : MonoBehaviour {
         }
         Singleton = this;
 
-        curScene_Name = "Application";
-        preScene_Name = "Application";
+        NextScene_Name = "Application";
+        CurrScene_Name = "Application";
 
         RenderingTrack = false;
         UnRenderingTrack = false;
         ReStartLevel = false;
     }
-   
+
+    /**
+    *  @brief Set GameObject DontDestroyOnLoad, (UNITY_EDITOR) Change scene into TestScene
+    */
     void Start()
     {
         // Are we in the Current Scene?
@@ -81,18 +100,20 @@ public class AppManager : MonoBehaviour {
             DontDestroyOnLoad(gameObject);
 
 #if UNITY_EDITOR
-            curScene = TestScene;
+            gameState = TestScene;
             LoadScene();
 #endif
         }
     }
 
-
+    /**
+    *  @brief If Condition met, UnRender Track or ChangeScene
+    */
     void Update()
     {
-        if (SceneManager.GetSceneByName(curScene_Name).isLoaded && preScene_Name != curScene_Name && !UnRenderingTrack)
+        if (SceneManager.GetSceneByName(NextScene_Name).isLoaded && CurrScene_Name != NextScene_Name && !UnRenderingTrack)
         {
-                if (preScene_Name != MainMenu_Scene && preScene_Name != "Application" && preScene_Name != TempChange_Scene)
+                if (CurrScene_Name != MainMenu_Scene && CurrScene_Name != "Application" && CurrScene_Name != TempChange_Scene)
                     UnRenderingTrack = true;
 
                 if (OrderExecution.Singleton != null && OrderExecution.Instance.AllDone && !UnRenderingTrack)
@@ -101,65 +122,83 @@ public class AppManager : MonoBehaviour {
 
     }
 
+   /**
+   *   @brief Function call when World Anchor done loading, change the Game Scene to main menu
+   *  
+   *   @return null
+   */
     public void StartGame()
     {
-        curScene = GameScene.mainmenu;
+        gameState = GameScene.mainmenu;
         SceneManager.LoadScene(MainMenu_Scene);
     }
 
+   /**
+   *   @brief Remove Room Child objects then Change Current active scene, and unload the old scene
+   *  
+   *   @return null
+   */
     public void ChangeScene()
     {
         Detach_RoomChild();
 
         OrderExecution.Instance.LifeGoalReached = true;
 
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName(curScene_Name));
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(NextScene_Name));
 
-        SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName(preScene_Name).buildIndex);
+        SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName(CurrScene_Name).buildIndex);
 
-        preScene_Name = curScene_Name;
+        CurrScene_Name = NextScene_Name;
 
-        if (ReStartLevel && preScene_Name == TempChange_Scene)
+        if (ReStartLevel && CurrScene_Name == TempChange_Scene)
         {
             ReStartLevel = false;
             LoadScene();
         }
     }
 
-
+    /**
+   *   @brief Quit Application Function //TODO
+   *  
+   *   @return null
+   */
     public void Quit()
     {
         Debug.Log("App: Terminating.");
-
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
 #if UNITY_WSA
-        //Application.Current.Exit();
-        //Application.Quit();
+        Application.Current.Exit();
+        Application.Quit();
 #endif
 
     }
 
+    /**
+    *   @brief Async Load the next Scene to preload scene data
+    *  
+    *   @return null
+    */
     public void LoadScene()
     {
         CheckAndDestoryManagers();
 
-        switch (curScene)
+        switch (gameState)
         {
             case GameScene.mainmenu:
                 {
-                    curScene_Name = MainMenu_Scene;
+                    NextScene_Name = MainMenu_Scene;
                     SceneManager.LoadSceneAsync(MainMenu_Scene, LoadSceneMode.Additive);
                     break;
                 }
             case GameScene.level_1:
                 {
-                    curScene_Name = Level_1_Scene;
+                    NextScene_Name = Level_1_Scene;
 
                     if (ReStartLevel)
                     {
-                        curScene_Name = TempChange_Scene;
+                        NextScene_Name = TempChange_Scene;
                         SceneManager.LoadSceneAsync(TempChange_Scene, LoadSceneMode.Additive);
                     }
                     else
@@ -169,11 +208,11 @@ public class AppManager : MonoBehaviour {
                 }
             case GameScene.level_2:
                 {
-                    curScene_Name = Level_2_Scene;
+                    NextScene_Name = Level_2_Scene;
 
                     if (ReStartLevel)
                     {
-                        curScene_Name = TempChange_Scene;
+                        NextScene_Name = TempChange_Scene;
                         SceneManager.LoadSceneAsync(TempChange_Scene, LoadSceneMode.Additive);
                     }
                     else
@@ -183,11 +222,11 @@ public class AppManager : MonoBehaviour {
                 }
             case GameScene.level_3:
                 {
-                    curScene_Name = Level_3_Scene;
+                    NextScene_Name = Level_3_Scene;
 
                     if (ReStartLevel)
                     {
-                        curScene_Name = TempChange_Scene;
+                        NextScene_Name = TempChange_Scene;
                         SceneManager.LoadSceneAsync(TempChange_Scene, LoadSceneMode.Additive);
                     }
                     else
@@ -197,11 +236,11 @@ public class AppManager : MonoBehaviour {
                 }
             case GameScene.level_4:
                 {
-                    curScene_Name =Level_4_Scene;
+                    NextScene_Name = Level_4_Scene;
 
                     if (ReStartLevel)
                     {
-                        curScene_Name = TempChange_Scene;
+                        NextScene_Name = TempChange_Scene;
                         SceneManager.LoadSceneAsync(TempChange_Scene, LoadSceneMode.Additive);
                     }
                     else
@@ -211,11 +250,11 @@ public class AppManager : MonoBehaviour {
                 }
             case GameScene.Tutorial:
                 {
-                    curScene_Name = Tutorial_Scene;
+                    NextScene_Name = Tutorial_Scene;
 
                     if (ReStartLevel)
                     {
-                        curScene_Name = TempChange_Scene;
+                        NextScene_Name = TempChange_Scene;
                         SceneManager.LoadSceneAsync(TempChange_Scene, LoadSceneMode.Additive);
                     }
                     else
@@ -226,44 +265,59 @@ public class AppManager : MonoBehaviour {
         }
     }
 
+    /**
+    *   @brief update the new GameState according the old GameState
+    *  
+    *   @return null
+    */
     public void NextLevel()
     {
-        switch (curScene)
+        switch (gameState)
         {
             case GameScene.level_1:
                 {
-                    curScene = GameScene.level_2;
+                    gameState = GameScene.level_2;
                     break;
                 }
             case GameScene.level_2:
                 {
-                    curScene = GameScene.level_3;
+                    gameState = GameScene.level_3;
                     break;
                 }
             case GameScene.level_3:
                 {
-                    curScene = GameScene.level_4;
+                    gameState = GameScene.level_4;
                     break;
                 }
             case GameScene.level_4:
                 {
-                    curScene = GameScene.mainmenu;
+                    gameState = GameScene.mainmenu;
                     break;
                 }
             case GameScene.Tutorial:
                 {
-                    curScene = GameScene.mainmenu;
+                    gameState = GameScene.mainmenu;
                     break;
                 }
         }
         LoadScene();
     }
 
+    /**
+    *   @brief Detory the Child GameObjects in TheRoom
+    *  
+    *   @return null
+    */
     public void Detach_RoomChild()
     {
         Destroy(TheRoom.transform.GetChild(0).gameObject);
     }
 
+    /**
+    *   @brief Detory all the current Level,menu,game State Managers, prepare for the next scene, prevent crush with next scene's managers
+    *  
+    *   @return null
+    */
     private void CheckAndDestoryManagers()
     {
         if(LevelManager.Singleton != null)

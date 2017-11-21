@@ -1,18 +1,30 @@
-﻿using System.Collections;
+﻿/** 
+*  @file    DragPoints.cs
+*  @author  Yin Shuyu (150713R) 
+*  
+*  @brief Contain class DragPoints (Currently project not in use)
+*  
+*/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using HoloToolkit.Unity.InputModule;
 using System;
 
+/**
+*  @brief Class Tested of Draging a Waypoint around and update the 3D Track Mesh at end (works)
+*/
 public class DragPoints : MonoBehaviour, IManipulationHandler
 {
-    private float Timer;
-    private int ID;
-    private bool InZone;
+    private float Timer; ///< Timer for Updating the 2D Track Mesh (dont update every frame will lag)
+    private int ID; ///< Id of the waypoint
+    private bool InZone; ///< bool checking are you in the zone that allow the waypoint to move in
 
-    private Vector3 LastPosition;
+    private Vector3 LastPosition; ///< VEctor3 Last position of the waypoint in zone (prevent going out of zone)
 
-
+    /**
+    *  @brief Get ID from MainPoints.cs which in the same gameobject
+    */
     private void Start()
     {
         MainPoints Temp = gameObject.transform.parent.gameObject.GetComponent(typeof(MainPoints)) as MainPoints;
@@ -44,6 +56,9 @@ public class DragPoints : MonoBehaviour, IManipulationHandler
     {
     }
 
+    /**
+    *  @brief Update the 3D Track Mesh
+    */
     public void OnManipulationCompleted(ManipulationEventData eventData)
     {
         transform.position = LastPosition;
@@ -65,14 +80,15 @@ public class DragPoints : MonoBehaviour, IManipulationHandler
         Timer = 0f;
     }
 
+    /**
+    *  @brief Update the 2D Track Mesh when Timer reach a specific time
+    */
     public void OnManipulationUpdated(ManipulationEventData eventData)
     {
         transform.position = Camera.main.transform.position + Camera.main.transform.forward * 1.5f;
 
 
         Timer += Time.deltaTime;
-
-        
 
         if (Timer >= 0.5f && InZone)
         {

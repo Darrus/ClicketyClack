@@ -1,23 +1,40 @@
-﻿using System.Collections;
+﻿/** 
+*  @file    Save_Load_Data.cs
+*  @author  Yin Shuyu (150713R) 
+*  
+*  @brief Contain static class Save_Load_Data
+*  
+*/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System;
 using System.Text;
 
-public class Save_Load_Data{
+/**
+*  @brief A Static class for Save and Load Game Data
+*/
+public static class Save_Load_Data{
 
-    public static String Testpath = Application.streamingAssetsPath + "/test.json";
-
-
-    public static String Tutorial = Application.streamingAssetsPath + "/Tutorial.json";
-    public static String Level_one_TrackData = Application.streamingAssetsPath + "/TrackData_one.json";
-    public static String Level_two_TrackData = Application.streamingAssetsPath + "/TrackData_two.json";
-    public static String Level_three_TrackData = Application.streamingAssetsPath + "/TrackData_three.json";
-    public static String Level_four_TrackData = Application.streamingAssetsPath + "/TrackData_four.json";
+    public static String Test_path = Application.streamingAssetsPath + "/test.json"; ///< String path for a test json file
 
 
+    public static String Tutorial_path = Application.streamingAssetsPath + "/Tutorial.json"; ///< String path for a Tutorial Data json file
+    public static String Level_one_TrackData_path = Application.streamingAssetsPath + "/TrackData_one.json"; ///< String path for a Level 1 Data json file
+    public static String Level_two_TrackData_path = Application.streamingAssetsPath + "/TrackData_two.json"; ///< String path for a Level 2 Data json file
+    public static String Level_three_TrackData_path = Application.streamingAssetsPath + "/TrackData_three.json"; ///< String path for a Level 3 Data json file
+    public static String Level_four_TrackData_path = Application.streamingAssetsPath + "/TrackData_four.json"; ///< String path for a Level 4 Data json file
 
+
+    /**
+   *   @brief A function to check whether Save file exists
+   *  
+   *   @param String path, which path file to check
+   *   
+   *   @return false, if dont exists
+   *   @return true, if exists
+   */
     public static bool Check_SaveFile(String path)
     {
         if (!System.IO.File.Exists(path))
@@ -28,6 +45,14 @@ public class Save_Load_Data{
             return true;
     }
 
+    /**
+    *   @brief A function to load file data
+    *  
+    *   @param String path, which path file to load data from
+    *   
+    *   @return null, if file dont exists
+    *   @return String response, Data string load out from path
+    */
     public static String load(String path)
     {
         if(!System.IO.File.Exists(path))
@@ -61,6 +86,15 @@ public class Save_Load_Data{
         return response;
     }
 
+    /**
+    *   @brief A function to save file data
+    *  
+    *   @param String path, which path file to save data to
+    *   
+    *   @param String content, Data String to save to path
+    *   
+    *   @return nothing
+    */
     public static void Save(String path, String content)
     {
         FileStream stream = File.Create(path);

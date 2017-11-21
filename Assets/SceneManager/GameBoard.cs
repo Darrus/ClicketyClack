@@ -1,25 +1,50 @@
-﻿using System.Collections;
+﻿/** 
+*  @file    GameBoard.cs
+*  @author  Yin Shuyu (150713R) 
+*  
+*  @brief Contain Singleton class GameBoard
+*  
+*/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+*  @brief Singleton Class contain Trian Life, and game progress State
+*/
 public class GameBoard : MonoBehaviour
 {
+    /**
+    *  @brief Struct for Train Life and functions
+    */
     [System.Serializable]
     public struct Train
     {
-        public bool head;
-        public bool Carriage;
-        public bool Cargo;
-        public int Life;
+        public bool head; ///< bool of whether head of the train is alive
+        public bool Carriage; ///< bool of whether Carriage of the train is alive
+        public bool Cargo; ///< bool of whether Cargo of the train is alive
+        public int Life; ///< number of parts of train is still alive
 
+        /**
+        *   @brief struct constructor setting Default value, struct cannot be paramless
+        *  
+        *   @param bool T, just a random param
+        *  
+        *   @return null
+        */
         public Train(bool T)
         {
-            head = T;
-            Carriage = T;
-            Cargo = T;
+            head = true;
+            Carriage = true;
+            Cargo = true;
             Life = 3;
         }
 
+        /**
+        *   @brief function to call the kill the head of the train, as well as parts behind the head
+        *  
+        *   @return null
+        */
         public void killHead()
         {
             head = false;
@@ -29,6 +54,11 @@ public class GameBoard : MonoBehaviour
             GameBoard.Instance.Check_Light_Bulbs();
         }
 
+        /**
+        *   @brief function to call the kill the Carriage of the train, as well as parts behind the Carriage
+        *  
+        *   @return null
+        */
         public void KillCarriage()
         {
             Carriage = false;
@@ -36,6 +66,12 @@ public class GameBoard : MonoBehaviour
             Life = 1;
             GameBoard.Instance.Check_Light_Bulbs();
         }
+
+        /**
+        *   @brief function to call the kill the Cargo of the train
+        *  
+        *   @return null
+        */
         public void KillCargo()
         {
             Cargo = false;
@@ -45,26 +81,29 @@ public class GameBoard : MonoBehaviour
     };
 
     [HideInInspector]
-    public Train TheTrainLife = new Train(true);
+    public Train TheTrainLife = new Train(true); ///< Train Struct as well as setting the Default values
 
-    public Material Lighten_Bulb_material;
-    public Material darken_Bulb_material;
+    public Material Lighten_Bulb_material; ///< Material of Light Bulb is lighten
+    public Material darken_Bulb_material; ///< Material of Light Bulb is Darken
 
-    public List<Renderer> Light_Bulbs;
+    public List<Renderer> Light_Bulbs; ///< List of the Light_Bulb's Renderer
 
-    public GameObject Victory_Screen;
-    public GameObject Lose_Screen;
+    public GameObject Victory_Screen; ///< GameObject of the Victory Screen
+    public GameObject Lose_Screen; ///< GameObject of the Lose Screen
 
-    public TrainMovement Train_Head_Movement;
-    public TextMesh BoardText;
+    public TrainMovement Train_Head_Movement; ///< TrainMovement of the Head of the Train
+    public TextMesh BoardText; ///< Text of the Game Progress State
 
-    public static GameBoard Singleton = null;
+    public static GameBoard Singleton = null; ///< Static Singleton of the GameBoard
 
-    public static GameBoard Instance
+    public static GameBoard Instance ///< Static Instance function to get all the Data of GameBoard
     {
         get { return Singleton; }
     }
 
+    /**
+    *  @brief At the Awake of the gameobject, need to set the Singleton
+    */
     void Awake()
     {
         Debug.Log("GameBoard: Starting.");
@@ -79,6 +118,7 @@ public class GameBoard : MonoBehaviour
         Victory_Screen.SetActive(false);
         Lose_Screen.SetActive(false);
     }
+
     // Use this for initialization
     void Start()
     {
@@ -93,6 +133,11 @@ public class GameBoard : MonoBehaviour
         Check_Win_Lose_Condition();
     }
 
+    /**
+    *   @brief Set Game Progress according the train distance to the total track distance in BoardTex
+    *  
+    *   @return null
+    */
     void Check_Text()
     {
         if (LevelManager.Instance.MoveOut && LevelManager.Instance.Play && !LevelManager.Instance.ReachStation && TheTrainLife.Life != 0)
@@ -103,6 +148,11 @@ public class GameBoard : MonoBehaviour
 
     }
 
+    /**
+    *   @brief get percentage of the train distance to the total track distance
+    *  
+    *   @return string percentage, int to string
+    */
     string Check_Progress()
     {
         int percentage = (int)(Train_Head_Movement.distanceTravel / Train_Head_Movement.Manager.TotalTrackDistance * 100);
@@ -110,6 +160,11 @@ public class GameBoard : MonoBehaviour
         return percentage.ToString();
     }
 
+    /**
+    *   @brief Check for Victory and Lose Condition and set according
+    *  
+    *   @return null
+    */
     void Check_Win_Lose_Condition()
     {
         if (TheTrainLife.Life == 0)
@@ -142,25 +197,44 @@ public class GameBoard : MonoBehaviour
 
     }
 
+	/**
+    *   @brief A function to Change Main Menu Scene
+    *  
+    *   @return null
+    */
     public void Button_Menu()
     {
         AppManager.Instance.RenderingTrack = false;
-        AppManager.Instance.curScene = AppManager.GameScene.mainmenu;
+        AppManager.Instance.gameState = AppManager.GameScene.mainmenu;
         AppManager.Instance.LoadScene();
     }
-
+	
+	/**
+    *   @brief A function to ReStart current level Scene
+    *  
+    *   @return null
+    */
     public void Button_Retry()
     {
         AppManager.Instance.ReStartLevel = true;
         AppManager.Instance.LoadScene();
     }
 
+	/**
+    *   @brief A function to go next level Scene
+    *  
+    *   @return null
+    */
     public void Button_NextLevel()
     {
         AppManager.Instance.NextLevel();
     }
 
-
+	/**
+    *   @brief A function to Change The Light_Bulb's material depending on the Train life
+    *  
+    *   @return null
+    */
     public void Check_Light_Bulbs()
     {
         if (TheTrainLife.head)
@@ -179,6 +253,11 @@ public class GameBoard : MonoBehaviour
             Light_Bulbs[2].material = darken_Bulb_material;
     }
 
+	/**
+    *   @brief A function to Destory the GameBoard's Singleton
+    *  
+    *   @return null
+    */
     public void SelfDestory()
     {
         Victory_Screen.SetActive(false);

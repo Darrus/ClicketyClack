@@ -1,17 +1,30 @@
-﻿using System.Collections;
+﻿/** 
+*  @file    TestSc.cs
+*  @author  Yin Shuyu (150713R) 
+*  
+*  @brief Contain class TestSc (Currently project not in use)
+*  
+*/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using HoloToolkit.Unity.InputModule;
 using System;
 
+/**
+*  @brief Class Tested of inserting a empty Waypoint into a Waypoint_List (works)
+*/
 public class TestSc : MonoBehaviour, IManipulationHandler
 {
 
-    private bool onTrack;
-    public int id;
+    private bool onTrack; ///< bool check for whether on track ( true if Collide with 2D track mesh)
+    public int id; ///< id of this new empty Waypoint
 
-    private PointManager Manager;
+    private PointManager Manager; ///< PointManager script to get acress to function
 
+    /**
+    *  @brief Find PointManager with tag, cant assign as empty Waypoint is a prefab
+    */
     private void Start()
     {
         onTrack = false;
@@ -51,11 +64,14 @@ public class TestSc : MonoBehaviour, IManipulationHandler
     {
     }
 
+    /**
+    *  @brief Create new Waypoint if onTrack == true when OnManipulationCompleted
+    */
     public void OnManipulationCompleted(ManipulationEventData eventData)
     {
         if(onTrack)
         {
-            Manager.AddNewPoints(transform.position, id, (int)MainPoints.pointType.NormalPoint);
+            Manager.AddNewPoints(transform.position, id, MainPoints.pointType.NormalPoint);
         }
 
         BezierCurve2.EnableTrackCollision = false;
