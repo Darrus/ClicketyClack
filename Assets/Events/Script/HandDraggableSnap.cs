@@ -296,8 +296,11 @@ namespace HoloToolkit.Unity.InputModule
             StoppedDragging.RaiseEvent();
 
             picked = false;
+            GetComponent<Rigidbody>().isKinematic = false;
+
             if (snapped)
             {
+                GetComponent<Rigidbody>().isKinematic = true;
                 for (int i = 0; i < meshRenderers.Length; ++i)
                 {
                     meshRenderers[i].material = defaultMaterial;
@@ -339,7 +342,6 @@ namespace HoloToolkit.Unity.InputModule
         public void OnInputUp(InputEventData eventData)
         {
             GetComponent<Rigidbody>().useGravity = true;
-            GetComponent<Rigidbody>().isKinematic = false;
 
             if (currentInputSource != null &&
                 eventData.SourceId == currentInputSourceId)

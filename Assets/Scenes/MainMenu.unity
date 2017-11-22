@@ -237,6 +237,7 @@ MonoBehaviour:
   - {fileID: 460154578}
   - {fileID: 2074769860}
   - {fileID: 1926644124}
+  redText: {fileID: 2100000, guid: bfea0989a5789294ca48b0ec417798d7, type: 2}
   victims:
   - {fileID: 249248023}
   - {fileID: 1595535916}
@@ -27067,7 +27068,7 @@ MonoBehaviour:
   RotationMode: 0
   PositionLerpSpeed: 0.2
   RotationLerpSpeed: 0.2
-  pluckDistance: 1
+  pluckDistance: 0.5
   IsDraggingEnabled: 1
   isPlucked: 0
 --- !u!1 &1140205235
@@ -42987,7 +42988,7 @@ MonoBehaviour:
   RotationMode: 0
   PositionLerpSpeed: 0.2
   RotationLerpSpeed: 0.2
-  pluckDistance: 1
+  pluckDistance: 0.5
   IsDraggingEnabled: 1
   isPlucked: 0
 --- !u!1 &2094181396
@@ -43252,7 +43253,7 @@ MonoBehaviour:
   RotationMode: 0
   PositionLerpSpeed: 0.2
   RotationLerpSpeed: 0.2
-  pluckDistance: 1
+  pluckDistance: 0.5
   IsDraggingEnabled: 1
   isPlucked: 0
 --- !u!1 &2120916912

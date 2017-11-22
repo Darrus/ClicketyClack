@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AnimateButton" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAIAAAAAAAAAAAAAAAAABAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\UI\Scripts\AnimateButton.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ChangeTargetTexture">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAACAAAAAAA=</HashCode>
+      <FileName>Assets\UI\Scripts\ChangeTargetTexture.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LevelSelectController">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAgACEAIAAAABABgAAIAAAAEAEAAAAAAAKgAEA=</HashCode>
+      <FileName>Assets\UI\Scripts\LevelSelectController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PosterSwap">
+    <Position X="2.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAgAAAAAAAEAAAAAAAAAAAAAAAACAAAAAABAAEA=</HashCode>
+      <FileName>Assets\UI\Scripts\PosterSwap.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ReversePlayAnimation">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="ReversePlayAnimation.ANIM_STATE" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\UI\Scripts\ReversePlayAnimation.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAQABAACAAACAAQAAAAAAAAAAACoAAAEAAAABAAQAEQ=</HashCode>
+      <FileName>Assets\UI\Scripts\ReversePlayAnimation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HoloToolkit.Unity.InputModule.HandDraggablePluck" BaseTypeListCollapsed="true">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="HoloToolkit.Unity.InputModule.HandDraggablePluck.RotationModeEnum" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\UI\Scripts\HandDraggablePluck.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>hAQlBAAEACxAAAAAAIQECACIABAAGYQAIAQQNEACIAA=</HashCode>
+      <FileName>Assets\UI\Scripts\HandDraggablePluck.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

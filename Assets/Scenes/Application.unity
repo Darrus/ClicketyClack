@@ -1738,7 +1738,7 @@ MonoBehaviour:
   RotationMode: 0
   PositionLerpSpeed: 0.2
   RotationLerpSpeed: 0.2
-  pluckDistance: 1.1
+  pluckDistance: 0.5
   IsDraggingEnabled: 1
   isPlucked: 0
 --- !u!114 &531061552
