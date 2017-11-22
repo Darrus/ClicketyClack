@@ -37,6 +37,8 @@ public class LevelManager : MonoBehaviour {
 
     public bool Tutorial; ///< bool Check Whether level is Tutorial, tutorial run codes differently
 
+    private bool once;
+
     public static LevelManager Singleton = null; ///< Static Singleton of the LevelManager
 
     public static LevelManager Instance ///< Static Instance function to get all the Data of LevelManager
@@ -60,6 +62,7 @@ public class LevelManager : MonoBehaviour {
 
         Play = false;
         BezierCurve2.Go = false;
+        once = false;
 
         VictimList.UpdateVictimList();
     }
@@ -100,22 +103,24 @@ public class LevelManager : MonoBehaviour {
     void Update()
     {
 
-        if (Tutorial && !CargoOn)
+        if (Tutorial && !CargoOn && !once)
         {
             AppManager.Instance.RenderingTrack = true;
             BezierCurve2.Go = true;
+            once = true;
         }
 
-        if (Tutorial && CargoOn && !AppManager.Instance.RenderingTrack)
+        if (MoveOut && Tutorial && CargoOn && once)
         {
             Button_Play();
+            once = false;
         }
 
-        if (!MoveOut && CargoOn && !Tutorial)
+        if (!MoveOut && CargoOn && !Tutorial && !once)
         {
             AppManager.Instance.RenderingTrack = true;
-            MoveOut = true;
             BezierCurve2.Go = true;
+            once = true;
         }
     }
 

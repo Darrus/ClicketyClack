@@ -108,6 +108,7 @@ public class FadeInTracks : MonoBehaviour {
         {
             AppManager.Instance.RenderingTrack = false;
             TheRealTrack.SetActive(true);
+            LevelManager.Instance.MoveOut = true;
         }
     }
 

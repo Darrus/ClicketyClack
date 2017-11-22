@@ -21,10 +21,10 @@ public class ArrowControll : MonoBehaviour
     public GameObject RockPos;                     ///< 洞窟の座標
 
     ///< チュートリアルギミックの完了確認
-    public static bool coalComp = false;           
-    public static bool cargoComp = false;
-    public static bool ConnectComp = false;
-    public static bool RockComp = false;
+    public static bool coalComp;
+    public static bool cargoComp;
+    public static bool ConnectComp;
+    public static bool RockComp;
 
 /**
  *   @brief   デバッグ時に１フレームだけ呼び出される関数
@@ -33,6 +33,11 @@ public class ArrowControll : MonoBehaviour
 */
     void Start()
     {
+        coalComp = false;
+        cargoComp = false;
+        ConnectComp = false;
+        RockComp = false;
+
         // 石炭の座標
         transform.position = new Vector3(Coal.transform.position.x, height, Coal.transform.position.z);
     }
