@@ -140,7 +140,6 @@ public class GameBoard : MonoBehaviour
     void Update()
     {
         Check_Text();
-
         Check_Win_Lose_Condition();
     }
 

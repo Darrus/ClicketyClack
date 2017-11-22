@@ -51,8 +51,7 @@ namespace HoloToolkit.Unity.InputModule
         [Range(0.01f, 1.0f)]
         public float RotationLerpSpeed = 0.2f;
 
-        [Range(1.0f, 3.0f)]
-        public float pluckDistance = 1.1f;
+        public float pluckDistance = 0.5f;
 
         public bool IsDraggingEnabled = true;
         public bool isPlucked;

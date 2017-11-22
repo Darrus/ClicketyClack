@@ -15,30 +15,31 @@ public class LevelSelectController : MonoBehaviour {
     public GameObject[] boardButtons;
     public GameObject[] signs;
     public TextMesh[] victimsLeftText;
+    public Material redText;
     public HumanController[] victims;
     public HumanController[] bandits;
     public Transform[] victimIdlePoints;
     public Transform[] banditIdlePoints;
     public Transform[] tunnels;
 
+    Material normalText;
     bool changeLevel = false;
 
 
     private void Start()
     {
+        normalText = victimsLeftText[0].GetComponent<MeshRenderer>().material;
         for (int i = 0; i < 4; ++i)
         {
             if (VictimManager.Check_Level_RequireVictimSave(i+1) == 0)
             {
-                victimsLeftText[i].color = Color.white;
-                // Number of victims left
+                victimsLeftText[i].GetComponent<MeshRenderer>().material = normalText;
                 victimsLeftText[i].text = " : " + VictimManager.VictimRemain_Level[i];
                 signs[i].SetActive(false);
             }
             else
             {
-                victimsLeftText[i].color = Color.red;
-                // Number of victims required
+                victimsLeftText[i].GetComponent<MeshRenderer>().material = redText;
                 victimsLeftText[i].text = " : " + VictimManager.Check_Level_RequireVictimSave(i + 1);
             }
         }
