@@ -49,6 +49,7 @@ public class BanditManager : MonoBehaviour {
             int banditSelect = Random.Range(0, banditTypes.Length);
             GameObject newBandit = Instantiate(banditTypes[banditSelect]);
             newBandit.transform.position = spawnPoints[i].transform.position;
+            newBandit.transform.SetParent(transform);
             activeBandits[i] = newBandit;
         }
     }

@@ -16,10 +16,16 @@ public class ConnectCargo : MonoBehaviour
 {
     public static bool _isConnect = false;          ///< 接続したかどうか
 
-/**
-*   @brief   毎フレーム呼び出される関数
-*   @param  nothing
-*   @return nothing 
+
+    private void Start()
+    {
+        _isConnect = false;
+    }
+
+    /**
+    *   @brief   毎フレーム呼び出される関数
+    *   @param  nothing
+    *   @return nothing 
 */
     private void Update()
     {
@@ -30,7 +36,8 @@ public class ConnectCargo : MonoBehaviour
             //Destroy(connector);
 
             // 電車を発進
-            LevelManager.Instance.CargoOn = true;
+            if (LevelManager.Singleton != null)
+                LevelManager.Instance.CargoOn = true;
             
             // 移動先を設定
             this.GetComponent<TrainMovement2>().enabled = true;
@@ -55,6 +62,8 @@ public class ConnectCargo : MonoBehaviour
 
             // 矢印の座標管理
             ArrowControll.ConnectComp = true;
+
+            Destroy(col.gameObject);
         }
     }
 }

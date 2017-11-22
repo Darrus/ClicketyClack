@@ -26,13 +26,14 @@ public class TutorialTrigger : MonoBehaviour
     private void Update()
     {
         // 電車が動いたら
-        if (LevelManager.Instance.CargoOn)
-        {
-            if (!_isTrig)
+        if(LevelManager.Singleton != null)
+            if (LevelManager.Instance.CargoOn)
             {
+                if (!_isTrig)
+                {
+                }
+                _isTrig = true;
             }
-            _isTrig = true;
-        }
     }
 
 }

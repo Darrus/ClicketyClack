@@ -28,6 +28,8 @@ public class CargoCollision : MonoBehaviour
 */
     private void Start()
     {
+        _isArrow = false;  
+        _isCoal = false;
         // 石炭の数値を初期化
         coalCount = 0;
 
@@ -78,8 +80,7 @@ public class CargoCollision : MonoBehaviour
         // 電車の停止
         if (collision.gameObject.tag == "DragPoint")
         {
-            // オブジェクトの削除
-            Destroy(collision.gameObject);
+            Debug.Log("Stop");
             
             // テキスト文の制御
             TextControll.textNum = 3;
@@ -90,6 +91,10 @@ public class CargoCollision : MonoBehaviour
             // 止まった
             RockAreaManager._isStop = true;
             LevelManager.Instance.Play = false;
+
+            // オブジェクトの削除
+            Destroy(collision.gameObject);
+
         }
     }
 
