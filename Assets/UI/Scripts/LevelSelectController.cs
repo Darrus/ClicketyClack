@@ -73,7 +73,7 @@ public class LevelSelectController : MonoBehaviour {
         if (changeLevel)
             return;
 
-        if (VictimManager.Check_Level_RequireVictimSave(level+1) != 0)
+        if (VictimManager.Check_Level_RequireVictimSave(level+1) != 0 && !MainMenuManager.Instance.Dev_Debug)
             return;
 
         changeLevel = true;
