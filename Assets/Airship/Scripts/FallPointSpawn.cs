@@ -69,7 +69,6 @@ public class FallPointSpawn : MonoBehaviour
         {
             // 乱数
             rate = Random.Range(1, 5);
-            Debug.Log(rate);
 
             // 電車が次に目指すレール上に落下地点をスポーン
             // 20% HIT

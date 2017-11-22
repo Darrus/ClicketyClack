@@ -171,8 +171,8 @@ public class AppManager : MonoBehaviour {
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
 #if UNITY_WSA
-        Application.Current.Exit();
-        Application.Quit();
+        //Application.Current.Exit();
+        //Application.Quit();
 #endif
 
     }

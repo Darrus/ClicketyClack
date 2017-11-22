@@ -51,6 +51,7 @@ public class CreateCount : MonoBehaviour
             // 削除
             Destroy(this.gameObject);
         }
+
     } 
 }
     

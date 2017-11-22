@@ -45,20 +45,27 @@ public class CountAnimation : CreateCount
         FadeOutText();
     }
 
-/**
-*   @brief   テキストの変更をする関数
-*   @param  nothing
-*   @return nothing 
+    /**
+    *   @brief   テキストの変更をする関数
+    *   @param  nothing
+    *   @return nothing 
 */
     void ChangeText()
     {
         // テキストメッシュの取得
         TextMesh text = GetComponent<TextMesh>();
 
-        // 表示
-        text.text = nowCnt + " / " + MaxCnt;
+        if (nowCnt == MaxCnt)
+        {
+            // 表示
+            text.text = "   CONPLETE";
+        }
+        else
+        {
+            // 表示
+            text.text = nowCnt + " / " + MaxCnt;
+        }
     }
-
 /**
 *   @brief   テキストの移動アニメーション関数
 *   @param  nothing

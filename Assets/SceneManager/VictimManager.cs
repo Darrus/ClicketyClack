@@ -16,15 +16,15 @@ public static class VictimManager
 {
 
     /**
-    *  @brief A struct for single Victim status data
+    *  @brief A class for single Victim status data
     */
     [System.Serializable]
-    public struct VictimData
+    public class VictimData
     {
         public GameObject theVictim; ///< GameObject of the victim
         public int Victim_ID; ///< id of the victim
         public AppManager.GameScene Level; ///< level of the victim belong to 
-        [HideInInspector]
+
         public bool Saved; ///< bool trigger whether victim saved
 
         /**
@@ -74,7 +74,7 @@ public static class VictimManager
                     {
                         if(Victim_List[n].Saved || Victim_List[n].theVictim == null)
                         {
-                            All_VictimData[i].gotSave();
+                            All_VictimData[i].Saved = true;
                             break;
                         }
 

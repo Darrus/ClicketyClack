@@ -47,8 +47,9 @@ public class MainMenuManager : MonoBehaviour
         if (VictimManager.All_VictimData == null)
             VictimManager.All_VictimData = VictimList;
         else
+        {
             VictimManager.Check_All_VictimData(VictimList);
-
+        }
         VictimManager.Check_VictimRemain();
 
         VictimManager.Level_RequireVictimSave = All_Level_RequireVictimSave;

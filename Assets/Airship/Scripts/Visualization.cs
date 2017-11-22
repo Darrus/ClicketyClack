@@ -14,16 +14,15 @@ using UnityEngine;
 public class Visualization : MonoBehaviour
 {
     public GameObject[] victim;                      ///< Victimを収納
+    public bool _isTutorial = false;                  ///< TutorialMode
 
-
- /**
- *   @brief   衝突したとき呼び出される関数
- *   @param  衝突したオブジェクト
- *   @return nothing 
+/**
+*   @brief   衝突したとき呼び出される関数
+*   @param  衝突したオブジェクト
+*   @return nothing 
 */
     private void OnTriggerEnter(Collider other)
     {
-
         // 衝突したとき
         for (int i = 0; i < victim.Length; i++)
         {
@@ -37,11 +36,15 @@ public class Visualization : MonoBehaviour
                 visible.enabled = true;
                 spriteUI.enabled = true;
 
-                // AIのスクリプトをオンにする
-                victim[i].GetComponent<HumanAI>().enabled = true;
+                if (!_isTutorial)
+                {
+                    // AIのスクリプトをオンにする
+                    victim[i].GetComponent<HumanAI>().enabled = true;
+                }
             }
         }
     }
+
 
 /**
 *   @brief   衝突から離れたとき呼び出される関数
@@ -50,22 +53,25 @@ public class Visualization : MonoBehaviour
 */
     private void OnTriggerExit(Collider other)
     {
-
-        // 衝突したとき
-        for (int i = 0; i < victim.Length; i++)
+        // チュートリアルモードでないとき
+        if (!_isTutorial)
         {
-            if (other.gameObject == victim[i])
+            // 衝突したとき
+            for (int i = 0; i < victim.Length; i++)
             {
-                // 子のメッシュを取得
-                SkinnedMeshRenderer visible = victim[i].GetComponentInChildren<SkinnedMeshRenderer>();
-                SpriteRenderer spriteUI = victim[i].GetComponentInChildren<SpriteRenderer>();
+                if (other.gameObject == victim[i])
+                {
+                    // 子のメッシュを取得
+                    SkinnedMeshRenderer visible = victim[i].GetComponentInChildren<SkinnedMeshRenderer>();
+                    SpriteRenderer spriteUI = victim[i].GetComponentInChildren<SpriteRenderer>();
 
-                // 不可視化
-                visible.enabled = false;
-                spriteUI.enabled = false;
+                    // 不可視化
+                    visible.enabled = false;
+                    spriteUI.enabled = false;
 
-                // AIのスクリプトをオフにする
-                victim[i].GetComponent<HumanAI>().enabled = false;
+                    // AIのスクリプトをオフにする
+                    victim[i].GetComponent<HumanAI>().enabled = false;
+                }
             }
         }
     }

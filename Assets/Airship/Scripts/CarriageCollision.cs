@@ -25,15 +25,11 @@ public class CarriageCollision : MonoBehaviour
         {
             if (collision.gameObject == victim[i])
             {
-                // カウント
-                CreateCount._isTri = true;
-
                 // 削除
                 Destroy(victim[i]);
 
-
+                // VictimManager管理
                 VictimManager.VictimRemain_Level[(int)(AppManager.Instance.gameState) - 1] -= 1;
-
                 if(GameBoard.Singleton != null)
                 GameBoard.Instance.UpdateVictimText();
             }

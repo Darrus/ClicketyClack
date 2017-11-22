@@ -51,6 +51,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb9b473b65aab4444a2d291a8fdd9591, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fallpointPrefab: {fileID: 1841728456325026, guid: c011cca3eaeec4d46a210eb1fbad5bc4,
+  fallpointPrefab: {fileID: 1822307344182228, guid: 8c12035cb9f6b4f4c9a16ead43a246f7,
     type: 2}
-  train: {fileID: 0}

@@ -1172,7 +1172,7 @@ Prefab:
     - target: {fileID: 114255529684967090, guid: b8402251d5f7b3643b692e519828235e,
         type: 2}
       propertyPath: TestScene
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114255529684967090, guid: b8402251d5f7b3643b692e519828235e,
         type: 2}
