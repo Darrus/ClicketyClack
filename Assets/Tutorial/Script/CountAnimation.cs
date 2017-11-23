@@ -58,7 +58,7 @@ public class CountAnimation : CreateCount
         if (nowCnt == MaxCnt)
         {
             // 表示
-            text.text = "   CONPLETE";
+            text.text = "   COMPLETE";
         }
         else
         {

@@ -238,7 +238,7 @@ public class GameBoard : MonoBehaviour
     */
     public void Button_NextLevel()
     {
-        int temp = VictimManager.Check_Level_RequireVictimSave((int)(AppManager.Instance.gameState) + 1);
+        int temp = VictimManager.Check_Level_RequireVictimSave((int)(AppManager.Instance.gameState) );
         if (temp == 0)
             AppManager.Instance.NextLevel();
         else

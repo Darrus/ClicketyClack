@@ -1466,7 +1466,7 @@ MonoBehaviour:
   ReStartLevel: 0
   RenderingTrack: 0
   UnRenderingTrack: 0
-  TestScene: 1
+  TestScene: 0
   TheRoom: {fileID: 1375522557}
 --- !u!1 &405394144
 GameObject:
