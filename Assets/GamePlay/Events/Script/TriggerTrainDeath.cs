@@ -20,7 +20,7 @@ public class TriggerTrainDeath : MonoBehaviour {
      */
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag(triggerTag))
+        if (collision.gameObject.CompareTag(triggerTag))
         {
             if (GameBoard.Singleton != null)
             {

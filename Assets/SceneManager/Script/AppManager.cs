@@ -132,7 +132,7 @@ public class AppManager : MonoBehaviour {
     public void StartGame()
     {
         gameState = GameScene.mainmenu;
-        SceneManager.LoadScene(MainMenu_Scene);
+        LoadScene();
     }
 
    /**

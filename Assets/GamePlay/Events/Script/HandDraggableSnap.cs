@@ -81,6 +81,7 @@ namespace HoloToolkit.Unity.InputModule
 
         private MeshRenderer[] meshRenderers;
         private Collider objCollider;
+        private BoxCollider myCollider;
         private bool picked = false;
         private EventBase trainEvent;
         private Material defaultMaterial;
@@ -92,6 +93,7 @@ namespace HoloToolkit.Unity.InputModule
                 HostTransform = transform;
             }
 
+            myCollider = GetComponent<BoxCollider>();
             mainCamera = Camera.main;
             meshRenderers = GetComponentsInChildren<MeshRenderer>();
             defaultMaterial = meshRenderers[0].material;
@@ -300,12 +302,22 @@ namespace HoloToolkit.Unity.InputModule
 
             if (snapped)
             {
-                GetComponent<Rigidbody>().isKinematic = true;
+                Vector3 size = myCollider.size;
+                size.y = 0.1f;
+                myCollider.size = size;
+                GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
+
                 for (int i = 0; i < meshRenderers.Length; ++i)
                 {
                     meshRenderers[i].material = defaultMaterial;
                 }
                 trainEvent.Solved = true;
+            }
+            else
+            {
+                Vector3 size = myCollider.size;
+                size.y = 0.2f;
+                myCollider.size = size;
             }
         }
 

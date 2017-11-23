@@ -516,8 +516,13 @@ PlayerSettings:
   metroCertificateIssuer: DefaultCompany
   metroCertificateNotAfter: 80bfaaa8d557d401
   metroApplicationDescription: ClicketyClack
-  wsaImages: {}
-  metroTileShortName: 
+  wsaImages:
+    2228324: Assets/Debug/Icon (310 px)png.png
+    2228349: Assets/Debug/Icon (388 px)png.png
+    2228374: Assets/Debug/Icon (465 px)png.png
+    2228424: Assets/Debug/Icon (620 px)png.png
+    2228624: Assets/Debug/Icon (1240 px)png.png
+  metroTileShortName: ClicketyClack
   metroCommandLineArgsFile: 
   metroTileShowName: 0
   metroMediumTileShowName: 0

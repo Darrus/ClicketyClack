@@ -53,6 +53,9 @@ namespace HoloToolkit.Unity.InputModule
 
         public float pluckDistance = 0.5f;
 
+        public float timer;
+        CollisionEnter onEnter;
+
         public bool IsDraggingEnabled = true;
         public bool isPlucked;
 
@@ -81,6 +84,7 @@ namespace HoloToolkit.Unity.InputModule
                 HostTransform = transform;
             }
 
+            onEnter = GetComponent<CollisionEnter>();
             myAnimator = GetComponent<Animator>();
             mainCamera = Camera.main;
         }
@@ -103,6 +107,14 @@ namespace HoloToolkit.Unity.InputModule
             if (IsDraggingEnabled && isDragging)
             {
                 UpdateDragging();
+            }
+            if(isPlucked && !isDragging)
+            {
+                timer -= Time.deltaTime;
+                if(timer <= 0.0f)
+                {
+                    onEnter.events.Invoke();
+                }
             }
         }
 
@@ -265,7 +277,6 @@ namespace HoloToolkit.Unity.InputModule
 
             if (!isDragging)
             {
-
                 GetComponent<Rigidbody>().useGravity = true;
                 return;
             }

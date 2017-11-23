@@ -24,7 +24,7 @@ public class CollisionEnter : MonoBehaviour
      */
     private void OnCollisionEnter(Collision collision)
     {
-        if (!collision.gameObject.CompareTag(triggerTag))
+        if ( !collision.gameObject.CompareTag(triggerTag))
             return;
 
         events.Invoke();

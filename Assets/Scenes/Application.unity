@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1466,7 +1466,7 @@ MonoBehaviour:
   ReStartLevel: 0
   RenderingTrack: 0
   UnRenderingTrack: 0
-  TestScene: 4
+  TestScene: 1
   TheRoom: {fileID: 1375522557}
 --- !u!1 &405394144
 GameObject:
@@ -2122,6 +2122,7 @@ MonoBehaviour:
   PositionLerpSpeed: 0.2
   RotationLerpSpeed: 0.2
   pluckDistance: 0.5
+  timer: 5
   IsDraggingEnabled: 1
   isPlucked: 0
 --- !u!114 &531061552
@@ -2161,17 +2162,6 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -4737,7 +4727,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1533750835}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.84, y: -0.605, z: 3.64}
+  m_LocalPosition: {x: -0.84, y: -0.67, z: 3.64}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -5925,9 +5915,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Explane:
-  - 'Pinch your finger to
+  - 'Pinch your finger
 
-    pick to spawn bandits.'
+    to spawn bandits.'
   - 'Pick up the bandits by
 
     pinching them and
