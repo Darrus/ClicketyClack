@@ -3,7 +3,6 @@
 *  @author  Yin Shuyu (150713R) 
 *  @date    21/11/2017
 *  @brief   Contain static class BezierCurve2
-*
 */
 using System.Collections;
 using System.Collections.Generic;
@@ -168,7 +167,7 @@ public static class BezierCurve2 {
                 {
                     PointData_List[n].id = n;
                     PointData_List[n].distance = TempTotalDistance - totalDistance;
-                    PointData_List[n].pointCruveSteps = (int)(PointData_List[n].distance * 100); // every 1 unit space, 100 sub point
+                    PointData_List[n].pointCruveSteps = (int)(PointData_List[n].distance * 200); // every 1 unit space, 100 sub point
                     //Debug.Log(n + " : "+ PointData_List[n].pointCruveSteps);
                 }
 
