@@ -157,7 +157,7 @@ public class HumanController : MonoBehaviour
                 else
                     rigid.MovePosition(transform.position + dir.normalized * runSpeed * Time.deltaTime);
 
-                if (dist <= 0.01f)
+                if (dist <= 0.001f)
                     return true;
                 break;
             default:

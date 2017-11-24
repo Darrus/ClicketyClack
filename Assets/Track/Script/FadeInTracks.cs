@@ -35,6 +35,8 @@ public class FadeInTracks : MonoBehaviour {
     public List<int> RailList;  ///< List of ID of the sub-point for the individual parts of the Track Mesh of the Rail Plate
     public List<Event_Data> Event_Data_List; ///< list of Struct Event_Data
 
+    bool ChildrenderStatus;  ///< child gameobject active status
+
     private int prePoint_ID; ///< previous sub-Point ID
 
     private int preRail_List_ID; ///< previous Rail Plate List ID
@@ -56,6 +58,7 @@ public class FadeInTracks : MonoBehaviour {
         currEvent_List_ID = -1;
 
         TheRealTrack.SetActive(false);
+        ChildrenderStatus = true;
 
         for (int i = 0; i < Event_Data_List.Count; i++)
         {
@@ -77,6 +80,14 @@ public class FadeInTracks : MonoBehaviour {
             if (TheRealTrack.activeSelf)
                 TheRealTrack.SetActive(false);
 
+            if(!ChildrenderStatus)
+            {
+                for (int i = 0; i < gameObject.transform.childCount; i++)
+                {
+                    gameObject.transform.GetChild(i).gameObject.SetActive(true);
+                }
+            }
+
             UnRenderAll();
         }
     }
@@ -89,10 +100,12 @@ public class FadeInTracks : MonoBehaviour {
     void RenderAll()
     {
         int temp = 0;
-        if (prePoint_ID != BezierCurve2.TrackData_List.Length)
+        if (prePoint_ID < BezierCurve2.TrackData_List.Length - 1)
         {
             if (RenderPoint.Point_ID < prePoint_ID)
-                temp = Inner.Count;
+            {
+                    temp = BezierCurve2.TrackData_List.Length;
+            }
             else
                 temp = RenderPoint.Point_ID;
 
@@ -106,6 +119,19 @@ public class FadeInTracks : MonoBehaviour {
         }
         else
         {
+            if(Inner.Count < BezierCurve2.TrackData_List.Length)
+            {
+                prePoint_ID = Inner.Count;
+            }
+
+            Debug.Log("Unrender Lag");
+
+            for(int i =0;i < gameObject.transform.childCount; i++)
+            {
+                gameObject.transform.GetChild(i).gameObject.SetActive(false);
+            }
+            ChildrenderStatus = false;
+
             AppManager.Instance.RenderingTrack = false;
             TheRealTrack.SetActive(true);
             LevelManager.Instance.MoveOut = true;
@@ -121,7 +147,7 @@ public class FadeInTracks : MonoBehaviour {
     {
         int temp = 0;
 
-        if (prePoint_ID != 0)
+        if (prePoint_ID > 0)
         {
             if(prePoint_ID == Inner.Count)
             {
@@ -159,6 +185,12 @@ public class FadeInTracks : MonoBehaviour {
     {
         for (int i = prePoint_ID; i < temp; i++)
         {
+            if (i >= Inner.Count)
+            {
+                prePoint_ID = temp;
+                return;
+            }
+                
             Renderer inner_RD = Inner[i].GetComponent<Renderer>();
             Renderer outter_RD = Outter[i].GetComponent<Renderer>();
 
@@ -181,6 +213,9 @@ public class FadeInTracks : MonoBehaviour {
             if (RailList[i] < prePoint_ID)
             {
                 currRail_List_ID = i;
+            }
+            if(RailList[i] >= prePoint_ID)
+            {
                 break;
             }
         }

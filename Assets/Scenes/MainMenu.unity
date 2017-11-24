@@ -34153,7 +34153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fcebf35a6f233d43bb2adfcc55b1259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookDistance: 2
+  lookDistance: 10
   onLookEvents:
     m_PersistentCalls:
       m_Calls:
@@ -38336,7 +38336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fcebf35a6f233d43bb2adfcc55b1259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookDistance: 2
+  lookDistance: 10
   onLookEvents:
     m_PersistentCalls:
       m_Calls:
@@ -44878,7 +44878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fcebf35a6f233d43bb2adfcc55b1259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookDistance: 2
+  lookDistance: 10
   onLookEvents:
     m_PersistentCalls:
       m_Calls:

@@ -146,7 +146,7 @@ public class TrainMovement : MonoBehaviour {
         {
             if (T)
             {
-                if (Temp_Id + 1 == BezierCurve2.TrackData_List.Length)
+                if (Temp_Id + 1 >= BezierCurve2.TrackData_List.Length)
                 {
                     Temp_Id = 0;
                     distanceTravel = 0;
@@ -154,6 +154,7 @@ public class TrainMovement : MonoBehaviour {
                     if (ID == 0)
                     {
                         Point_ID = BezierCurve2.TrackData_List.Length;
+                        Debug.Log("Render =finished");
                         gameObject.SetActive(false);
                         break;
                     }
@@ -166,14 +167,12 @@ public class TrainMovement : MonoBehaviour {
                     }
 
                 }
-                if (distanceTravel >= BezierCurve2.TrackData_List[Temp_Id].distance)
-                {
-                    transform.position = BezierCurve2.TrackData_List[Temp_Id].position;
-                    transform.LookAt(transform.position + BezierCurve2.TrackData_List[Temp_Id].tangent);
-                }
 
                 if (distanceTravel < BezierCurve2.TrackData_List[Temp_Id + 1].distance)
                 {
+                    transform.position = BezierCurve2.TrackData_List[Temp_Id].position;
+                    transform.LookAt(transform.position + BezierCurve2.TrackData_List[Temp_Id].tangent);
+
                     Point_ID = Temp_Id;
                     run = false;
                 }
@@ -182,7 +181,7 @@ public class TrainMovement : MonoBehaviour {
             }
             else
             {
-                if (Temp_Id == 0)
+                if (Temp_Id <= 0)
                 {
                     Temp_Id = BezierCurve2.TrackData_List.Length;
                     Temp_Id -= 1;
@@ -195,15 +194,11 @@ public class TrainMovement : MonoBehaviour {
                         break;
                     }
                 }
-
-                if (distanceTravel <= BezierCurve2.TrackData_List[Temp_Id].distance)
+                if (distanceTravel > BezierCurve2.TrackData_List[Temp_Id - 1].distance)
                 {
                     transform.position = BezierCurve2.TrackData_List[Temp_Id].position;
                     transform.LookAt(transform.position - BezierCurve2.TrackData_List[Temp_Id].tangent);
-                }
 
-                if (distanceTravel > BezierCurve2.TrackData_List[Temp_Id - 1].distance)
-                {
                     Point_ID = Temp_Id;
                     run = false;
                 }

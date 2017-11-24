@@ -12,7 +12,7 @@ using UnityEngine;
  */
 public class DestroyBullet : MonoBehaviour
 {
-    private float delayTime = 3.0f;                     ///< 待機時間
+    private float delayTime = 10.0f;                     ///< 待機時間
 
     public GameObject Parent;                           ///< 親子
     public GameObject ParticleEffect;               ///< エフェクト
@@ -72,6 +72,22 @@ public class DestroyBullet : MonoBehaviour
             
             // エフェクトの再生座標を指定
             explosionSFX.PlayAtPosition();
+
+            if (GameBoard.Singleton != null)
+            {
+                if (col.gameObject.name == "head")
+                {
+                    GameBoard.Instance.TheTrainLife.killHead();
+                }
+                if (col.gameObject.name == "carriage")
+                {
+                    GameBoard.Instance.TheTrainLife.KillCarriage();
+                }
+                if (col.gameObject.name == "cargo")
+                {
+                    GameBoard.Instance.TheTrainLife.KillCargo();
+                }
+            }
 
             // 親と指定されたオブジェクトを削除
             Destroy(Parent);
